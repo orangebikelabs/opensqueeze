@@ -1,5 +1,6 @@
 /*
- * Copyright (c) 2014 Orange Bike Labs, LLC.
+ * Copyright (c) 2014-2022 The OpenSqueeze Authors. All Rights Reserved.
+ * Use of this source code is governed by the GPLv3 license that can be found in the LICENSE file.
  */
 
 package com.orangebikelabs.orangesqueeze.cache;
@@ -21,14 +22,14 @@ import java.util.concurrent.TimeUnit;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.CoreMatchers.nullValue;
-import static org.junit.Assert.assertThat;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 public class CacheEntryTest {
 
     private CacheEntry mKeyA1, mKeyA2;
     private CacheEntry mKeyB1;
     private ExecutorService mExecutorService;
-    private Stopwatch mStopwatch = new Stopwatch();
+    final private Stopwatch mStopwatch = Stopwatch.createStarted();
 
     @Before
     public void beforeTest() {

@@ -1,22 +1,23 @@
 /*
- * Copyright (c) 2014 Orange Bike Labs, LLC.
+ * Copyright (c) 2014-2022 The OpenSqueeze Authors. All Rights Reserved.
+ * Use of this source code is governed by the GPLv3 license that can be found in the LICENSE file.
  */
 
 package com.orangebikelabs.orangesqueeze.common;
 
 import com.google.common.base.Optional;
 import com.google.common.collect.HashMultimap;
-import com.google.common.collect.Lists;
 import com.google.common.collect.SetMultimap;
 
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertThat;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 /**
  * @author tsandee
@@ -24,7 +25,7 @@ import static org.junit.Assert.assertThat;
 public class TestSyncStatus {
 
     private SyncStatus mSyncStatus;
-    private PlayerId mPlayers[] = new PlayerId[10];
+    final private PlayerId[] mPlayers = new PlayerId[10];
 
 
     @Before
