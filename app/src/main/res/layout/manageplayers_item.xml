@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright (c) 2020 Orange Bike Labs, LLC.
+  -->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:minHeight="?attr/listPreferredItemHeight"
+    android:orientation="horizontal"
+    tools:context=".ui.MainActivity">
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_weight="0.5"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/player_name_label"
+            style="@style/Text.FirstLine"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:text="@string/playeritem_name"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/player_status_label"
+            style="@style/Text.SecondLine"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-light"
+            android:text="@string/playeritem_status" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginStart="0dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginEnd="0dp"
+        android:layout_marginRight="0dp"
+        android:layout_weight="0.5"
+        android:minWidth="125dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/volume_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/volume_label"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+
+        <!-- seekbar maxheight set to large value to fix rendering bug on pre-sdk 21 -->
+        <SeekBar
+            android:id="@+id/volume_bar"
+            android:layout_width="match_parent"
+            android:layout_height="32dp"
+            android:contentDescription="@string/volume_slider_desc"
+            android:max="@integer/volume_max"
+            android:maxHeight="1000dp" />
+    </LinearLayout>
+
+    <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/player_power_toggle"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:paddingStart="@dimen/player_switch_padding"
+        android:paddingEnd="0dp" />
+
+    <ImageButton
+        android:id="@+id/action_button"
+        style="@style/Button.Overflow"
+        android:layout_gravity="center_vertical|end"
+        tools:ignore="ContentDescription" />
+</LinearLayout>

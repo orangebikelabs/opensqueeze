@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+  ~ Copyright (c) 2020 Orange Bike Labs, LLC.
+  -->
+
+<level-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:drawable="@drawable/ic_repeat_tinted"
+        android:maxLevel="0"
+        android:minLevel="0" />
+    <item
+        android:drawable="@drawable/ic_repeat_one_orange"
+        android:maxLevel="1"
+        android:minLevel="1" />
+    <item
+        android:drawable="@drawable/ic_repeat_orange"
+        android:maxLevel="2"
+        android:minLevel="2" />
+</level-list>

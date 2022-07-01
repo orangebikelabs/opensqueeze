@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright (c) 2020 Orange Bike Labs, LLC.
+  -->
+
+<resources>
+    <bool name="default_pref_autodiscovery">true</bool>
+    <bool name="default_pref_autoconnect">true</bool>
+    <bool name="default_pref_showtips">true</bool>
+
+    <string name="default_pref_cachelocation" translatable="false">internal</string>
+    <string name="default_pref_automaticmute_behavior" translatable="false">nothing</string>
+    <string name="default_pref_automaticunmute" translatable="false">5</string>
+    <string name="default_pref_cache_storagesize" translatable="false">0</string>
+    <bool name="default_pref_autolaunch_squeezeplayer">false</bool>
+    <string name="default_pref_trackselect_playmode" translatable="false">prompt</string>
+
+    <bool name="tiny_nowplaying_compact_mode">true</bool>
+    <bool name="default_pref_browse_showactionbar">true</bool>
+    <bool name="default_pref_browse_shownowplaying">true</bool>
+    <bool name="default_pref_artwork_highlightmissing">false</bool>
+    <bool name="default_pref_keepscreenon">false</bool>
+    <bool name="default_pref_browse_disableartistartwork">false</bool>
+    <bool name="default_pref_verboselogging">false</bool>
+    <bool name="default_pref_systemvolumecontrol">true</bool>
+    <bool name="default_pref_silentaudiohack">false</bool>
+    <bool name="default_pref_pauseonheadphonedisconnect">false</bool>
+
+    <string name="default_pref_theme" translatable="false">default</string>
+    <bool name="default_pref_compactmode" translatable="false">false</bool>
+    <string name="default_pref_browse_gridcellcount" translatable="false">-1</string>
+    <bool name="default_pref_use24hourtimeformat">false</bool>
+    <string name="default_pref_trackdownload_location" translatable="false" />
+    <bool name="default_pref_trackdownload_transcodeenabled">true</bool>
+    <string name="default_pref_trackdownload_transcodeformat" translatable="false">mp3</string>
+    <string name="default_pref_trackdownload_transcodeoptions" translatable="false">quality=5,bitrate=160</string>
+    <bool name="default_pref_shownowplayingnotification">true</bool>
+
+    <bool name="browse_grid_default">false</bool>
+    <bool name="compact_nowplaying_actionbar">true</bool>
+
+    <!-- increment this above zero to show the localization splash one time -->
+    <integer name="show_localization_in_progress_counter">0</integer>
+    <bool name="default_pref_autosizetext" translatable="false">false</bool>
+</resources>

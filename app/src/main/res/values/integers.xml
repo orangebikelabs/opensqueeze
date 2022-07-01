@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2020 Orange Bike Labs, LLC.
+  -->
+
+<resources>
+    <item name="coverart_storage_cache_factor" type="fraction">10%</item>
+    <integer name="min_coverart_storage_cache_size">50</integer>
+    <integer name="max_coverart_storage_cache_size">1000</integer>
+
+    <!-- server browse list -->
+    <integer name="slide_anim_time">300</integer>
+    <integer name="volume_max">100</integer>
+    <integer name="nowplaying_progress_animation_duration">4000</integer>
+    <integer name="thumbnail_fadein_duration">250</integer>
+</resources>

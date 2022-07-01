@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2020 Orange Bike Labs, LLC.
+  -->
+
+<resources>
+    <!-- id for the dynamically created breadcrumb view -->
+    <item type="id" name="nowplaying_switcher"/>
+
+    <!-- id for tag of recyclable object -->
+    <item type="id" name="tag_recyclable"/>
+
+    <!-- id for tag of viewholders in adapters -->
+    <item type="id" name="tag_viewholder"/>
+
+    <!-- id for tag of clickableitemholders in listadapters -->
+    <item type="id" name="tag_clickableitem"/>
+
+    <item type="id" name="tag_action"/>
+
+    <item type="id" name="tag_item"/>
+
+    <item type="id" name="tag_playerid"/>
+
+    <item type="id" name="tag_containerview"/>
+
+    <item type="id" name="tag_itemposition"/>
+</resources>

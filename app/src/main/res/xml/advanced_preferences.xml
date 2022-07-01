@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright (c) 2020 Orange Bike Labs, LLC.
+  -->
+
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    android:key="@string/pref_root_screen_key">
+
+    <PreferenceCategory android:title="@string/pref_browse_category">
+        <CheckBoxPreference
+            android:defaultValue="@bool/default_pref_browse_showactionbar"
+            android:key="@string/pref_browse_showactionbar_key"
+            android:summary="@string/pref_browse_showactionbar_summary"
+            android:title="@string/pref_browse_showactionbar_title" />
+        <CheckBoxPreference
+            android:defaultValue="@bool/default_pref_browse_shownowplaying"
+            android:key="@string/pref_browse_shownowplaying_key"
+            android:summary="@string/pref_browse_shownowplaying_summary"
+            android:title="@string/pref_browse_shownowplaying_title" />
+    </PreferenceCategory>
+    <PreferenceCategory android:title="@string/pref_artwork_category">
+        <CheckBoxPreference
+            android:defaultValue="@bool/default_pref_browse_disableartistartwork"
+            android:key="@string/pref_browse_disableartistartwork_key"
+            android:summary="@string/pref_browse_disableartistartwork_summary"
+            android:title="@string/pref_browse_disableartistartwork_title" />
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:key="@string/pref_volume_category_key"
+        android:title="@string/volume_desc">
+        <CheckBoxPreference
+            android:defaultValue="@bool/default_pref_systemvolumecontrol"
+            android:key="@string/pref_systemvolumecontrol_key"
+            android:summaryOff="@string/pref_systemvolumecontrol_summaryOff"
+            android:summaryOn="@string/pref_systemvolumecontrol_summaryOn"
+            android:title="@string/pref_systemvolumecontrol_title" />
+
+        <CheckBoxPreference
+            android:defaultValue="@bool/default_pref_silentaudiohack"
+            android:key="@string/pref_silentaudiohack_key"
+            android:summaryOff="@string/pref_silentaudiohack_summaryOff"
+            android:summaryOn="@string/pref_silentaudiohack_summaryOn"
+            android:title="@string/pref_silentaudiohack_title" />
+
+        <CheckBoxPreference
+            android:defaultValue="@bool/default_pref_pauseonheadphonedisconnect"
+            android:key="@string/pref_pauseonheadphonedisconnect_key"
+            android:summaryOff="@string/pref_pauseonheadphonedisconnect_summaryOff"
+            android:summaryOn="@string/pref_pauseonheadphonedisconnect_summaryOn"
+            android:title="@string/pref_pauseonheadphonedisconnect_title" />
+
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:key="@string/pref_other_category_key"
+        android:title="@string/pref_other_category">
+        <CheckBoxPreference
+            android:defaultValue="@bool/default_pref_autoconnect"
+            android:key="AutoConnect"
+            android:summary="@string/pref_autoconnect_summary"
+            android:title="@string/pref_autoconnect_title" />
+    </PreferenceCategory>
+
+</PreferenceScreen>

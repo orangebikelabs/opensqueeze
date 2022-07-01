@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright (c) 2020 Orange Bike Labs, LLC.
+  -->
+
+<resources>
+    <string name="add_server_button_text">Specific Server</string>
+    <string name="connect_hostname">Hostname or IP address</string>
+    <string name="connect_port">Port</string>
+    <string name="connect_button">Connect</string>
+    <string name="connectserver_title">Connect to Media Server</string>
+    <string name="select_player_title">Select Player</string>
+    <string name="menu_preferences">Preferences</string>
+    <string name="menu_downloadpreferences">Download Preferences</string>
+    <string name="menu_downloadclearall">Clear All</string>
+    <string name="menu_players">Players</string>
+    <string name="menu_switchserver">Switch Server</string>
+    <string name="search_hint">Search</string>
+    <string name="menu_search">Search</string>
+    <string name="menu_browse_refresh">Refresh</string>
+    <string name="menu_maintenance">Maintenance</string>
+    <string name="connection_error_title">Connection Error</string>
+    <string name="error_cannot_resolve_hostname">Cannot resolve hostname &#8220;%1$s&#8221;</string>
+    <string name="hostname_already_exists">Server with hostname &#8220;%1$s&#8221; already exists.</string>
+    <string name="invalid_hostname_port">Invalid hostname and/or port.</string>
+    <string name="awaitingnetwork_title">Waiting for Network</string>
+    <string name="awaitingnetwork_message">Waiting for network connectivity to be restored. Check airplane mode or other network settings.</string>
+    <string name="connecting_title">Connecting</string>
+    <string name="connecting_message_html">Connecting to &lt;b>%1$s&lt;/b></string>
+    <string name="connecting_message_noserver">Connecting to server</string>
+    <string name="section_artist">Artists</string>
+    <string name="section_track">Tracks</string>
+    <string name="section_album">Albums</string>
+    <string name="search_item_name">Search: %1$s</string>
+    <string name="menu_remove_server">Forget Server</string>
+    <string name="menu_pin_server">Pin Server</string>
+    <string name="menu_unpin_server">Unpin Server</string>
+    <string name="menu_remove_server_credentials">Forget Server Login</string>
+    <string name="player_label" translatable="false">%1$s</string>
+    <string name="volume_label" translatable="false">%1$d</string>
+    <string name="volume_locked_label">(Locked)</string>
+    <string name="about_app">About</string>
+    <string name="username_label">Username</string>
+    <string name="password_label">Password</string>
+    <string name="login_title">Login to %1$s</string>
+    <string name="no_player_available_label_html">No players connected to &lt;b>%1$s&lt;/b>.</string>
+    <string name="main_preference_activity_name">Open Squeeze Preferences</string>
+    <string name="advanced_preference_activity_name">Advanced Preferences</string>
+    <string name="trackdownload_preference_activity_name">Download Preferences</string>
+    <string name="error_invalid_credentials">Invalid username and/or password</string>
+    <string name="loading_text">Loading&#8230;</string>
+    <string name="loading_menus_text">Loading Menus&#8230;</string>
+    <string name="randomplay_artist">Random Artist</string>
+    <string name="randomplay_track">Random Track</string>
+    <string name="randomplay_album">Random Album</string>
+    <string name="randomplay_year">Random Year</string>
+
+    <string-array name="repeat_strings">
+        <item>Repeat Off</item>
+        <item>Repeat Song</item>
+        <item>Repeat Playlist</item>
+    </string-array>
+    <string-array name="shuffle_strings">
+        <item>Shuffle Off</item>
+        <item>Shuffle Tracks</item>
+        <item>Shuffle Albums</item>
+    </string-array>
+
+    <string name="play_desc">Play</string>
+    <string name="playnext_desc">Play Next</string>
+    <string name="playadd_desc">Add to Playlist</string>
+    <string name="download_desc">Download to Device</string>
+    <string name="actionmenu_title_html">On &lt;b>%1$s&lt;/b>:</string>
+    <string name="nowplaying_activity_title_playing_html">&lt;b>%1$s&lt;/b> &#8226; %2$d of %3$d</string>
+    <string name="nowplaying_activity_title_paused_html">&lt;b>%1$s&lt;/b> &#8226; Paused</string>
+    <string name="nowplaying_activity_title_stopped_html">&lt;b>%1$s&lt;/b> &#8226; Stopped</string>
+    <string name="nowplaying_activity_title_disconnected_html">&lt;b>%1$s&lt;/b> &#8226; Disconnected</string>
+    <string name="nowplaying_activity_title_off_html">&lt;b>%1$s&lt;/b> &#8226; Off</string>
+    <string name="nowplaying_activity_title_noplayers_html">No Players</string>
+    <string name="powermanager_service_label" translatable="false">Power Monitor Service</string>
+    <string name="connection_service_label" translatable="false">Squeezebox Server Connection Service</string>
+    <string name="content_provider_label" translatable="false">Open Squeeze Content Provider</string>
+    <string name="playlist_action_remove">Remove from Playlist</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="empty_downloads_text">No active or completed downloads</string>
+    <string name="empty_text">No Items</string>
+    <string name="select_player_prompt">Select player:</string>
+    <string name="change_player_notification_html">&lt;b>%1$s&lt;/b> is now the active player</string>
+    <!-- 
+    <string name="compilation_options">Compilation Options</string>
+    <string name="shown">Shown</string>
+    <string name="hidden">Hidden</string>
+    -->
+    <string name="serverdiscovery_label">Server Discovery</string>
+    <string name="squeezenetwork_button_text" translatable="false">mysqueezebox.com</string>
+    <string name="network_error">Network Error</string>
+    <string name="addtoplaylist_action_toast_html">Added &lt;b>%1$s&lt;/b> to the current playlist
+    </string>
+    <string name="playnext_action_toast_html">Added &lt;b>%1$s&lt;/b> next in the current playlist
+    </string>
+    <string name="playnow_action_toast_html">Playing &lt;b>%1$s&lt;/b></string>
+    <string name="addtofavorites_action_toast_html">Added &lt;b>%1$s&lt;/b> to favorites</string>
+    <string name="action_addfavorite">Add to Favorites</string>
+    <string name="action_removefavorite">Remove Favorite</string>
+    <string name="removefavorite_action_toast_html">Removed &lt;b>%1$s&lt;/b> from favorites
+    </string>
+    <string name="removefavorite_action_confirmation_html">Are you sure you want to remove &lt;b>%1$s&lt;/b>
+        from favorites?
+    </string>
+    <string name="clearplaylist_action_confirmation">Are you sure you want to clear the current playlist?</string>
+    <string name="menu_nowplaying_saveplaylist">Save Playlist</string>
+    <string name="menu_nowplaying_clearplaylist">Clear Playlist</string>
+    <string name="menu_nowplaying_showplaylist">Show Playlist</string>
+    <string name="menu_nowplaying_hideplaylist">Hide Playlist</string>
+    <string name="cleared_playlist">Cleared Playlist</string>
+    <string name="nowplaying_saveplaylist_title">Save Playlist</string>
+    <string name="nowplaying_saveplaylist_message">Enter the new playlist name:</string>
+    <string name="nowplaying_saveplaylist_hint">New playlist name</string>
+    <string name="saved_playlist_html">Saved Playlist &lt;b>%1$s&lt;/b></string>
+    <string name="playmode_stopped">Stopped</string>
+    <string name="playmode_playing">Playing</string>
+    <string name="playmode_paused">Paused</string>
+    <string name="playeritem_name" translatable="false">%1$s</string>
+    <string name="playeritem_status" translatable="false">%1$s</string>
+    <string name="save">Save</string>
+    <string name="squeezeplayer_start_item">Start SqueezePlayer</string>
+    <string name="action_squeezeplayer_stop">Stop Service</string>
+    <string name="action_synchronization">Synchronization</string>
+    <string name="synchronization_title_html">Synchronize &lt;b>%1$s&lt;/b> with:</string>
+    <string name="action_squeezenetwork_connect_player">Connect to mysqueezebox.com</string>
+    <string name="player_connect_server_confirmation_message">Connect %1$s to the server &#8220;%2$s&#8221;?
+        Note that it can take some time for the player to become visible after the switch.
+    </string>
+    <string name="player_connect_server_confirmation_title">Confirm server selection</string>
+    <string name="players_none">None</string>
+    <string name="action_renameplayer">Rename Player</string>
+    <string name="action_moreplayermenu">More</string>
+    <string name="rename_player_title">Rename Player</string>
+    <string name="action_sleepplayer">Player Sleep</string>
+    <string name="player_settings_title">%1$s Settings</string>
+    <string name="unsynchronized_player_separator">Unsynchronized Players</string>
+    <string name="synchronized_player_separator">Synchronization Group %1$d</string>
+    <string name="other_servers_player_separator">Players On Other Servers</string>
+    <string name="group_players_separator">Group Players</string>
+    <string name="action_unsync">Unsynchronize</string>
+    <string name="renameplayer_empty_title">Empty Player Name</string>
+    <string name="renameplayer_empty_message">Must supply a valid player name</string>
+    <string name="renameplayer_duplicate_title">Duplicate Player Name</string>
+    <string name="renameplayer_duplicate_message">This player name already exists</string>
+    <string name="randomplay_genreselect_loading">Active Genres</string>
+    <string name="randomplay_genreselect">%1$d Active Genres</string>
+    <string name="cachelocation_internal">Internal Storage</string>
+    <string name="cachelocation_external">External Storage (SD Card, etc.)</string>
+    <string name="confirmation_title">Are you sure?</string>
+    <string name="nextbutton_label">Next</string>
+    <string name="neverbutton_label">Never Show Again</string>
+    <string name="contextmenu_item_title" translatable="false">%1$s: %2$s</string>
+    <string name="extras_node_text">Extras</string>
+    <string name="wakeonlan_prompt">Wake-On-LAN Policy</string>
+    <string name="wakeonlan_autodetect">Autodetect MAC address</string>
+    <string name="wakeonlan_macaddress">MAC address</string>
+    <string name="wakeonlan_hostname">Hostname</string>
+    <!-- these must stay in this order -->
+    <string-array name="wakeonlan_policy_entries">
+        <item>Never</item>
+        <item>On connect or reconnect</item>
+    </string-array>
+    <string name="wakeonlan_ports">Ports</string>
+    <string name="wakeonlan_dialog_title">Wake-On-LAN: %1$s</string>
+    <string name="menuitem_wakeonlansettings">Wake-On-LAN Settings</string>
+    <string name="globalsearch_expand_nodeinline_on">Expand Item Inline</string>
+    <string name="globalsearch_expand_nodeinline_off">Don\'t Expand Item Inline</string>
+    <string name="globalsearch_moreitem">%1$d more item(s)</string>
+    <string name="player_sleep_text">Sleep &#8220;%1$s&#8221; in %2$d minutes</string>
+    <string name="player_sleep_endoftrack">Sleep &#8220;%1$s&#8221; when track ends in %2$d
+        minutes
+    </string>
+    <string name="player_sleep_never">Do not sleep &#8220;%1$s&#8221;</string>
+    <string name="error_download_title">Error downloading files</string>
+    <string name="download_started">Download Started</string>
+    <string name="widget_small_label">Open Squeeze (small)</string>
+    <string name="widget_large_label">Open Squeeze (large)</string>
+    <string name="widget_playername_text">Player: %1$s</string>
+    <string name="disconnected">Disconnected</string>
+    <string name="widget_noplayers_text">No Players</string>
+
+    <string name="maintenance_title">Maintenance</string>
+    <string name="maintenance_server_rescan_playlists">Rescan Playlists</string>
+    <string name="maintenance_server_rescan_playlists_desc">Triggers a server-side rescan of the
+        playlists.
+    </string>
+    <string name="maintenance_server_rescan">Rescan New and Changed</string>
+    <string name="maintenance_server_rescan_desc">Triggers a server-side rescan looking for new and
+        changed media.
+    </string>
+    <string name="maintenance_server_rescan_clear">Clear and Rescan</string>
+    <string name="maintenance_server_rescan_clear_desc">Triggers a server-side clear and rescan,
+        rebuilding the database from scratch.
+    </string>
+    <string name="maintenance_local_cleardevicecache">Wipe Device Cache</string>
+    <string name="maintenance_local_cleardevicecache_desc">Wipe the local device cache of artwork and other cached items. The cache will be repopulated on demand.</string>
+
+    <string name="menu_volume_slider_label">Volume: %1$d</string>
+    <string name="menu_generic_slider_label">Slide to select your value: %1$d</string>
+
+    <string name="navigation_browse">Browse</string>
+    <string name="navigation_downloads">Downloads</string>
+    <string name="navigation_players">Players</string>
+    <string name="navigation_search">Search</string>
+    <string name="navigation_customize">Customize Menus</string>
+    <string name="navigation_nowplaying">Now Playing</string>
+    <string name="download_batch_name" translatable="false">%1$s (%2$s)</string>
+    <string name="menu_startdownload">Download</string>
+    <string name="download_activity_title">Download: %1$s</string>
+    <string name="download_service_label" translatable="false">Track Download Service</string>
+
+    <string name="customize_menu_title">Customize</string>
+
+    <string name="notification_downloads_title">Downloads</string>
+    <string name="notification_downloads_text">%1$d of %2$d</string>
+
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
+    <string name="left_drawer_title">Browse</string>
+
+    <string name="wipingcache_notification_text">Wiping cached media server data.</string>
+    <string name="feedback_collecting_logs">Collecting Logs</string>
+
+    <string name="previous_track_desc">Previous Track</string>
+    <string name="pause_desc">Pause Playback</string>
+    <string name="next_track_desc">Next Track</string>
+    <string name="volume_desc">Volume</string>
+    <string name="thumbsup_desc">Track Thumbs Up</string>
+    <string name="thumbsdown_desc">Track Thumbs Down</string>
+    <string name="repeat_toggle_desc">Toggle Repeat Mode</string>
+    <string name="shuffle_toggle_desc">Toggle Shuffle Mode</string>
+    <string name="search_desc">Search</string>
+    <string name="visual_separator_desc">Visual Separator</string>
+    <string name="artwork_missing_desc">Artwork Missing</string>
+    <string name="choosenewserver_desc">Choose Server</string>
+    <string name="choose">Choose</string>
+    <string name="connecting_icon_desc">Icon indicating connecting is in progress</string>
+    <string name="player_overflow_desc">Show more player actions</string>
+    <string name="decrease_volume_desc">Decrease volume</string>
+    <string name="increase_volume_desc">Increase volume</string>
+    <string name="item_overflow_desc">Show more actions for this item</string>
+    <string name="player_artwork_desc">Artwork for the active player</string>
+    <string name="artwork_loading_desc">Artwork loading</string>
+    <string name="item_icon_desc">Item icon</string>
+    <string name="item_icon_missing_desc">Missing item icon</string>
+    <string name="connect_server_type_icon">Icon representing the server type</string>
+    <string name="volume_slider_desc">Change the volume</string>
+    <string name="sleep_slider_desc">Change the sleep time</string>
+    <string name="track_progress_seek_desc">Seek within the current track</string>
+    <string name="item_artwork_desc">Artwork for the current item</string>
+    <string name="permission_read_phone_state_rationale_content">The phone permission is required in order to automatically mute and unmute based on your phone usage. If you deny this permission, this feature will not work.</string>
+    <string name="permission_read_phone_state_denied">The phone permission was denied. This feature will not function.</string>
+    <string name="permission_read_phone_state_neverask">The phone permission will never be requested again.</string>
+    <string name="permission_read_phone_state_rationale_title">Phone Permission</string>
+
+    <string name="permission_write_external_storage_rationale_content">The storage permission is required in order to download files to external locations.  If you deny this permission then you may be limited in where you can download files.</string>
+    <string name="permission_write_external_storage_denied">The storage permission was denied.</string>
+    <string name="permission_write_external_storage_neverask">The storage permission will never be requested again.</string>
+    <string name="permission_write_external_storage_rationale_title">Storage Permission</string>
+
+    <string name="cancel_notification_desc">Cancel notification, disconnect</string>
+    <string name="reset">Reset</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
+    <string name="custom_path">Custom Path</string>
+    <string name="ip_address">Current device IP address: %1$s\n(may have others)</string>
+    <string name="nowplaying_shortcut_short_label">Now Playing</string>
+    <string name="nowplaying_shortcut_long_label">Launch direct to Now Playing</string>
+    <string name="all_items">All Items</string>
+    <string name="close">Close</string>
+    <string name="snap_to_current_item">Snap to Current Track</string>
+    <string name="forgot_password">Forgot your password?</string>
+</resources>

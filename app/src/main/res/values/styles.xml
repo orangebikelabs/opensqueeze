@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright (c) 2020 Orange Bike Labs, LLC.
+  -->
+
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <style name="Item">
+        <!-- empty -->
+    </style>
+
+    <style name="Item.Grid">
+        <!-- empty -->
+    </style>
+
+    <style name="Tinted">
+        <item name="tint">?attr/colorControlNormal</item>
+    </style>
+
+    <style name="Divider">
+        <item name="android:background">@color/divider</item>
+    </style>
+
+    <style name="AboutLogo">
+        <item name="android:padding">8dp</item>
+        <item name="android:background">?attr/selectableItemBackground</item>
+        <item name="android:scaleType">center</item>
+    </style>
+
+    <style name="AboutLogo.Tinted">
+        <item name="tint">?attr/colorControlNormal</item>
+    </style>
+
+    <style name="Text" parent="@style/TextAppearance.AppCompat">
+        <!-- intentionally blank, 14sp ftr -->
+    </style>
+
+    <style name="Text.NoItems">
+        <item name="android:text">@string/empty_text</item>
+        <item name="android:textAppearance">?android:attr/textAppearanceLarge</item>
+    </style>
+
+    <style name="Text.NowPlaying" parent="Text.FirstLine.AutoSize">
+        <item name="android:background">?attr/selectableItemBackgroundBorderless</item>
+    </style>
+
+    <style name="Text.NowPlaying.Track">
+        <item name="android:textSize">22sp</item>
+        <item name="autoSizeMaxTextSize">22sp</item>
+    </style>
+
+    <style name="Text.NowPlaying.Artist">
+        <item name="android:textSize">18sp</item>
+        <item name="autoSizeMaxTextSize">18sp</item>
+    </style>
+
+    <style name="Text.NowPlaying.Album">
+        <item name="android:fontFamily">sans-serif-light</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textSize">18sp</item>
+        <item name="autoSizeMaxTextSize">18sp</item>
+    </style>
+
+    <style name="Text.FirstLine" parent="TextAppearance.MaterialComponents.Subtitle1">
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:textSize">?attr/firstLineTextSize</item>
+    </style>
+
+    <style name="Text.FirstLine.AutoSize">
+        <item name="android:maxLines">1</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:scrollHorizontally">true</item>
+        <item name="autoSizeTextType">uniform</item>
+        <item name="autoSizeMinTextSize">@dimen/autosize_minimum_text_size</item>
+        <item name="autoSizeMaxTextSize">?attr/firstLineTextSize</item>
+        <item name="autoSizeStepGranularity">@dimen/autosize_granularity</item>
+    </style>
+
+    <style name="Text.FirstLine.AutoSize.Grid">
+        <item name="android:fontFamily">sans-serif-condensed-medium</item>
+    </style>
+
+    <style name="Text.SecondLine" parent="TextAppearance.MaterialComponents.Subtitle1">
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textSize">?attr/secondLineTextSize</item>
+    </style>
+
+    <style name="Text.SecondLine.AutoSize">
+        <item name="android:maxLines">1</item>
+        <item name="android:scrollHorizontally">true</item>
+        <item name="android:ellipsize">end</item>
+        <item name="autoSizeTextType">uniform</item>
+        <item name="autoSizeMinTextSize">@dimen/autosize_minimum_text_size</item>
+        <item name="autoSizeMaxTextSize">?attr/secondLineTextSize</item>
+        <item name="autoSizeStepGranularity">@dimen/autosize_granularity</item>
+    </style>
+
+    <style name="Text.TrackTime">
+        <item name="android:textSize">?attr/secondLineTextSize</item>
+        <item name="android:fontFamily">sans-serif-condensed</item>
+        <item name="android:maxLines">1</item>
+    </style>
+
+    <style name="Text.TrackTime.Grid">
+        <!-- empty -->
+    </style>
+
+    <style name="Text.SecondLine.AutoSize.Grid">
+        <item name="android:fontFamily">sans-serif-condensed</item>
+    </style>
+
+    <style name="Text.SingleLine" parent="TextAppearance.MaterialComponents.Subtitle1">
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:textSize">?attr/singleLineTextSize</item>
+        <item name="android:maxLines">1</item>
+    </style>
+
+    <style name="Text.SingleLine.AutoSize">
+        <item name="android:ellipsize">end</item>
+        <item name="autoSizeTextType">uniform</item>
+        <item name="autoSizeMinTextSize">@dimen/autosize_minimum_text_size</item>
+        <item name="autoSizeMaxTextSize">?attr/singleLineTextSize</item>
+        <item name="autoSizeStepGranularity">@dimen/autosize_granularity</item>
+    </style>
+
+    <style name="Text.SingleLine.AutoSize.Grid">
+        <item name="android:fontFamily">sans-serif-condensed</item>
+    </style>
+
+    <style name="Text.SingleLine.Large">
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="Text.DrawerItem">
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:textSize">@dimen/drawer_item_text_size</item>
+    </style>
+
+    <style name="Text.Body1" parent="TextAppearance.MaterialComponents.Body1" />
+
+    <style name="Button" parent="Widget.MaterialComponents.Button">
+        <!-- intentionally blank -->
+    </style>
+
+    <style name="Button.Overflow">
+        <item name="android:layout_width">48dp</item>
+        <item name="android:layout_height">48dp</item>
+        <item name="android:scaleType">centerInside</item>
+        <item name="android:src">@drawable/overflow</item>
+        <item name="android:paddingStart">16dp</item>
+        <item name="android:paddingEnd">8dp</item>
+        <item name="android:paddingTop">8dp</item>
+        <item name="android:paddingBottom">8dp</item>
+        <item name="tint">?attr/colorControlNormal</item>
+        <item name="android:background">?attr/selectableItemBackgroundBorderless</item>
+        <item name="android:contentDescription">@string/item_overflow_desc</item>
+    </style>
+
+    <style name="Button.Overflow.Grid">
+        <item name="android:layout_width">64dp</item>
+        <item name="android:paddingStart">8dp</item>
+        <item name="android:paddingEnd">0dp</item>
+    </style>
+
+    <style name="Button.Control">
+        <item name="android:padding">?attr/controlButtonPadding</item>
+        <item name="android:layout_width">56dp</item>
+        <item name="android:layout_height">56dp</item>
+        <item name="android:background">?attr/selectableItemBackgroundBorderless</item>
+        <item name="android:scaleType">centerCrop</item>
+        <item name="android:tag">control</item>
+    </style>
+
+    <style name="Button.Control.Tinted">
+        <item name="tint">?attr/colorControlNormal</item>
+    </style>
+
+    <style name="Button.Control.Tinted.Large">
+    </style>
+
+    <style name="Button.AppWidgetControl">
+        <item name="android:padding">8dp</item>
+        <item name="android:layout_width">60dp</item>
+        <item name="android:layout_height">60dp</item>
+        <item name="android:background">?android:attr/selectableItemBackgroundBorderless</item>
+        <item name="android:scaleType">centerCrop</item>
+        <item name="android:tag">control</item>
+    </style>
+
+    <style name="Button.HeaderControl">
+        <item name="android:padding">8dp</item>
+        <item name="android:scaleType">centerCrop</item>
+        <item name="tint">?attr/colorControlNormal</item>
+        <item name="android:background">?attr/selectableItemBackgroundBorderless</item>
+    </style>
+
+    <style name="SleepDialogTimePicker">
+        <item name="android:timePickerMode">spinner</item>
+    </style>
+</resources>

@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright (c) 2020 Orange Bike Labs, LLC.
+  -->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="4dp">
+
+        <ProgressBar
+            android:id="@+id/tiny_track_progress"
+            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:indeterminate="false"
+            android:progressDrawable="@drawable/default_track_progress" />
+
+        <View
+            android:id="@+id/nowplaying_progress_gradient"
+            android:layout_width="@dimen/nowplaying_progress_gradient_width"
+            android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/nowplaying_progress_gradient_marginLeft"
+            android:background="@drawable/default_theme_nowplaying_progress_gradient" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/tiny_nowplaying_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:elevation="4dp"
+        android:focusable="true"
+        android:gravity="center_vertical"
+        android:minHeight="?attr/tinyNowPlayingHeight"
+        android:orientation="horizontal"
+        android:paddingStart="0dp"
+        android:paddingEnd="8dp">
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ImageSwitcher
+                android:id="@+id/artwork_thumb"
+                android:layout_width="?attr/tinyNowPlayingArtworkSize"
+                android:layout_height="?attr/tinyNowPlayingArtworkSize"
+                android:layout_gravity="center_vertical"
+                android:animateFirstView="false"
+                android:animateLayoutChanges="false"
+                android:padding="?attr/tinyNowPlayingArtworkPadding">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:contentDescription="@string/player_artwork_desc"
+                    android:scaleType="centerInside" />
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:contentDescription="@string/player_artwork_desc"
+                    android:scaleType="centerInside" />
+            </ImageSwitcher>
+
+            <androidx.core.widget.ContentLoadingProgressBar
+                android:id="@+id/artwork_loading_progress"
+                style="@style/Widget.AppCompat.ProgressBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:indeterminate="true" />
+        </FrameLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="5dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/track_text"
+                style="@style/Text.FirstLine.AutoSize"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/firstline_autosize_height"
+                android:gravity="center_vertical"
+                android:textIsSelectable="false" />
+
+            <TextView
+                android:id="@+id/artist_text"
+                style="@style/Text.SecondLine.AutoSize"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/secondline_autosize_height"
+                android:textIsSelectable="false" />
+        </LinearLayout>
+
+
+        <ImageButton
+            android:id="@+id/previous_button"
+            style="@style/Button.Control.Tinted"
+            android:contentDescription="@string/previous_track_desc"
+            android:src="@drawable/ic_skip_previous" />
+
+        <ImageButton
+            android:id="@+id/pause_button"
+            style="@style/Button.Control.Tinted"
+            android:contentDescription="@string/pause_desc"
+            android:src="@drawable/ic_pause" />
+
+        <ImageButton
+            android:id="@+id/play_button"
+            style="@style/Button.Control.Tinted"
+            android:contentDescription="@string/play_desc"
+            android:src="@drawable/ic_play_arrow" />
+
+        <ImageButton
+            android:id="@+id/next_button"
+            style="@style/Button.Control.Tinted"
+            android:contentDescription="@string/next_track_desc"
+            android:src="@drawable/ic_skip_next" />
+
+        <ImageButton
+            android:id="@+id/thumbsdown_button"
+            style="@style/Button.Control"
+            android:contentDescription="@string/thumbsdown_desc"
+            android:src="@drawable/control_thumbsdown_tinted" />
+
+        <ImageButton
+            android:id="@+id/thumbsup_button"
+            style="@style/Button.Control"
+            android:contentDescription="@string/thumbsup_desc"
+            android:src="@drawable/control_thumbsup_tinted" />
+
+        <ImageButton
+            android:id="@+id/volume_button"
+            style="@style/Button.Control.Tinted"
+            android:contentDescription="@string/volume_desc"
+            android:src="@drawable/ic_volume" />
+    </LinearLayout>
+
+</LinearLayout>

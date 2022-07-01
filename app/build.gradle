@@ -1,0 +1,209 @@
+/*
+ * Copyright (c) 2020 Orange Bike Labs, LLC.
+ */
+
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'kotlin-parcelize'
+apply plugin: 'com.squareup.sqldelight'
+
+android {
+    namespace 'com.orangebikelabs.orangesqueeze'
+
+    // use most recent so we can use most recent support library
+    compileSdkVersion 32
+
+    sourceSets {
+        main {
+            java {
+                srcDir 'src/main/sqldelight'
+            }
+        }
+    }
+
+    packagingOptions {
+        // work around duplicate license files in jackson JARs
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/services/com.fasterxml.jackson.core.JsonFactory'
+        exclude 'META-INF/MANIFEST.MF'
+    }
+
+    defaultConfig {
+        applicationId 'com.orangebikelabs.opensqueeze'
+
+        versionCode obl_android_app_versionCode
+        versionName obl_android_app_versionName
+
+        // android >= 5.0
+        minSdkVersion 21
+        targetSdkVersion 32
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            proguardFile getDefaultProguardFile('proguard-android-optimize.txt')
+            proguardFile 'proguard-project.pro'
+            proguardFile 'proguard-guava.pro'
+            proguardFile 'proguard-jackson.pro'
+            proguardFile 'proguard-otto.pro'
+        }
+
+        debug {
+            multiDexEnabled true
+        }
+    }
+
+    buildFeatures {
+        viewBinding true
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+    }
+
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_11
+    }
+
+    lintOptions {
+        // if true, stop the gradle build if errors are found
+        abortOnError true
+    }
+}
+
+sqldelight {
+    // Database name
+    OSDatabase {
+        // generated package for main database
+        packageName = "com.orangebikelabs.orangesqueeze.database"
+
+        // The directory where to store '.db' schema files relative to the root
+        // of the project. These files are used to verify that migrations yield
+        // a database with the latest schema. Defaults to null so the verification
+        // tasks will not be created.
+        schemaOutputDirectory = file("src/main/databases")
+    }
+}
+
+dependencies {
+    // PhotoView
+    implementation 'com.github.chrisbanes:PhotoView:2.3.0'
+
+    // coroutines
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.2'
+
+    // lifecycle
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.1'
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.4.1'
+
+    // recyclerview
+    implementation 'androidx.recyclerview:recyclerview:1.2.1'
+
+    // ListViewAnimations
+    implementation 'com.nhaarman.listviewanimations:lib-core:3.1.0@aar'
+    implementation 'com.nhaarman.listviewanimations:lib-manipulation:3.1.0@aar'
+
+    implementation "com.afollestad.material-dialogs:core:${obl_materialdialogsVersion}"
+    implementation "com.afollestad.material-dialogs:input:${obl_materialdialogsVersion}"
+    implementation "com.afollestad.material-dialogs:datetime:${obl_materialdialogsVersion}"
+    implementation "com.afollestad.material-dialogs:files:${obl_materialdialogsVersion}"
+    implementation "com.afollestad.material-dialogs:lifecycle:${obl_materialdialogsVersion}"
+    implementation "com.afollestad.material-dialogs:bottomsheets:${obl_materialdialogsVersion}"
+
+    // NineOldAndroids for ListViewAnimations
+    implementation 'com.nineoldandroids:library:2.4.0'
+
+    implementation 'androidx.core:core-ktx:1.8.0'
+    implementation 'androidx.appcompat:appcompat:1.4.2'
+    implementation 'androidx.fragment:fragment-ktx:1.4.1'
+    implementation 'androidx.preference:preference-ktx:1.2.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation 'androidx.media:media:1.6.0'
+
+    //noinspection GradleDependency
+    implementation 'com.google.android.material:material:1.3.0'
+
+    implementation "com.fasterxml.jackson.core:jackson-core:${obl_jacksonVersion}"
+    implementation "com.fasterxml.jackson.core:jackson-annotations:${obl_jacksonVersion}"
+    implementation "com.fasterxml.jackson.core:jackson-databind:${obl_jacksonVersion}"
+    implementation "com.fasterxml.jackson.dataformat:jackson-dataformat-smile:${obl_jacksonVersion}"
+
+    implementation "com.google.guava:guava:${obl_guavaVersion}"
+
+    // this relies on now-deprecated jcenter, we moved dependency jar directly into lib for now
+    //implementation "com.gojuno.koptional:koptional:${obl_koptionalVersion}"
+
+    // required for Guava
+    implementation 'javax.inject:javax.inject:1'
+    implementation "com.google.errorprone:error_prone_annotations:${obl_errorProneVersion}"
+
+    // HTTP client
+    //noinspection GradleDependency
+    implementation "com.squareup.okhttp3:okhttp:${obl_okhttpVersion}"
+    implementation "com.squareup.okhttp3:logging-interceptor:${obl_okhttpVersion}"
+    implementation "com.squareup.okhttp3:okhttp-urlconnection:${obl_okhttpVersion}"
+    implementation 'com.squareup.okio:okio:2.9.0'
+
+    // event bus
+    implementation 'com.squareup:otto:1.3.8'
+
+    // annotations
+    implementation "com.google.code.findbugs:jsr305:${obl_jsr305Version}"
+
+    // ReactiveX
+    implementation "io.reactivex.rxjava3:rxandroid:3.0.0"
+    implementation "io.reactivex.rxjava3:rxjava:3.0.13"
+    implementation "io.reactivex.rxjava3:rxkotlin:3.0.1"
+
+    // sqldelight
+    implementation "com.squareup.sqldelight:android-driver:${sqldelight_version}"
+    implementation "com.squareup.sqldelight:coroutines-extensions:${sqldelight_version}"
+
+    // permissions
+    //noinspection GradleDependency
+    implementation "com.github.permissions-dispatcher:permissionsdispatcher:${obl_permissionsDispatcherVersion}"
+    kapt "com.github.permissions-dispatcher:permissionsdispatcher-processor:${obl_permissionsDispatcherVersion}"
+
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.7'
+
+    implementation 'androidx.multidex:multidex:2.0.1'
+
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+    implementation "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
+
+    implementation fileTree(dir: 'lib', include: ['*.jar'])
+
+    testImplementation 'junit:junit:4.13.2'
+    testImplementation 'org.robolectric:robolectric:4.6.1'
+}
+
+tasks.withType(JavaCompile) {
+    // uncomment this for more detailed deprecation warnings
+    //options.compilerArgs << "-Xlint:deprecation"
+    options.compilerArgs << "-Xlint:unchecked"
+}
+
+task archiveApks {
+    description = "Copies APKs and mapping files to the archive directory"
+    doLast {
+        def appName = "${rootProject.name}"
+        def versionDir = android.defaultConfig.versionName + "-" + android.defaultConfig.versionCode
+
+        copy {
+            from fileTree(dir: 'build/outputs/apk').files
+            into 'build/archive'
+            include '*.apk'
+            rename('app-(.*)\\.apk', "${appName}-${versionDir}-\$1.apk")
+        }
+
+        copy {
+            from 'build/outputs/mapping'
+            into 'build/archive/mapping'
+        }
+    }
+}
+archiveApks.mustRunAfter assemble

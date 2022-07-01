@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright (c) 2020 Orange Bike Labs, LLC.
+  -->
+
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:padding="4dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center">
+
+        <ImageButton
+            android:id="@+id/previous_button"
+            style="@style/Button.Control.Tinted"
+            android:contentDescription="@string/previous_track_desc"
+            android:src="@drawable/ic_skip_previous" />
+
+        <ImageButton
+            android:id="@+id/pause_button"
+            style="@style/Button.Control.Tinted.Large"
+            android:contentDescription="@string/pause_desc"
+            android:src="@drawable/ic_pause_circle_filled"
+            android:visibility="gone" />
+
+        <ImageButton
+            android:id="@+id/play_button"
+            style="@style/Button.Control.Tinted.Large"
+            android:contentDescription="@string/play_desc"
+            android:src="@drawable/ic_play_circle_filled" />
+
+        <ImageButton
+            android:id="@+id/next_button"
+            style="@style/Button.Control.Tinted"
+            android:contentDescription="@string/next_track_desc"
+            android:src="@drawable/ic_skip_next" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center">
+
+        <ImageButton
+            android:id="@+id/thumbsdown_button"
+            style="@style/Button.Control"
+            android:contentDescription="@string/thumbsdown_desc"
+            android:src="@drawable/control_thumbsdown_tinted" />
+
+        <ImageButton
+            android:id="@+id/volume_button"
+            style="@style/Button.Control.Tinted"
+            android:contentDescription="@string/volume_desc"
+            android:src="@drawable/ic_volume" />
+
+        <ImageButton
+            android:id="@+id/thumbsup_button"
+            style="@style/Button.Control"
+            android:contentDescription="@string/thumbsup_desc"
+            android:src="@drawable/control_thumbsup_tinted" />
+
+    </LinearLayout>
+
+</TableLayout>

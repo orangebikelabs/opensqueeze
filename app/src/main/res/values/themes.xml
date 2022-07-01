@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright (c) 2020 Orange Bike Labs, LLC.
+  -->
+
+<resources>
+    <!-- main theme for Orange Squeeze -->
+    <style name="Theme.OrangeSqueeze" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/primaryColor</item>
+        <item name="colorPrimaryDark">@color/primaryDarkColor</item>
+        <item name="colorPrimaryVariant">@color/primaryDarkColor</item>
+        <item name="colorOnPrimary">@color/primaryTextColor</item>
+        <item name="colorSecondary">@color/secondaryColor</item>
+        <item name="colorSecondaryVariant">@color/secondaryDarkColor</item>
+        <item name="colorOnSecondary">@color/secondaryTextColor</item>
+
+        <!-- used for majority of lists, derived from preferred list item height -->
+        <item name="listPreferredItemHeight">?android:attr/listPreferredItemHeight</item>
+        <item name="largerListItemHeight">?android:attr/listPreferredItemHeightLarge</item>
+        <item name="controlButtonPadding">@dimen/control_button_padding</item>
+        <item name="listIconSize">56dp</item>
+        <item name="listIconPadding">8dp</item>
+        <item name="tinyNowPlayingHeight">60dp</item>
+        <item name="tinyNowPlayingArtworkSize">56dp</item>
+        <item name="tinyNowPlayingArtworkPadding">4dp</item>
+        <item name="listPreferredItemPaddingStart">16dp</item>
+        <item name="listPreferredItemPaddingEnd">16dp</item>
+        <item name="expandableListPreferredItemPaddingLeft">40dp</item>
+        <item name="expandableListPreferredChildPaddingLeft">
+            ?attr/expandableListPreferredItemPaddingLeft
+        </item>
+        <item name="firstLineTextSize">16sp</item>
+        <item name="secondLineTextSize">14sp</item>
+        <item name="singleLineTextSize">18sp</item>
+        <item name="gridTextPadding">8dp</item>
+    </style>
+
+    <style name="Theme.OrangeSqueeze.Compact">
+        <item name="listPreferredItemHeight">48dp</item>
+        <item name="largerListItemHeight">60dp</item>
+        <item name="listIconSize">44dp</item>
+        <item name="listIconPadding">0dp</item>
+        <item name="controlButtonPadding">@dimen/control_button_padding_compact</item>
+        <item name="tinyNowPlayingHeight">48dp</item>
+        <item name="tinyNowPlayingArtworkSize">44dp</item>
+        <item name="tinyNowPlayingArtworkPadding">2dp</item>
+        <item name="listPreferredItemPaddingStart">8dp</item>
+        <item name="listPreferredItemPaddingEnd">8dp</item>
+        <item name="firstLineTextSize">16sp</item>
+        <item name="secondLineTextSize">14sp</item>
+        <item name="singleLineTextSize">18sp</item>
+        <item name="gridTextPadding">4dp</item>
+    </style>
+
+    <style name="Theme.OrangeSqueeze.DialogWhenLarge" parent="Theme.MaterialComponents.DayNight.DialogWhenLarge">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+
+        <!-- paste values from Theme.OrangeSqueeze, do not modify here -->
+        <item name="colorPrimary">@color/primaryColor</item>
+        <item name="colorPrimaryDark">@color/primaryDarkColor</item>
+        <item name="colorPrimaryVariant">@color/primaryDarkColor</item>
+        <item name="colorOnPrimary">@color/primaryTextColor</item>
+        <item name="colorSecondary">@color/secondaryColor</item>
+        <item name="colorSecondaryVariant">@color/secondaryDarkColor</item>
+        <item name="colorOnSecondary">@color/secondaryTextColor</item>
+
+        <!-- used for majority of lists, derived from preferred list item height -->
+        <item name="listPreferredItemHeight">?android:attr/listPreferredItemHeight</item>
+        <item name="largerListItemHeight">?android:attr/listPreferredItemHeightLarge</item>
+        <item name="controlButtonPadding">@dimen/control_button_padding</item>
+        <item name="listIconSize">56dp</item>
+        <item name="listIconPadding">8dp</item>
+        <item name="tinyNowPlayingHeight">60dp</item>
+        <item name="tinyNowPlayingArtworkSize">56dp</item>
+        <item name="tinyNowPlayingArtworkPadding">4dp</item>
+        <item name="listPreferredItemPaddingStart">16dp</item>
+        <item name="listPreferredItemPaddingEnd">16dp</item>
+        <item name="expandableListPreferredItemPaddingLeft">40dp</item>
+        <item name="expandableListPreferredChildPaddingLeft">
+            ?attr/expandableListPreferredItemPaddingLeft
+        </item>
+
+        <item name="firstLineTextSize">16sp</item>
+        <item name="secondLineTextSize">14sp</item>
+        <item name="singleLineTextSize">18sp</item>
+        <item name="gridTextPadding">8dp</item>
+    </style>
+</resources>

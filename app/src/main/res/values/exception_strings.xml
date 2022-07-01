@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2020 Orange Bike Labs, LLC.
+  -->
+
+<resources>
+    <string name="exception_connection_timeout">Timeout waiting for server connection to complete</string>
+    <string name="exception_no_network_available">No Network Available</string>
+    <string name="exception_connection_error">Connection error</string>
+</resources>

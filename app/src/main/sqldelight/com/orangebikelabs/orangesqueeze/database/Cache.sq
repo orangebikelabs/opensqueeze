@@ -1,0 +1,34 @@
+CREATE TABLE cache (
+    _id INTEGER PRIMARY KEY AUTOINCREMENT,
+    cachekeyhash INTEGER NOT NULL,
+    cachekey TEXT NOT NULL,
+    cacheitemstatus TEXT NOT NULL,
+    cachevalue BLOB,
+    cachevaluesize INTEGER NOT NULL,
+    cacheserverscantimestamp INTEGER,
+    cacheexpirestimestamp INTEGER,
+    cachelastusedtimestamp INTEGER,
+    serverid INTEGER REFERENCES server(_id),
+    UNIQUE (cachekey, serverid)
+);
+
+wipePurge:
+DELETE FROM cache;
+
+lookupExternalCacheSize:
+SELECT total(cachevaluesize) FROM cache WHERE cachevalue IS NULL;
+
+lookupInternalCacheSize:
+SELECT total(cachevaluesize) FROM cache WHERE cachevalue IS NOT NULL;
+
+deleteWithId:
+DELETE FROM cache WHERE _id = ?;
+
+deleteWithServerId:
+DELETE FROM cache WHERE serverid = ?;
+
+lookupExternalEntriesSortedByDisuse:
+SELECT _id, cachevaluesize FROM cache WHERE cachevalue IS NULL ORDER BY cachelastusedtimestamp ASC;
+
+lookupInternalEntriesSortedByDisuse:
+SELECT _id, cachevaluesize FROM cache WHERE cachevalue IS NOT NULL ORDER BY cachelastusedtimestamp ASC;

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2020 Orange Bike Labs, LLC.
+  -->
+
+<resources>
+    <bool name="tiny_nowplaying_compact_mode">false</bool>
+    <bool name="browse_grid_default">true</bool>
+    <bool name="compact_nowplaying_actionbar">false</bool>
+</resources>

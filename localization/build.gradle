@@ -1,0 +1,25 @@
+
+/*
+ * Copyright (c) 2022 Orange Bike Labs, LLC.
+ */
+
+apply plugin: 'groovy'
+apply plugin: 'java-gradle-plugin'
+
+gradlePlugin {
+    plugins {
+        localization {
+            id = "localization"
+            implementationClass = "LocalizationPlugin"
+        }
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation("com.squareup.okio:okio:2.9.0")
+    implementation("net.sf.supercsv:super-csv:2.4.0")
+}

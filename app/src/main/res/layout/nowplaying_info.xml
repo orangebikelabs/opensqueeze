@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright (c) 2020 Orange Bike Labs, LLC.
+  -->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/album_text"
+        style="@style/Text.NowPlaying.Album"
+        android:layout_width="match_parent"
+        android:layout_height="30sp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:gravity="center"
+        android:text="album text"
+        tools:ignore="HardcodedText" />
+
+    <TextView
+        android:id="@+id/track_text"
+        style="@style/Text.NowPlaying.Track"
+        android:layout_width="match_parent"
+        android:layout_height="34sp"
+        android:gravity="center"
+        android:text="track text"
+        tools:ignore="HardcodedText" />
+
+    <TextView
+        android:id="@+id/artist_text"
+        style="@style/Text.NowPlaying.Artist"
+        android:layout_width="match_parent"
+        android:layout_height="30sp"
+        android:gravity="center"
+        android:text="artist text"
+        tools:ignore="HardcodedText">
+
+    </TextView>
+
+</LinearLayout>

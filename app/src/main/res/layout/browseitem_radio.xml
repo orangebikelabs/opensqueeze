@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright (c) 2020 Orange Bike Labs, LLC.
+  -->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:descendantFocusability="blocksDescendants"
+    android:gravity="center_vertical"
+    android:minHeight="?attr/listPreferredItemHeight">
+
+    <RadioButton
+        android:id="@+id/radio"
+        style="@style/Text.SingleLine"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="?attr/listPreferredItemPaddingStart"
+        android:layout_marginEnd="?attr/listPreferredItemPaddingEnd"
+        android:layout_weight="1"
+        android:text="Radio Text"
+        tools:ignore="HardcodedText" />
+</LinearLayout>

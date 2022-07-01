@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright (c) 2020 Orange Bike Labs, LLC.
+  -->
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?attr/selectableItemBackground">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/overflow_button_allowance_width"
+        android:minHeight="?attr/listPreferredItemHeight">
+
+        <ImageView
+            android:id="@+id/icon"
+            android:layout_width="?attr/listIconSize"
+            android:layout_height="?attr/listIconSize"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="?attr/listPreferredItemPaddingStart"
+            android:layout_marginTop="?attr/listIconPadding"
+            android:layout_marginEnd="0dp"
+            android:layout_marginBottom="?attr/listIconPadding"
+            android:contentDescription="@string/item_icon_missing_desc"
+            android:scaleType="centerCrop"
+            android:src="@drawable/artwork_missing" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="?attr/listPreferredItemPaddingStart"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/text1"
+                style="@style/Text.FirstLine.AutoSize"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/firstline_autosize_height"
+                android:gravity="center_vertical"
+                android:text="Top Text With Lots of Text and Multiple Lines and more and more and more"
+                tools:ignore="HardcodedText" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/text2"
+                    style="@style/Text.SecondLine.AutoSize"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/secondline_autosize_height"
+                    android:layout_weight="1"
+                    android:ellipsize="middle"
+                    android:gravity="center_vertical"
+                    android:text="Bottom Left Text"
+                    tools:ignore="HardcodedText" />
+
+                <TextView
+                    android:id="@+id/text3"
+                    style="@style/Text.TrackTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:gravity="center_vertical"
+                    android:text="Bottom Right Text"
+                    tools:ignore="HardcodedText" />
+            </LinearLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <ImageButton
+        android:id="@+id/action_button"
+        style="@style/Button.Overflow"
+        android:layout_gravity="center_vertical|end"
+        tools:ignore="ContentDescription" />
+
+</FrameLayout>

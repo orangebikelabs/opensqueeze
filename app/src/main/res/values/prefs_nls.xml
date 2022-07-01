@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2020 Orange Bike Labs, LLC.
+  -->
+
+<resources>
+
+    <string name="pref_root_screen_key" translatable="false"/>
+    <string name="pref_autoconnect_key" translatable="false">AutoConnect</string>
+    <string name="pref_autodiscovery_key" translatable="false">AutoDiscovery</string>
+    <string name="pref_cachelocation_key" translatable="false">CacheLocation</string>
+
+    <string-array name="pref_cachelocation_values" translatable="false">
+        <item>internal</item>
+        <item>external</item>
+    </string-array>
+
+    <string name="pref_cache_storagesize_key" translatable="false">CacheStorageSize</string>
+
+    <string-array name="pref_cache_storagesize_values" translatable="false">
+        <item>0</item>
+        <item>50</item>
+        <item>100</item>
+        <item>250</item>
+        <item>500</item>
+        <item>1000</item>
+    </string-array>
+
+    <string name="removed_pref_cache_memorysize_key" translatable="false">CacheMemorySize</string>
+    <string name="removed_pref_artworkprefetch_key" translatable="false">ArtworkPrefetch</string>
+    <string name="removed_pref_browsealbumsort" translatable="false">BrowseAlbumSort</string>
+    <string name="removed_pref_themeid" translatable="false">ThemeId</string>
+
+    <string name="pref_automaticmute_category_key" translatable="false">AutomaticMutingCategory</string>
+    <string name="pref_automaticmute_key" translatable="false">AutomaticMute</string>
+
+    <!-- these must correspond to values in the AppPreferences enum -->
+    <string-array name="pref_automaticmute_values" translatable="false">
+        <item>nothing</item>
+        <item>mute</item>
+        <item>mutecurrent</item>
+        <item>pause</item>
+        <item>pausecurrent</item>
+    </string-array>
+
+    <string name="pref_browse_disableartistartwork_key" translatable="false">BrowseDisableArtistArtwork</string>
+    <string name="pref_browse_albumsort_key" translatable="false">BrowseAlbumSort</string>
+    <string name="pref_general_category_key" translatable="false">GeneralCategory</string>
+    <string name="pref_other_category_key" translatable="false">OtherCategory</string>
+    <string name="pref_volume_category_key" translatable="false">VolumeCategory</string>
+    <string name="pref_browse_gridcellcount_key" translatable="false">BrowseGridCellCount</string>
+    <string name="pref_keepscreenon_key" translatable="false">KeepScreenOn</string>
+    <string name="pref_autolaunch_squeezeplayer_key" translatable="false">AutoLaunchSqueezePlayer</string>
+    <string name="pref_trackselect_playmode_key" translatable="false">TrackSelectPlayMode</string>
+    <string name="pref_showtips_key" translatable="false">ShowTips</string>
+    <string name="pref_browse_showactionbar_key" translatable="false">BrowseShowActionBar</string>
+    <string name="pref_browse_shownowplaying_key" translatable="false">BrowseShowNowPlayingBar</string>
+    <string name="pref_automaticunmute_key" translatable="false">AutomaticUnmute</string>
+    <string name="pref_servicekeepalive_key" translatable="false">ConnectionTimeout</string>
+    <string name="pref_use24hourtimeformat_key" translatable="false">Use24HourTimeFormat</string>
+    <string name="pref_shownowplayingnotification_key" translatable="false">ShowNowPlayingNotification</string>
+    <string name="pref_systemvolumecontrol_key" translatable="false">SystemVolumeIntegration</string>
+
+    <!-- value in minutes -->
+    <string-array name="pref_automaticunmute_values" translatable="false">
+        <!-- never -->
+        <item>-1</item>
+
+        <item>1</item>
+        <item>5</item>
+        <item>10</item>
+        <item>30</item>
+        <item>60</item>
+
+        <!-- forever -->
+        <item>-2</item>
+    </string-array>
+
+    <string name="pref_theme_key" translatable="false">AndroidTheme</string>
+    <string name="pref_compactmode_key" translatable="false">CompactMode</string>
+
+    <string-array name="pref_theme_values" translatable="false">
+        <item>light</item>
+        <item>dark</item>
+        <item>default</item>
+    </string-array>
+    <string name="pref_verboselogging_key" translatable="false">VerboseLogging</string>
+
+    <string-array name="pref_trackselect_playmode_values">
+        <item>prompt</item>
+        <item>play</item>
+        <item>insert</item>
+        <item>add</item>
+    </string-array>
+
+    <string name="pref_trackdownload_category_key" translatable="false">TrackDownloadCategoryKey</string>
+    <string name="pref_trackdownload_location_key" translatable="false">TrackDownloadLocation</string>
+    <string name="pref_trackdownload_transcodeenabled_key" translatable="false">TrackDownloadTranscodeEnabled</string>
+    <string name="pref_trackdownload_transcodeformat_key" translatable="false">TrackDownloadTranscodeFormat</string>
+    <string name="pref_trackdownload_transcodeoptions_key" translatable="false">TrackDownloadTranscodeOptions</string>
+
+    <string-array name="pref_browse_gridcellcount_values" translatable="false">
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+    </string-array>
+
+    <string name="pref_language_key" translatable="false">Language.Key</string>
+    <string-array name="pref_language_values">
+        <item>en</item>
+        <item>fr</item>
+        <item>de</item>
+    </string-array>
+
+    <string name="pref_silentaudiohack_key" translatable="false">SilentAudioHack</string>
+    <string name="pref_pauseonheadphonedisconnect_key" translatable="false">PauseOnHeadphoneDisconnect</string>
+    <string name="pref_autosizetext_key" translatable="false">AutomaticSizeText</string>
+</resources>

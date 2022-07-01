@@ -1,0 +1,15 @@
+<!--
+  ~ Copyright (c) 2020 Orange Bike Labs, LLC.
+  -->
+
+<appwidget-provider xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:initialLayout="@layout/widget_small"
+    android:minHeight="48dp"
+    android:minResizeHeight="48dp"
+    android:minResizeWidth="110dp"
+    android:minWidth="180dp"
+    android:resizeMode="horizontal"
+    android:updatePeriodMillis="1800000"
+    android:widgetCategory="home_screen|keyguard"
+    tools:targetApi="jelly_bean_mr1" />

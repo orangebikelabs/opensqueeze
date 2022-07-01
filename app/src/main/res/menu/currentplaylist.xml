@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright (c) 2020 Orange Bike Labs, LLC.
+  -->
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/menu_nowplaying_saveplaylist"
+        android:icon="@drawable/ic_save"
+        android:orderInCategory="2"
+        android:title="@string/menu_nowplaying_saveplaylist"
+        app:iconTint="?attr/colorControlNormal"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/menu_nowplaying_clearplaylist"
+        android:icon="@drawable/ic_delete_forever"
+        android:orderInCategory="2"
+        android:title="@string/menu_nowplaying_clearplaylist"
+        app:iconTint="?attr/colorControlNormal"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/menu_nowplaying_snaptocurrentitem"
+        android:checkable="true"
+        android:orderInCategory="2"
+        android:title="@string/snap_to_current_item"
+        app:showAsAction="never" />
+</menu>

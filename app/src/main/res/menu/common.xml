@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright (c) 2020 Orange Bike Labs, LLC.
+  -->
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/menu_players"
+        android:icon="@drawable/ic_boombox"
+        android:orderInCategory="5"
+        android:title="@string/menu_players"
+        app:iconTint="?attr/colorControlNormal"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/menu_switchserver"
+        android:icon="@drawable/ic_switchserver"
+        android:orderInCategory="6"
+        android:title="@string/menu_switchserver"
+        app:iconTint="?attr/colorControlNormal" />
+
+    <item
+        android:id="@+id/menu_search"
+        android:icon="@drawable/ic_search"
+        android:orderInCategory="7"
+        android:title="@string/menu_search"
+        app:iconTint="?attr/colorControlNormal"
+        app:showAsAction="collapseActionView|ifRoom" />
+
+    <item
+        android:id="@+id/menu_preferences"
+        android:icon="@drawable/ic_settings"
+        android:orderInCategory="8"
+        android:title="@string/menu_preferences"
+        app:iconTint="?attr/colorControlNormal" />
+
+    <item
+        android:id="@+id/menu_maintenance"
+        android:orderInCategory="9"
+        android:title="@string/menu_maintenance" />
+
+    <item
+        android:id="@+id/menu_about"
+        android:icon="@drawable/ic_info_outline"
+        android:orderInCategory="10"
+        android:title="@string/about_app"
+        app:iconTint="?attr/colorControlNormal" />
+
+</menu>

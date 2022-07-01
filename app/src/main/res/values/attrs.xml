@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright (c) 2020 Orange Bike Labs, LLC.
+  -->
+
+<resources>
+    <attr name="controlButtonPadding" format="dimension" />
+    <attr name="listIconSize" format="dimension" />
+    <attr name="listIconPadding" format="dimension" />
+    <attr name="tinyNowPlayingHeight" format="dimension" />
+    <attr name="tinyNowPlayingArtworkSize" format="dimension" />
+    <attr name="tinyNowPlayingArtworkPadding" format="dimension" />
+    <attr name="largerListItemHeight" format="dimension" />
+    <attr name="listPreferredItemPaddingStart" format="dimension" />
+    <attr name="listPreferredItemPaddingEnd" format="dimension" />
+    <attr name="expandableListPreferredItemPaddingLeft" format="dimension" />
+    <attr name="expandableListPreferredChildPaddingLeft" format="dimension" />
+    <attr name="firstLineTextSize" format="dimension" />
+    <attr name="secondLineTextSize" format="dimension" />
+    <attr name="singleLineTextSize" format="dimension" />
+    <attr name="gridTextPadding" format="dimension" />
+</resources>

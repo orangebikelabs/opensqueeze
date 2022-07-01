@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2020 Orange Bike Labs, LLC.
+  -->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:gravity="center_horizontal"
+              android:orientation="vertical">
+
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:id="@+id/choose_new_server_button"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:src="@drawable/artwork_noplayers"
+        android:scaleType="centerInside"
+        android:contentDescription="@string/choosenewserver_desc"/>
+
+    <TextView
+        android:id="@+id/noplayer_server_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="@string/no_player_available_label_html"
+        android:textAppearance="?android:attr/textAppearanceMedium"/>
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragment1"
+        android:name="com.orangebikelabs.orangesqueeze.players.ManagePlayersFragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+</LinearLayout>

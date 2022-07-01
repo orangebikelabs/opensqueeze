@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright (c) 2020 Orange Bike Labs, LLC.
+  -->
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/linearLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginEnd="@dimen/overflow_button_allowance_width"
+    android:background="?attr/selectableItemBackground"
+    android:gravity="center_vertical|start"
+    android:minHeight="?attr/listPreferredItemHeight">
+
+    <ImageView
+        android:id="@+id/icon"
+        android:layout_width="?attr/listIconSize"
+        android:layout_height="?attr/listIconSize"
+        android:layout_marginStart="?attr/listPreferredItemPaddingStart"
+        android:layout_marginTop="?attr/listIconPadding"
+        android:layout_marginBottom="?attr/listIconPadding"
+        android:contentDescription="@string/item_icon_missing_desc"
+        android:scaleType="center"
+        android:src="@drawable/artwork_missing"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Space
+        android:id="@+id/space"
+        android:layout_width="@dimen/overflow_button_allowance_width"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/action_button"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/text1"
+        style="@style/Text.SingleLine.AutoSize"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/singleline_autosize_height"
+        android:layout_marginStart="?attr/listPreferredItemPaddingStart"
+        android:ellipsize="end"
+        android:gravity="center_vertical"
+        android:text="Text"
+        app:layout_constrainedWidth="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/space"
+        app:layout_constraintStart_toEndOf="@+id/icon"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="HardcodedText" />
+
+    <ImageButton
+        android:id="@+id/action_button"
+        style="@style/Button.Overflow"
+        android:layout_gravity="center_vertical|end"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ContentDescription" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

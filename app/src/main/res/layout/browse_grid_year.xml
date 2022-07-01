@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright (c) 2020 Orange Bike Labs, LLC.
+  -->
+
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/Item.Grid"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/text1"
+        style="@style/Text.SingleLine.AutoSize"
+        android:layout_width="match_parent"
+        android:layout_height="160dp"
+        android:gravity="center"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:text="YEAR"
+        android:textSize="26sp"
+        app:autoSizeMaxTextSize="120sp"
+        app:autoSizeStepGranularity="8sp"
+        tools:ignore="HardcodedText" />
+
+    <ImageButton
+        android:id="@+id/action_button"
+        style="@style/Button.Overflow.Grid"
+        android:layout_gravity="bottom|end"
+        tools:ignore="ContentDescription" />
+
+</com.google.android.material.card.MaterialCardView>

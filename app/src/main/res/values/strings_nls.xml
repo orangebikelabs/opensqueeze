@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2020 Orange Bike Labs, LLC.
+  -->
+
+<resources>
+    <string name="squeezeplayer" translatable="false">SqueezePlayer</string>
+    <string name="database_name" translatable="false">OpenSqueeze.db</string>
+    <string name="app_name" translatable="false">Open Squeeze</string>
+    <string name="nowplaying_shortcut_disabled" translatable="false">Disabled</string>
+</resources>

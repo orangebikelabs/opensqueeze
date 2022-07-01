@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright (c) 2020 Orange Bike Labs, LLC.
+  -->
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/widget_background"
+    android:padding="@dimen/widget_margin">
+
+    <LinearLayout
+        android:id="@+id/widget_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/artwork"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="0dp"
+                android:layout_marginBottom="4dp"
+                android:contentDescription="@string/artwork_missing_desc"
+                android:scaleType="centerCrop"
+                android:src="@drawable/artwork_missing" />
+
+            <include layout="@layout/appwidget_player_buttons" />
+
+            <include layout="@layout/appwidget_player_buttons2" />
+
+            <ImageButton
+                android:id="@+id/search_button"
+                style="@style/Button.AppWidgetControl"
+                android:contentDescription="@string/search_desc"
+                android:src="@drawable/ic_search_white" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="4"
+            android:orientation="vertical"
+            tools:ignore="UseCompoundDrawables">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/widget_separator"
+                android:contentDescription="@string/visual_separator_desc" />
+
+            <TextView
+                android:id="@+id/nowplaying_text"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:background="?android:attr/selectableItemBackground"
+                android:ellipsize="marquee"
+                android:gravity="center_vertical"
+                android:paddingLeft="8dp"
+                android:paddingTop="4dp"
+                android:paddingRight="8dp"
+                android:paddingBottom="4dp"
+                android:singleLine="true"
+                android:text="Now Playing Text"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="@android:color/primary_text_dark"
+                tools:ignore="HardcodedText,NestedWeights" />
+        </LinearLayout>
+
+        <!-- placeholder, used only in large widget -->
+        <TextView
+            android:id="@+id/player_name_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone" />
+    </LinearLayout>
+
+</FrameLayout>

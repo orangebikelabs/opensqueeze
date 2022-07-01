@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright (c) 2020 Orange Bike Labs, LLC.
+  -->
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent">
+
+    <FrameLayout
+        android:id="@+id/browseview_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!-- lists/grids/viewpagers added dynamically, replace this one -->
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/browseview"/>
+
+        <TextView
+            android:id="@android:id/empty"
+            style="@style/Text.NoItems"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:visibility="invisible"/>
+
+        <TextView
+            android:id="@+id/loading"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="@string/loading_text"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:visibility="invisible"/>
+
+        <ViewStub
+            android:id="@+id/browsetext_stub"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout="@layout/browse_textscroll"
+            android:inflatedId="@+id/textarea_scroll"/>
+
+        <ViewStub
+            android:id="@+id/browseimage_stub"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout="@layout/browse_imageview"
+            android:inflatedId="@+id/artwork"/>
+    </FrameLayout>
+
+    <ProgressBar
+        android:id="@+id/listload_progress"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_gravity="top"
+        android:indeterminate="false"
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+        android:progressDrawable="@drawable/default_load_progress"/>
+</FrameLayout>

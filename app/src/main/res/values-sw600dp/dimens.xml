@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2020 Orange Bike Labs, LLC.
+  -->
+
+<resources>
+    <dimen name="control_button_padding">16dp</dimen>
+    <dimen name="control_button_padding_compact">8dp</dimen>
+</resources>

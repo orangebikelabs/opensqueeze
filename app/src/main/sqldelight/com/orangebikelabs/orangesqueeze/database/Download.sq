@@ -1,0 +1,46 @@
+import com.orangebikelabs.orangesqueeze.download.DownloadStatus;
+
+CREATE TABLE download (
+    _id INTEGER PRIMARY KEY AUTOINCREMENT,
+    downloadbatch TEXT NOT NULL,
+    downloadtrackid TEXT NOT NULL,
+    downloadistranscoded INTEGER AS Boolean NOT NULL DEFAULT 0,
+    downloadtitle TEXT NOT NULL,
+    downloadsource TEXT NOT NULL,
+    downloaddestination TEXT NOT NULL,
+    downloadcreatetimestamp INTEGER NOT NULL,
+    downloadcompletiontimestamp INTEGER,
+    downloadstatus TEXT AS DownloadStatus NOT NULL,
+    downloadautostart INTEGER AS Boolean NOT NULL DEFAULT 1,
+    serverid INTEGER REFERENCES server(_id)
+);
+
+lookupDownloadsToStart:
+SELECT _id, downloadautostart FROM download
+    WHERE downloadcompletiontimestamp IS NULL AND serverid = :findserverid
+    ORDER BY downloadcreatetimestamp ASC;
+
+lookupDownloadsWithServerId:
+SELECT _id, downloadtitle, downloadstatus, downloadbatch FROM download
+    WHERE serverid = :findserverid
+    ORDER BY _id ASC;
+
+lookupWithId:
+SELECT * FROM download WHERE _id = :finddownloadid;
+
+updateStatus:
+UPDATE download
+    SET downloadcompletiontimestamp = ?, downloadstatus = ?, downloadautostart = ?
+    WHERE _id = :finddownloadid;
+
+
+insert:
+INSERT INTO download (downloadbatch, downloadtrackid, downloadistranscoded,
+            downloadcreatetimestamp, downloadtitle, downloadsource, downloaddestination, serverid, downloadstatus)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);
+
+deleteWithServerId:
+DELETE FROM download WHERE serverid = ?;
+
+deleteAll:
+DELETE FROM download;

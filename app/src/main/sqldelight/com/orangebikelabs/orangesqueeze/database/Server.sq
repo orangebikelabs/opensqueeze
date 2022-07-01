@@ -1,0 +1,76 @@
+import com.orangebikelabs.orangesqueeze.app.PlayerMenuHelper.PlayerMenuSet;
+import com.orangebikelabs.orangesqueeze.common.PlayerId;
+import com.orangebikelabs.orangesqueeze.common.ServerType;
+import com.orangebikelabs.orangesqueeze.common.WakeOnLanSettings;
+import java.lang.Integer;
+import kotlin.collections.List;
+import kotlin.collections.Map;
+
+CREATE TABLE server (
+    _id INTEGER PRIMARY KEY AUTOINCREMENT,
+    servername TEXT NOT NULL,
+    serverhost TEXT NOT NULL,
+    serverwakeonlan TEXT AS WakeOnLanSettings,
+    serverport INTEGER AS Integer NOT NULL,
+    servertype TEXT AS ServerType NOT NULL,
+    serverplayermenus BLOB AS Map<PlayerId, PlayerMenuSet>,
+    servermenunodes BLOB AS List<String>,
+    serverlastseen INTEGER,
+    serverlastconnected INTEGER,
+    serverlastplayer TEXT AS PlayerId,
+    serverusername TEXT,
+    serverpassword TEXT,
+    serversid TEXT,
+    serverkey TEXT,
+    serverautoconnect INTEGER AS Boolean NOT NULL DEFAULT 0,
+    UNIQUE (servername)
+);
+
+updateLastPlayer:
+UPDATE server SET serverlastplayer = ? WHERE _id = :findserverid;
+
+updateMenus:
+UPDATE server SET serverplayermenus = ?, servermenunodes = ? WHERE _id = :findserverid;
+
+lookupAll:
+SELECT * FROM server;
+
+lookupAutoconnectServer:
+SELECT _id, servername FROM server WHERE serverautoconnect <> 0;
+
+lookupByName:
+SELECT * FROM server WHERE servername = :findservername;
+
+lookupById:
+SELECT * FROM server WHERE _id = :findserverid;
+
+lookupForServerList:
+SELECT * FROM server WHERE serverlastseen > :serverlastseen OR servertype <> :discoveredservertype ORDER BY serverlastconnected DESC;
+
+insertDiscovered:
+INSERT INTO server (serverhost, serverport, serverlastseen, servername, servertype) VALUES (?, ?, ?, ?, ?);
+
+insertSimple:
+INSERT INTO server (serverhost, serverport, servername, servertype) VALUES (?, ?, ?, ?);
+
+updateDiscovered:
+UPDATE server SET serverhost = ?, serverport = ?, serverlastseen = ? WHERE _id = :findserverid;
+
+updateAutoconnect:
+UPDATE server SET serverautoconnect = ? WHERE _id = :findserverid;
+
+updateWakeOnLan:
+UPDATE server SET serverwakeonlan = ? WHERE _id = :findserverid;
+
+updateCredentials:
+UPDATE server SET serverkey = ?, serverusername = ?, serverpassword = ?, serversid = ? WHERE _id = :findserverid;
+
+updateServerTypeWithTypeCheck:
+UPDATE server SET servertype = ? WHERE _id = :findserverid AND servertype = :findservertype;
+
+updateServerType:
+UPDATE server SET servertype = ? WHERE _id = :findserverid;
+
+/** Attention -- don't add new ways to delete servers because we enforce integrity constaints in sw. */
+deleteById:
+DELETE FROM server WHERE _id = :findserverid;

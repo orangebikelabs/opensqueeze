@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright (c) 2020 Orange Bike Labs, LLC.
+  -->
+
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    android:key="@string/pref_root_screen_key">
+
+    <PreferenceCategory
+        android:key="@string/pref_general_category_key"
+        android:title="@string/pref_general_category_title">
+        <ListPreference
+            android:defaultValue="en"
+            android:entries="@array/pref_language_entries"
+            android:entryValues="@array/pref_language_values"
+            android:key="@string/pref_language_key"
+            android:persistent="false"
+            android:summary="@string/pref_language_summary"
+            android:title="@string/pref_language_title" />
+        <ListPreference
+            android:defaultValue="@string/default_pref_theme"
+            android:entries="@array/pref_theme_entries"
+            android:entryValues="@array/pref_theme_values"
+            android:key="@string/pref_theme_key"
+            android:summary="@string/pref_theme_summary"
+            android:title="@string/pref_theme_title" />
+
+        <CheckBoxPreference
+            android:defaultValue="@bool/default_pref_shownowplayingnotification"
+            android:key="@string/pref_shownowplayingnotification_key"
+            android:summaryOff="@string/pref_shownowplayingnotification_summaryOff"
+            android:summaryOn="@string/pref_shownowplayingnotification_summaryOn"
+            android:title="@string/pref_shownowplayingnotification_title" />
+        <CheckBoxPreference
+            android:defaultValue="@bool/default_pref_keepscreenon"
+            android:key="@string/pref_keepscreenon_key"
+            android:summary="@string/pref_keepscreenon_summary"
+            android:title="@string/pref_keepscreenon_title" />
+        <CheckBoxPreference
+            android:defaultValue="@bool/default_pref_autolaunch_squeezeplayer"
+            android:key="@string/pref_autolaunch_squeezeplayer_key"
+            android:summary="@string/pref_autolaunch_squeezeplayer_summary"
+            android:title="@string/pref_autolaunch_squeezeplayer_title" />
+        <CheckBoxPreference
+            android:defaultValue="@bool/default_pref_use24hourtimeformat"
+            android:key="@string/pref_use24hourtimeformat_key"
+            android:summaryOff="@string/pref_use24hourtimeformat_summaryOff"
+            android:summaryOn="@string/pref_use24hourtimeformat_summaryOn"
+            android:title="@string/pref_use24hourtimeformat_title" />
+    </PreferenceCategory>
+    <PreferenceCategory android:title="@string/pref_browse_category">
+        <CheckBoxPreference
+            android:defaultValue="@bool/default_pref_compactmode"
+            android:key="@string/pref_compactmode_key"
+            android:summaryOff="@string/pref_compactmode_summaryOff"
+            android:summaryOn="@string/pref_compactmode_summaryOn"
+            android:title="@string/pref_compactmode_title" />
+
+        <CheckBoxPreference
+            android:defaultValue="@bool/default_pref_autosizetext"
+            android:key="@string/pref_autosizetext_key"
+            android:summaryOff="@string/pref_autosizetext_summaryOff"
+            android:summaryOn="@string/pref_autosizetext_summaryOn"
+            android:title="@string/pref_autosizetext_title" />
+
+        <ListPreference
+            android:defaultValue="@string/default_pref_browse_gridcellcount"
+            android:entries="@array/pref_browse_gridcellcount_values"
+            android:entryValues="@array/pref_browse_gridcellcount_values"
+            android:key="@string/pref_browse_gridcellcount_key"
+            android:summary="@string/pref_browse_gridcellcount_summary"
+            android:title="@string/pref_browse_gridcellcount_title" />
+
+        <ListPreference
+            android:defaultValue="@string/default_pref_trackselect_playmode"
+            android:entries="@array/pref_trackselect_playmode_entries"
+            android:entryValues="@array/pref_trackselect_playmode_values"
+            android:key="@string/pref_trackselect_playmode_key"
+            android:summary="@string/pref_trackselect_playmode_summary"
+            android:title="@string/pref_trackselect_playmode_title" />
+
+        <com.orangebikelabs.orangesqueeze.ui.AlbumSortPreference
+            android:summary="@string/pref_browse_albumsort_summary"
+            android:title="@string/pref_browse_albumsort_title" />
+    </PreferenceCategory>
+    <PreferenceCategory android:title="@string/pref_cache_category">
+        <com.orangebikelabs.orangesqueeze.ui.WipeArtworkPreference
+            android:dialogMessage="@string/pref_wipeartwork_message"
+            android:dialogTitle="@string/pref_wipeartwork_title"
+            android:negativeButtonText="@string/no"
+            android:positiveButtonText="@string/yes"
+            android:summary="@string/pref_wipeartwork_summary"
+            android:title="@string/pref_wipeartwork_title" />
+
+        <ListPreference
+            android:defaultValue="internal"
+            android:entries="@array/pref_cachelocation_entries"
+            android:entryValues="@array/pref_cachelocation_values"
+            android:key="@string/pref_cachelocation_key"
+            android:title="@string/pref_cachelocation_title" />
+        <ListPreference
+            android:defaultValue="0"
+            android:entries="@array/pref_cache_storagesize_entries"
+            android:entryValues="@array/pref_cache_storagesize_values"
+            android:key="@string/pref_cache_storagesize_key"
+            android:summary="@string/pref_cache_storagesize_summary"
+            android:title="@string/pref_cache_storagesize_title" />
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:key="@string/pref_automaticmute_category_key"
+        android:title="@string/pref_automaticmute_category_title">
+        <Preference
+            android:defaultValue="@string/default_pref_automaticmute_behavior"
+            android:key="@string/pref_automaticmute_key"
+            android:summary="@string/pref_automaticmute_summary"
+            android:title="@string/pref_automaticmute_title" />
+
+        <ListPreference
+            android:defaultValue="@string/default_pref_automaticunmute"
+            android:entries="@array/pref_automaticunmute_entries"
+            android:entryValues="@array/pref_automaticunmute_values"
+            android:key="@string/pref_automaticunmute_key"
+            android:summary="@string/pref_automaticunmute_summary"
+            android:title="@string/pref_automaticunmute_title" />
+    </PreferenceCategory>
+    <PreferenceCategory android:title="@string/pref_other_category">
+        <com.orangebikelabs.orangesqueeze.ui.DownloadPreference
+            android:summary="@string/pref_downloadprefs_summary"
+            android:title="@string/pref_downloadprefs_title" />
+
+        <com.orangebikelabs.orangesqueeze.ui.AdvancedPreference
+            android:summary="@string/pref_advancedprefs_summary"
+            android:title="@string/pref_advancedprefs_title" />
+    </PreferenceCategory>
+
+</PreferenceScreen>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright (c) 2020 Orange Bike Labs, LLC.
+  -->
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/menu_startdownload"
+        android:icon="@drawable/ic_download"
+        android:orderInCategory="7"
+        android:title="@string/menu_startdownload"
+        app:iconTint="?attr/colorControlNormal"
+        app:showAsAction="withText|always" />
+
+    <item
+        android:id="@+id/menu_downloadpreferences"
+        android:icon="@drawable/ic_settings"
+        android:orderInCategory="8"
+        android:title="@string/menu_downloadpreferences"
+        app:iconTint="?attr/colorControlNormal" />
+
+</menu>

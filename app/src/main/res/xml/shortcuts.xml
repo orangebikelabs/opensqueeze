@@ -1,0 +1,19 @@
+<!--
+  ~ Copyright (c) 2020 Orange Bike Labs, LLC.
+  -->
+
+<shortcuts xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+    <shortcut
+        android:enabled="true"
+        android:icon="@mipmap/ic_shortcut_nowplaying"
+        android:shortcutDisabledMessage="@string/nowplaying_shortcut_disabled"
+        android:shortcutId="nowplaying"
+        android:shortcutLongLabel="@string/nowplaying_shortcut_long_label"
+        android:shortcutShortLabel="@string/nowplaying_shortcut_short_label"
+        tools:targetApi="n_mr1">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:data="https://app.orangebikelabs.com/orangesqueeze/nowplaying" />
+    </shortcut>
+</shortcuts>

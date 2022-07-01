@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright (c) 2020 Orange Bike Labs, LLC.
+  -->
+
+<com.orangebikelabs.orangesqueeze.widget.HeaderListView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/list"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fastScrollAlwaysVisible="true"
+    android:fastScrollEnabled="true"
+    android:scrollbarStyle="outsideInset"
+    tools:listitem="@layout/browseitem_thumb2" />

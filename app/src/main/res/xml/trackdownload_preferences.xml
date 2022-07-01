@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2020 Orange Bike Labs, LLC.
+  -->
+
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+                  android:key="@string/pref_root_screen_key">
+
+    <PreferenceCategory
+        android:title="@string/pref_trackdownload_category"
+        android:key="@string/pref_trackdownload_category_key">
+        <Preference
+            android:key="@string/pref_trackdownload_location_key"
+            android:summary="@string/pref_trackdownload_location_summary"
+            android:title="@string/pref_trackdownload_location_title"/>
+
+        <CheckBoxPreference
+            android:defaultValue="@bool/default_pref_trackdownload_transcodeenabled"
+            android:key="@string/pref_trackdownload_transcodeenabled_key"
+            android:summaryOff="@string/pref_trackdownload_transcodeenabled_off"
+            android:summaryOn="@string/pref_trackdownload_transcodeenabled_on"
+            android:title="@string/pref_trackdownload_transcodeenabled_title"/>
+
+        <EditTextPreference
+            android:dependency="@string/pref_trackdownload_transcodeenabled_key"
+            android:key="@string/pref_trackdownload_transcodeformat_key"
+            android:defaultValue="@string/default_pref_trackdownload_transcodeformat"
+            android:summary="@string/pref_trackdownload_transcodeformat_summary"
+            android:title="@string/pref_trackdownload_transcodeformat_title"/>
+
+        <EditTextPreference
+            android:dependency="@string/pref_trackdownload_transcodeenabled_key"
+            android:key="@string/pref_trackdownload_transcodeoptions_key"
+            android:defaultValue="@string/default_pref_trackdownload_transcodeoptions"
+            android:summary="@string/pref_trackdownload_transcodeoptions_summary"
+            android:title="@string/pref_trackdownload_transcodeoptions_title"/>
+    </PreferenceCategory>
+
+</PreferenceScreen>

@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright (c) 2020 Orange Bike Labs, LLC.
+  -->
+
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    android:stretchColumns="1">
+
+    <TableRow
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <Spinner
+            android:id="@+id/policy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_span="2"
+            android:entries="@array/wakeonlan_policy_entries"
+            android:minHeight="60dp"
+            android:prompt="@string/wakeonlan_prompt"
+            android:spinnerMode="dialog" />
+    </TableRow>
+
+    <TableRow
+        android:layout_width="wrap_content"
+        android:layout_height="60dp">
+
+        <CheckBox
+            android:id="@+id/autodetect"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_span="3"
+            android:minHeight="60dp"
+            android:text="@string/wakeonlan_autodetect" />
+    </TableRow>
+
+    <TableRow
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:labelFor="@+id/macaddress"
+            android:text="@string/wakeonlan_macaddress" />
+
+        <EditText
+            android:id="@+id/macaddress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:autofillHints="macaddress"
+            android:importantForAutofill="no"
+            android:inputType="text"
+            android:minWidth="120dp"
+            tools:targetApi="o" />
+    </TableRow>
+
+    <TableRow
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:labelFor="@+id/broadcast"
+            android:text="@string/wakeonlan_hostname" />
+
+        <EditText
+            android:id="@+id/broadcast"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:autofillHints="hostname"
+            android:importantForAutofill="no"
+            android:inputType="text"
+            android:minWidth="120dp"
+            tools:targetApi="o" />
+    </TableRow>
+
+    <TableRow
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:labelFor="@+id/ports"
+            android:text="@string/wakeonlan_ports" />
+
+        <EditText
+            android:id="@+id/ports"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:autofillHints="ports"
+            android:importantForAutofill="no"
+            android:inputType="text"
+            android:minWidth="120dp"
+            tools:targetApi="o" />
+    </TableRow>
+
+</TableLayout>

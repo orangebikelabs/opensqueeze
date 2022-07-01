@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright (c) 2020 Orange Bike Labs, LLC.
+  -->
+
+<com.orangebikelabs.orangesqueeze.widget.HeaderGridView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/grid"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:columnWidth="@dimen/target_grid_item_dimension"
+    android:divider="@android:color/transparent"
+    android:dividerHeight="16dp"
+    android:drawSelectorOnTop="true"
+    android:fastScrollAlwaysVisible="true"
+    android:fastScrollEnabled="true"
+    android:numColumns="3"
+    android:scrollbarStyle="outsideInset"
+    android:stretchMode="columnWidth"
+    tools:listitem="@layout/browse_grid_thumb2">
+
+</com.orangebikelabs.orangesqueeze.widget.HeaderGridView>

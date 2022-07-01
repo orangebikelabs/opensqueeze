@@ -1,0 +1,12 @@
+wipeStoredMenus:
+UPDATE server
+    SET serverplayermenus = NULL, servermenunodes = NULL;
+
+vacuum:
+VACUUM;
+
+changes:
+SELECT changes();
+
+last_insert_rowid:
+SELECT last_insert_rowid();

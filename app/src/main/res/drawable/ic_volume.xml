@@ -1,0 +1,8 @@
+<!--
+  ~ Copyright (c) 2020 Orange Bike Labs, LLC.
+  -->
+
+<vector android:height="36dp" android:viewportHeight="24.0"
+    android:viewportWidth="24.0" android:width="36dp" xmlns:android="http://schemas.android.com/apk/res/android">
+    <path android:fillColor="#FF000000" android:pathData="M7,9v6h4l5,5V4l-5,5H7z"/>
+</vector>

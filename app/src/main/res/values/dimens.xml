@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright (c) 2020 Orange Bike Labs, LLC.
+  -->
+
+<resources>
+    <dimen name="widget_margin">0dp</dimen>
+    <dimen name="divider_size">1dp</dimen>
+    <dimen name="nowplaying_progress_gradient_width">200dp</dimen>
+    <dimen name="nowplaying_progress_gradient_marginLeft">-200dp</dimen>
+    <dimen name="dialog_textbox_padding">8dp</dimen>
+    <dimen name="target_grid_item_dimension">200dp</dimen>
+    <dimen name="artistartwork_component_minimum_size">60dp</dimen>
+    <dimen name="drawer_size">240dp</dimen>
+
+    <!-- padding to left of gridview -->
+    <dimen name="gridview_left_padding">0dp</dimen>
+
+    <!-- padding to left of gridview -->
+    <dimen name="gridview_right_padding">0dp</dimen>
+
+    <dimen name="platform_scrollbar_size">48dp</dimen>
+
+    <dimen name="control_button_padding">8dp</dimen>
+    <dimen name="control_button_padding_compact">4dp</dimen>
+
+    <dimen name="serverlist_popup_list_width">240dp</dimen>
+    <dimen name="popup_list_window_width">320dp</dimen>
+
+    <dimen name="notification_large_bitmap_size">64dp</dimen>
+    <dimen name="notification_bigpicture_bitmap_size">256dp</dimen>
+    <dimen name="notification_button_size">40dp</dimen>
+
+    <dimen name="player_switch_padding">8dp</dimen>
+
+    <dimen name="headercontrol_size">56dp</dimen>
+    <dimen name="abouticon_size">80dp</dimen>
+
+    <dimen name="overflow_button_allowance_width">32dp</dimen>
+    <dimen name="actionitem_height">48dp</dimen>
+
+    <dimen name="drawer_item_text_size">14sp</dimen>
+    <dimen name="drawer_item_size">48dp</dimen>
+    <dimen name="drawer_item_icon_size">32dp</dimen>
+    <dimen name="autosize_minimum_text_size">12sp</dimen>
+    <dimen name="firstline_autosize_height">24sp</dimen>
+    <dimen name="secondline_autosize_height">22sp</dimen>
+    <dimen name="singleline_autosize_height">26sp</dimen>
+    <dimen name="autosize_granularity">2sp</dimen>
+    <dimen name="actionitem_icon_padding">8dp</dimen>
+    <dimen name="sib_shadow_size">0.5dp</dimen>
+</resources>

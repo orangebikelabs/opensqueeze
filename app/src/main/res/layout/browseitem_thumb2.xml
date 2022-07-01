@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright (c) 2020 Orange Bike Labs, LLC.
+  -->
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frameLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?attr/selectableItemBackground"
+    android:minHeight="?attr/listPreferredItemHeight">
+
+    <ImageView
+        android:id="@+id/icon"
+        android:layout_width="?attr/listIconSize"
+        android:layout_height="?attr/listIconSize"
+        android:layout_marginStart="?attr/listPreferredItemPaddingStart"
+        android:layout_marginTop="?attr/listIconPadding"
+        android:layout_marginEnd="0dp"
+        android:layout_marginBottom="?attr/listIconPadding"
+        android:contentDescription="@string/item_icon_missing_desc"
+        android:scaleType="center"
+        android:src="@drawable/artwork_missing"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/text1"
+        style="@style/Text.FirstLine.AutoSize"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/firstline_autosize_height"
+        android:layout_marginStart="?attr/listPreferredItemPaddingStart"
+        android:ellipsize="end"
+        android:gravity="center_vertical"
+        android:text="Top Text This is a lot of text that will overlap and go too far"
+        app:layout_constraintBottom_toTopOf="@+id/text2"
+        app:layout_constraintEnd_toStartOf="@id/space"
+        app:layout_constraintStart_toEndOf="@+id/icon"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed"
+        tools:ignore="HardcodedText" />
+
+    <TextView
+        android:id="@+id/text2"
+        style="@style/Text.SecondLine.AutoSize"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/secondline_autosize_height"
+        android:ellipsize="end"
+        android:gravity="center_vertical"
+        android:text="Bottom Left Text"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/text3"
+        app:layout_constraintStart_toStartOf="@+id/text1"
+        app:layout_constraintTop_toBottomOf="@+id/text1"
+        tools:ignore="HardcodedText" />
+
+    <TextView
+        android:id="@+id/text3"
+        style="@style/Text.TrackTime"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/secondline_autosize_height"
+        android:layout_marginStart="8dp"
+        android:gravity="center_vertical"
+        android:text="Bottom Right Text"
+        app:layout_constrainedWidth="true"
+        app:layout_constraintBaseline_toBaselineOf="@id/text2"
+        app:layout_constraintEnd_toStartOf="@+id/space"
+        app:layout_constraintStart_toEndOf="@+id/text2"
+        tools:ignore="HardcodedText" />
+
+    <ImageButton
+        android:id="@+id/action_button"
+        style="@style/Button.Overflow"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ContentDescription" />
+
+    <Space
+        android:id="@+id/space"
+        android:layout_width="@dimen/overflow_button_allowance_width"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
