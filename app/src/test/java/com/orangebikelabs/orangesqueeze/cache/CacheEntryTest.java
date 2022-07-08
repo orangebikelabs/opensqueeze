@@ -60,14 +60,37 @@ public class CacheEntryTest {
         assertThat(mKeyA1, not(new CacheEntry(mKeyA1.getCacheType(), mKeyA1.getServerId(), mKeyA1.getKey() + "added")));
     }
 
+    /**
+     * test the reentrant capabilites of the locking. Same key entry value but different key objects, same thread
+     */
     @Test
-    public void testCacheEntryLockFail() throws Exception {
+    public void testCacheEntryLockSuccess() throws Exception {
         assertThat(mKeyA1.tryLock(0, TimeUnit.SECONDS), is(true));
         try {
-            assertThat(mKeyA2.tryLock(0, TimeUnit.SECONDS), is(false));
+            assertThat(mKeyA2.tryLock(0, TimeUnit.SECONDS), is(true));
+            mKeyA2.releaseLock();
         } finally {
             mKeyA1.releaseLock();
         }
+    }
+
+    /**
+     * test the reentrant capabilites of the locking. Same key entry value but different key objects, different thread
+     */
+    @Test
+    public void testCacheEntryLockFailure() throws Exception {
+        final CountDownLatch latch = new CountDownLatch(1);
+        final CountDownLatch latch2 = new CountDownLatch(1);
+        mExecutorService.submit(() -> {
+            assertThat(mKeyA1.tryLock(0, TimeUnit.SECONDS), is(true));
+            latch.countDown();
+            assertThat(latch2.await(1, TimeUnit.SECONDS), is(true));
+            mKeyA1.releaseLock();
+            return null;
+        });
+        assertThat(latch.await(1, TimeUnit.SECONDS), is(true));
+        assertThat(mKeyA2.tryLock(0, TimeUnit.SECONDS), is(false));
+        latch2.countDown();
     }
 
     @Test
