@@ -12,17 +12,17 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.concurrent.Callable;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.not;
-import static org.hamcrest.CoreMatchers.nullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.greaterThan;
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.not;
+import static org.hamcrest.Matchers.nullValue;
 
 public class CacheEntryTest {
 
@@ -36,6 +36,8 @@ public class CacheEntryTest {
         // these two cache entries should refer to the same lock internally
         mKeyA1 = new CacheEntry(Type.SERVERSCAN, 1, "keyA");
         mKeyA2 = new CacheEntry(Type.SERVERSCAN, 1, "keyA");
+
+        // this is a different entry
         mKeyB1 = new CacheEntry(Type.SERVERSCAN, 1, "keyB");
 
         mExecutorService = Executors.newCachedThreadPool();
@@ -93,52 +95,41 @@ public class CacheEntryTest {
         latch2.countDown();
     }
 
+    /**
+     * tests that the tryLock method will wait some time if there is a lengthy operation holding the lock
+     */
     @Test
     public void testCacheEntryLockDelayedSuccess() throws Exception {
-        HoldLockCallable callable = new HoldLockCallable(mKeyA1, 5, TimeUnit.SECONDS);
-        Future<Void> future = mExecutorService.submit(callable);
+        final int WAIT_SECONDS = 5;
+        final CountDownLatch lockHeldLatch = new CountDownLatch(1);
+        Future<Void> future = mExecutorService.submit(() -> {
+            assertThat(mKeyA1.tryLock(0, TimeUnit.SECONDS), is(true));
 
-        assertThat(callable.mLocked.await(1, TimeUnit.SECONDS), is(true));
+            // signal that lock is held
+            lockHeldLatch.countDown();
+            try {
+                // hold the lock for 5 seconds
+                TimeUnit.SECONDS.sleep(WAIT_SECONDS);
+                return null;
+            } finally {
+                mKeyA1.releaseLock();
+            }
+        });
+
+        // wait for lock to be held
+        assertThat("lock is held", lockHeldLatch.await(2, TimeUnit.SECONDS), is(true));
 
         mStopwatch.start();
         // now wait at least one second
         Thread.sleep(1000);
-        assertThat(mKeyA2.tryLock(5, TimeUnit.SECONDS), is(true));
+        assertThat("lock acquired", mKeyA2.tryLock(WAIT_SECONDS, TimeUnit.SECONDS), is(true));
         try {
-            assertThat(mStopwatch.elapsed(TimeUnit.MILLISECONDS) > 4000, is(true));
+            assertThat("we actually waited 4 seconds", mStopwatch.elapsed(TimeUnit.MILLISECONDS), greaterThan((WAIT_SECONDS - 1) * 1000L));
         } finally {
             mKeyA2.releaseLock();
         }
 
         // future should complete relatively quickly, one second should be plenty
-        assertThat(future.get(1, TimeUnit.SECONDS), nullValue());
-    }
-
-    static class HoldLockCallable implements Callable<Void> {
-        final long mTime;
-        final TimeUnit mTimeUnits;
-        final CacheEntry mEntry;
-        final CountDownLatch mLocked = new CountDownLatch(1);
-
-        HoldLockCallable(CacheEntry entry, long time, TimeUnit units) {
-            mEntry = entry;
-            mTime = time;
-            mTimeUnits = units;
-        }
-
-        @Override
-        public Void call() throws Exception {
-            if (!mEntry.tryLock(0, TimeUnit.SECONDS)) {
-                throw new IllegalStateException("expected lock to not be held");
-            }
-            mLocked.countDown();
-            try {
-                mTimeUnits.sleep(mTime);
-                return null;
-            } finally {
-                mEntry.releaseLock();
-            }
-        }
-
+        assertThat(future.get(1, TimeUnit.SECONDS), is(nullValue()));
     }
 }
