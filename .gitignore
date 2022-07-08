@@ -12,5 +12,6 @@ local.properties
 .idea/compiler.xml
 .idea/gradle.xml
 .idea/misc.xml
+.idea/modules.xml
 *.iml
 captures/**
