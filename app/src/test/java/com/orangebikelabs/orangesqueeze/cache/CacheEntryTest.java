@@ -30,15 +30,20 @@ public class CacheEntryTest {
     private CacheEntry mKeyB1;
     private ExecutorService mExecutorService;
     final private Stopwatch mStopwatch = Stopwatch.createStarted();
+    private int testIncrement = 0;
 
     @Before
     public void beforeTest() {
+        testIncrement++;
+
+        // key entries should not be shared between tests because their lock state might bleed over
+
         // these two cache entries should refer to the same lock internally
-        mKeyA1 = new CacheEntry(Type.SERVERSCAN, 1, "keyA");
-        mKeyA2 = new CacheEntry(Type.SERVERSCAN, 1, "keyA");
+        mKeyA1 = new CacheEntry(Type.SERVERSCAN, 1, "keyA" + testIncrement);
+        mKeyA2 = new CacheEntry(Type.SERVERSCAN, 1, "keyA" + testIncrement);
 
         // this is a different entry
-        mKeyB1 = new CacheEntry(Type.SERVERSCAN, 1, "keyB");
+        mKeyB1 = new CacheEntry(Type.SERVERSCAN, 1, "keyB" + testIncrement);
 
         mExecutorService = Executors.newCachedThreadPool();
         mStopwatch.reset();
@@ -83,7 +88,7 @@ public class CacheEntryTest {
     public void testCacheEntryLockFailure() throws Exception {
         final CountDownLatch latch = new CountDownLatch(1);
         final CountDownLatch latch2 = new CountDownLatch(1);
-        mExecutorService.submit(() -> {
+        Future<Void> future = mExecutorService.submit(() -> {
             assertThat(mKeyA1.tryLock(0, TimeUnit.SECONDS), is(true));
             latch.countDown();
             assertThat(latch2.await(1, TimeUnit.SECONDS), is(true));
@@ -93,6 +98,8 @@ public class CacheEntryTest {
         assertThat(latch.await(1, TimeUnit.SECONDS), is(true));
         assertThat(mKeyA2.tryLock(0, TimeUnit.SECONDS), is(false));
         latch2.countDown();
+
+        assertThat(future.get(1, TimeUnit.SECONDS), is(nullValue()));
     }
 
     /**
@@ -104,10 +111,9 @@ public class CacheEntryTest {
         final CountDownLatch lockHeldLatch = new CountDownLatch(1);
         Future<Void> future = mExecutorService.submit(() -> {
             assertThat(mKeyA1.tryLock(0, TimeUnit.SECONDS), is(true));
-
-            // signal that lock is held
-            lockHeldLatch.countDown();
             try {
+                // signal that lock is held
+                lockHeldLatch.countDown();
                 // hold the lock for 5 seconds
                 TimeUnit.SECONDS.sleep(WAIT_SECONDS);
                 return null;
@@ -117,7 +123,7 @@ public class CacheEntryTest {
         });
 
         // wait for lock to be held
-        assertThat("lock is held", lockHeldLatch.await(2, TimeUnit.SECONDS), is(true));
+        assertThat("lock is held", lockHeldLatch.await(1, TimeUnit.SECONDS), is(true));
 
         mStopwatch.start();
         // now wait at least one second
