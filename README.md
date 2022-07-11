@@ -20,9 +20,14 @@ the product has undergone development in fits and starts, but as of Spring 2020 
 stopped. Open Squeeze was released in July 2022 with Orange Squeeze branding and certain other
 unreleasable components removed, but is otherwise fully-functional.
 
+## Releases
+Find pre-built APK releases (alpha, beta, and release) in the project's [Github Releases](https://github.com/orangebikelabs/opensqueeze/releases).
+
+You can also just get the [latest release here](https://github.com/orangebikelabs/opensqueeze/releases/latest).
+
 ## Building
 
-Use Android Studio Dolphin (2021.3.1) beta releases to build the project.
+Use Android Studio Dolphin (2021.3.1) beta releases to build the project. You need to [install and configure](https://developer.android.com/about/versions/12/setup-sdk) the Android SDK first.
 
 ```
 # .\gradlew assembleRelease
