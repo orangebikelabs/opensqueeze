@@ -14,7 +14,23 @@
   "plugins": [
     "@semantic-release/commit-analyzer",
     "@semantic-release/release-notes-generator",
-    "@semantic-release/github"
+    [
+      "@semantic-release/github",
+      {
+        "assets": [
+          {
+            "path": "app/build/outputs/apk/release/app-release-unsigned.apk",
+            "name": "OpenSqueeze-${nextRelease.gitTag}-release.apk",
+            "label": "Release APK file (minified, unsigned)"
+          },
+          {
+            "path": "app/build/outputs/apk/debug/app-debug.apk",
+            "name": "OpenSqueeze-${nextRelease.gitTag}-debug.apk",
+            "label": "Debug APK file"
+          }
+        ]
+      }
+    ]
   ],
   "dryRun": true,
   "ci": true
