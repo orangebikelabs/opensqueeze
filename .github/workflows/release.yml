@@ -36,9 +36,9 @@ jobs:
           reporter: java-junit        # Format of test results
 
       - name: Setup Node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
-          node-version: 'lts/*'
+          node-version: 16
 
       - name: Release
         env:
