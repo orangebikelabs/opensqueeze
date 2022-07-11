@@ -20,7 +20,7 @@
         "assets": [
           {
             "path": "app/build/outputs/apk/release/app-release-unsigned.apk",
-            "name": "OpenSqueeze-${nextRelease.gitTag}-release.apk",
+            "name": "OpenSqueeze-${nextRelease.gitTag}-release-unsigned.apk",
             "label": "Release APK file (minified, unsigned)"
           },
           {
