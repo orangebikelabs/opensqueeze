@@ -1,6 +1,7 @@
 name: Release
 concurrency: ci-release
 
+# only completes full build & test cycle if release will be issued
 on:
   push:
     branches:
@@ -41,6 +42,7 @@ jobs:
 
     name: Build, Test & Release
     needs: get-next-version
+    if: needs.get-next-version.outputs.new-release-published == 'true'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
