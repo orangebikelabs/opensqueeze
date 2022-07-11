@@ -23,8 +23,8 @@ buildscript {
 }
 
 allprojects {
-    // update this when it's time to bump the app version
-    ext.obl_android_app_versionName = '2.6.0'
+    // override this on command line or in gradle.properties
+    ext.obl_android_app_versionName = 'snapshot'
 
     // override this on command line or in gradle.properties
     ext.obl_android_app_buildNumber = "1"
