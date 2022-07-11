@@ -26,8 +26,8 @@ allprojects {
     // update this when it's time to bump the app version
     ext.obl_android_app_versionName = '2.6.0'
 
-    // pull version code from jenkins build id
-    ext.obl_android_app_buildNumber = System.getenv("BUILD_NUMBER") ?: "1"
+    // override this on command line or in gradle.properties
+    ext.obl_android_app_buildNumber = "1"
     ext.obl_android_app_versionCode = obl_android_app_buildNumber.toInteger()
 
     ext.obl_guavaVersion = '30.1.1-android'

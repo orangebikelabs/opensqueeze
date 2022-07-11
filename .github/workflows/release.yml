@@ -8,9 +8,29 @@ on:
       - beta
       - alpha
 
+env:
+  semrel_package_command: "npm i semantic-release @semantic-release/changelog @semantic-release/git semantic-release-export-data -D"
+
 jobs:
+  get-next-version:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      - run: ${{ env.semrel_package_command }}
+      - run: npx semantic-release --dry-run
+        id: get-next-version
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    outputs:
+      new-release-published: ${{ steps.get-next-version.outputs.new-release-published }}
+      new-release-version: ${{ steps.get-next-version.outputs.new-release-version }}
+
   buildtest:
     name: Build, Test & Release
+    needs: get-next-version
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -25,7 +45,7 @@ jobs:
         run: chmod +x gradlew
 
       - name: Build with Gradle
-        run: ./gradlew build
+        run: ./gradlew -Pobl_android_app_versionName=${{ needs.get-next-version.outputs.new-release-version }} -Pobl_android_app_buildNumber=${{ github.run_number }} build
 
       - name: Test Report
         uses: dorny/test-reporter@v1
@@ -41,8 +61,8 @@ jobs:
           node-version: 16
 
       - name: Install npm release packages
-        run: npm i semantic-release @semantic-release/changelog @semantic-release/git -D
-
+        run: ${{ env.semrel_package_command }}
+        
       - name: Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
