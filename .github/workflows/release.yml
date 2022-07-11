@@ -14,7 +14,7 @@ env:
 
 jobs:
   get-next-version:
-    name: Get next semantic version
+    name: Detect next semantic version
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -26,6 +26,10 @@ jobs:
         id: get-next-version
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          
+      - run: "echo Detected next version: ${{ steps.get-next-version.outputs.new-release-versione }}"
+      - run: "echo Release will be published: ${{ steps.get-next-version.outputs.new-release-published }}"
+
     outputs:
       new-release-published: ${{ steps.get-next-version.outputs.new-release-published }}
       new-release-version: ${{ steps.get-next-version.outputs.new-release-version }}
