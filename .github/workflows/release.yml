@@ -9,8 +9,8 @@ on:
       - alpha
 
 jobs:
-  release:
-    name: Release
+  buildtest:
+    name: Build, Test & Release
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -39,6 +39,9 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 16
+
+      - name: Install npm release packages
+        run: npm i semantic-release @semantic-release/changelog @semantic-release/git -D
 
       - name: Release
         env:
