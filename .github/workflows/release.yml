@@ -27,7 +27,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           
-      - run: "echo Detected next version: ${{ steps.get-next-version.outputs.new-release-versione }}"
+      - run: "echo Detected next version: ${{ steps.get-next-version.outputs.new-release-version }}"
       - run: "echo Release will be published: ${{ steps.get-next-version.outputs.new-release-published }}"
 
     outputs:
