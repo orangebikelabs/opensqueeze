@@ -8,7 +8,7 @@ on:
 
 jobs:
   buildtest:
-    name: Build & Test
+    name: Build & Unit Tests
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -32,3 +32,16 @@ jobs:
           name: Java Tests            # Name of the check run which will be created
           path: "**/test-results/**/*.xml"    # Path to test results
           reporter: java-junit        # Format of test results
+
+  instrumentedTests:
+    name: Instrumented Tests
+    runs-on: macos-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v3
+
+      - name: run connected tests
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: 31
+          script: ./gradlew connectedCheck
