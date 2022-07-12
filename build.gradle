@@ -23,11 +23,8 @@ buildscript {
 }
 
 allprojects {
-    // override this on command line or in gradle.properties
-    ext.obl_android_app_versionName = 'snapshot'
-
-    // override this on command line or in gradle.properties
-    ext.obl_android_app_buildNumber = "1"
+    ext.obl_android_app_versionName = versionName
+    ext.obl_android_app_buildNumber = buildNumber
     ext.obl_android_app_versionCode = obl_android_app_buildNumber.toInteger()
 
     ext.obl_guavaVersion = '30.1.1-android'

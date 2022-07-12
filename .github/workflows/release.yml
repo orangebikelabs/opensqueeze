@@ -59,7 +59,7 @@ jobs:
       - run: echo Building with version ${{ env.next_version_name }} and code ${{ env.next_build_number }}
 
       - name: Build with Gradle
-        run: ./gradlew -Pobl_android_app_versionName=${{ env.next_version_name }} -Pobl_android_app_buildNumber=${{ env.next_build_number }} build
+        run: ./gradlew -PversionName=${{ env.next_version_name }} -PbuildNumber=${{ env.next_build_number }} build
 
       - name: Test Report
         uses: dorny/test-reporter@v1
