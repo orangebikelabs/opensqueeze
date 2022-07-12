@@ -55,7 +55,7 @@ class ConnectFragment : SBFragment() {
         super.onCreate(savedInstanceState)
         adapter = ConnectAdapter()
 
-        viewModel.events.observe(this, { event ->
+        viewModel.events.observe(this) { event ->
             event.getContentIfNotHandled()?.let {
                 return@let when (it) {
                     is ConnectViewModel.Events.ConnectionFailed -> {
@@ -74,7 +74,7 @@ class ConnectFragment : SBFragment() {
                     }
                 }
             }
-        })
+        }
 
     }
 
