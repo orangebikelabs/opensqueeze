@@ -4,7 +4,7 @@
  */
 
 buildscript {
-    ext.kotlin_version = '1.7.0'
+    ext.kotlin_version = '1.7.10'
     ext.sqldelight_version = '1.5.1'
 
     repositories {
