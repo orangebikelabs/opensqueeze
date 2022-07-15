@@ -36,7 +36,7 @@ allprojects {
     // must stay at 3.12.x until minsdk >= 25
     ext.obl_okhttpVersion = '3.12.9'
     ext.obl_jsr305Version = '3.0.2'
-    ext.obl_jacksonVersion = '2.12.4'
+    ext.obl_jacksonVersion = '2.13.3'
     ext.obl_koptionalVersion = '1.7.0'
     ext.obl_permissionsDispatcherVersion = '4.9.2'
     ext.obl_materialdialogsVersion = '3.3.0'
