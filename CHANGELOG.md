@@ -1,3 +1,10 @@
+## [2.5.4-alpha.6](https://github.com/orangebikelabs/opensqueeze/compare/v2.5.4-alpha.5...v2.5.4-alpha.6) (2022-07-15)
+
+
+### Bug Fixes
+
+* bump obl_jacksonVersion from 2.12.4 to 2.13.3 ([85a7a05](https://github.com/orangebikelabs/opensqueeze/commit/85a7a0579f2575b19fc6fd6947645fd6cc0cc40a))
+
 ## [2.5.4-alpha.5](https://github.com/orangebikelabs/opensqueeze/compare/v2.5.4-alpha.4...v2.5.4-alpha.5) (2022-07-15)
 
 
