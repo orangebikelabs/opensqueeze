@@ -1,3 +1,10 @@
+## [2.5.4-alpha.5](https://github.com/orangebikelabs/opensqueeze/compare/v2.5.4-alpha.4...v2.5.4-alpha.5) (2022-07-15)
+
+
+### Bug Fixes
+
+* NPE due to changes in menu handling ([784708d](https://github.com/orangebikelabs/opensqueeze/commit/784708dae28b0184bfaf595565dd21e89dcf93c2))
+
 ## [2.5.4-alpha.4](https://github.com/orangebikelabs/opensqueeze/compare/v2.5.4-alpha.3...v2.5.4-alpha.4) (2022-07-15)
 
 
