@@ -94,6 +94,9 @@ public class BrowseNodeFragment extends AbsBrowseFragment<NodeItemAdapter, List<
     @Nonnull
     protected String getParentNodeId() {
         NavigationItem item = NavigationItem.Companion.getNavigationItem(getMutableArguments());
+        if(item == null) {
+            throw new IllegalStateException("require navigation item");
+        }
         String nodeId = item.getNodeId();
         if (nodeId == null) {
             throw new IllegalStateException("require nodeid");
