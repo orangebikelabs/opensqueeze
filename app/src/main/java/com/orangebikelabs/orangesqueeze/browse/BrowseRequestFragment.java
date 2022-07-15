@@ -8,6 +8,9 @@ package com.orangebikelabs.orangesqueeze.browse;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 
+import androidx.core.view.MenuHost;
+import androidx.core.view.MenuProvider;
+import androidx.lifecycle.Lifecycle;
 import androidx.loader.app.LoaderManager.LoaderCallbacks;
 import androidx.loader.content.Loader;
 
@@ -29,6 +32,7 @@ import com.orangebikelabs.orangesqueeze.browse.common.BrowseRequestData;
 import com.orangebikelabs.orangesqueeze.browse.common.Item;
 import com.orangebikelabs.orangesqueeze.browse.common.LoadingItem;
 import com.orangebikelabs.orangesqueeze.browse.common.SeparatorItem;
+import com.orangebikelabs.orangesqueeze.common.MenuTools;
 import com.orangebikelabs.orangesqueeze.common.NavigationItem;
 import com.orangebikelabs.orangesqueeze.common.OSAssert;
 import com.orangebikelabs.orangesqueeze.common.FutureResult;
@@ -68,8 +72,34 @@ public class BrowseRequestFragment extends AbsBrowseFragment<MenuListAdapter, Br
         super.onCreate(savedInstanceState);
 
         mRefreshCache = false;
+    }
 
-        setHasOptionsMenu(true);
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        MenuHost menuHost = requireActivity();
+        menuHost.addMenuProvider(new MenuProvider() {
+            @Override
+            public void onCreateMenu(Menu menu, MenuInflater menuInflater) {
+                menuInflater.inflate(R.menu.browse, menu);
+            }
+
+            @Override
+            public boolean onMenuItemSelected(MenuItem menuItem) {
+                boolean handled = false;
+                if (menuItem.getItemId() == R.id.menu_browse_refresh) {
+                    requery(null);
+                    handled = true;
+                }
+                return handled;
+            }
+
+            @Override
+            public void onPrepareMenu(Menu menu) {
+                MenuTools.setVisible(menu, R.id.menu_browse_refresh, true);
+            }
+        }, getViewLifecycleOwner(), Lifecycle.State.RESUMED);
     }
 
     @Override
@@ -117,29 +147,6 @@ public class BrowseRequestFragment extends AbsBrowseFragment<MenuListAdapter, Br
         return request;
     }
 
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-
-        inflater.inflate(R.menu.browse, menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.menu_browse_refresh) {
-            requery(null);
-            return true;
-        } else {
-            return super.onOptionsItemSelected(item);
-        }
-    }
-
-    @Override
-    public void onPrepareOptionsMenu(Menu menu) {
-        super.onPrepareOptionsMenu(menu);
-        menu.findItem(R.id.menu_browse_refresh).setVisible(true);
-    }
-
     /**
      * subclasses can override this to change the loader
      */
@@ -154,6 +161,8 @@ public class BrowseRequestFragment extends AbsBrowseFragment<MenuListAdapter, Br
         @Override
         @Nonnull
         public Loader<BrowseRequestData> onCreateLoader(int id, @Nullable Bundle args) {
+            OSAssert.assertNotNull(args, "args shouldn't be null");
+
             switch (id) {
                 case BROWSE_LOADER_ID:
                     BrowseRequest request = newRequest(args);
