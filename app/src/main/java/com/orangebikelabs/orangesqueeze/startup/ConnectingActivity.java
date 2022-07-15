@@ -66,6 +66,11 @@ public class ConnectingActivity extends SBActivity {
     }
 
     private void launchConnectActivity() {
+        if (isFinishing()) {
+            // we've already launched it
+            return;
+        }
+
         startActivity(new Intent(this, ConnectActivity.class));
         finish();
 
