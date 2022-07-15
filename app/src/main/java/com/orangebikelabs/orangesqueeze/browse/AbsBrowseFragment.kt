@@ -204,6 +204,7 @@ abstract class AbsBrowseFragment<T : BrowseItemBaseAdapter, L> : AbsMenuFragment
     }
 
     @Suppress("DEPRECATION")
+    @Deprecated("by superclass")
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
@@ -565,7 +566,7 @@ abstract class AbsBrowseFragment<T : BrowseItemBaseAdapter, L> : AbsMenuFragment
     private val browseHeaderCallbacks = BrowseHeaderCallbacks()
     private var browseHeader: View? = null
 
-    private fun setupBrowseHeader(style: BrowseStyle) {
+    private fun setupBrowseHeader(@Suppress("UNUSED_PARAMETER") style: BrowseStyle) {
         val blv = checkNotNull(browseListView)
         val hc = blv as HeaderCapable
 

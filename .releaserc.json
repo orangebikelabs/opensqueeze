@@ -13,14 +13,35 @@
   "repositoryUrl": "https://github.com/orangebikelabs/opensqueeze.git",
   "plugins": [
     "@semantic-release/commit-analyzer",
-    "@semantic-release/release-notes-generator",
+    [
+      "@semantic-release/release-notes-generator",
+      {
+        "preset": "conventionalcommits"
+      }
+    ],
+    [
+      "@semantic-release/changelog",
+      {
+        "changelogFile": "CHANGELOG.md"
+      }
+    ],
+    [
+      "@semantic-release/git",
+      {
+        "assets": [
+          "CHANGELOG.md"
+        ],
+        "message": "chore(release): OpenSqueeze ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
+      }
+    ],
+    "semantic-release-export-data",
     [
       "@semantic-release/github",
       {
         "assets": [
           {
             "path": "app/build/outputs/apk/release/app-release-unsigned.apk",
-            "name": "OpenSqueeze-${nextRelease.gitTag}-release.apk",
+            "name": "OpenSqueeze-${nextRelease.gitTag}-release-unsigned.apk",
             "label": "Release APK file (minified, unsigned)"
           },
           {
@@ -32,6 +53,5 @@
       }
     ]
   ],
-  "dryRun": true,
   "ci": true
 }

@@ -401,7 +401,9 @@ abstract public class SBActivity extends AppCompatActivity {
                     .setMessage(R.string.about_message)
                     .setIcon(R.drawable.about_icon_selected)
                     .setPositiveButton(R.string.ok,
-                            (dlg, which) -> { dlg.dismiss(); })
+                            (dlg, which) -> {
+                                dlg.dismiss();
+                            })
                     .setCancelable(true);
             builder.create().show();
             return true;
