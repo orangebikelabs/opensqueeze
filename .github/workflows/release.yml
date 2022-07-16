@@ -9,6 +9,10 @@ on:
       - beta
       - alpha
 
+permissions:
+  statuses: write
+  checks: write
+
 env:
   # this is the command needed to bootstrap the tooling for semantic-release based on our release configuration
   semrel_package_bootstrap: "npm i semantic-release @semantic-release/changelog @semantic-release/git semantic-release-export-data conventional-changelog-conventionalcommits -D"
