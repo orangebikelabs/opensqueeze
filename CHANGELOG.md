@@ -1,3 +1,15 @@
+## [2.5.4-alpha.7](https://github.com/orangebikelabs/opensqueeze/compare/v2.5.4-alpha.6...v2.5.4-alpha.7) (2022-07-16)
+
+
+### Bug Fixes
+
+* bump error_prone_annotations from 2.8.0 to 2.14.0 ([6302b32](https://github.com/orangebikelabs/opensqueeze/commit/6302b32ddc8f9beaf2622dd35989dc40e6e4b729))
+* bump guava from 30.1.1-android to 31.1-android ([bd19e6e](https://github.com/orangebikelabs/opensqueeze/commit/bd19e6ea0ddaa3fd6e703b5c1772bd80230b8444))
+* bump kotlinx-coroutines-core from 1.6.1 to 1.6.4 ([0f596ef](https://github.com/orangebikelabs/opensqueeze/commit/0f596efd3eb3c6d82e93deed495c27a10b3e429c))
+* bump material from 1.3.0 to 1.6.1 ([6365ec3](https://github.com/orangebikelabs/opensqueeze/commit/6365ec3f8c7652d0386998962bb1175b1cc81050))
+* bump okio from 2.9.0 to 3.2.0 ([3f8a00d](https://github.com/orangebikelabs/opensqueeze/commit/3f8a00df98b7a105520c07308a8133ac5ab6c875))
+* bump robolectric from 4.6.1 to 4.8.1 ([132366a](https://github.com/orangebikelabs/opensqueeze/commit/132366a1e43f83e9e7aa75f258f3fa1d015193fb))
+
 ## [2.5.4-alpha.6](https://github.com/orangebikelabs/opensqueeze/compare/v2.5.4-alpha.5...v2.5.4-alpha.6) (2022-07-15)
 
 
