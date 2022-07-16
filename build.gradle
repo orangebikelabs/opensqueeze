@@ -27,7 +27,7 @@ allprojects {
     ext.obl_android_app_buildNumber = buildNumber
     ext.obl_android_app_versionCode = obl_android_app_buildNumber.toInteger()
 
-    ext.obl_guavaVersion = '30.1.1-android'
+    ext.obl_guavaVersion = '31.1-android'
     ext.obl_errorProneVersion = '2.8.0'
 
     // must stay at 3.12.x until minsdk >= 25
