@@ -5,7 +5,7 @@
 
 buildscript {
     ext.kotlin_version = '1.7.10'
-    ext.sqldelight_version = '1.5.1'
+    ext.sqldelight_version = '1.5.3'
 
     repositories {
         google()
