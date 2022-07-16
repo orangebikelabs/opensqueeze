@@ -8,9 +8,7 @@ on:
       - beta
       - alpha
 
-permissions:
-  statuses: write
-  checks: write
+permissions: write-all
 
 jobs:
   release:
