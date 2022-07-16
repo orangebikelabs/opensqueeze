@@ -8,6 +8,10 @@ on:
       - beta
       - alpha
 
+permissions:
+  statuses: write
+  checks: write
+
 jobs:
   release:
     name: Release
