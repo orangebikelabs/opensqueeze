@@ -6,9 +6,7 @@ on:
   pull_request:
     types: [opened, synchronize, reopened]
 
-permissions:
-  statuses: write
-  checks: write
+permissions: write-all
 
 jobs:
   buildtest:

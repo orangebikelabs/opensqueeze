@@ -9,9 +9,7 @@ on:
       - beta
       - alpha
 
-permissions:
-  statuses: write
-  checks: write
+permissions: write-all
 
 env:
   # this is the command needed to bootstrap the tooling for semantic-release based on our release configuration
