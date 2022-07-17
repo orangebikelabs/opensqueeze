@@ -13,5 +13,7 @@ local.properties
 .idea/gradle.xml
 .idea/misc.xml
 .idea/modules.xml
+.idea/androidTestResultsUserPreferences.xml
 *.iml
 captures/**
+.vscode/**
