@@ -1,3 +1,12 @@
+## [2.5.4-alpha.8](https://github.com/orangebikelabs/opensqueeze/compare/v2.5.4-alpha.7...v2.5.4-alpha.8) (2022-07-17)
+
+
+### Bug Fixes
+
+* artist in notification would be blank occasionally ([36a09cd](https://github.com/orangebikelabs/opensqueeze/commit/36a09cdf98114fc8587c319a3a1e09a01c8660e9))
+* **deps:** update leakcanary to 2.9.1 ([f8cc0bb](https://github.com/orangebikelabs/opensqueeze/commit/f8cc0bbcabcacb1e97db44dd16b2d5060d286d77))
+* muted/paused player list was kept for all players even when setting only applied to current player ([822b7b3](https://github.com/orangebikelabs/opensqueeze/commit/822b7b3ee24c74f41412bec9c0bc4ab45effeec6))
+
 ## [2.5.4-alpha.7](https://github.com/orangebikelabs/opensqueeze/compare/v2.5.4-alpha.6...v2.5.4-alpha.7) (2022-07-16)
 
 
