@@ -16,3 +16,4 @@ local.properties
 .idea/androidTestResultsUserPreferences.xml
 *.iml
 captures/**
+.vscode/**
