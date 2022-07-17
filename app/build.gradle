@@ -127,7 +127,6 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'androidx.media:media:1.6.0'
 
-    //noinspection GradleDependency
     implementation 'com.google.android.material:material:1.6.1'
 
     implementation "com.fasterxml.jackson.core:jackson-core:${obl_jacksonVersion}"
@@ -159,7 +158,7 @@ dependencies {
 
     // ReactiveX
     implementation "io.reactivex.rxjava3:rxandroid:3.0.0"
-    implementation "io.reactivex.rxjava3:rxjava:3.0.13"
+    implementation "io.reactivex.rxjava3:rxjava:3.1.5"
     implementation "io.reactivex.rxjava3:rxkotlin:3.0.1"
 
     // sqldelight
