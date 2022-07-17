@@ -1,3 +1,11 @@
+## [2.5.4-alpha.9](https://github.com/orangebikelabs/opensqueeze/compare/v2.5.4-alpha.8...v2.5.4-alpha.9) (2022-07-17)
+
+
+### Bug Fixes
+
+* **deps:** upgrade to rxjava 3.1.5 ([ed3cfe1](https://github.com/orangebikelabs/opensqueeze/commit/ed3cfe1e84bf936e77be88cddd3dec8bf912f432))
+* update about dialog to provide at least version name ([b7e0d02](https://github.com/orangebikelabs/opensqueeze/commit/b7e0d02a370eb0ec05132c697b7adda9d81d6167))
+
 ## [2.5.4-alpha.8](https://github.com/orangebikelabs/opensqueeze/compare/v2.5.4-alpha.7...v2.5.4-alpha.8) (2022-07-17)
 
 
