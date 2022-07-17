@@ -669,17 +669,20 @@ public class CacheService {
      */
     class CleanupService extends AbstractScheduledService {
         @Override
+        @Nonnull
         protected ScheduledExecutorService executor() {
             // don't use database executor, we don't want startup/shutdown operations to be deferred due to scrolling
             return OSExecutors.getSingleThreadScheduledExecutor();
         }
 
         @Override
+        @Nonnull
         protected String serviceName() {
             return "CleanupService";
         }
 
         @Override
+        @Nonnull
         protected void runOneIteration() {
             // run the cleanup on the database executor
             getDatabaseExecutor().execute(mCleanupRunnable);

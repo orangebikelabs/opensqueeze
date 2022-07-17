@@ -20,6 +20,7 @@ import java.io.OutputStream;
 import java.net.URL;
 import java.util.concurrent.LinkedBlockingQueue;
 
+import javax.annotation.Nonnull;
 import javax.annotation.concurrent.ThreadSafe;
 
 import okhttp3.CacheControl;
@@ -44,6 +45,7 @@ public class StreamingWriter extends AbsInterruptibleThreadService {
     }
 
     @Override
+    @Nonnull
     protected String serviceName() {
         return "StreamingWriter";
     }
