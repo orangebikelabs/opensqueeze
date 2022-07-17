@@ -16,11 +16,9 @@ import com.orangebikelabs.orangesqueeze.common.*
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.disposables.Disposable
 import io.reactivex.rxjava3.functions.Function
-import java.util.*
 import java.util.concurrent.ExecutionException
 import java.util.concurrent.TimeUnit
 import java.util.concurrent.TimeoutException
-import javax.annotation.Nonnull
 
 /**
  * Broadcast receiver that launches an intent directed towards the server connection service, which mutes any recently connected players.
@@ -64,6 +62,7 @@ class PhoneStateReceiver : BroadcastReceiver() {
                         } catch (e: TimeoutException) {
                             // ignore
                         } catch (e: InterruptedException) {
+                            // ignore
                         } catch (e: ExecutionException) {
                             OSLog.w(e.cause?.message, e.cause)
                         }
@@ -77,7 +76,6 @@ class PhoneStateReceiver : BroadcastReceiver() {
     }
 
     companion object {
-        @JvmStatic
         fun updateComponentEnabled(context: Context, prefs: SBPreferences) {
             val enabled = prefs.onCallBehavior != OnCallMuteBehavior.NOTHING
             val mgr = context.packageManager
@@ -87,47 +85,59 @@ class PhoneStateReceiver : BroadcastReceiver() {
         /**
          * perform the mute action when a phone call is received, if configured
          */
-        @Nonnull
         private fun doMute(prefs: SBPreferences, context: SBContext): List<FutureResult> {
-            val results = mutableListOf<FutureResult>()
-            // is it disabled?
-            if (prefs.onCallBehavior != OnCallMuteBehavior.NOTHING) {
-                // nope,
-                val currentPlayerId = context.playerId
-                val mutedPlayers = mutableListOf<PlayerId>()
-                for (s in context.serverStatus.availablePlayers) {
-                    if (s.mode != PlayerStatus.Mode.PLAYING) {
-                        // only mute players that are playing
-                        continue
-                    }
-                    mutedPlayers += s.id
-                    var request: SBRequest? = null
-                    when (prefs.onCallBehavior) {
-                        OnCallMuteBehavior.MUTE -> request = context.newRequest("mixer", "muting", "1")
-                        OnCallMuteBehavior.MUTE_CURRENT -> if (s.id == currentPlayerId) {
-                            request = context.newRequest("mixer", "muting", "1")
-                        }
-                        OnCallMuteBehavior.PAUSE -> request = context.newRequest("pause", "1")
-                        OnCallMuteBehavior.PAUSE_CURRENT -> if (s.id == currentPlayerId) {
-                            request = context.newRequest("pause", "1")
-                        }
-                        OnCallMuteBehavior.NOTHING -> {
-                        }
-                    }
-                    if (request != null) {
-                        // add player id
-                        request.playerId = s.id
-
-                        // submit the request and add it to the tracking list
-                        results += request.submit(OSExecutors.getUnboundedPool())
-                    }
-                }
-                prefs.setLastMutedEvent(System.currentTimeMillis(), mutedPlayers)
+            // shortcircuit if disabled
+            if (prefs.onCallBehavior == OnCallMuteBehavior.NOTHING) {
+                return emptyList()
             }
+
+            val results = mutableListOf<FutureResult>()
+
+            val currentPlayerId = context.playerId
+            val mutedPlayers = mutableListOf<PlayerId>()
+            context.serverStatus.availablePlayers
+                    .filter { it.mode == PlayerStatus.Mode.PLAYING }
+                    .forEach { itPlayerStatus ->
+                        val request = when (prefs.onCallBehavior) {
+                            OnCallMuteBehavior.MUTE -> {
+                                context.newRequest("mixer", "muting", "1")
+                            }
+                            OnCallMuteBehavior.MUTE_CURRENT -> {
+                                if (itPlayerStatus.id == currentPlayerId) {
+                                    context.newRequest("mixer", "muting", "1")
+                                } else {
+                                    null
+                                }
+                            }
+                            OnCallMuteBehavior.PAUSE -> {
+                                context.newRequest("pause", "1")
+                            }
+                            OnCallMuteBehavior.PAUSE_CURRENT -> {
+                                if (itPlayerStatus.id == currentPlayerId) {
+                                    context.newRequest("pause", "1")
+                                } else {
+                                    null
+                                }
+                            }
+                            OnCallMuteBehavior.NOTHING -> {
+                                // do nothing
+                                null
+                            }
+                        }
+                        if (request != null) {
+                            mutedPlayers += itPlayerStatus.id
+
+                            // add player id to request
+                            request.playerId = itPlayerStatus.id
+
+                            // submit the request and add it to the tracking list
+                            results += request.submit(OSExecutors.getUnboundedPool())
+                        }
+                    }
+            prefs.setLastMutedEvent(System.currentTimeMillis(), mutedPlayers)
             return results
         }
 
-        @Nonnull
         private fun doUnmute(prefs: SBPreferences, context: SBContext): List<FutureResult?> {
             val unmutePref = prefs.getAutoUnmute(TimeUnit.MILLISECONDS) ?: return emptyList()
 
@@ -144,24 +154,28 @@ class PhoneStateReceiver : BroadcastReceiver() {
                 // nope
                 return emptyList()
             }
-            val results: MutableList<FutureResult?> = ArrayList()
+            val results = mutableListOf<FutureResult>()
 
             // capture muted player list
             val mutedPlayers = prefs.lastMutedPlayers
 
             // now clear the mute event
             prefs.setLastMutedEvent(0L, emptyList())
-            for (id in mutedPlayers) {
-                var request: SBRequest? = null
-                when (prefs.onCallBehavior) {
-                    OnCallMuteBehavior.MUTE, OnCallMuteBehavior.MUTE_CURRENT -> request = context.newRequest("mixer", "muting", "0")
-                    OnCallMuteBehavior.PAUSE, OnCallMuteBehavior.PAUSE_CURRENT -> request = context.newRequest("pause", "0")
+            for (playerId in mutedPlayers) {
+                val request = when (prefs.onCallBehavior) {
+                    OnCallMuteBehavior.MUTE, OnCallMuteBehavior.MUTE_CURRENT -> {
+                        context.newRequest("mixer", "muting", "0")
+                    }
+                    OnCallMuteBehavior.PAUSE, OnCallMuteBehavior.PAUSE_CURRENT -> {
+                        context.newRequest("pause", "0")
+                    }
                     OnCallMuteBehavior.NOTHING -> {
+                        null
                     }
                 }
                 if (request != null) {
-                    request.playerId = id
-                    results.add(request.submit(OSExecutors.getUnboundedPool()))
+                    request.playerId = playerId
+                    results += request.submit(OSExecutors.getUnboundedPool())
                 }
             }
             return results
