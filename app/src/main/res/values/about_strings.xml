@@ -5,5 +5,5 @@
 
 <resources>
     <string name="about_title">About %1$s</string>
-    <string name="about_message">This is about message</string>
+    <string name="about_message">Version %1$s</string>
 </resources>

@@ -27,6 +27,7 @@ import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.orangebikelabs.orangesqueeze.BuildConfig;
 import com.orangebikelabs.orangesqueeze.R;
 import com.orangebikelabs.orangesqueeze.cache.CacheServiceProvider;
 import com.orangebikelabs.orangesqueeze.common.BusProvider;
@@ -397,8 +398,8 @@ abstract public class SBActivity extends AppCompatActivity {
             return true;
         } else if (item.getItemId() == R.id.menu_about) {
             MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(this)
-                    .setTitle(R.string.about_title)
-                    .setMessage(R.string.about_message)
+                    .setTitle(getString(R.string.about_title, getString(R.string.app_name)))
+                    .setMessage(getString(R.string.about_message, BuildConfig.VERSION_NAME))
                     .setIcon(R.drawable.about_icon_selected)
                     .setPositiveButton(R.string.ok,
                             (dlg, which) -> {
