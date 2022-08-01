@@ -1,3 +1,10 @@
+## [2.5.4-alpha.12](https://github.com/orangebikelabs/opensqueeze/compare/v2.5.4-alpha.11...v2.5.4-alpha.12) (2022-08-01)
+
+
+### Bug Fixes
+
+* bump lifecycle-viewmodel-ktx from 2.5.0 to 2.5.1 ([435c236](https://github.com/orangebikelabs/opensqueeze/commit/435c236b0ec95ba950092d5db95c396e0e7874ce))
+
 ## [2.5.4-alpha.11](https://github.com/orangebikelabs/opensqueeze/compare/v2.5.4-alpha.10...v2.5.4-alpha.11) (2022-08-01)
 
 
