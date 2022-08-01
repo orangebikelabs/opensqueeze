@@ -1,3 +1,10 @@
+## [2.5.4-alpha.11](https://github.com/orangebikelabs/opensqueeze/compare/v2.5.4-alpha.10...v2.5.4-alpha.11) (2022-08-01)
+
+
+### Bug Fixes
+
+* bump lifecycle-livedata-ktx from 2.5.0 to 2.5.1 ([e326211](https://github.com/orangebikelabs/opensqueeze/commit/e326211b9f2bb298086975ce911b1d7f9bef776b))
+
 ## [2.5.4-alpha.10](https://github.com/orangebikelabs/opensqueeze/compare/v2.5.4-alpha.9...v2.5.4-alpha.10) (2022-08-01)
 
 
