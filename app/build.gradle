@@ -101,7 +101,7 @@ dependencies {
 
     // lifecycle
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.0'
-    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.5.0'
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.5.1'
 
     // recyclerview
     implementation 'androidx.recyclerview:recyclerview:1.2.1'
