@@ -63,15 +63,18 @@ jobs:
         run: chmod +x gradlew
 
       - name: Setting up release keystore
-        env:
-          release_keystore_base64: ${{ secrets.RELEASE_KEYSTORE_BASE64 }}
         run:
-          echo $release_keystore_base64 | base64 --decode > app/release_keystore.jks
+          echo ${{ secrets.RELEASE_KEYSTORE_BASE64 }} | base64 --decode > app/release_keystore.jks
 
       - run: echo Building with version ${{ env.next_version_name }} and code ${{ env.next_build_number }}
 
       - name: Build with Gradle
-        run: ./gradlew --no-daemon -PversionName=${{ env.next_version_name }} -PbuildNumber=${{ env.next_build_number }} -PreleaseKeystorePassword=${{ env.RELEASE_KEYSTORE_PASSWORD }} build
+        run: >
+          ./gradlew --no-daemon
+          -PversionName=${{ env.next_version_name }}
+          -PbuildNumber=${{ env.next_build_number }}
+          -PreleaseKeystorePassword=${{ secrets.RELEASE_KEYSTORE_PASSWORD }}
+          build
 
       - name: Test Report
         uses: dorny/test-reporter@v1
