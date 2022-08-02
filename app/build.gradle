@@ -23,6 +23,13 @@ android {
         }
     }
 
+    signingConfigs {
+        release {
+            storeFile file('release_keystore.jks')
+            keyAlias 'signing'
+        }
+    }
+
     packagingOptions {
         // work around duplicate license files in jackson JARs
         exclude 'META-INF/LICENSE'
@@ -75,6 +82,15 @@ android {
     lintOptions {
         // if true, stop the gradle build if errors are found
         abortOnError true
+    }
+
+    // enable release signing if we have password
+    if (project.hasProperty('releaseKeystorePassword')) {
+        signingConfigs.release.storePassword = releaseKeystorePassword
+        signingConfigs.release.keyPassword = releaseKeystorePassword
+
+        // actually set the config here
+        buildTypes.release.signingConfig = signingConfigs.release
     }
 }
 
