@@ -1,3 +1,10 @@
+## [2.5.4-alpha.13](https://github.com/orangebikelabs/opensqueeze/compare/v2.5.4-alpha.12...v2.5.4-alpha.13) (2022-08-02)
+
+
+### Bug Fixes
+
+* sign release builds to improve deliverability ([4ea6fd7](https://github.com/orangebikelabs/opensqueeze/commit/4ea6fd70dda2f98efb6393d0ab1ee907e8e459a9))
+
 ## [2.5.4-alpha.12](https://github.com/orangebikelabs/opensqueeze/compare/v2.5.4-alpha.11...v2.5.4-alpha.12) (2022-08-01)
 
 
