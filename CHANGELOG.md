@@ -1,3 +1,10 @@
+## [2.5.4-alpha.15](https://github.com/orangebikelabs/opensqueeze/compare/v2.5.4-alpha.14...v2.5.4-alpha.15) (2022-08-02)
+
+
+### Bug Fixes
+
+* r8 7.x+ compatibility with Jackson, causing crashes in release mode ([67ea420](https://github.com/orangebikelabs/opensqueeze/commit/67ea4202a8f178ec06cf2564b82ef6f487604d5e))
+
 ## [2.5.4-alpha.14](https://github.com/orangebikelabs/opensqueeze/compare/v2.5.4-alpha.13...v2.5.4-alpha.14) (2022-08-02)
 
 
