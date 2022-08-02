@@ -12,6 +12,7 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.telephony.TelephonyManager
 import com.google.common.util.concurrent.Futures
+import com.google.common.util.concurrent.ListeningExecutorService
 import com.orangebikelabs.orangesqueeze.common.*
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.disposables.Disposable
@@ -40,12 +41,12 @@ class PhoneStateReceiver : BroadcastReceiver() {
         if (state == TelephonyManager.EXTRA_STATE_IDLE) {
             // only trigger this if something will actually happen otherwise we spin up the server connection for nothing
             if (prefs.getAutoUnmute(TimeUnit.SECONDS) != null) {
-                work = Function { sbContext: SBContext -> doUnmute(prefs, sbContext) }
+                work = Function { sbContext: SBContext -> doUnmute(prefs, sbContext, OSExecutors.getUnboundedPool()) }
             }
         } else {
             // only trigger this if something will actually happen otherwise we spin up the server connection for nothing
             if (prefs.onCallBehavior != OnCallMuteBehavior.NOTHING) {
-                work = Function { sbContext: SBContext -> doMute(prefs, sbContext) }
+                work = Function { sbContext: SBContext -> doMute(prefs, sbContext, OSExecutors.getUnboundedPool()) }
             }
         }
         if (work != null) {
@@ -85,7 +86,7 @@ class PhoneStateReceiver : BroadcastReceiver() {
         /**
          * perform the mute action when a phone call is received, if configured
          */
-        private fun doMute(prefs: SBPreferences, context: SBContext): List<FutureResult> {
+        fun doMute(prefs: SBPreferences, context: SBContext, executor: ListeningExecutorService): List<FutureResult> {
             // shortcircuit if disabled
             if (prefs.onCallBehavior == OnCallMuteBehavior.NOTHING) {
                 return emptyList()
@@ -131,14 +132,14 @@ class PhoneStateReceiver : BroadcastReceiver() {
                             request.playerId = itPlayerStatus.id
 
                             // submit the request and add it to the tracking list
-                            results += request.submit(OSExecutors.getUnboundedPool())
+                            results += request.submit(executor)
                         }
                     }
             prefs.setLastMutedEvent(System.currentTimeMillis(), mutedPlayers)
             return results
         }
 
-        private fun doUnmute(prefs: SBPreferences, context: SBContext): List<FutureResult?> {
+        fun doUnmute(prefs: SBPreferences, context: SBContext, executor: ListeningExecutorService): List<FutureResult?> {
             val unmutePref = prefs.getAutoUnmute(TimeUnit.MILLISECONDS) ?: return emptyList()
 
             // is there a valid mute event to process?
@@ -175,7 +176,7 @@ class PhoneStateReceiver : BroadcastReceiver() {
                 }
                 if (request != null) {
                     request.playerId = playerId
-                    results += request.submit(OSExecutors.getUnboundedPool())
+                    results += request.submit(executor)
                 }
             }
             return results
