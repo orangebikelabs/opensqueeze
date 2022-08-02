@@ -1,3 +1,10 @@
+## [2.5.4-alpha.14](https://github.com/orangebikelabs/opensqueeze/compare/v2.5.4-alpha.13...v2.5.4-alpha.14) (2022-08-02)
+
+
+### Bug Fixes
+
+* release not picking up release .apk ([d5b4e9c](https://github.com/orangebikelabs/opensqueeze/commit/d5b4e9c6084272b2a48a87d9dd2e2bc80a158b8a))
+
 ## [2.5.4-alpha.13](https://github.com/orangebikelabs/opensqueeze/compare/v2.5.4-alpha.12...v2.5.4-alpha.13) (2022-08-02)
 
 
