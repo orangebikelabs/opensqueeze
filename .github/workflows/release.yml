@@ -9,8 +9,6 @@ on:
       - beta
       - alpha
 
-permissions: write-all
-
 env:
   # this is the command needed to bootstrap the tooling for semantic-release based on our release configuration
   semrel_package_bootstrap: "npm i semantic-release @semantic-release/changelog @semantic-release/git semantic-release-export-data conventional-changelog-conventionalcommits -D"
@@ -28,8 +26,8 @@ jobs:
       - run: npx semantic-release --dry-run
         id: get-next-version
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}     # use limited token for readonly version probing
+
       - run: "echo Detected next version: ${{ steps.get-next-version.outputs.new-release-version }}"
       - run: "echo Release will be published: ${{ steps.get-next-version.outputs.new-release-published }}"
 
@@ -41,7 +39,6 @@ jobs:
     env:
       next_version_name: ${{ needs.get-next-version.outputs.new-release-version }}
       next_build_number: ${{ github.run_number }}
-
 
     name: Build, Test & Release
     needs: get-next-version
@@ -66,7 +63,7 @@ jobs:
         run:
           echo ${{ secrets.RELEASE_KEYSTORE_BASE64 }} | base64 --decode > app/release_keystore.jks
 
-      - run: echo Building with version ${{ env.next_version_name }} and code ${{ env.next_build_number }}
+      - run: echo Building with version ${{ env.next_version_name }}, build number ${{ env.next_build_number }}
 
       - name: Build with Gradle
         run: >
@@ -91,9 +88,8 @@ jobs:
 
       - name: Bootstrap npm Semantic Release packages
         run: ${{ env.semrel_package_bootstrap }}
-        
+
       - name: Release
         env:
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}     # use expanded permissions of GH_TOKEN secret for release
         run: npx semantic-release
