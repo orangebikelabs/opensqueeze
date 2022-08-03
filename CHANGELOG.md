@@ -1,3 +1,10 @@
+## [2.5.4-alpha.16](https://github.com/orangebikelabs/opensqueeze/compare/v2.5.4-alpha.15...v2.5.4-alpha.16) (2022-08-03)
+
+
+### Bug Fixes
+
+* squished/erratic icons in now playing view ([e2e0ea9](https://github.com/orangebikelabs/opensqueeze/commit/e2e0ea9e5beb8819a80d653535c64637d7124f1f))
+
 ## [2.5.4-alpha.15](https://github.com/orangebikelabs/opensqueeze/compare/v2.5.4-alpha.14...v2.5.4-alpha.15) (2022-08-02)
 
 
