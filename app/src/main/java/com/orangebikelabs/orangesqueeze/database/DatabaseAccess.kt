@@ -147,9 +147,9 @@ class DatabaseAccess {
 
 fun OSDatabase.deleteServer(id: Long) {
     transaction {
-        serverQueries.deleteById(id)
-        cacheQueries.deleteWithServerId(id)
         downloadQueries.deleteWithServerId(id)
+        cacheQueries.deleteWithServerId(id)
+        serverQueries.deleteById(id)
     }
 }
 
