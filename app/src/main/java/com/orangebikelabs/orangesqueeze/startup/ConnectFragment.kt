@@ -12,6 +12,7 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import androidx.annotation.StringRes
 import androidx.appcompat.widget.ListPopupWindow
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DiffUtil
@@ -113,6 +114,13 @@ class ConnectFragment : SBFragment() {
         binding.list.layoutManager = LinearLayoutManager(requireContext())
         binding.list.adapter = adapter
         setDiscoveryState()
+
+        viewModel.servers
+                .onEach {
+                    binding.list.isVisible = it.isNotEmpty()
+                    binding.empty.isVisible = it.isEmpty()
+                }
+                .launchIn(lifecycleScope)
     }
 
     private fun onServerItemClick(view: View, server: Server) {
