@@ -1,3 +1,11 @@
+## [2.5.4-alpha.17](https://github.com/orangebikelabs/opensqueeze/compare/v2.5.4-alpha.16...v2.5.4-alpha.17) (2022-08-08)
+
+
+### Bug Fixes
+
+* bump error_prone_annotations from 2.14.0 to 2.15.0 ([fea0bed](https://github.com/orangebikelabs/opensqueeze/commit/fea0bed5458b5c50c866c73908079d0387f167f5))
+* bump mockk from 1.12.4 to 1.12.5 ([a09af44](https://github.com/orangebikelabs/opensqueeze/commit/a09af4452cdb7c564b0f120c5b6c42a2ebd6996c))
+
 ## [2.5.4-alpha.16](https://github.com/orangebikelabs/opensqueeze/compare/v2.5.4-alpha.15...v2.5.4-alpha.16) (2022-08-03)
 
 
