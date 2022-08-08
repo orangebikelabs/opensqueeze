@@ -1,3 +1,11 @@
+## [2.5.4-alpha.18](https://github.com/orangebikelabs/opensqueeze/compare/v2.5.4-alpha.17...v2.5.4-alpha.18) (2022-08-08)
+
+
+### Bug Fixes
+
+* crash when deleting/forgetting server ([91799dd](https://github.com/orangebikelabs/opensqueeze/commit/91799dd4ad8713e41944e9a0d181aa1b210b8324))
+* show empty list indicator for empty server list ([af5ade7](https://github.com/orangebikelabs/opensqueeze/commit/af5ade76cecdca1a3aba4e02ae14228f4677df9a))
+
 ## [2.5.4-alpha.17](https://github.com/orangebikelabs/opensqueeze/compare/v2.5.4-alpha.16...v2.5.4-alpha.17) (2022-08-08)
 
 
