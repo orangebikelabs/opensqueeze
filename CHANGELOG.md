@@ -1,3 +1,10 @@
+## [2.5.4-alpha.19](https://github.com/orangebikelabs/opensqueeze/compare/v2.5.4-alpha.18...v2.5.4-alpha.19) (2022-08-11)
+
+
+### Bug Fixes
+
+* error handling when creating new server would not show proper error when duplicating servers ([e3fccfc](https://github.com/orangebikelabs/opensqueeze/commit/e3fccfc2fcc28d10f2e262524923ab211fa2f495))
+
 ## [2.5.4-alpha.18](https://github.com/orangebikelabs/opensqueeze/compare/v2.5.4-alpha.17...v2.5.4-alpha.18) (2022-08-08)
 
 
