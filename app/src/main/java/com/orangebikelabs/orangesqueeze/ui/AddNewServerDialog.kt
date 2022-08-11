@@ -12,21 +12,24 @@ import androidx.lifecycle.lifecycleScope
 import arrow.core.Either
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.bottomsheets.BottomSheet
+import com.afollestad.materialdialogs.callbacks.onDismiss
 import com.afollestad.materialdialogs.customview.customView
 import com.afollestad.materialdialogs.customview.getCustomView
 import com.afollestad.materialdialogs.lifecycle.lifecycleOwner
 import com.google.common.net.HostAndPort
 import com.orangebikelabs.orangesqueeze.R
 import com.orangebikelabs.orangesqueeze.databinding.AddNewServerBinding
-import com.orangebikelabs.orangesqueeze.startup.ConnectFragment
 import com.orangebikelabs.orangesqueeze.startup.ConnectViewModel
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 
 /**
  * UI component to add a new server.<br></br>
  *
  * @author tbsandee@orangebikelabs.com
  */
+
+typealias Result = Either<String, Long>
+
 class AddNewServerDialog private constructor(private val context: Context, private val lifecycleOwner: LifecycleOwner, private val viewModel: ConnectViewModel) {
     companion object {
         fun create(fragment: Fragment, viewModel: ConnectViewModel): AddNewServerDialog {
@@ -38,9 +41,11 @@ class AddNewServerDialog private constructor(private val context: Context, priva
 
     private lateinit var bindings: AddNewServerBinding
     private lateinit var dialog: MaterialDialog
+    private val deferredResult = CompletableDeferred<Result>()
 
-    fun show() {
+    suspend fun show(): Result {
         dialog.show()
+        return deferredResult.await()
     }
 
     fun create() {
@@ -56,6 +61,11 @@ class AddNewServerDialog private constructor(private val context: Context, priva
                 }
                 .negativeButton(res = R.string.cancel) {
                     it.dismiss()
+                }
+                .onDismiss {
+                    if (!deferredResult.isCompleted) {
+                        deferredResult.complete(Either.Left("cancelled"))
+                    }
                 }
         bindings = AddNewServerBinding.bind(dialog.getCustomView())
         bindings.hostname.setOnKeyListener { _, keyCode, event ->
@@ -75,8 +85,7 @@ class AddNewServerDialog private constructor(private val context: Context, priva
     }
 
     private fun onConnectButtonClicked() {
-        val hostAndPort = viewModel.parseHostAndPort(bindings.hostname.text.toString(), bindings.port.text.toString())
-        when (hostAndPort) {
+        when (val hostAndPort = viewModel.parseHostAndPort(bindings.hostname.text.toString(), bindings.port.text.toString())) {
             is Either.Right -> {
                 createNewServer(hostAndPort.value)
             }
@@ -89,13 +98,14 @@ class AddNewServerDialog private constructor(private val context: Context, priva
     private fun createNewServer(hostAndPort: HostAndPort) {
         lifecycleOwner.lifecycleScope.launch {
             val valid = viewModel.validateHost(hostAndPort.host)
-            if(!valid) {
+            if (!valid) {
                 showConnectionErrorDialog(hostAndPort.host)
                 return@launch
             }
             when (val result = viewModel.createNewServer(hostAndPort)) {
                 is Either.Right -> {
                     // success!
+                    deferredResult.complete(Either.Right(result.value))
                     dialog.dismiss()
                 }
                 is Either.Left -> {

@@ -21,6 +21,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import arrow.core.Either
 import com.afollestad.materialdialogs.MaterialDialog
 import com.orangebikelabs.orangesqueeze.R
 import com.orangebikelabs.orangesqueeze.app.SBFragment
@@ -95,8 +96,17 @@ class ConnectFragment : SBFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.addButton.setOnClickListener {
-            AddNewServerDialog.create(this, viewModel)
-                    .show()
+            viewLifecycleOwner.lifecycleScope.launch {
+                when(val result = AddNewServerDialog.create(this@ConnectFragment, viewModel).show()) {
+                    is Either.Left -> {
+                        // nah, do nothing
+                    }
+                    is Either.Right -> {
+                        mSbContext.startPendingConnection(result.value, "dumb")
+                    }
+                }
+
+            }
         }
         binding.squeezenetworkButton.setOnClickListener { viewModel.createNewSqueezenetwork() }
         binding.discoveryToggle.isChecked = SBPreferences.get().isAutoDiscoverEnabled

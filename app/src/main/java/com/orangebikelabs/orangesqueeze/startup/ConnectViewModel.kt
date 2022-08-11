@@ -160,7 +160,7 @@ class ConnectViewModel(application: Application) : AndroidViewModel(application)
         }
     }
 
-    suspend fun createNewServer(hostAndPort: HostAndPort): Either<Exception, Boolean> {
+    suspend fun createNewServer(hostAndPort: HostAndPort): Either<Exception, Long> {
         return withContext(Dispatchers.IO) {
             database.transactionWithResult {
                 val host = hostAndPort.host
@@ -171,7 +171,10 @@ class ConnectViewModel(application: Application) : AndroidViewModel(application)
                 }
                 if (sq.lookupByName(host).executeAsOneOrNull() == null) {
                     sq.insertSimple(serverhost = host, servername = host, serverport = hostAndPort.getPortOrDefault(9000), servertype = ServerType.PINNED)
-                    Either.Right(true)
+                    val serverId = database.globalQueries
+                            .last_insert_rowid()
+                            .executeAsOne()
+                    Either.Right(serverId)
                 } else {
                     Either.Left(Exception(context.applicationContext.getString(R.string.hostname_already_exists, host)))
                 }
