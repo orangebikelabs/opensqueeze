@@ -8,6 +8,8 @@ package com.orangebikelabs.orangesqueeze.startup
 import android.app.Application
 import androidx.annotation.StringRes
 import androidx.lifecycle.*
+import arrow.core.Either
+import com.google.common.net.HostAndPort
 import com.orangebikelabs.orangesqueeze.R
 import com.orangebikelabs.orangesqueeze.app.PendingConnection
 import com.orangebikelabs.orangesqueeze.common.*
@@ -23,6 +25,8 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.lang.IllegalStateException
+import java.net.InetAddress
+import java.net.UnknownHostException
 import java.util.concurrent.TimeUnit
 
 class ConnectViewModel(application: Application) : AndroidViewModel(application) {
@@ -33,6 +37,7 @@ class ConnectViewModel(application: Application) : AndroidViewModel(application)
     sealed class Events {
         data class ConnectionFailed(val reason: String) : Events()
         data class ConnectionNeedsLogin(val connectionInfo: ConnectionInfo) : Events()
+        data class ServerAdded(val id: Long, val name: String) : Events()
     }
 
     enum class ServerOperation(@StringRes val resId: Int) {
@@ -85,6 +90,10 @@ class ConnectViewModel(application: Application) : AndroidViewModel(application)
         return retval
     }
 
+    fun getCurrentIpAddress(): String {
+        return DeviceInterfaceInfo.getInstance().mIpAddress ?: "<unknown>"
+    }
+
     fun createNewSqueezenetwork() {
         viewModelScope.launch {
             val rowId = createNewSqueezenetworkRow()
@@ -125,8 +134,55 @@ class ConnectViewModel(application: Application) : AndroidViewModel(application)
         }
     }
 
+    fun parseHostAndPort(hostname: String, port: String): Either<String, HostAndPort> {
+        val checkHostname = hostname.trim()
+        val checkPort = port.trim()
+        if (checkHostname.isNotEmpty()) {
+            return try {
+                Either.Right(HostAndPort.fromParts(checkHostname, checkPort.toIntOrNull() ?: 0))
+            } catch (e: IllegalArgumentException) {
+                // invalid hostname format
+                Either.Left(e.message.orEmpty())
+            }
+        }
+        return Either.Left("blank host")
+    }
+
+    suspend fun validateHost(host: String): Boolean {
+        return withContext(Dispatchers.IO) {
+            try {
+                // check hostname
+                InetAddress.getByName(host)
+                true
+            } catch (e: UnknownHostException) {
+                false
+            }
+        }
+    }
+
+    suspend fun createNewServer(hostAndPort: HostAndPort): Either<Exception, Boolean> {
+        return withContext(Dispatchers.IO) {
+            database.transactionWithResult {
+                val host = hostAndPort.host
+                val sq = database.serverQueries
+                val server = sq.lookupByName(host).executeAsOneOrNull()
+                if (server?.servertype == ServerType.DISCOVERED) {
+                    database.deleteServer(server._id)
+                }
+                if (sq.lookupByName(host).executeAsOneOrNull() == null) {
+                    sq.insertSimple(serverhost = host, servername = host, serverport = hostAndPort.getPortOrDefault(9000), servertype = ServerType.PINNED)
+                    Either.Right(true)
+                } else {
+                    Either.Left(Exception(context.applicationContext.getString(R.string.hostname_already_exists, host)))
+                }
+            }
+        }
+    }
+
     private suspend fun createNewSqueezenetworkRow(): Long {
-        var rowId = 0L
+        var serverId = 0L
+        var serverName = ""
+
         withContext(Dispatchers.IO) {
             database.transaction {
                 val servers = database.serverQueries
@@ -134,19 +190,21 @@ class ConnectViewModel(application: Application) : AndroidViewModel(application)
                         .executeAsList()
                         .map { it.servername }
                 var index = 1
-                var candidateName = Constants.SQUEEZENETWORK_SERVERNAME
-                while (servers.contains(candidateName)) {
+                serverName = Constants.SQUEEZENETWORK_SERVERNAME
+                while (servers.contains(serverName)) {
                     index++
-                    candidateName = Constants.SQUEEZENETWORK_SERVERNAME + " " + index
+                    serverName = Constants.SQUEEZENETWORK_SERVERNAME + " " + index
                 }
                 database.serverQueries
-                        .insertSimple(Constants.SQUEEZENETWORK_HOSTNAME, Constants.SQUEEZENETWORK_PORT, candidateName, ServerType.SQUEEZENETWORK)
-                rowId = database.globalQueries
+                        .insertSimple(Constants.SQUEEZENETWORK_HOSTNAME, Constants.SQUEEZENETWORK_PORT, serverName, ServerType.SQUEEZENETWORK)
+                serverId = database.globalQueries
                         .last_insert_rowid()
                         .executeAsOne()
             }
         }
-        return rowId
+        events.postValue(Event(Events.ServerAdded(serverId, serverName)))
+
+        return serverId
     }
 
     @Subscribe

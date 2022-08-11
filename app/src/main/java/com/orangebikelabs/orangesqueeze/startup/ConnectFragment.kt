@@ -14,7 +14,9 @@ import androidx.annotation.StringRes
 import androidx.appcompat.widget.ListPopupWindow
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.ListAdapter
@@ -32,8 +34,8 @@ import com.orangebikelabs.orangesqueeze.net.SendDiscoveryPacketService
 import com.orangebikelabs.orangesqueeze.ui.AddNewServerDialog
 import com.orangebikelabs.orangesqueeze.ui.LoginDialogFragment
 import com.orangebikelabs.orangesqueeze.ui.WakeOnLanDialog
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 import java.util.concurrent.TimeUnit
 
 /**
@@ -73,20 +75,11 @@ class ConnectFragment : SBFragment() {
                             // ignore if the fragment is being removed
                         }
                     }
+                    is ConnectViewModel.Events.ServerAdded -> TODO()
                 }
             }
         }
 
-    }
-
-    override fun onStart() {
-        super.onStart()
-
-        viewModel.servers
-                .onEach {
-                    adapter.submitList(it)
-                }
-                .launchIn(lifecycleScope)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
@@ -102,7 +95,7 @@ class ConnectFragment : SBFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.addButton.setOnClickListener {
-            AddNewServerDialog.create(requireActivity())
+            AddNewServerDialog.create(this, viewModel)
                     .show()
         }
         binding.squeezenetworkButton.setOnClickListener { viewModel.createNewSqueezenetwork() }
@@ -115,12 +108,16 @@ class ConnectFragment : SBFragment() {
         binding.list.adapter = adapter
         setDiscoveryState()
 
-        viewModel.servers
-                .onEach {
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.servers.collectLatest {
                     binding.list.isVisible = it.isNotEmpty()
                     binding.empty.isVisible = it.isEmpty()
+
+                    adapter.submitList(it)
                 }
-                .launchIn(lifecycleScope)
+            }
+        }
     }
 
     private fun onServerItemClick(view: View, server: Server) {

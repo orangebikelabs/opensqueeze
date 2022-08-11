@@ -156,6 +156,7 @@ class MainPreferenceActivity : AbsPreferenceActivity() {
 
         }
 
+        @Deprecated("Deprecated in Java", ReplaceWith("onRequestPermissionsResult(requestCode, grantResults)"))
         override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
             onRequestPermissionsResult(requestCode, grantResults)
         }
@@ -163,16 +164,16 @@ class MainPreferenceActivity : AbsPreferenceActivity() {
         @NeedsPermission(Manifest.permission.READ_PHONE_STATE)
         fun showAutomaticMuteOptions() {
             val initialIndex = SBPreferences.get().onCallBehavior.ordinal
-            MaterialDialog(requireContext()).show {
-                lifecycleOwner(this@MainPreferenceFragment)
-                title(res = R.string.pref_automaticmute_title)
-                listItemsSingleChoice(res = R.array.pref_automaticmute_entries, initialSelection = initialIndex) { _, ndx, _ ->
-                    val behavior = OnCallMuteBehavior.values()[ndx]
-                    SBPreferences.get().onCallBehavior = behavior
-                }
-                positiveButton(res = R.string.ok)
-                negativeButton(res = R.string.cancel)
-            }
+            MaterialDialog(requireContext())
+                    .lifecycleOwner(this@MainPreferenceFragment)
+                    .title(res = R.string.pref_automaticmute_title)
+                    .listItemsSingleChoice(res = R.array.pref_automaticmute_entries, initialSelection = initialIndex) { _, ndx, _ ->
+                        val behavior = OnCallMuteBehavior.values()[ndx]
+                        SBPreferences.get().onCallBehavior = behavior
+                    }
+                    .positiveButton(res = R.string.ok)
+                    .negativeButton(res = R.string.cancel)
+                    .show()
         }
 
         @OnShowRationale(Manifest.permission.READ_PHONE_STATE)
