@@ -1,3 +1,10 @@
+## [2.5.4-alpha.20](https://github.com/orangebikelabs/opensqueeze/compare/v2.5.4-alpha.19...v2.5.4-alpha.20) (2022-08-11)
+
+
+### Bug Fixes
+
+* automatically connect to a newly added server ([b0263b7](https://github.com/orangebikelabs/opensqueeze/commit/b0263b75257144e9f5ae690bdd3040a72e457622))
+
 ## [2.5.4-alpha.19](https://github.com/orangebikelabs/opensqueeze/compare/v2.5.4-alpha.18...v2.5.4-alpha.19) (2022-08-11)
 
 
