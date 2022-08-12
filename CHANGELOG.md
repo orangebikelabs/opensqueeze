@@ -1,3 +1,11 @@
+## [2.5.4-alpha.21](https://github.com/orangebikelabs/opensqueeze/compare/v2.5.4-alpha.20...v2.5.4-alpha.21) (2022-08-12)
+
+
+### Bug Fixes
+
+* compile failure due to missed commit ([a8262d4](https://github.com/orangebikelabs/opensqueeze/commit/a8262d4ff69b69303d51bafd9f558e8ba653ceb3))
+* remove a TODO flag when adding a SB network server ([f9d8e8e](https://github.com/orangebikelabs/opensqueeze/commit/f9d8e8e65894ba55e065afe4f2f9d5fd64552f79))
+
 ## [2.5.4-alpha.20](https://github.com/orangebikelabs/opensqueeze/compare/v2.5.4-alpha.19...v2.5.4-alpha.20) (2022-08-11)
 
 
