@@ -204,8 +204,6 @@ class ConnectViewModel(application: Application) : AndroidViewModel(application)
                         .executeAsOne()
             }
         }
-        events.postValue(Event(Events.ServerAdded(serverId, serverName)))
-
         return serverId
     }
 
