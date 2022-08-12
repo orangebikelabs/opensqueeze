@@ -37,7 +37,6 @@ class ConnectViewModel(application: Application) : AndroidViewModel(application)
     sealed class Events {
         data class ConnectionFailed(val reason: String) : Events()
         data class ConnectionNeedsLogin(val connectionInfo: ConnectionInfo) : Events()
-        data class ServerAdded(val id: Long, val name: String) : Events()
     }
 
     enum class ServerOperation(@StringRes val resId: Int) {

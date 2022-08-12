@@ -76,7 +76,6 @@ class ConnectFragment : SBFragment() {
                             // ignore if the fragment is being removed
                         }
                     }
-                    is ConnectViewModel.Events.ServerAdded -> TODO()
                 }
             }
         }
