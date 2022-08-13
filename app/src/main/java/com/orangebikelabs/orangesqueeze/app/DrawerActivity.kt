@@ -23,6 +23,7 @@ import com.orangebikelabs.orangesqueeze.R
 import com.orangebikelabs.orangesqueeze.common.NavigationItem
 import com.orangebikelabs.orangesqueeze.common.NavigationManager
 import com.orangebikelabs.orangesqueeze.common.OSLog
+import com.orangebikelabs.orangesqueeze.compat.getParcelableArrayListCompat
 import com.orangebikelabs.orangesqueeze.compat.getParcelableCompat
 import com.orangebikelabs.orangesqueeze.databinding.DrawerBinding
 import com.orangebikelabs.orangesqueeze.databinding.ToolbarBinding
@@ -175,7 +176,7 @@ abstract class DrawerActivity : SBActivity() {
             currentItem = checkNotNull(savedInstanceState.getParcelableCompat(STATE_NAV_ITEM, NavigationItem::class.java))
             { "saved item shouldn't be null: $savedInstanceState" }
 
-            navigationStack = checkNotNull(savedInstanceState.getParcelableArrayList(STATE_NAV_STACK, NavigationItem::class.java))
+            navigationStack = checkNotNull(savedInstanceState.getParcelableArrayListCompat(STATE_NAV_STACK, NavigationItem::class.java))
             { "nav stack shouldn't be null: $savedInstanceState" }
 
             refreshNavigationList()
@@ -320,7 +321,9 @@ abstract class DrawerActivity : SBActivity() {
         outState.putParcelableArrayList(STATE_NAV_STACK, ArrayList(navigationStack))
     }
 
+    @Deprecated("Deprecated in Java")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        @Suppress("DEPRECATION")
         super.onActivityResult(requestCode, resultCode, data)
 
         if (requestCode != NavigationManager.ACTIVITY_REQUESTCODE || data == null) {
