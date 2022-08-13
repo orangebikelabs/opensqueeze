@@ -23,6 +23,7 @@ import com.orangebikelabs.orangesqueeze.R
 import com.orangebikelabs.orangesqueeze.common.NavigationItem
 import com.orangebikelabs.orangesqueeze.common.NavigationManager
 import com.orangebikelabs.orangesqueeze.common.OSLog
+import com.orangebikelabs.orangesqueeze.compat.getParcelableCompat
 import com.orangebikelabs.orangesqueeze.databinding.DrawerBinding
 import com.orangebikelabs.orangesqueeze.databinding.ToolbarBinding
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
@@ -171,10 +172,10 @@ abstract class DrawerActivity : SBActivity() {
         } else {
             // when we restore, a fragment is already created and the nav index is restored with the spinner state
             // but an event will trigger, so ignore that one
-            currentItem = checkNotNull(savedInstanceState.getParcelable(STATE_NAV_ITEM))
+            currentItem = checkNotNull(savedInstanceState.getParcelableCompat(STATE_NAV_ITEM, NavigationItem::class.java))
             { "saved item shouldn't be null: $savedInstanceState" }
 
-            navigationStack = checkNotNull(savedInstanceState.getParcelableArrayList(STATE_NAV_STACK))
+            navigationStack = checkNotNull(savedInstanceState.getParcelableArrayList(STATE_NAV_STACK, NavigationItem::class.java))
             { "nav stack shouldn't be null: $savedInstanceState" }
 
             refreshNavigationList()

@@ -27,6 +27,7 @@ import com.orangebikelabs.orangesqueeze.common.OSAssert
 import com.orangebikelabs.orangesqueeze.common.PlayerId
 import com.orangebikelabs.orangesqueeze.common.PlayerStatus
 import com.orangebikelabs.orangesqueeze.common.event.CurrentPlayerState
+import com.orangebikelabs.orangesqueeze.compat.getParcelableCompat
 import com.orangebikelabs.orangesqueeze.databinding.VolumeDialogBinding
 import com.squareup.otto.Subscribe
 import kotlin.math.max
@@ -99,7 +100,7 @@ class VolumeFragment : SBDialogFragment() {
     @SuppressLint("ClickableViewAccessibility")
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
 
-        val playerId = requireNotNull(requireArguments().getParcelable<PlayerId>(ARG_PLAYERID))
+        val playerId = requireNotNull(requireArguments().getParcelableCompat(ARG_PLAYERID, PlayerId::class.java))
         autoTimeout = requireArguments().getBoolean(ARG_AUTOTIMEOUT)
 
         return MaterialDialog(requireContext()).apply {

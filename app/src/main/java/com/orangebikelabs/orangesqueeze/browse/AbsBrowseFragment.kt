@@ -27,6 +27,7 @@ import com.orangebikelabs.orangesqueeze.common.*
 import com.orangebikelabs.orangesqueeze.common.event.ItemActionButtonClickEvent
 import com.orangebikelabs.orangesqueeze.common.event.ItemSliderChangedEvent
 import com.orangebikelabs.orangesqueeze.common.event.TriggerListPreload
+import com.orangebikelabs.orangesqueeze.compat.getParcelableCompat
 import com.orangebikelabs.orangesqueeze.menu.AbsMenuFragment
 import com.orangebikelabs.orangesqueeze.menu.ActionNames
 import com.orangebikelabs.orangesqueeze.menu.MenuElement
@@ -188,7 +189,7 @@ abstract class AbsBrowseFragment<T : BrowseItemBaseAdapter, L> : AbsMenuFragment
 
         alwaysRefreshOnRestart = mutableArguments.getBoolean(PARAM_ALWAYS_REFRESH_ON_RESTART, false)
 
-        suppliedBrowseStyle = mutableArguments.getParcelable(PARAM_BROWSE_STYLE)
+        suppliedBrowseStyle = mutableArguments.getParcelableCompat(PARAM_BROWSE_STYLE, BrowseStyle::class.java)
         browseStyle = suppliedBrowseStyle ?: defaultBrowseStyle
 
         isShortMode = mutableArguments.getBoolean(PARAM_SHORT_MODE, false)

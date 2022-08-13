@@ -7,7 +7,10 @@ package com.orangebikelabs.orangesqueeze.compat
 
 import android.annotation.SuppressLint
 import android.app.Service
+import android.content.Intent
 import android.os.Build.VERSION
+import android.os.Bundle
+import android.os.Parcelable
 
 class CompatKt {
     companion object {
@@ -18,6 +21,33 @@ class CompatKt {
     }
 }
 
+fun <T> Bundle.getParcelableCompat(key: String?, clz: Class<T>): T? {
+    return if(VERSION.SDK_INT >= 33) {
+        this.getParcelable(key, clz)
+    } else {
+        @Suppress("DEPRECATION")
+        this.getParcelable(key)
+    }
+}
+
+fun <T : Parcelable> Bundle.getParcelableArrayListCompat(key: String?, clz: Class<T>): ArrayList<T>? {
+    return if(VERSION.SDK_INT >= 33) {
+        this.getParcelableArrayList(key, clz)
+    } else {
+        @Suppress("DEPRECATION")
+        this.getParcelableArrayList(key)
+    }
+}
+
+fun <T : Parcelable> Intent.getParcelableArrayListExtraCompat(key: String?, clz: Class<T>): ArrayList<T>? {
+    return if(VERSION.SDK_INT >= 33) {
+        this.getParcelableArrayListExtra(key, clz)
+    } else {
+        @Suppress("DEPRECATION")
+        this.getParcelableArrayListExtra(key)
+    }
+}
+@Suppress("DEPRECATION")
 fun Service.stopForegroundCompat(flags: Int) {
     if (VERSION.SDK_INT >= 24) {
         this.stopForeground(flags)
@@ -25,11 +55,9 @@ fun Service.stopForegroundCompat(flags: Int) {
         when (flags) {
             Service.STOP_FOREGROUND_REMOVE,
             Service.STOP_FOREGROUND_DETACH -> {
-                @Suppress("DEPRECATION")
                 this.stopForeground(true)
             }
             0 -> {
-                @Suppress("DEPRECATION")
                 this.stopForeground(false)
             }
             else -> throw IllegalStateException()

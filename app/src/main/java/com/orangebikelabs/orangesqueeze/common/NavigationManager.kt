@@ -17,6 +17,7 @@ import com.orangebikelabs.orangesqueeze.app.DrawerActivity
 import com.orangebikelabs.orangesqueeze.browse.AbsBrowseFragment
 import com.orangebikelabs.orangesqueeze.browse.BrowseActivity
 import com.orangebikelabs.orangesqueeze.browse.search.SearchActivity
+import com.orangebikelabs.orangesqueeze.compat.getParcelableArrayListExtraCompat
 import com.orangebikelabs.orangesqueeze.nowplaying.NowPlayingActivity
 import com.orangebikelabs.orangesqueeze.ui.CustomizeRootMenuActivity
 import com.orangebikelabs.orangesqueeze.ui.MainActivity
@@ -185,7 +186,7 @@ class NavigationManager(private val activity: DrawerActivity) {
     }
 
     fun getNavigationStack(intent: Intent): List<NavigationItem> {
-        return intent.getParcelableArrayListExtra(EXTRA_NAVIGATION_STACK) ?: emptyList()
+        return intent.getParcelableArrayListExtraCompat(EXTRA_NAVIGATION_STACK, NavigationItem::class.java) ?: emptyList()
     }
 
     private fun populateNavigationStack(intent: Intent) {
