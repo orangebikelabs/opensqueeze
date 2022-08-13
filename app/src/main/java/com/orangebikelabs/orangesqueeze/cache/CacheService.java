@@ -70,7 +70,7 @@ public class CacheService {
     /**
      * the cache version identifier. If the backing cache format changes in an incompatible way this will be bumped and old cache items will
      */
-    private static final int CACHE_VERSION = 6;
+    private static final int CACHE_VERSION = 7;
 
     /**
      * number of items in the renew queue before they are committed to the database
@@ -682,13 +682,13 @@ public class CacheService {
         }
 
         @Override
-        @Nonnull
         protected void runOneIteration() {
             // run the cleanup on the database executor
             getDatabaseExecutor().execute(mCleanupRunnable);
         }
 
         @Override
+        @Nonnull
         protected Scheduler scheduler() {
             return Scheduler.newFixedRateSchedule(Constants.CACHEMAINTENANCE_DELAY, Constants.CACHEMAINTENANCE_INTERVAL, Constants.TIME_UNITS);
         }
