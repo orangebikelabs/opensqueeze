@@ -40,7 +40,7 @@ class SBApplication : Application() {
             if (e is UndeliverableException) {
                 e = e.cause
             }
-            if (e is IOException || e is SocketException) {
+            if (e is IOException) {
                 // fine, irrelevant network problem or API that throws on cancellation
                 return@setErrorHandler
             }
