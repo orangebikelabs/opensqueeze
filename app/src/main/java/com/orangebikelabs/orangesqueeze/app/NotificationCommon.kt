@@ -26,6 +26,8 @@ import com.google.common.util.concurrent.Futures
 import com.orangebikelabs.orangesqueeze.R
 import com.orangebikelabs.orangesqueeze.common.*
 import com.orangebikelabs.orangesqueeze.compat.Compat
+import com.orangebikelabs.orangesqueeze.compat.CompatKt
+import com.orangebikelabs.orangesqueeze.compat.stopForegroundCompat
 import com.orangebikelabs.orangesqueeze.nowplaying.PlayerControlStates
 import com.orangebikelabs.orangesqueeze.startup.StartupActivity
 import com.orangebikelabs.orangesqueeze.ui.MainActivity
@@ -199,7 +201,7 @@ object NotificationCommon {
     }
 
     fun cancelNowPlayingNotification(service: Service) {
-        service.stopForeground(true)
+        service.stopForegroundCompat(CompatKt.STOP_FOREGROUND_REMOVE)
     }
 
     private fun getLargeBitmap(status: PlayerStatus): Bitmap? {
@@ -229,6 +231,7 @@ object NotificationCommon {
         } catch (e: TimeoutException) {
             // no worries
         } catch (e: InterruptedException) {
+            // empty, ok
         } catch (e: ExecutionException) {
             OSLog.e(e.message ?: "", e)
         }

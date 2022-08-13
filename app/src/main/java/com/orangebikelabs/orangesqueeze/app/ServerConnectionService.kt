@@ -50,10 +50,12 @@ class ServerConnectionService : Service() {
         private const val SERVICE_TIMEOUT_IN_MILLIS = 120_000L
 
         // accessed from main thread only
+        @Suppress("ObjectPropertyName")
         private var _serviceMayBeStarted = false
 
         // written from main thread, read from anywhere
         @Volatile
+        @Suppress("ObjectPropertyName")
         private var _serviceWasStopped = false
 
         /**
@@ -478,15 +480,13 @@ class ServerConnectionService : Service() {
 
         updateChargingStatus()
 
-        val newEligibleForShutdown: EligibleForShutdown
-
         // we no longer worry about metered/unmetered since there's a notification. also doze.
         // val isMetered = ConnectivityManagerCompat.isActiveNetworkMetered(connectivityManager)
-        if (!uiGone) {
+        val newEligibleForShutdown = if (!uiGone) {
             // ui is visible, no shutdown
-            newEligibleForShutdown = EligibleForShutdown.NO
+            EligibleForShutdown.NO
         } else {
-            newEligibleForShutdown = EligibleForShutdown.IFSTOPPED
+            EligibleForShutdown.IFSTOPPED
         }
         if (OSLog.isLoggable(OSLog.DEBUG)) {
             val toString = MoreObjects.toStringHelper("ServerConnectionService status change")
