@@ -18,6 +18,7 @@ import com.squareup.otto.Subscribe;
 
 import javax.annotation.Nullable;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.core.text.HtmlCompat;
 
 /**
@@ -36,6 +37,15 @@ public class ConnectingActivity extends SBActivity {
         }
 
         setContentView(R.layout.connecting);
+
+        getOnBackPressedDispatcher().addCallback(new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                if (mContext.abortPendingConnection()) {
+                    launchConnectActivity();
+                }
+            }
+        });
     }
 
     @Override
@@ -51,13 +61,6 @@ public class ConnectingActivity extends SBActivity {
     @Override
     protected boolean isSupportedConnectionState(ConnectionInfo ci) {
         return !ci.isConnected() && mContext.isConnecting();
-    }
-
-    @Override
-    public void onBackPressed() {
-        if (mContext.abortPendingConnection()) {
-            launchConnectActivity();
-        }
     }
 
     @Override

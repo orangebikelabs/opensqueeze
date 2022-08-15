@@ -45,8 +45,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.OrangeSqueeze"
         android:usesCleartextTraffic="true"
+        android:enableOnBackInvokedCallback="true"
         tools:ignore="GoogleAppIndexingWarning"
-        tools:targetApi="m">
+        tools:targetApi="tiramisu">
 
         <activity
             android:name=".startup.StartupActivity"

@@ -7,6 +7,8 @@ package com.orangebikelabs.orangesqueeze.browse;
 
 import android.content.Intent;
 import android.os.Bundle;
+
+import androidx.activity.OnBackPressedCallback;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.core.app.NavUtils;
@@ -81,14 +83,6 @@ public class BrowseActivity extends DrawerActivity {
         super.onStart();
 
         syncHeaderFooterState();
-    }
-
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-
-        // TODO do we want transitions for exiting?
-        // overridePendingTransition(R.anim.in_from_left, android.R.anim.fade_out);
     }
 
     @Override
