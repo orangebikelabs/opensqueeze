@@ -30,9 +30,6 @@ public class PlayerDrawerFragment extends ManagePlayersFragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        // override this -- we don't want the option menu for this fragment to be impacting things
-        setHasOptionsMenu(false);
     }
 
     @Override
@@ -46,6 +43,11 @@ public class PlayerDrawerFragment extends ManagePlayersFragment {
             NavigationItem ni = NavigationItem.Companion.newFixedItem(requireContext(), NavigationItem.Type.PLAYERS);
             getNavigationManager().navigateTo(ni);
         });
+    }
+
+    @Override
+    protected void setupMenuProvider() {
+        // do nothing, skip superclass impl
     }
 
     @Override

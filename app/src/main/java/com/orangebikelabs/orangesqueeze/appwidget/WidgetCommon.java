@@ -257,7 +257,7 @@ public class WidgetCommon {
                 // artwork is loading
                 views.setImageViewResource(R.id.artwork, R.drawable.artwork_loading);
                 artworkSet = true;
-                Futures.addCallback(bmpFuture, new FutureCallback<Bitmap>() {
+                Futures.addCallback(bmpFuture, new FutureCallback<>() {
                     @Override
                     public void onSuccess(@Nullable Bitmap bitmap) {
                         updateWidgets(sbContext);

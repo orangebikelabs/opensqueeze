@@ -92,7 +92,6 @@ public class ManagePlayersAdapter extends ArrayAdapter<AbsPlayerItem> {
     @Nonnull
     @Override
     public AbsPlayerItem getItem(int position) {
-        //noinspection ConstantConditions
         return super.getItem(position);
     }
 

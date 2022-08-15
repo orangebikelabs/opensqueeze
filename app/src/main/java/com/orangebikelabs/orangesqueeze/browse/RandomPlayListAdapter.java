@@ -74,7 +74,6 @@ public class RandomPlayListAdapter extends ArrayAdapter<Item> {
     @Nonnull
     @Override
     public Item getItem(int position) {
-        //noinspection ConstantConditions
         return super.getItem(position);
     }
 
@@ -95,6 +94,8 @@ public class RandomPlayListAdapter extends ArrayAdapter<Item> {
             iconView.setContentDescription(item.getText());
 
             Drawable d = ContextCompat.getDrawable(iconView.getContext(), item.getIconRid());
+            OSAssert.assertNotNull(d, "not null");
+
             Drawable newDrawable = Drawables.getTintedDrawable(iconView.getContext(), d);
             iconView.setImageDrawable(newDrawable);
         }
@@ -164,7 +165,7 @@ public class RandomPlayListAdapter extends ArrayAdapter<Item> {
         }
     }
 
-    final private FutureCallback<SBResult> mResultCallback = new FutureCallback<SBResult>() {
+    final private FutureCallback<SBResult> mResultCallback = new FutureCallback<>() {
 
         @Override
         public void onSuccess(@Nullable SBResult result) {

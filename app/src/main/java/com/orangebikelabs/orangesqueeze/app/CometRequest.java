@@ -175,7 +175,7 @@ public class CometRequest extends AbsRequest {
         }
     }
 
-    final private CacheRequestCallback<JsonNode, byte[]> mCacheCallback = new CacheRequestCallback<JsonNode, byte[]>() {
+    final private CacheRequestCallback<JsonNode, byte[]> mCacheCallback = new CacheRequestCallback<>() {
 
         @Override
         @Nonnull
@@ -184,7 +184,9 @@ public class CometRequest extends AbsRequest {
             return getCacheEntry();
         }
 
-        /** converts ByteSource from cache to our cache result */
+        /**
+         * converts ByteSource from cache to our cache result
+         */
         @Override
         @Nonnull
         public JsonNode onDeserializeCacheData(CacheService service, ByteSource byteSource, long expectedLength) throws IOException {

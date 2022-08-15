@@ -98,7 +98,6 @@ public class BitmapTools {
         }
     }
 
-    @SuppressWarnings("deprecation")
     public static int bitmapSize(Bitmap bmp) {
         Config config = bmp.getConfig();
         int byteCount = 2;
@@ -119,7 +118,7 @@ public class BitmapTools {
                 // these last two are just fail-safes in case stuff gets added
                 case HARDWARE:
                 default:
-                    byteCount = 2;
+                    // use default value
                     break;
             }
         }

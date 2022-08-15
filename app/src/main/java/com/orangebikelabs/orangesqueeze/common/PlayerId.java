@@ -36,7 +36,7 @@ public class PlayerId implements Parcelable, Serializable, Comparable<PlayerId> 
         }
     }
 
-    public static final Parcelable.Creator<PlayerId> CREATOR = new Parcelable.Creator<PlayerId>() {
+    public static final Parcelable.Creator<PlayerId> CREATOR = new Parcelable.Creator<>() {
         @Override
         public PlayerId createFromParcel(Parcel in) {
             return new PlayerId(in.readString());

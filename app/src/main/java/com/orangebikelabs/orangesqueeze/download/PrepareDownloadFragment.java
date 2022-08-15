@@ -12,6 +12,10 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.core.view.MenuProvider;
+import androidx.fragment.app.FragmentActivity;
+import androidx.lifecycle.Lifecycle;
 import androidx.loader.app.LoaderManager;
 import androidx.loader.content.Loader;
 
@@ -32,6 +36,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.orangebikelabs.orangesqueeze.R;
 import com.orangebikelabs.orangesqueeze.app.SBFragment;
 import com.orangebikelabs.orangesqueeze.common.MenuTools;
+import com.orangebikelabs.orangesqueeze.common.NavigationCommandSet;
 import com.orangebikelabs.orangesqueeze.common.NavigationItem;
 import com.orangebikelabs.orangesqueeze.common.OSAssert;
 import com.orangebikelabs.orangesqueeze.common.OSExecutors;
@@ -87,15 +92,17 @@ public class PrepareDownloadFragment extends SBFragment {
         super.onCreate(savedInstanceState);
 
         NavigationItem item = OSAssert.assertNotNull(NavigationItem.Companion.getNavigationItem(getArguments()), "Can't be null");
+        NavigationCommandSet ncs = item.getRequestCommandSet();
+        OSAssert.assertNotNull(ncs, "can't be null");
 
-        mCommands = item.getRequestCommandSet().getCommands();
-        mParams = item.getRequestCommandSet().getParameters();
+        mCommands = ncs.getCommands();
+        mParams = ncs.getParameters();
         mPlayerId = mSbContext.getPlayerId();
         mDownloadTitle = item.getName();
 
-        setHasOptionsMenu(true);
-
         mBus.register(mEventReceiver);
+
+        requireActivity().addMenuProvider(mMenuProvider, this, Lifecycle.State.RESUMED);
     }
 
     @Override
@@ -105,43 +112,10 @@ public class PrepareDownloadFragment extends SBFragment {
         mBus.unregister(mEventReceiver);
     }
 
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-
-        inflater.inflate(R.menu.preparedownloads, menu);
-    }
-
-    @Override
-    public void onPrepareOptionsMenu(Menu menu) {
-        super.onPrepareOptionsMenu(menu);
-
-        MenuItem item = menu.findItem(R.id.menu_search);
-        if (item != null) {
-            item.setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
-        }
-
-        MenuTools.setVisible(menu, R.id.menu_players, false);
-        MenuTools.setEnabled(menu, R.id.menu_startdownload, mDownloadableCount > 0 && mPrepareDownloadDisposable == null);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.menu_downloadpreferences) {
-            startActivity(new Intent(getContext(), TrackDownloadPreferenceActivity.class));
-            return true;
-        } else if (item.getItemId() == R.id.menu_startdownload) {
-            prepareDownloads();
-            return true;
-        } else {
-            return super.onOptionsItemSelected(item);
-        }
-    }
-
     protected void refreshOptionsMenu() {
-        Activity activity = getActivity();
+        FragmentActivity activity = getActivity();
         if (activity != null && isAdded() && !activity.isFinishing()) {
-            activity.invalidateOptionsMenu();
+            activity.invalidateMenu();
         }
     }
 
@@ -315,7 +289,39 @@ public class PrepareDownloadFragment extends SBFragment {
 //		}
 //	}
 
-    final private LoaderManager.LoaderCallbacks<DownloadJob> mLoaderCallbacks = new LoaderManager.LoaderCallbacks<DownloadJob>() {
+    final private MenuProvider mMenuProvider = new MenuProvider() {
+
+        @Override
+        public void onPrepareMenu(@NonNull Menu menu) {
+            MenuItem item = menu.findItem(R.id.menu_search);
+            if (item != null) {
+                item.setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
+            }
+
+            MenuTools.setVisible(menu, R.id.menu_players, false);
+            MenuTools.setEnabled(menu, R.id.menu_startdownload, mDownloadableCount > 0 && mPrepareDownloadDisposable == null);
+        }
+
+        @Override
+        public void onCreateMenu(@NonNull Menu menu, @NonNull MenuInflater menuInflater) {
+            menuInflater.inflate(R.menu.preparedownloads, menu);
+        }
+
+        @Override
+        public boolean onMenuItemSelected(@NonNull MenuItem menuItem) {
+            if (menuItem.getItemId() == R.id.menu_downloadpreferences) {
+                startActivity(new Intent(getContext(), TrackDownloadPreferenceActivity.class));
+                return true;
+            } else if (menuItem.getItemId() == R.id.menu_startdownload) {
+                prepareDownloads();
+                return true;
+            } else {
+                return false;
+            }
+        }
+    };
+
+    final private LoaderManager.LoaderCallbacks<DownloadJob> mLoaderCallbacks = new LoaderManager.LoaderCallbacks<>() {
         @Override
         @Nonnull
         public Loader<DownloadJob> onCreateLoader(int id, @Nullable Bundle args) {
@@ -376,7 +382,6 @@ public class PrepareDownloadFragment extends SBFragment {
         @Nonnull
         @Override
         public DownloadTrack getItem(int position) {
-            //noinspection ConstantConditions
             return super.getItem(position);
         }
 

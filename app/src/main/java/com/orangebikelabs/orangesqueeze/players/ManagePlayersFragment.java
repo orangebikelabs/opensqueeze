@@ -11,12 +11,17 @@ import android.os.Bundle;
 import android.os.Parcelable;
 
 import androidx.annotation.Keep;
+import androidx.annotation.NonNull;
 import androidx.core.text.HtmlCompat;
+import androidx.core.view.MenuProvider;
+import androidx.lifecycle.Lifecycle;
 import androidx.loader.app.LoaderManager.LoaderCallbacks;
 import androidx.loader.content.Loader;
 
 import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
@@ -91,6 +96,27 @@ public class ManagePlayersFragment extends SBFragment implements LoaderCallbacks
         super.onCreate(savedInstanceState);
 
         mBus.register(mEventReceiver);
+
+    }
+
+    /** subclass can override this to remove behavior */
+    protected void setupMenuProvider() {
+        requireActivity().addMenuProvider(new MenuProvider() {
+            @Override
+            public void onCreateMenu(@NonNull Menu menu, @NonNull MenuInflater menuInflater) {
+                // use activity menu
+            }
+
+            @Override
+            public boolean onMenuItemSelected(@NonNull MenuItem menuItem) {
+                return false;
+            }
+
+            @Override
+            public void onPrepareMenu(@NonNull Menu menu) {
+                MenuTools.setVisible(menu, R.id.menu_players, false);
+            }
+        }, this, Lifecycle.State.RESUMED);
     }
 
     @Override
@@ -115,12 +141,6 @@ public class ManagePlayersFragment extends SBFragment implements LoaderCallbacks
         mListView.setAdapter(mAdapter);
     }
 
-    @Override
-    public void onPrepareOptionsMenu(Menu menu) {
-        super.onPrepareOptionsMenu(menu);
-
-        MenuTools.setVisible(menu, R.id.menu_players, false);
-    }
 
     @SuppressWarnings("deprecation")
     @Override

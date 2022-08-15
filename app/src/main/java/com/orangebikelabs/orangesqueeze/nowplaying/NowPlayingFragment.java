@@ -59,7 +59,7 @@ public class NowPlayingFragment extends AbsNowPlayingFragment {
 
     private NowplayingBinding mBinding;
 
-    private AutoSizeTextHelper mAutosizeTextHelper = new AutoSizeTextHelper();
+    final private AutoSizeTextHelper mAutosizeTextHelper = new AutoSizeTextHelper();
 
     public NowPlayingFragment() {
     }
@@ -67,8 +67,6 @@ public class NowPlayingFragment extends AbsNowPlayingFragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        setHasOptionsMenu(true);
 
         mShuffleStrings = getResources().getStringArray(R.array.shuffle_strings);
         mRepeatStrings = getResources().getStringArray(R.array.repeat_strings);
@@ -205,7 +203,7 @@ public class NowPlayingFragment extends AbsNowPlayingFragment {
             if (id == R.id.shuffle_button) {
                 final ShuffleMode initialShuffleMode = playerStatus.getShuffleMode();
                 FutureResult futureResult = mSbContext.sendPlayerCommand("playlist", "shuffle");
-                Futures.addCallback(futureResult, new AbsFragmentResultReceiver<NowPlayingFragment>(this) {
+                Futures.addCallback(futureResult, new AbsFragmentResultReceiver<>(this) {
                     @Override
                     public void onEventualSuccess(NowPlayingFragment fragment, SBResult result) {
                         int newVal = initialShuffleMode.ordinal() + 1;
@@ -230,7 +228,7 @@ public class NowPlayingFragment extends AbsNowPlayingFragment {
             } else if (id == R.id.repeat_button) {
                 final RepeatMode initialRepeatMode = playerStatus.getRepeatMode();
                 FutureResult futureResult = mSbContext.sendPlayerCommand("playlist", "repeat");
-                Futures.addCallback(futureResult, new AbsFragmentResultReceiver<NowPlayingFragment>(this) {
+                Futures.addCallback(futureResult, new AbsFragmentResultReceiver<>(this) {
 
                     @Override
                     public void onEventualSuccess(NowPlayingFragment fragment, SBResult result) {

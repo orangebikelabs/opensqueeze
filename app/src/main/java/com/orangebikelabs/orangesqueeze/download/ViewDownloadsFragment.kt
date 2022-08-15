@@ -8,6 +8,7 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.*
+import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -111,9 +112,9 @@ class ViewDownloadsFragment : SBFragment() {
     }
 
     private fun refreshOptionsMenu() {
-        val activity: Activity? = activity
+        val activity: FragmentActivity? = activity
         if (activity != null && isAdded && !activity.isFinishing) {
-            activity.invalidateOptionsMenu()
+            activity.invalidateMenu()
         }
     }
 }

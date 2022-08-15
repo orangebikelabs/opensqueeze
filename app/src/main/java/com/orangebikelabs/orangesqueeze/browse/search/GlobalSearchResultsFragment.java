@@ -7,7 +7,10 @@ package com.orangebikelabs.orangesqueeze.browse.search;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.core.text.HtmlCompat;
+import androidx.core.view.MenuProvider;
+import androidx.lifecycle.Lifecycle;
 import androidx.loader.app.LoaderManager.LoaderCallbacks;
 import androidx.loader.content.Loader;
 import androidx.appcompat.widget.SearchView;
@@ -67,6 +70,13 @@ public class GlobalSearchResultsFragment extends BrowseRequestFragment {
     }
 
     @Override
+    public void onCreate(@androidx.annotation.Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        requireActivity().addMenuProvider(mMenuProvider, this, Lifecycle.State.RESUMED);
+    }
+
+    @Override
     @Nonnull
     protected BrowseRequest newRequest(@Nullable Bundle args) {
         String query = getQuery().or("");
@@ -84,40 +94,6 @@ public class GlobalSearchResultsFragment extends BrowseRequestFragment {
     @Nonnull
     protected MenuListAdapter createListAdapter() {
         return new GlobalSearchListAdapter(requireContext(), getThumbnailProcessor());
-    }
-
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-
-        MenuItem searchItem = menu.findItem(R.id.menu_search);
-        if (searchItem != null) {
-            SearchView searchView = (SearchView) searchItem.getActionView();
-
-            searchView.setSubmitButtonEnabled(true);
-            searchView.setQueryHint(getString(R.string.search_hint));
-            searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-                @Override
-                public boolean onQueryTextSubmit(String query) {
-                    Bundle newArgs = new Bundle();
-                    newArgs.putString(GlobalSearchResultsFragment.ARG_QUERY, query);
-
-                    OSAssert.assertParcelable(newArgs);
-                    requery(newArgs);
-                    return true;
-                }
-
-                @Override
-                public boolean onQueryTextChange(String newText) {
-                    return false;
-                }
-            });
-
-            String query = getQuery().orNull();
-            if (query != null) {
-                searchView.setQuery(query, false);
-            }
-        }
     }
 
     @Override
@@ -163,6 +139,45 @@ public class GlobalSearchResultsFragment extends BrowseRequestFragment {
             return super.onActionButtonClicked(item, actionButton, position);
         }
     }
+
+    final private MenuProvider mMenuProvider = new MenuProvider() {
+        @Override
+        public void onCreateMenu(@NonNull Menu menu, @NonNull MenuInflater menuInflater) {
+            MenuItem searchItem = menu.findItem(R.id.menu_search);
+            if (searchItem != null) {
+                SearchView searchView = (SearchView) searchItem.getActionView();
+
+                searchView.setSubmitButtonEnabled(true);
+                searchView.setQueryHint(getString(R.string.search_hint));
+                searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+                    @Override
+                    public boolean onQueryTextSubmit(String query) {
+                        Bundle newArgs = new Bundle();
+                        newArgs.putString(GlobalSearchResultsFragment.ARG_QUERY, query);
+
+                        OSAssert.assertParcelable(newArgs);
+                        requery(newArgs);
+                        return true;
+                    }
+
+                    @Override
+                    public boolean onQueryTextChange(String newText) {
+                        return false;
+                    }
+                });
+
+                String query = getQuery().orNull();
+                if (query != null) {
+                    searchView.setQuery(query, false);
+                }
+            }
+        }
+
+        @Override
+        public boolean onMenuItemSelected(@NonNull MenuItem menuItem) {
+            return false;
+        }
+    };
 
     class SearchLoaderCallbacks implements LoaderCallbacks<BrowseRequestData> {
         @Override

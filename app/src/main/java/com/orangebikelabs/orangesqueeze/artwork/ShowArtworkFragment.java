@@ -119,7 +119,7 @@ public class ShowArtworkFragment extends SBFragment {
         mArtworkView.setImageResource(R.drawable.artwork_loading);
 
         final Future<?> finalFuture = mArtworkFuture;
-        Futures.addCallback(mArtworkFuture, new FutureCallback<ArtworkCacheData>() {
+        Futures.addCallback(mArtworkFuture, new FutureCallback<>() {
 
             @Override
             public void onSuccess(@Nullable ArtworkCacheData artworkCacheData) {

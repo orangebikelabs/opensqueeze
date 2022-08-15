@@ -57,7 +57,7 @@ public class MenuElement implements Serializable {
     @JsonIgnore
     @Nonnull
     static public IconRetriever newIconRetriever() {
-        return new MenuElementIconRetriever(new Function<Item, MenuElement>() {
+        return new MenuElementIconRetriever(new Function<>() {
             @Override
             @Nullable
             public MenuElement apply(@Nullable Item item) {
@@ -73,7 +73,7 @@ public class MenuElement implements Serializable {
     @JsonIgnore
     @Nonnull
     static public IconRetriever newIconRetriever(final Supplier<MenuElement> supplier) {
-        return new MenuElementIconRetriever(new Function<Item, MenuElement>() {
+        return new MenuElementIconRetriever(new Function<>() {
             @Override
             @Nullable
             public MenuElement apply(@Nullable Item item) {

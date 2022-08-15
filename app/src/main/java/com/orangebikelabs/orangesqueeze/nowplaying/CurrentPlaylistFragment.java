@@ -11,6 +11,9 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.SystemClock;
 
+import androidx.annotation.NonNull;
+import androidx.core.view.MenuProvider;
+import androidx.lifecycle.Lifecycle;
 import androidx.loader.app.LoaderManager.LoaderCallbacks;
 import androidx.loader.content.Loader;
 
@@ -87,7 +90,8 @@ public class CurrentPlaylistFragment extends AbsMenuFragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setHasOptionsMenu(true);
+        // enable menu handling when the fragment is resumed
+        requireActivity().addMenuProvider(mMenuProvider, this, Lifecycle.State.RESUMED);
 
         mThumbnailProcessor = new ThumbnailProcessor(requireContext());
 
@@ -166,55 +170,6 @@ public class CurrentPlaylistFragment extends AbsMenuFragment {
         super.onActivityCreated(savedInstanceState);
 
         getLoaderManager().initLoader(PLAYLIST_LOADER, null, mLoaderCallbacks);
-    }
-
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-
-        inflater.inflate(R.menu.currentplaylist, menu);
-    }
-
-    @Override
-    public void onPrepareOptionsMenu(Menu menu) {
-        super.onPrepareOptionsMenu(menu);
-
-        MenuTools.setVisible(menu, R.id.menu_nowplaying_clearplaylist, true);
-        MenuTools.setVisible(menu, R.id.menu_nowplaying_saveplaylist, true);
-
-        MenuItem item = menu.findItem(R.id.menu_nowplaying_snaptocurrentitem);
-        if (item != null) {
-            item.setChecked(SBPreferences.get().shouldAutoscrollToCurrentItem());
-        }
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.menu_nowplaying_clearplaylist) {
-            MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(requireActivity());
-            builder.setTitle(R.string.confirmation_title)
-                    .setMessage(R.string.clearplaylist_action_confirmation)
-                    .setPositiveButton(R.string.ok, (dlg, which) -> clearPlaylist())
-                    .setNegativeButton(R.string.cancel, (dlg, which) -> {
-                    })
-                    .show();
-            return true;
-        } else if (item.getItemId() == R.id.menu_nowplaying_saveplaylist) {
-            PlayerId playerId = getEffectivePlayerId();
-            if (playerId != null) {
-                SavePlaylistDialog.newInstance(this, mPlaylistList, playerId)
-                        .show();
-            }
-            return true;
-        } else if (item.getItemId() == R.id.menu_nowplaying_snaptocurrentitem) {
-            SBPreferences.get().setShouldAutoscrollToCurrentItem(!item.isChecked());
-            if (SBPreferences.get().shouldAutoscrollToCurrentItem()) {
-                performAutoScroll();
-            }
-            return true;
-        } else {
-            return super.onOptionsItemSelected(item);
-        }
     }
 
     @Override
@@ -372,7 +327,7 @@ public class CurrentPlaylistFragment extends AbsMenuFragment {
         }
     };
 
-    final private LoaderCallbacks<PlaylistListRequestData> mLoaderCallbacks = new LoaderCallbacks<PlaylistListRequestData>() {
+    final private LoaderCallbacks<PlaylistListRequestData> mLoaderCallbacks = new LoaderCallbacks<>() {
 
         @Override
         @Nonnull
@@ -454,6 +409,52 @@ public class CurrentPlaylistFragment extends AbsMenuFragment {
 
         deferNextAutoScroll();
     }
+
+    final private MenuProvider mMenuProvider = new MenuProvider() {
+        @Override
+        public void onCreateMenu(@NonNull Menu menu, @NonNull MenuInflater menuInflater) {
+            menuInflater.inflate(R.menu.currentplaylist, menu);
+        }
+
+        @Override
+        public boolean onMenuItemSelected(@NonNull MenuItem menuItem) {
+            if (menuItem.getItemId() == R.id.menu_nowplaying_clearplaylist) {
+                MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(requireActivity());
+                builder.setTitle(R.string.confirmation_title)
+                        .setMessage(R.string.clearplaylist_action_confirmation)
+                        .setPositiveButton(R.string.ok, (dlg, which) -> clearPlaylist())
+                        .setNegativeButton(R.string.cancel, (dlg, which) -> {
+                        })
+                        .show();
+                return true;
+            } else if (menuItem.getItemId() == R.id.menu_nowplaying_saveplaylist) {
+                PlayerId playerId = getEffectivePlayerId();
+                if (playerId != null) {
+                    SavePlaylistDialog.newInstance(CurrentPlaylistFragment.this, mPlaylistList, playerId)
+                            .show();
+                }
+                return true;
+            } else if (menuItem.getItemId() == R.id.menu_nowplaying_snaptocurrentitem) {
+                SBPreferences.get().setShouldAutoscrollToCurrentItem(!menuItem.isChecked());
+                if (SBPreferences.get().shouldAutoscrollToCurrentItem()) {
+                    performAutoScroll();
+                }
+                return true;
+            }
+            return false;
+        }
+
+        @Override
+        public void onPrepareMenu(@NonNull Menu menu) {
+            MenuTools.setVisible(menu, R.id.menu_nowplaying_clearplaylist, true);
+            MenuTools.setVisible(menu, R.id.menu_nowplaying_saveplaylist, true);
+
+            MenuItem item = menu.findItem(R.id.menu_nowplaying_snaptocurrentitem);
+            if (item != null) {
+                item.setChecked(SBPreferences.get().shouldAutoscrollToCurrentItem());
+            }
+        }
+    };
 
     final private OnItemMovedListener mItemMovedListener = (positionOne, positionTwo) -> {
         mPlaylistChangeCommand = mSbContext.sendPlayerCommand(getEffectivePlayerId(), Arrays.asList("playlist", "move", positionOne, positionTwo));

@@ -17,6 +17,7 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.ActionBar
 import com.orangebikelabs.orangesqueeze.BuildConfig
 import com.orangebikelabs.orangesqueeze.R
@@ -134,6 +135,7 @@ abstract class DrawerActivity : SBActivity() {
                     browseDrawerOpen = false
                     drawerBinding.drawerLayout.closeDrawer(GRAVITY_BROWSE_DRAWER)
                 }
+                drawerBackPressedCallback.isEnabled = true
                 doApplyDrawerState()
             }
 
@@ -144,6 +146,7 @@ abstract class DrawerActivity : SBActivity() {
                 } else {
                     playerDrawerOpen = false
                 }
+                drawerBackPressedCallback.isEnabled = false
                 doApplyDrawerState()
             }
 
@@ -180,6 +183,18 @@ abstract class DrawerActivity : SBActivity() {
             { "nav stack shouldn't be null: $savedInstanceState" }
 
             refreshNavigationList()
+        }
+        onBackPressedDispatcher.addCallback(this, drawerBackPressedCallback)
+    }
+
+    private val drawerBackPressedCallback = object: OnBackPressedCallback(false) {
+        override fun handleOnBackPressed() {
+            if(browseDrawerOpen) {
+                drawerBinding.drawerLayout.closeDrawer(GRAVITY_BROWSE_DRAWER)
+            }
+            if(playerDrawerOpen) {
+                drawerBinding.drawerLayout.closeDrawer(GRAVITY_PLAYER_DRAWER)
+            }
         }
     }
 

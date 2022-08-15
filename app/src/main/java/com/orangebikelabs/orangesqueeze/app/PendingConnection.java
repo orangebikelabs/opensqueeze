@@ -321,7 +321,7 @@ public class PendingConnection {
         return mState.get() == PendingState.STARTED;
     }
 
-    final private Callable<PendingState> mCallable = new Callable<PendingState>() {
+    final private Callable<PendingState> mCallable = new Callable<>() {
         @Nonnull
         @Override
         public PendingState call() {
