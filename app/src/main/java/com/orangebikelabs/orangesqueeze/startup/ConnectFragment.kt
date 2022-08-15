@@ -13,6 +13,7 @@ import android.widget.ArrayAdapter
 import androidx.annotation.StringRes
 import androidx.appcompat.widget.ListPopupWindow
 import androidx.core.view.isVisible
+import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -22,7 +23,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import arrow.core.Either
-import com.afollestad.materialdialogs.MaterialDialog
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.orangebikelabs.orangesqueeze.R
 import com.orangebikelabs.orangesqueeze.app.SBFragment
 import com.orangebikelabs.orangesqueeze.common.SBContextProvider
@@ -31,13 +32,11 @@ import com.orangebikelabs.orangesqueeze.common.ServerType
 import com.orangebikelabs.orangesqueeze.databinding.ConnectBinding
 import com.orangebikelabs.orangesqueeze.databinding.ConnectserverItemBinding
 import com.orangebikelabs.orangesqueeze.database.Server
-import com.orangebikelabs.orangesqueeze.net.SendDiscoveryPacketService
 import com.orangebikelabs.orangesqueeze.ui.AddNewServerDialog
-import com.orangebikelabs.orangesqueeze.ui.LoginDialogFragment
+import com.orangebikelabs.orangesqueeze.ui.LoginFragment
 import com.orangebikelabs.orangesqueeze.ui.WakeOnLanDialog
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
-import java.util.concurrent.TimeUnit
 
 /**
  * Fragment has server list and connection/discovery logic.
@@ -45,11 +44,14 @@ import java.util.concurrent.TimeUnit
  * @author tbsandee@orangebikelabs.com
  */
 class ConnectFragment : SBFragment() {
+    companion object {
+        const val LOGIN_RESULT_KEY = "loginResultKey"
+    }
+
     private var _binding: ConnectBinding? = null
     private val binding
         get() = _binding!!
 
-    private var sendDiscoveryPacket: SendDiscoveryPacketService? = null
 
     private lateinit var adapter: ConnectAdapter
 
@@ -66,20 +68,23 @@ class ConnectFragment : SBFragment() {
                         showAlertDialog(R.string.connection_error_title, it.reason)
                     }
                     is ConnectViewModel.Events.ConnectionNeedsLogin -> {
-                        try {
-                            val ci = it.connectionInfo
-                            val existing = parentFragmentManager.findFragmentByTag("login") as LoginDialogFragment?
-                            existing?.dismiss()
-                            val ldf = LoginDialogFragment.newInstance(this@ConnectFragment, ci.serverId, ci.serverName)
-                            ldf.show(parentFragmentManager, "login")
-                        } catch (e: IllegalStateException) {
-                            // ignore if the fragment is being removed
-                        }
+                        val ci = it.connectionInfo
+                        val ldf = LoginFragment.newInstance(LOGIN_RESULT_KEY, ci.serverId, ci.serverName)
+                        ldf.show(parentFragmentManager, "login")
                     }
                 }
             }
         }
 
+        // handle result from login credential check
+        setFragmentResultListener(LOGIN_RESULT_KEY) { _, bundle ->
+            val result = LoginFragment.getResult(bundle)
+            if (result.loginSuccess) {
+                mSbContext.startPendingConnection(result.serverId, result.serverName)
+            } else {
+                showAlertDialog(R.string.connection_error_title, getString(R.string.error_invalid_credentials))
+            }
+        }
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
@@ -96,7 +101,7 @@ class ConnectFragment : SBFragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.addButton.setOnClickListener {
             viewLifecycleOwner.lifecycleScope.launch {
-                when(val result = AddNewServerDialog.create(this@ConnectFragment, viewModel).show()) {
+                when (val result = AddNewServerDialog.create(this@ConnectFragment, viewModel).show()) {
                     is Either.Left -> {
                         // nah, do nothing
                     }
@@ -129,7 +134,7 @@ class ConnectFragment : SBFragment() {
         }
     }
 
-    private fun onServerItemClick(view: View, server: Server) {
+    private fun onServerItemClick(server: Server) {
         val ci = mSbContext.connectionInfo
 
         // if it's the same id just end the activity
@@ -139,16 +144,6 @@ class ConnectFragment : SBFragment() {
             mSbContext.startPendingConnection(server._id, server.servername)
         }
     }
-
-    // this method is called by login dialog fragment when the results are found
-    fun onLoginDialogResult(success: Boolean, serverId: Long, serverName: String) {
-        if (success) {
-            mSbContext.startPendingConnection(serverId, serverName)
-        } else {
-            showAlertDialog(R.string.connection_error_title, getString(R.string.error_invalid_credentials))
-        }
-    }
-
 
     private data class ServerItemContext(val serverOperations: ConnectViewModel.ServerOperation, val text: String) {
         override fun toString(): String {
@@ -192,13 +187,12 @@ class ConnectFragment : SBFragment() {
 
     override fun onPause() {
         super.onPause()
-        sendDiscoveryPacket?.stopAsync()
+        viewModel.setDiscoveryMode(false)
     }
 
     override fun onResume() {
         super.onResume()
-        sendDiscoveryPacket = SendDiscoveryPacketService(15, TimeUnit.SECONDS)
-        sendDiscoveryPacket?.startAsync()
+        viewModel.setDiscoveryMode(true)
     }
 
     private fun setDiscoveryState() {
@@ -206,10 +200,13 @@ class ConnectFragment : SBFragment() {
     }
 
     private fun showAlertDialog(@StringRes titleRid: Int, message: String) {
-        MaterialDialog(requireContext())
-                .icon(res = android.R.drawable.ic_dialog_alert)
-                .title(res = titleRid)
-                .message(text = message)
+        MaterialAlertDialogBuilder(requireContext())
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .setTitle(titleRid)
+                .setMessage(message)
+                .setPositiveButton(R.string.ok) { _, _ ->
+                    // do nothing
+                }
                 .show()
     }
 
@@ -222,7 +219,7 @@ class ConnectFragment : SBFragment() {
                 }
                 binding.root.setOnClickListener {
                     val item = getItem(bindingAdapterPosition)
-                    onServerItemClick(it, item)
+                    onServerItemClick(item)
                 }
             }
         }

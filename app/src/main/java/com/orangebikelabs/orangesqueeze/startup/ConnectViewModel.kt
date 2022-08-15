@@ -17,9 +17,11 @@ import com.orangebikelabs.orangesqueeze.common.event.PendingConnectionState
 import com.orangebikelabs.orangesqueeze.database.DatabaseAccess
 import com.orangebikelabs.orangesqueeze.database.deleteServer
 import com.orangebikelabs.orangesqueeze.database.Server
+import com.orangebikelabs.orangesqueeze.net.SendDiscoveryPacketService
 import com.squareup.otto.Subscribe
 import com.squareup.sqldelight.runtime.coroutines.asFlow
 import com.squareup.sqldelight.runtime.coroutines.mapToList
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
@@ -29,9 +31,18 @@ import java.net.InetAddress
 import java.net.UnknownHostException
 import java.util.concurrent.TimeUnit
 
-class ConnectViewModel(application: Application) : AndroidViewModel(application) {
+class ConnectViewModel
+    constructor(application: Application, private val ioDispatcher: CoroutineDispatcher): AndroidViewModel(application) {
+
+    // required for all viewmodels
+    @Suppress("unused")
+    constructor(application: Application) : this(application, Dispatchers.IO)
+
     private val database by lazy { DatabaseAccess.getInstance(application) }
     private val context by lazy { SBContextProvider.get() }
+
+    private var sendDiscoveryPacket: SendDiscoveryPacketService? = null
+
     private var ignorePendingConnectionEvent = false
 
     sealed class Events {
@@ -69,6 +80,19 @@ class ConnectViewModel(application: Application) : AndroidViewModel(application)
         super.onCleared()
 
         BusProvider.getInstance().unregister(this)
+
+        sendDiscoveryPacket?.stopAsync()
+        sendDiscoveryPacket = null
+    }
+
+    fun setDiscoveryMode(enabled: Boolean) {
+        if(enabled && sendDiscoveryPacket == null) {
+            sendDiscoveryPacket = SendDiscoveryPacketService(15, TimeUnit.SECONDS)
+            sendDiscoveryPacket?.startAsync()
+        } else if(!enabled && sendDiscoveryPacket != null) {
+            sendDiscoveryPacket?.stopAsync()
+            sendDiscoveryPacket = null
+        }
     }
 
     fun getAvailableServerOperations(server: Server): List<ServerOperation> {
@@ -148,7 +172,8 @@ class ConnectViewModel(application: Application) : AndroidViewModel(application)
     }
 
     suspend fun validateHost(host: String): Boolean {
-        return withContext(Dispatchers.IO) {
+        @Suppress("BlockingMethodInNonBlockingContext")
+        return withContext(ioDispatcher) {
             try {
                 // check hostname
                 InetAddress.getByName(host)
@@ -160,7 +185,7 @@ class ConnectViewModel(application: Application) : AndroidViewModel(application)
     }
 
     suspend fun createNewServer(hostAndPort: HostAndPort): Either<Exception, Long> {
-        return withContext(Dispatchers.IO) {
+        return withContext(ioDispatcher) {
             database.transactionWithResult {
                 val host = hostAndPort.host
                 val sq = database.serverQueries
@@ -183,9 +208,9 @@ class ConnectViewModel(application: Application) : AndroidViewModel(application)
 
     private suspend fun createNewSqueezenetworkRow(): Long {
         var serverId = 0L
-        var serverName = ""
+        var serverName: String
 
-        withContext(Dispatchers.IO) {
+        withContext(ioDispatcher) {
             database.transaction {
                 val servers = database.serverQueries
                         .lookupAll()
