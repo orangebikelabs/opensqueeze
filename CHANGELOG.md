@@ -1,3 +1,16 @@
+## [2.6.0-alpha.1](https://github.com/orangebikelabs/opensqueeze/compare/v2.5.4-alpha.21...v2.6.0-alpha.1) (2022-08-15)
+
+
+### Features
+
+* support android 13 predictive back gesture ([a2e64a2](https://github.com/orangebikelabs/opensqueeze/commit/a2e64a24ce290f7a4db283928721601f5147d5e5))
+
+
+### Bug Fixes
+
+* add missing POST_NOTIFICATIONS permission for SDK33 and higher ([3040b46](https://github.com/orangebikelabs/opensqueeze/commit/3040b46d04aa98da2f51333ad61a22b95d4c5c24))
+* back button presses should close menu/player drawers ([b9268c3](https://github.com/orangebikelabs/opensqueeze/commit/b9268c3eaf7d2d770dfba6b81abee1e5e5895305))
+
 ## [2.5.4-alpha.21](https://github.com/orangebikelabs/opensqueeze/compare/v2.5.4-alpha.20...v2.5.4-alpha.21) (2022-08-12)
 
 
