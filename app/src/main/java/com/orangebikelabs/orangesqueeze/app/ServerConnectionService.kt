@@ -176,7 +176,6 @@ class ServerConnectionService : Service() {
         powerManager = getSystemService(Context.POWER_SERVICE) as PowerManager?
 
         val filter = IntentFilter()
-        @Suppress("DEPRECATION")
         filter.addAction(Intent.ACTION_POWER_CONNECTED)
         filter.addAction(Intent.ACTION_POWER_DISCONNECTED)
         filter.addAction(AudioManager.ACTION_AUDIO_BECOMING_NOISY)
@@ -544,7 +543,6 @@ class ServerConnectionService : Service() {
             val action = intent.action ?: return
 
             var unhandled = false
-            @Suppress("DEPRECATION")
             when (action) {
                 PowerManager.ACTION_DEVICE_IDLE_MODE_CHANGED -> {
                     // do nothing

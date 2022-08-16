@@ -11,6 +11,7 @@ import android.os.Bundle;
 import androidx.core.view.MenuHost;
 import androidx.core.view.MenuProvider;
 import androidx.lifecycle.Lifecycle;
+import androidx.loader.app.LoaderManager;
 import androidx.loader.app.LoaderManager.LoaderCallbacks;
 import androidx.loader.content.Loader;
 
@@ -127,7 +128,6 @@ public class BrowseRequestFragment extends AbsBrowseFragment<MenuListAdapter, Br
         return new MenuListAdapter(requireContext(), getThumbnailProcessor());
     }
 
-    @SuppressWarnings("deprecation")
     @Override
     public void requery(@Nullable Bundle args) {
         super.requery(args);
@@ -135,7 +135,7 @@ public class BrowseRequestFragment extends AbsBrowseFragment<MenuListAdapter, Br
         mRefreshCache = true;
 
         if (isResumed()) {
-            getLoaderManager().restartLoader(BROWSE_LOADER_ID, getMutableArguments(), createLoaderCallbacks());
+            LoaderManager.getInstance(this).restartLoader(BROWSE_LOADER_ID, getMutableArguments(), createLoaderCallbacks());
         }
     }
 

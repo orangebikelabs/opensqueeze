@@ -15,6 +15,7 @@ import androidx.annotation.NonNull;
 import androidx.core.text.HtmlCompat;
 import androidx.core.view.MenuProvider;
 import androidx.lifecycle.Lifecycle;
+import androidx.loader.app.LoaderManager;
 import androidx.loader.app.LoaderManager.LoaderCallbacks;
 import androidx.loader.content.Loader;
 
@@ -141,13 +142,12 @@ public class ManagePlayersFragment extends SBFragment implements LoaderCallbacks
         mListView.setAdapter(mAdapter);
     }
 
-
     @SuppressWarnings("deprecation")
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        getLoaderManager().initLoader(PLAYER_LIST_LOADER, null, this);
+        LoaderManager.getInstance(this).initLoader(PLAYER_LIST_LOADER, null, this);
     }
 
     @Override

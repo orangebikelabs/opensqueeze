@@ -145,7 +145,7 @@ public class PrepareDownloadFragment extends SBFragment {
         super.onActivityCreated(savedInstanceState);
 
         if (mPlayerId != null) {
-            getLoaderManager().initLoader(0, getArguments(), mLoaderCallbacks);
+            LoaderManager.getInstance(this).initLoader(0, getArguments(), mLoaderCallbacks);
         }
     }
 

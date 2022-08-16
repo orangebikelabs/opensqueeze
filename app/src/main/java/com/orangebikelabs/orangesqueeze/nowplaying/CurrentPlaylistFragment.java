@@ -14,6 +14,7 @@ import android.os.SystemClock;
 import androidx.annotation.NonNull;
 import androidx.core.view.MenuProvider;
 import androidx.lifecycle.Lifecycle;
+import androidx.loader.app.LoaderManager;
 import androidx.loader.app.LoaderManager.LoaderCallbacks;
 import androidx.loader.content.Loader;
 
@@ -169,7 +170,7 @@ public class CurrentPlaylistFragment extends AbsMenuFragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        getLoaderManager().initLoader(PLAYLIST_LOADER, null, mLoaderCallbacks);
+        LoaderManager.getInstance(this).initLoader(PLAYLIST_LOADER, null, mLoaderCallbacks);
     }
 
     @Override
@@ -265,7 +266,6 @@ public class CurrentPlaylistFragment extends AbsMenuFragment {
      * local event receiver
      */
     final private Object mEventReceiver = new Object() {
-        @SuppressWarnings("deprecation")
         @Subscribe
         public void whenCurrentPlayerStatusChanges(CurrentPlayerState event) {
 
@@ -306,7 +306,7 @@ public class CurrentPlaylistFragment extends AbsMenuFragment {
             }
 
             if (restartLoader) {
-                getLoaderManager().restartLoader(PLAYLIST_LOADER, null, mLoaderCallbacks);
+                LoaderManager.getInstance(CurrentPlaylistFragment.this).restartLoader(PLAYLIST_LOADER, null, mLoaderCallbacks);
             }
             mPlaylistChangeCommand = null;
         }

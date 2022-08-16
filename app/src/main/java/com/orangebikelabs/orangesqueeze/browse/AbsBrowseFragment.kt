@@ -17,6 +17,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.ViewStub
 import android.widget.*
+import androidx.loader.app.LoaderManager
 
 import com.orangebikelabs.orangesqueeze.R
 import com.orangebikelabs.orangesqueeze.artwork.ThumbnailProcessor
@@ -209,7 +210,7 @@ abstract class AbsBrowseFragment<T : BrowseItemBaseAdapter, L> : AbsMenuFragment
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        loaderManager.initLoader(BROWSE_LOADER_ID, mutableArguments, createLoaderCallbacks())
+        LoaderManager.getInstance(this).initLoader(BROWSE_LOADER_ID, mutableArguments, createLoaderCallbacks())
     }
 
     protected open fun onLoaderDataReceived(data: L?, empty: Boolean, complete: Boolean) {
