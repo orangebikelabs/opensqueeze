@@ -7,6 +7,7 @@ package com.orangebikelabs.orangesqueeze.download
 import android.content.Intent
 import android.os.Bundle
 import android.view.*
+import androidx.core.view.MenuProvider
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
@@ -37,6 +38,34 @@ class ViewDownloadsFragment : SBFragment() {
         super.onCreate(savedInstanceState)
 
         adapter = ViewDownloadsAdapter(requireContext())
+        requireActivity().addMenuProvider(object : MenuProvider {
+            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+                menuInflater.inflate(R.menu.viewdownloads, menu)
+            }
+
+            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+                return when (menuItem.itemId) {
+                    R.id.menu_downloadpreferences -> {
+                        startActivity(Intent(requireActivity(), TrackDownloadPreferenceActivity::class.java))
+                        true
+                    }
+                    R.id.menu_downloadclearall -> {
+                        viewModel.clearDownloads()
+
+                        // stop any active downloads
+                        val stopDownloads = DownloadService.getStopDownloadsIntent(requireActivity())
+                        requireActivity().startService(stopDownloads)
+                        true
+                    }
+                    else -> false
+                }
+            }
+
+            override fun onPrepareMenu(menu: Menu) {
+                MenuTools.setVisible(menu, R.id.menu_downloadclearall, !adapter.isEmpty)
+                MenuTools.setVisible(menu, R.id.menu_startdownload, false)
+            }
+        }, this, Lifecycle.State.RESUMED)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
@@ -67,44 +96,6 @@ class ViewDownloadsFragment : SBFragment() {
                     adapter.finalizeUpdate()
                     refreshOptionsMenu()
                 }
-            }
-        }
-    }
-
-    @Suppress("DEPRECATION")
-    @Deprecated("Deprecated in Java")
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        super.onCreateOptionsMenu(menu, inflater)
-        inflater.inflate(R.menu.viewdownloads, menu)
-    }
-
-    @Suppress("DEPRECATION")
-    @Deprecated("Deprecated in Java")
-    override fun onPrepareOptionsMenu(menu: Menu) {
-        super.onPrepareOptionsMenu(menu)
-
-        MenuTools.setVisible(menu, R.id.menu_downloadclearall, !adapter.isEmpty)
-        MenuTools.setVisible(menu, R.id.menu_startdownload, false)
-    }
-
-    @Suppress("DEPRECATION")
-    @Deprecated("Deprecated in Java")
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            R.id.menu_downloadpreferences -> {
-                startActivity(Intent(requireActivity(), TrackDownloadPreferenceActivity::class.java))
-                true
-            }
-            R.id.menu_downloadclearall -> {
-                viewModel.clearDownloads()
-
-                // stop any active downloads
-                val stopDownloads = DownloadService.getStopDownloadsIntent(requireActivity())
-                requireActivity().startService(stopDownloads)
-                true
-            }
-            else -> {
-                super.onOptionsItemSelected(item)
             }
         }
     }
