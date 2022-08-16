@@ -1,3 +1,10 @@
+## [2.6.0-alpha.2](https://github.com/orangebikelabs/opensqueeze/compare/v2.6.0-alpha.1...v2.6.0-alpha.2) (2022-08-16)
+
+
+### Bug Fixes
+
+* migrate to new permissions framework, compatible with Android 12+ ([08cbbbe](https://github.com/orangebikelabs/opensqueeze/commit/08cbbbef1b12a2386836b6596c5495edabfeecc6))
+
 ## [2.6.0-alpha.1](https://github.com/orangebikelabs/opensqueeze/compare/v2.5.4-alpha.21...v2.6.0-alpha.1) (2022-08-15)
 
 
