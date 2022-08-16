@@ -1,3 +1,10 @@
+## [2.6.0-alpha.3](https://github.com/orangebikelabs/opensqueeze/compare/v2.6.0-alpha.2...v2.6.0-alpha.3) (2022-08-16)
+
+
+### Bug Fixes
+
+* download menu items not appearing ([6f755ec](https://github.com/orangebikelabs/opensqueeze/commit/6f755ec612a4f6404975d65af79432e6467dbed0))
+
 ## [2.6.0-alpha.2](https://github.com/orangebikelabs/opensqueeze/compare/v2.6.0-alpha.1...v2.6.0-alpha.2) (2022-08-16)
 
 
