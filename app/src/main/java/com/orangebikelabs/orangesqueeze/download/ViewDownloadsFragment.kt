@@ -4,7 +4,6 @@
  */
 package com.orangebikelabs.orangesqueeze.download
 
-import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.*
@@ -26,7 +25,6 @@ import kotlinx.coroutines.launch
  * @author tsandee
  */
 class ViewDownloadsFragment : SBFragment() {
-
     private var _binding: DownloadsListBinding? = null
     private val binding
         get() = _binding!!
