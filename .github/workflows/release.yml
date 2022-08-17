@@ -59,9 +59,10 @@ jobs:
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
 
-      - name: Setting up release keystore
-        run:
+      - name: Setting up keystores
+        run: |
           echo ${{ secrets.RELEASE_KEYSTORE_BASE64 }} | base64 --decode > app/release_keystore.jks
+          echo ${{ secrets.DEBUG_KEYSTORE_BASE64 }} | base64 --decode > app/debug_keystore.jks
 
       - run: echo Building with version ${{ env.next_version_name }}, build number ${{ env.next_build_number }}
 
@@ -71,6 +72,7 @@ jobs:
           -PversionName=${{ env.next_version_name }}
           -PbuildNumber=${{ env.next_build_number }}
           -PreleaseKeystorePassword=${{ secrets.RELEASE_KEYSTORE_PASSWORD }}
+          -PdebugKeystore=app/debug_keystore.jks
           build
 
       - name: Test Report
