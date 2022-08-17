@@ -72,7 +72,7 @@ jobs:
           -PversionName=${{ env.next_version_name }}
           -PbuildNumber=${{ env.next_build_number }}
           -PreleaseKeystorePassword=${{ secrets.RELEASE_KEYSTORE_PASSWORD }}
-          -PdebugKeystore=app/debug_keystore.jks
+          -PdebugKeystore=debug_keystore.jks
           build
 
       - name: Test Report
