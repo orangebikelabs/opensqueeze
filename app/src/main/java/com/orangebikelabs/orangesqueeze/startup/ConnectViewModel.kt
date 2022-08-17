@@ -9,6 +9,7 @@ import android.app.Application
 import androidx.annotation.StringRes
 import androidx.lifecycle.*
 import arrow.core.Either
+import arrow.core.getOrElse
 import com.google.common.net.HostAndPort
 import com.orangebikelabs.orangesqueeze.R
 import com.orangebikelabs.orangesqueeze.app.PendingConnection
@@ -239,7 +240,7 @@ class ConnectViewModel
         val pendingConnection = event.pendingConnection ?: return
 
         val state = pendingConnection.state
-        val reason = pendingConnection.failureReason.or("Error")
+        val reason = pendingConnection.failureReason.getOrElse { "Error" }
         OSLog.v("ConnectFragment::whenPendingConnectionChanged $state, reason=$reason")
         when (state) {
             PendingConnection.PendingState.SUCCESS -> context.finalizePendingConnection()

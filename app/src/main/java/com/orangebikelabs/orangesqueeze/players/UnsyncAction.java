@@ -25,7 +25,7 @@ public class UnsyncAction extends AbsPlayerAction {
         boolean retval = super.initialize(item);
         if (retval) {
             PlayerItem pi = (PlayerItem) item;
-            retval = pi.getSyncGroup().isPresent();
+            retval = pi.getSyncGroup().isDefined();
         }
         return retval;
     }

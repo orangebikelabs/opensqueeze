@@ -8,6 +8,7 @@ package com.orangebikelabs.orangesqueeze.players;
 import android.content.Context;
 
 import androidx.appcompat.widget.SwitchCompat;
+import arrow.core.Option;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,13 +21,13 @@ import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
-import com.google.common.base.Optional;
 import com.google.common.collect.ComparisonChain;
 import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Ordering;
 import com.orangebikelabs.orangesqueeze.R;
 import com.orangebikelabs.orangesqueeze.common.FutureResult;
+import com.orangebikelabs.orangesqueeze.common.MoreOption;
 import com.orangebikelabs.orangesqueeze.common.OSAssert;
 import com.orangebikelabs.orangesqueeze.common.OtherPlayerInfo;
 import com.orangebikelabs.orangesqueeze.common.PlayerId;
@@ -125,7 +126,7 @@ public class ManagePlayersAdapter extends ArrayAdapter<AbsPlayerItem> {
                 groups.add(s);
                 continue;
             }
-            int syncGroup = mSyncStatus.getSyncGroup(s.getId()).or(0);
+            int syncGroup = MoreOption.getOrElse(mSyncStatus.getSyncGroup(s.getId()), 0);
             if (lastSyncGroup != syncGroup) {
                 if (syncGroup == 0) {
                     add(new SeparatorItem(getContext().getString(R.string.unsynchronized_player_separator)));
@@ -418,7 +419,7 @@ public class ManagePlayersAdapter extends ArrayAdapter<AbsPlayerItem> {
         }
 
         @Nonnull
-        public Optional<Integer> getSyncGroup() {
+        public Option<Integer> getSyncGroup() {
             return mSyncStatus.getSyncGroup(mPlayerStatus.getId());
         }
 
@@ -634,9 +635,9 @@ public class ManagePlayersAdapter extends ArrayAdapter<AbsPlayerItem> {
 
         @Override
         public int compare(PlayerStatus lhs, PlayerStatus rhs) {
-            int lhsSyncGroup = mSyncStatus.getSyncGroup(lhs.getId()).or(0);
+            int lhsSyncGroup = MoreOption.getOrElse(mSyncStatus.getSyncGroup(lhs.getId()), 0);
 
-            int rhsSyncGroup = mSyncStatus.getSyncGroup(rhs.getId()).or(0);
+            int rhsSyncGroup = MoreOption.getOrElse(mSyncStatus.getSyncGroup(rhs.getId()), 0);
             return ComparisonChain.start().
                     // all players in sync group first
                             compareTrueFirst(lhsSyncGroup != 0, rhsSyncGroup != 0).

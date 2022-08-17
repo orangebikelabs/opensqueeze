@@ -14,10 +14,9 @@ import android.media.AudioManager
 import android.os.*
 import android.support.v4.media.session.MediaSessionCompat
 import androidx.core.content.ContextCompat
-import com.gojuno.koptional.None
-import com.gojuno.koptional.Optional
-import com.gojuno.koptional.Some
-import com.gojuno.koptional.toOptional
+import arrow.core.None
+import arrow.core.Option
+import arrow.core.Some
 import com.google.common.base.MoreObjects
 import com.orangebikelabs.orangesqueeze.appwidget.WidgetCommon
 import com.orangebikelabs.orangesqueeze.common.*
@@ -154,7 +153,7 @@ class ServerConnectionService : Service() {
 
     private var pendingShutdownDisposable: Disposable? = null
 
-    private val playerStatusProcessor: PublishProcessor<Optional<PlayerStatus>> = PublishProcessor.create()
+    private val playerStatusProcessor: PublishProcessor<Option<PlayerStatus>> = PublishProcessor.create()
 
     private val compositeDisposable = CompositeDisposable()
 
@@ -209,7 +208,7 @@ class ServerConnectionService : Service() {
                 .observeOn(OSExecutors.singleThreadScheduler())
                 .onBackpressureLatest()
                 .subscribe { status ->
-                    WidgetCommon.updateWidgetsWithPlayerStatus(this@ServerConnectionService, status.toNullable())
+                    WidgetCommon.updateWidgetsWithPlayerStatus(this@ServerConnectionService, status.orNull())
                 }
 
         // handle notification updates
@@ -413,7 +412,7 @@ class ServerConnectionService : Service() {
 
     private fun fireCurrentPlayerStatus() {
         val status = SBContextProvider.get().playerStatus
-        playerStatusProcessor.onNext(status.toOptional())
+        playerStatusProcessor.onNext(Option.fromNullable(status))
     }
 
     private fun shouldAllowServiceTimeout(isPlayerStatusUpdate: Boolean): Boolean {
@@ -465,7 +464,7 @@ class ServerConnectionService : Service() {
 
     @Subscribe
     fun whenCurrentPlayerStatusChanges(event: CurrentPlayerState) {
-        playerStatusProcessor.onNext(event.playerStatus.toOptional())
+        playerStatusProcessor.onNext(Option.fromNullable(event.playerStatus))
     }
 
     private fun onDeviceStatusChange() {
@@ -556,7 +555,7 @@ class ServerConnectionService : Service() {
                 BroadcastServiceActions.UPDATE_WIDGETS.intentAction -> {
                     OSExecutors.getUnboundedPool().execute(ConnectionAwareRunnable(location = "UPDATE_WIDGETS") {
                         AndroidSchedulers.mainThread().scheduleDirect {
-                            playerStatusProcessor.onNext(it.playerStatus.toOptional())
+                            playerStatusProcessor.onNext(Option.fromNullable(it.playerStatus))
                         }
                     })
                 }

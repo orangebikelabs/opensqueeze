@@ -5,7 +5,6 @@
 
 package com.orangebikelabs.orangesqueeze.common;
 
-import com.google.common.base.Optional;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.SetMultimap;
 
@@ -15,6 +14,8 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import arrow.core.OptionKt;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -50,12 +51,12 @@ public class TestSyncStatus {
      */
     @Test
     public void testInitialGroupMemberships() {
-        assertThat(mSyncStatus.getSyncGroup(mPlayers[0])).isEqualTo(Optional.of(1));
-        assertThat(mSyncStatus.getSyncGroup(mPlayers[1])).isEqualTo(Optional.of(1));
-        assertThat(mSyncStatus.getSyncGroup(mPlayers[2])).isEqualTo(Optional.of(1));
-        assertThat(mSyncStatus.getSyncGroup(mPlayers[3])).isEqualTo(Optional.of(2));
-        assertThat(mSyncStatus.getSyncGroup(mPlayers[4])).isEqualTo(Optional.of(2));
-        assertThat(mSyncStatus.getSyncGroup(mPlayers[5])).isEqualTo(Optional.<Integer>absent());
+        assertThat(mSyncStatus.getSyncGroup(mPlayers[0])).isEqualTo(OptionKt.some(1));
+        assertThat(mSyncStatus.getSyncGroup(mPlayers[1])).isEqualTo(OptionKt.some(1));
+        assertThat(mSyncStatus.getSyncGroup(mPlayers[2])).isEqualTo(OptionKt.some(1));
+        assertThat(mSyncStatus.getSyncGroup(mPlayers[3])).isEqualTo(OptionKt.some(2));
+        assertThat(mSyncStatus.getSyncGroup(mPlayers[4])).isEqualTo(OptionKt.some(2));
+        assertThat(mSyncStatus.getSyncGroup(mPlayers[5])).isEqualTo(OptionKt.none());
     }
 
     /**
@@ -64,8 +65,8 @@ public class TestSyncStatus {
     @Test
     public void testUnsynchronize() {
         assertThat(mSyncStatus.unsynchronize(mPlayers[3])).isTrue();
-        assertThat(mSyncStatus.getSyncGroup(mPlayers[3])).isEqualTo(Optional.<Integer>absent());
-        assertThat(mSyncStatus.getSyncGroup(mPlayers[4])).isEqualTo(Optional.<Integer>absent());
+        assertThat(mSyncStatus.getSyncGroup(mPlayers[3])).isEqualTo(OptionKt.none());
+        assertThat(mSyncStatus.getSyncGroup(mPlayers[4])).isEqualTo(OptionKt.none());
     }
 
     /**
@@ -74,7 +75,7 @@ public class TestSyncStatus {
     @Test
     public void testUnsynchronizeInvalid() {
         assertThat(mSyncStatus.unsynchronize(mPlayers[5])).isFalse();
-        assertThat(mSyncStatus.getSyncGroup(mPlayers[5])).isEqualTo(Optional.<Integer>absent());
+        assertThat(mSyncStatus.getSyncGroup(mPlayers[5])).isEqualTo(OptionKt.none());
     }
 
 
@@ -84,8 +85,8 @@ public class TestSyncStatus {
     @Test
     public void testSynchronizeNoop() {
         assertThat(mSyncStatus.synchronize(mPlayers[4], mPlayers[3])).isFalse();
-        assertThat(mSyncStatus.getSyncGroup(mPlayers[3])).isEqualTo(Optional.of(2));
-        assertThat(mSyncStatus.getSyncGroup(mPlayers[4])).isEqualTo(Optional.of(2));
+        assertThat(mSyncStatus.getSyncGroup(mPlayers[3])).isEqualTo(OptionKt.some(2));
+        assertThat(mSyncStatus.getSyncGroup(mPlayers[4])).isEqualTo(OptionKt.some(2));
     }
 
     /**
@@ -94,8 +95,8 @@ public class TestSyncStatus {
     @Test
     public void testSynchronizeChangeGroup() {
         assertThat(mSyncStatus.synchronize(mPlayers[3], mPlayers[1])).isEqualTo(true);
-        assertThat(mSyncStatus.getSyncGroup(mPlayers[3])).isEqualTo(Optional.of(1));
-        assertThat(mSyncStatus.getSyncGroup(mPlayers[4])).isEqualTo(Optional.<Integer>absent());
+        assertThat(mSyncStatus.getSyncGroup(mPlayers[3])).isEqualTo(OptionKt.some(1));
+        assertThat(mSyncStatus.getSyncGroup(mPlayers[4])).isEqualTo(OptionKt.none());
     }
 
 
@@ -105,8 +106,8 @@ public class TestSyncStatus {
     @Test
     public void testSynchronizeNewGroup() {
         assertThat(mSyncStatus.synchronize(mPlayers[5], mPlayers[6])).isEqualTo(true);
-        assertThat(mSyncStatus.getSyncGroup(mPlayers[5])).isEqualTo(Optional.of(3));
-        assertThat(mSyncStatus.getSyncGroup(mPlayers[6])).isEqualTo(Optional.of(3));
+        assertThat(mSyncStatus.getSyncGroup(mPlayers[5])).isEqualTo(OptionKt.some(3));
+        assertThat(mSyncStatus.getSyncGroup(mPlayers[6])).isEqualTo(OptionKt.some(3));
     }
 
     /**
@@ -118,12 +119,12 @@ public class TestSyncStatus {
         assertThat(mSyncStatus.unsynchronize(mPlayers[1])).isTrue();
         assertThat(mSyncStatus.unsynchronize(mPlayers[2])).isFalse();
 
-        assertThat(mSyncStatus.getSyncGroup(mPlayers[0])).isEqualTo(Optional.<Integer>absent());
-        assertThat(mSyncStatus.getSyncGroup(mPlayers[1])).isEqualTo(Optional.<Integer>absent());
-        assertThat(mSyncStatus.getSyncGroup(mPlayers[2])).isEqualTo(Optional.<Integer>absent());
+        assertThat(mSyncStatus.getSyncGroup(mPlayers[0])).isEqualTo(OptionKt.none());
+        assertThat(mSyncStatus.getSyncGroup(mPlayers[1])).isEqualTo(OptionKt.none());
+        assertThat(mSyncStatus.getSyncGroup(mPlayers[2])).isEqualTo(OptionKt.none());
 
-        assertThat(mSyncStatus.getSyncGroup(mPlayers[3])).isEqualTo(Optional.of(1));
-        assertThat(mSyncStatus.getSyncGroup(mPlayers[4])).isEqualTo(Optional.of(1));
+        assertThat(mSyncStatus.getSyncGroup(mPlayers[3])).isEqualTo(OptionKt.some(1));
+        assertThat(mSyncStatus.getSyncGroup(mPlayers[4])).isEqualTo(OptionKt.some(1));
     }
 
     /**
@@ -135,9 +136,9 @@ public class TestSyncStatus {
         updates.add(Arrays.asList(mPlayers[0], mPlayers[1], mPlayers[2]));
 
         assertThat(mSyncStatus.updateSyncStatus(updates)).isFalse();
-        assertThat(mSyncStatus.getSyncGroup(mPlayers[0])).isEqualTo(Optional.of(1));
-        assertThat(mSyncStatus.getSyncGroup(mPlayers[1])).isEqualTo(Optional.of(1));
-        assertThat(mSyncStatus.getSyncGroup(mPlayers[2])).isEqualTo(Optional.of(1));
+        assertThat(mSyncStatus.getSyncGroup(mPlayers[0])).isEqualTo(OptionKt.some(1));
+        assertThat(mSyncStatus.getSyncGroup(mPlayers[1])).isEqualTo(OptionKt.some(1));
+        assertThat(mSyncStatus.getSyncGroup(mPlayers[2])).isEqualTo(OptionKt.some(1));
     }
 
     /**
@@ -149,9 +150,9 @@ public class TestSyncStatus {
         updates.add(Arrays.asList(mPlayers[0], mPlayers[1]));
 
         assertThat(mSyncStatus.updateSyncStatus(updates)).isTrue();
-        assertThat(mSyncStatus.getSyncGroup(mPlayers[0])).isEqualTo(Optional.of(1));
-        assertThat(mSyncStatus.getSyncGroup(mPlayers[1])).isEqualTo(Optional.of(1));
-        assertThat(mSyncStatus.getSyncGroup(mPlayers[2])).isEqualTo(Optional.<Integer>absent());
+        assertThat(mSyncStatus.getSyncGroup(mPlayers[0])).isEqualTo(OptionKt.some(1));
+        assertThat(mSyncStatus.getSyncGroup(mPlayers[1])).isEqualTo(OptionKt.some(1));
+        assertThat(mSyncStatus.getSyncGroup(mPlayers[2])).isEqualTo(OptionKt.none());
     }
 
     /**
@@ -164,10 +165,10 @@ public class TestSyncStatus {
         updates.add(Arrays.asList(mPlayers[2], mPlayers[8]));
 
         assertThat(mSyncStatus.updateSyncStatus(updates)).isTrue();
-        assertThat(mSyncStatus.getSyncGroup(mPlayers[0])).isEqualTo(Optional.of(1));
-        assertThat(mSyncStatus.getSyncGroup(mPlayers[1])).isEqualTo(Optional.of(1));
+        assertThat(mSyncStatus.getSyncGroup(mPlayers[0])).isEqualTo(OptionKt.some(1));
+        assertThat(mSyncStatus.getSyncGroup(mPlayers[1])).isEqualTo(OptionKt.some(1));
 
-        assertThat(mSyncStatus.getSyncGroup(mPlayers[2])).isEqualTo(Optional.of(3));
-        assertThat(mSyncStatus.getSyncGroup(mPlayers[8])).isEqualTo(Optional.of(3));
+        assertThat(mSyncStatus.getSyncGroup(mPlayers[2])).isEqualTo(OptionKt.some(3));
+        assertThat(mSyncStatus.getSyncGroup(mPlayers[8])).isEqualTo(OptionKt.some(3));
     }
 }

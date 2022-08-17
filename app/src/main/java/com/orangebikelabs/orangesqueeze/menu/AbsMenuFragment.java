@@ -28,6 +28,7 @@ import com.orangebikelabs.orangesqueeze.browse.common.PlayNextAction;
 import com.orangebikelabs.orangesqueeze.browse.common.PlayNowAction;
 import com.orangebikelabs.orangesqueeze.common.AbsFragmentResultReceiver;
 import com.orangebikelabs.orangesqueeze.common.FutureResult;
+import com.orangebikelabs.orangesqueeze.common.MoreOption;
 import com.orangebikelabs.orangesqueeze.common.NavigationCommandSet;
 import com.orangebikelabs.orangesqueeze.common.NavigationItem;
 import com.orangebikelabs.orangesqueeze.common.NavigationManager;
@@ -121,8 +122,8 @@ abstract public class AbsMenuFragment extends SBFragment {
                         executeMenuCommand(itemTitle, element, action, params, nextWindow, fromContextMenu, fillValue);
                     }
                 }
-            } else if (element.getSelectedIndex().isPresent() && !action.getChoices().isEmpty()) {
-                int ndx = element.getSelectedIndex().get();
+            } else if (element.getSelectedIndex().isDefined() && !action.getChoices().isEmpty()) {
+                int ndx = MoreOption.get(element.getSelectedIndex());
                 if (ndx >= 0 && ndx < action.getChoices().size()) {
                     // advance the selection
                     // TODO temporary behavior, use a dialog?

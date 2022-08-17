@@ -7,10 +7,10 @@ package com.orangebikelabs.orangesqueeze.app;
 import android.content.Context;
 
 import androidx.annotation.Keep;
+import arrow.core.Option;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.google.common.base.Charsets;
-import com.google.common.base.Optional;
 import com.google.common.base.Throwables;
 import com.google.common.util.concurrent.Atomics;
 import com.google.common.util.concurrent.ListenableFuture;
@@ -73,12 +73,10 @@ import javax.annotation.concurrent.ThreadSafe;
 @ThreadSafe
 public class PendingConnection {
 
-    @SuppressWarnings("serial")
     static class AuthenticationException extends SBException {
         // no overrides
     }
 
-    @SuppressWarnings("serial")
     static class ConnectionException extends SBException {
         public ConnectionException(String detailMessage, Throwable t) {
             super(detailMessage, t);
@@ -157,8 +155,8 @@ public class PendingConnection {
     }
 
     @Nonnull
-    synchronized public Optional<String> getFailureReason() {
-        return Optional.fromNullable(mFailureReason);
+    synchronized public Option<String> getFailureReason() {
+        return Option.fromNullable(mFailureReason);
     }
 
     synchronized protected void setFailureReason(@Nullable String failureReason) {

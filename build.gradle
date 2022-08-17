@@ -35,7 +35,6 @@ allprojects {
     ext.obl_okhttpVersion = '3.12.13'
     ext.obl_jsr305Version = '3.0.2'
     ext.obl_jacksonVersion = '2.13.3'
-    ext.obl_koptionalVersion = '1.7.0'
     ext.obl_materialdialogsVersion = '3.3.0'
 
     repositories {

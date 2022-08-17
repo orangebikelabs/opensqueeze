@@ -25,6 +25,7 @@ import com.orangebikelabs.orangesqueeze.artwork.ArtworkType;
 import com.orangebikelabs.orangesqueeze.artwork.StandardArtworkCacheRequest;
 import com.orangebikelabs.orangesqueeze.cache.CacheFuture;
 import com.orangebikelabs.orangesqueeze.common.FileUtils;
+import com.orangebikelabs.orangesqueeze.common.MoreOption;
 import com.orangebikelabs.orangesqueeze.common.OSExecutors;
 import com.orangebikelabs.orangesqueeze.common.OSLog;
 import com.orangebikelabs.orangesqueeze.common.Reporting;
@@ -154,7 +155,7 @@ class DownloadTask implements Callable<Boolean> {
             mp3.setAlbum(ti.getTrackAlbum());
             mp3.setTitle(ti.getTrackName());
 
-            double duration = ti.getDuration().or(0.0f);
+            double duration = MoreOption.getOrElse(ti.getDuration(), 0.0f);
             if (duration >= 0.0f && duration < 10000.0f) {
                 mp3.setAudioDuration((int) duration);
             }

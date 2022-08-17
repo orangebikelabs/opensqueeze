@@ -10,9 +10,10 @@ import android.content.Context;
 
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
+import arrow.core.Option;
+import arrow.core.OptionKt;
 
 import com.google.common.base.MoreObjects;
-import com.google.common.base.Optional;
 import com.google.common.base.Throwables;
 import com.google.common.collect.Queues;
 import com.google.common.io.ByteSource;
@@ -288,9 +289,9 @@ public class CacheService {
         return found;
     }
 
-    public <T, C> Optional<T> peek(final CacheRequestCallback<T, C> request) throws CachedItemInvalidException, CachedItemNotFoundException {
+    public <T, C> Option<T> peek(final CacheRequestCallback<T, C> request) throws CachedItemInvalidException, CachedItemNotFoundException {
         if (!isRunning()) {
-            return Optional.absent();
+            return OptionKt.none();
         }
 
         final CacheEntry entry = request.getEntry();
@@ -303,12 +304,12 @@ public class CacheService {
                 // trigger row renewal
                 renew(request, entry, false);
             }
-            return Optional.fromNullable(retval);
+            return Option.fromNullable(retval);
         } catch (Exception e) {
             Throwables.propagateIfPossible(e, CachedItemInvalidException.class, CachedItemNotFoundException.class);
 
             OSLog.w(Tag.CACHE, "CacheService.peek(): " + e.getMessage(), e);
-            return Optional.absent();
+            return OptionKt.none();
         }
     }
 

@@ -14,12 +14,13 @@ import androidx.lifecycle.Lifecycle;
 import androidx.loader.app.LoaderManager.LoaderCallbacks;
 import androidx.loader.content.Loader;
 import androidx.appcompat.widget.SearchView;
+import arrow.core.Option;
+
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 
-import com.google.common.base.Optional;
 import com.orangebikelabs.orangesqueeze.R;
 import com.orangebikelabs.orangesqueeze.actions.AbsAction;
 import com.orangebikelabs.orangesqueeze.actions.ActionDialogBuilder;
@@ -27,6 +28,7 @@ import com.orangebikelabs.orangesqueeze.browse.BrowseRequestFragment;
 import com.orangebikelabs.orangesqueeze.browse.OSBrowseAdapter;
 import com.orangebikelabs.orangesqueeze.browse.common.BrowseRequest;
 import com.orangebikelabs.orangesqueeze.browse.common.BrowseRequestData;
+import com.orangebikelabs.orangesqueeze.common.MoreOption;
 import com.orangebikelabs.orangesqueeze.common.OSAssert;
 import com.orangebikelabs.orangesqueeze.common.LoopingRequestLoader;
 import com.orangebikelabs.orangesqueeze.common.SBContextProvider;
@@ -79,7 +81,7 @@ public class GlobalSearchResultsFragment extends BrowseRequestFragment {
     @Override
     @Nonnull
     protected BrowseRequest newRequest(@Nullable Bundle args) {
-        String query = getQuery().or("");
+        String query = MoreOption.getOrElse(getQuery(), "");
         BrowseRequest retval = new GlobalSearchRequest(SBContextProvider.get().getPlayerId(), query);
         return retval;
     }
@@ -100,16 +102,16 @@ public class GlobalSearchResultsFragment extends BrowseRequestFragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        Optional<String> query = getQuery();
-        if (query.isPresent()) {
+        Option<String> query = getQuery();
+        if (query.isDefined()) {
             requery(null);
         }
     }
 
     @Nonnull
-    protected Optional<String> getQuery() {
+    protected Option<String> getQuery() {
         Bundle args = getMutableArguments();
-        return Optional.fromNullable(args.getString(ARG_QUERY));
+        return Option.fromNullable(args.getString(ARG_QUERY));
     }
 
     protected boolean showExpandableSearchHeaderMenu(View v, ExpandableSearchHeaderItem item) {
