@@ -1,3 +1,11 @@
+## [2.6.0-alpha.5](https://github.com/orangebikelabs/opensqueeze/compare/v2.6.0-alpha.4...v2.6.0-alpha.5) (2022-08-18)
+
+
+### Bug Fixes
+
+* crash deserializing menus on sdk 21 due to newer jackson component ([4a2e8d8](https://github.com/orangebikelabs/opensqueeze/commit/4a2e8d885a0dbf35e6942c7fa1fe603766b42232))
+* invisible player list headers on android 5 ([bfd29a5](https://github.com/orangebikelabs/opensqueeze/commit/bfd29a5927ed6c4d0ce4fa90e01679f493f58b5c))
+
 ## [2.6.0-alpha.4](https://github.com/orangebikelabs/opensqueeze/compare/v2.6.0-alpha.3...v2.6.0-alpha.4) (2022-08-17)
 
 
