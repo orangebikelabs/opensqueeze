@@ -36,7 +36,7 @@ allprojects {
     ext.obl_jsr305Version = '3.0.2'
 
     // must stay at 2.12.7 for sdk 21
-    ext.obl_jacksonVersion = '2.12.7'
+    ext.obl_jacksonVersion = '2.13.3'
     ext.obl_materialdialogsVersion = '3.3.0'
 
     repositories {
