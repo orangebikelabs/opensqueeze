@@ -149,7 +149,7 @@ dependencies {
     implementation 'androidx.media:media:1.6.0'
 
     // functional programming in kotlin
-    implementation("io.arrow-kt:arrow-core:1.0.1")
+    implementation("io.arrow-kt:arrow-core:1.1.2")
 
     implementation 'com.google.android.material:material:1.6.1'
 
