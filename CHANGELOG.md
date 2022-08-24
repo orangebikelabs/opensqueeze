@@ -1,3 +1,10 @@
+## [2.6.0-alpha.6](https://github.com/orangebikelabs/opensqueeze/compare/v2.6.0-alpha.5...v2.6.0-alpha.6) (2022-08-24)
+
+
+### Bug Fixes
+
+* bump arrow-core from 1.0.1 to 1.1.2 ([470f7c2](https://github.com/orangebikelabs/opensqueeze/commit/470f7c25b95b19e7f8760738daeb8b053c1b1d76))
+
 ## [2.6.0-alpha.5](https://github.com/orangebikelabs/opensqueeze/compare/v2.6.0-alpha.4...v2.6.0-alpha.5) (2022-08-18)
 
 
