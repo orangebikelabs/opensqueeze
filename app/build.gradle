@@ -149,13 +149,17 @@ dependencies {
     implementation 'androidx.media:media:1.6.0'
 
     // functional programming in kotlin
-    implementation("io.arrow-kt:arrow-core:1.1.2")
+    implementation 'io.arrow-kt:arrow-core:1.1.2'
 
     implementation 'com.google.android.material:material:1.6.1'
 
+    //noinspection GradleDependency
     implementation "com.fasterxml.jackson.core:jackson-core:${obl_jacksonVersion}"
+    //noinspection GradleDependency
     implementation "com.fasterxml.jackson.core:jackson-annotations:${obl_jacksonVersion}"
+    //noinspection GradleDependency
     implementation "com.fasterxml.jackson.core:jackson-databind:${obl_jacksonVersion}"
+    //noinspection GradleDependency
     implementation "com.fasterxml.jackson.dataformat:jackson-dataformat-smile:${obl_jacksonVersion}"
 
     implementation "com.google.guava:guava:${obl_guavaVersion}"
@@ -165,8 +169,11 @@ dependencies {
     implementation "com.google.errorprone:error_prone_annotations:${obl_errorProneVersion}"
 
     // HTTP client
+    //noinspection GradleDependency
     implementation "com.squareup.okhttp3:okhttp:${obl_okhttpVersion}"
+    //noinspection GradleDependency
     implementation "com.squareup.okhttp3:logging-interceptor:${obl_okhttpVersion}"
+    //noinspection GradleDependency
     implementation "com.squareup.okhttp3:okhttp-urlconnection:${obl_okhttpVersion}"
     implementation 'com.squareup.okio:okio:3.2.0'
 
