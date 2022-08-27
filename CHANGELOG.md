@@ -1,3 +1,10 @@
+## [2.6.0-alpha.7](https://github.com/orangebikelabs/opensqueeze/compare/v2.6.0-alpha.6...v2.6.0-alpha.7) (2022-08-27)
+
+
+### Bug Fixes
+
+* crash in goForgotPassword() method due to uninit servertype ([5391274](https://github.com/orangebikelabs/opensqueeze/commit/5391274ad411a91d5125975b698bd64baf979a69))
+
 ## [2.6.0-alpha.6](https://github.com/orangebikelabs/opensqueeze/compare/v2.6.0-alpha.5...v2.6.0-alpha.6) (2022-08-24)
 
 
