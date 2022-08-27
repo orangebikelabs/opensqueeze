@@ -29,7 +29,7 @@ class LoginViewModel(application: Application, private val ioDispatcher: Corouti
 
     private val database by lazy { DatabaseAccess.getInstance(application) }
 
-    data class UsernamePasswordResult(val username: String, val password: String)
+    data class ServerDataResult(val username: String, val password: String, val serverType: ServerType)
 
     sealed class Events {
         data class Login(val success: Boolean) : Events()
@@ -51,14 +51,16 @@ class LoginViewModel(application: Application, private val ioDispatcher: Corouti
         BusProvider.getInstance().register(eventReceiver)
     }
 
-    suspend fun loadUsernamePassword(serverId: Long): UsernamePasswordResult? {
+    suspend fun loadServerData(serverId: Long): ServerDataResult? {
         var username = ""
         var password = ""
+        var serverType = ServerType.DISCOVERED
         var success = false
         withContext(ioDispatcher) {
             val serverRecord = database.serverQueries.lookupById(serverId).executeAsOneOrNull()
             if (serverRecord != null) {
                 username = serverRecord.serverusername ?: ""
+                serverType = serverRecord.servertype
                 if (serverRecord.serverpassword != null && serverRecord.serverkey != null) {
                     try {
                         val decrypted = EncryptionTools.decrypt(serverRecord.serverkey, serverRecord.serverpassword)
@@ -74,7 +76,7 @@ class LoginViewModel(application: Application, private val ioDispatcher: Corouti
             }
         }
         return if (success) {
-            UsernamePasswordResult(username, password)
+            ServerDataResult(username, password, serverType)
         } else {
             null
         }

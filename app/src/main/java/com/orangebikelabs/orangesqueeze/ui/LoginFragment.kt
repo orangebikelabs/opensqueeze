@@ -58,7 +58,7 @@ class LoginFragment : SBDialogFragment() {
     private var serverId = 0L
     private lateinit var serverName: String
     private lateinit var resultKey: String
-    private lateinit var serverType: ServerType
+    private var serverType: ServerType? = null
     private lateinit var serverHost: String
     private var serverPort = 0
 
@@ -131,13 +131,13 @@ class LoginFragment : SBDialogFragment() {
 
         // access the database and populates the username/password fields properly in the background
         lifecycleScope.launchWhenStarted {
-            val result = viewModel.loadUsernamePassword(serverId)
-            if (result != null) {
-                binding.username.setText(result.username)
-                binding.password.setText(result.password)
-            } else {
-                throw IllegalStateException("missing server record")
+            val result = viewModel.loadServerData(serverId)
+            checkNotNull(result) {
+                "missing server record"
             }
+            binding.username.setText(result.username)
+            binding.password.setText(result.password)
+            serverType = result.serverType
         }
     }
 
