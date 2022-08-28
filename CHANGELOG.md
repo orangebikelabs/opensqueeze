@@ -1,3 +1,10 @@
+## [2.6.0-alpha.8](https://github.com/orangebikelabs/opensqueeze/compare/v2.6.0-alpha.7...v2.6.0-alpha.8) (2022-08-28)
+
+
+### Bug Fixes
+
+* check for browser before launching view intent for uri's ([94488b7](https://github.com/orangebikelabs/opensqueeze/commit/94488b7808d0f63a34195e43e4169e5b91c6573a))
+
 ## [2.6.0-alpha.7](https://github.com/orangebikelabs/opensqueeze/compare/v2.6.0-alpha.6...v2.6.0-alpha.7) (2022-08-27)
 
 
