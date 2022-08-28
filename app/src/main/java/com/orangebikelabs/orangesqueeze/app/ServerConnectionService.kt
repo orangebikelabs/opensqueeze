@@ -18,6 +18,7 @@ import arrow.core.None
 import arrow.core.Option
 import arrow.core.Some
 import com.google.common.base.MoreObjects
+import com.orangebikelabs.orangesqueeze.BuildConfig
 import com.orangebikelabs.orangesqueeze.appwidget.WidgetCommon
 import com.orangebikelabs.orangesqueeze.common.*
 import com.orangebikelabs.orangesqueeze.common.PlayerStatus.PlayerButton
@@ -70,8 +71,8 @@ class ServerConnectionService : Service() {
          * retrieve an intent targeting this service. sets the service key automatically
          */
         fun getBroadcastIntent(action: BroadcastServiceActions): Intent {
-            val newIntent = Intent()
-            newIntent.action = action.intentAction
+            val newIntent = Intent(action.intentAction)
+            newIntent.`package` = BuildConfig.APPLICATION_ID
             return newIntent
         }
 
