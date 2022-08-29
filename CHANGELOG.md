@@ -1,3 +1,10 @@
+## [2.6.0-alpha.12](https://github.com/orangebikelabs/opensqueeze/compare/v2.6.0-alpha.11...v2.6.0-alpha.12) (2022-08-29)
+
+
+### Bug Fixes
+
+* cleanup old builds at end of successful release ([5db9055](https://github.com/orangebikelabs/opensqueeze/commit/5db9055ed82f6f2e4abd25ad9b63d209dd974a39))
+
 ## [2.6.0-alpha.11](https://github.com/orangebikelabs/opensqueeze/compare/v2.6.0-alpha.10...v2.6.0-alpha.11) (2022-08-29)
 
 
