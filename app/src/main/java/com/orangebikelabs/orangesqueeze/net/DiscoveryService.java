@@ -59,6 +59,7 @@ final public class DiscoveryService extends AbstractExecutionThreadService {
 
     static public void triggerDiscovery(Context context) {
         Intent discoveryIntent = new Intent(ACTION_TRIGGER_DISCOVERY);
+        discoveryIntent.setPackage(context.getPackageName());
         context.sendBroadcast(discoveryIntent);
     }
 
@@ -215,6 +216,7 @@ final public class DiscoveryService extends AbstractExecutionThreadService {
             }
             if (servername != null) {
                 Intent discoveryIntent = new Intent(ACTION_NOTIFY_DISCOVERED_SERVER);
+                discoveryIntent.setPackage(mContext.getPackageName());
                 discoveryIntent.putExtra(PARAM_DISCOVERED_SERVER_NAME, servername);
                 discoveryIntent.putExtra(PARAM_DISCOVERED_SERVER_IP, ipaddress);
                 discoveryIntent.putExtra(PARAM_DISCOVERED_SERVER_JSONPORT, jsonport);
