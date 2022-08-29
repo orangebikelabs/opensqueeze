@@ -1,3 +1,13 @@
+## [2.6.0-alpha.9](https://github.com/orangebikelabs/opensqueeze/compare/v2.6.0-alpha.8...v2.6.0-alpha.9) (2022-08-29)
+
+
+### Bug Fixes
+
+* bump mockk from 1.12.5 to 1.12.7 ([421d2fa](https://github.com/orangebikelabs/opensqueeze/commit/421d2fa423cbc26787e2f3988c2ad19f82ed230b))
+* limit implicit intent to current package to fix potential security vulnerability ([e8661d0](https://github.com/orangebikelabs/opensqueeze/commit/e8661d00ec5bf16c7826677b21704f44e3d8f147))
+* potential npe [skip release] ([0db3767](https://github.com/orangebikelabs/opensqueeze/commit/0db3767451c8bd05539f52e62983bc60151d30a1))
+* secure implicit internal broadcast intent to only send to this package ([c074e6f](https://github.com/orangebikelabs/opensqueeze/commit/c074e6fc45e1dee528c98260c09446533249cd4c))
+
 ## [2.6.0-alpha.8](https://github.com/orangebikelabs/opensqueeze/compare/v2.6.0-alpha.7...v2.6.0-alpha.8) (2022-08-28)
 
 
