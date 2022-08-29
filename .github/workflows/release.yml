@@ -94,7 +94,7 @@ jobs:
 
   release:
     name: Release to Github
-    needs: [instrumentedTests, build]
+    needs: build
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
