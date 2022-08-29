@@ -87,6 +87,7 @@ jobs:
 
       - uses: actions/upload-artifact@v3
         with:
+          retention-days: 1
           name: builds
           path: |
             app/build/outputs/**/*.apk
@@ -105,7 +106,7 @@ jobs:
       - uses: actions/download-artifact@v3
         with:
           name: builds
-          path: .
+          path: app/build/outputs
 
       - run: find .
 
