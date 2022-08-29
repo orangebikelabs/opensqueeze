@@ -25,6 +25,7 @@ import android.widget.RemoteViews;
 import com.google.common.util.concurrent.FutureCallback;
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
+import com.orangebikelabs.orangesqueeze.BuildConfig;
 import com.orangebikelabs.orangesqueeze.R;
 import com.orangebikelabs.orangesqueeze.app.ServerConnectionService;
 import com.orangebikelabs.orangesqueeze.artwork.Artwork;
@@ -118,7 +119,7 @@ public class WidgetCommon {
 
     @Nonnull
     static public RemoteViews getDisconnectedRemoteViews(Context context, @LayoutRes int layout, @StringRes int rid, Object... args) {
-        RemoteViews views = new RemoteViews(context.getPackageName(), layout);
+        RemoteViews views = new RemoteViews(BuildConfig.APPLICATION_ID, layout);
 
         views.setTextViewText(R.id.nowplaying_text, HtmlCompat.fromHtml(context.getString(rid, args), 0));
         views.setViewVisibility(R.id.player_name_label, View.GONE);
@@ -141,7 +142,7 @@ public class WidgetCommon {
 
     @Nonnull
     static public RemoteViews getConnectedRemoteViews(Context context, PlayerStatus status, @LayoutRes int layout) {
-        RemoteViews views = new RemoteViews(context.getPackageName(), layout);
+        RemoteViews views = new RemoteViews(BuildConfig.APPLICATION_ID, layout);
 
         boolean livingLarge = layout == LargerWidget.LAYOUT_RID;
         SBContext sbContext = SBContextProvider.get();
