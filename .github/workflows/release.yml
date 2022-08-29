@@ -122,3 +122,24 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }} # use supplied semantic release gh-token with extra permissions
         run: npx semantic-release
+
+  cleanup:
+    name: Cleanup old builds
+    needs: release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Cleanup beta builds
+        uses: dev-drprasad/delete-older-releases@v0.2.0
+        with:
+          keep_latest: 3
+          delete_tag_pattern: beta
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Cleanup alpha builds
+        uses: dev-drprasad/delete-older-releases@v0.2.0
+        with:
+          keep_latest: 3
+          delete_tag_pattern: alpha
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
