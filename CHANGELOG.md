@@ -1,3 +1,11 @@
+## [2.6.0-alpha.13](https://github.com/orangebikelabs/opensqueeze/compare/v2.6.0-alpha.12...v2.6.0-alpha.13) (2022-08-31)
+
+
+### Bug Fixes
+
+* issue muting track transition ([f04cde2](https://github.com/orangebikelabs/opensqueeze/commit/f04cde22a90832933e4cabe78f0564dce4f6db1e))
+* upgrade to material components 1.7.0-rc1 and transition away from old Android widgets ([e592d0a](https://github.com/orangebikelabs/opensqueeze/commit/e592d0a5888ca12a37389a5bae5b63424b9b8145))
+
 ## [2.6.0-alpha.12](https://github.com/orangebikelabs/opensqueeze/compare/v2.6.0-alpha.11...v2.6.0-alpha.12) (2022-08-29)
 
 
