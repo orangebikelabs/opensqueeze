@@ -181,7 +181,9 @@ public class NowPlayingFragment extends AbsNowPlayingFragment {
         boolean trackTransition = quickSetText(mTrackText, getTrackText(status));
 
         if (!trackTransition) {
-            trackTransition = (mBinding.progress.seekbar.getValueTo() != status.getTotalTime());
+            // don't transition on new track text if we are at the very end of the track
+            // this prevents some superflous transition animations
+            trackTransition = Math.abs(mBinding.progress.seekbar.getValueTo() - status.getTotalTime()) >= 0.1;
         }
 
         if (mShuffleButton != null) {
