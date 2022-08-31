@@ -108,8 +108,6 @@ jobs:
           name: builds
           path: app/build/outputs
 
-      - run: find .
-
       - name: Prepare Node environment
         uses: actions/setup-node@v3
         with:
