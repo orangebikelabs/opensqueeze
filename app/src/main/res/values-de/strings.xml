@@ -240,8 +240,8 @@
     <string name="nowplaying_activity_title_off_html">&lt;b>%1$s&lt;/b> • Aus</string>
     <string name="playlist_action_remove">Aus Playlist entfernen</string>
     <string name="select_player_prompt">Player auswählen:</string>
-    <string name="change_player_notification_html"><![CDATA[<b>%1$s</b> ist jetzt der aktive Player]]></string>
-    <string name="addtoplaylist_action_toast_html">&lt;b>%1$s&lt;/b> wurde der aktuellen Playlist hinzugefügt</string>
+    <string name="change_player_snackbar"><![CDATA[<b>%1$s</b> ist jetzt der aktive Player]]></string>
+    <string name="addtoplaylist_action_snackbar_html">&lt;b>%1$s&lt;/b> wurde der aktuellen Playlist hinzugefügt</string>
     <string name="menu_nowplaying_saveplaylist">Playlist speichern</string>
     <string name="menu_nowplaying_clearplaylist">Playlist löschen</string>
     <string name="menu_nowplaying_showplaylist">Playlist anzeigen</string>
@@ -275,10 +275,10 @@
     <string name="wakeonlan_dialog_title">Wake-on-LAN: %1$s</string>
     <string name="synchronized_player_separator">Synchronisationsgruppe %1$d</string>
     <string name="player_connect_server_confirmation_message">Verbinden Sie %1$s mit dem Server \"%2$s\"?\n\nBeachten Sie, dass es einige Zeit dauern kann, bis der Player nach dem Wechsel sichtbar wird.</string>
-    <string name="playnext_action_toast_html">&lt;b>%1$s&lt;/b> als nächstes in der aktuellen Playlist hinzugefügt</string>
-    <string name="playnow_action_toast_html"><![CDATA[Spielen von <b>%1$s</b>]]></string>
-    <string name="addtofavorites_action_toast_html"><![CDATA[<b>%1$s</b> zu Favoriten hinzugefügt]]></string>
-    <string name="removefavorite_action_toast_html"><![CDATA[<b>%1$s</b> wurde aus den Favoriten entfernt]]></string>
+    <string name="playnext_action_snackbar_html">&lt;b>%1$s&lt;/b> als nächstes in der aktuellen Playlist hinzugefügt</string>
+    <string name="playnow_action_snackbar_html"><![CDATA[Spielen von <b>%1$s</b>]]></string>
+    <string name="addtofavorites_action_snackbar_html"><![CDATA[<b>%1$s</b> zu Favoriten hinzugefügt]]></string>
+    <string name="removefavorite_action_snackbar_html"><![CDATA[<b>%1$s</b> wurde aus den Favoriten entfernt]]></string>
     <string name="removefavorite_action_confirmation_html"><![CDATA[Möchten Sie <b>%1$s</b> wirklich von den Favoriten entfernen?]]></string>
     <string name="clearplaylist_action_confirmation">Möchten Sie die aktuelle Playlist wirklich löschen?</string>
     <string name="saved_playlist_html"><![CDATA[Gespeicherte Playliste <b>%1$s</b>]]></string>

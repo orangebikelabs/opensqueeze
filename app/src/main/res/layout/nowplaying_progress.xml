@@ -18,7 +18,7 @@
         android:textAppearance="?android:attr/textAppearanceSmall"
         tools:ignore="HardcodedText" />
 
-    <SeekBar
+    <com.google.android.material.slider.Slider
         android:id="@+id/seekbar"
         android:layout_width="match_parent"
         android:layout_marginStart="4dp"

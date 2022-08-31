@@ -24,7 +24,7 @@ import androidx.core.text.HtmlCompat;
  */
 public class CommandTools {
     @Nullable
-    static public CharSequence lookupToast(Context context, SBRequest request, String title) {
+    static public CharSequence lookupSnackbar(Context context, SBRequest request, String title) {
         CharSequence retval = null;
         List<?> commands = request.getCommands();
         String firstLine = title.split("\n")[0];
@@ -35,25 +35,25 @@ public class CommandTools {
                         || commandsContain(commands, "trackstat", "trackstatcmd:play")
                         || commandsContainInOrder(commands, "custombrowse", "play")
         ) {
-            retval = HtmlCompat.fromHtml(context.getString(R.string.playnow_action_toast_html, firstLine), 0);
+            retval = HtmlCompat.fromHtml(context.getString(R.string.playnow_action_snackbar_html, firstLine), 0);
         } else if (
                 commandsContain(commands, "playlistcontrol", "cmd:insert")
                         || commandsContainInOrder(commands, "playlist", "insert")
                         || commandsContain(commands, "trackstat", "trackstatcmd:insert")
                         || commandsContainInOrder(commands, "custombrowse", "insert")
         ) {
-            retval = HtmlCompat.fromHtml(context.getString(R.string.playnext_action_toast_html, firstLine), 0);
+            retval = HtmlCompat.fromHtml(context.getString(R.string.playnext_action_snackbar_html, firstLine), 0);
         } else if (
                 commandsContain(commands, "playlistcontrol", "cmd:add")
                         || commandsContainInOrder(commands, "playlist", "add")
                         || commandsContain(commands, "trackstat", "trackstatcmd:add")
                         || commandsContainInOrder(commands, "custombrowse", "add")
         ) {
-            retval = HtmlCompat.fromHtml(context.getString(R.string.addtoplaylist_action_toast_html, firstLine), 0);
+            retval = HtmlCompat.fromHtml(context.getString(R.string.addtoplaylist_action_snackbar_html, firstLine), 0);
         } else if (commandsContain(commands, "favorites", "add")) {
-            retval = HtmlCompat.fromHtml(context.getString(R.string.addtofavorites_action_toast_html, firstLine), 0);
+            retval = HtmlCompat.fromHtml(context.getString(R.string.addtofavorites_action_snackbar_html, firstLine), 0);
         } else if (commandsContain(commands, "favorites", "delete")) {
-            retval = HtmlCompat.fromHtml(context.getString(R.string.removefavorite_action_toast_html, firstLine), 0);
+            retval = HtmlCompat.fromHtml(context.getString(R.string.removefavorite_action_snackbar_html, firstLine), 0);
         } else {
             if (!Strings.isNullOrEmpty(title)) {
                 retval = title;

@@ -14,12 +14,12 @@ import android.os.SystemClock
 import android.view.KeyEvent
 import android.view.MotionEvent
 import android.view.View
-import android.widget.SeekBar
-import android.widget.SeekBar.OnSeekBarChangeListener
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.customview.customView
 import com.afollestad.materialdialogs.customview.getCustomView
 import com.afollestad.materialdialogs.lifecycle.lifecycleOwner
+import com.google.android.material.slider.Slider
+import com.google.android.material.slider.Slider.OnSliderTouchListener
 import com.orangebikelabs.orangesqueeze.R
 import com.orangebikelabs.orangesqueeze.app.SBDialogFragment
 import com.orangebikelabs.orangesqueeze.common.FutureResult
@@ -147,32 +147,31 @@ class VolumeFragment : SBDialogFragment() {
                     updateVolumeText(volume)
                     setTimeout(true)
 
-                    binding.volume.progress = volume
+                    binding.volume.value = volume.toFloat()
                     return@setOnTouchListener true
                 }
                 return@setOnTouchListener true
             }
-            binding.volume.setOnSeekBarChangeListener(object : OnSeekBarChangeListener {
-                override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
-                    val status = playerStatus
-                    if (fromUser && status != null) {
-                        lastResult = mContext.setPlayerVolume(status.id, progress)
-                        updateVolumeText(progress)
-                        setTimeout(true)
-                    }
+            binding.volume.addOnChangeListener { _, value, fromUser ->
+                val status = playerStatus
+                if (fromUser && status != null) {
+                    lastResult = mContext.setPlayerVolume(status.id, value.toInt())
+                    updateVolumeText(value.toInt())
+                    setTimeout(true)
                 }
-
-                override fun onStartTrackingTouch(seekBar: SeekBar) {
+            }
+            binding.volume.addOnSliderTouchListener(object : OnSliderTouchListener {
+                override fun onStartTrackingTouch(slider: Slider) {
                     inTouch = true
                 }
 
-                override fun onStopTrackingTouch(seekBar: SeekBar) {
+                override fun onStopTrackingTouch(slider: Slider) {
                     inTouch = false
                 }
-
             })
+            binding.volume.setLabelFormatter { value -> value.toInt().toString() }
 
-            binding.volume.max = 100
+            binding.volume.valueTo = 100.toFloat()
             binding.increaseVolumeButton.setOnClickListener {
                 controlChangeVolumeSmallUp()
             }
@@ -248,9 +247,9 @@ class VolumeFragment : SBDialogFragment() {
 
     private fun controlChangeVolume(diff: Int) {
         val playerStatus = playerStatus ?: return
-        binding.volume.incrementProgressBy(diff)
+        binding.volume.value += diff
         lastResult = mContext.incrementPlayerVolume(playerStatus.id, diff)
-        updateVolumeText(binding.volume.progress)
+        updateVolumeText(binding.volume.value.toInt())
         setTimeout(true)
     }
 
@@ -266,7 +265,7 @@ class VolumeFragment : SBDialogFragment() {
                     // TODO show graphic for muted?
                     volume = 0
                 }
-                binding.volume.progress = volume
+                binding.volume.value = volume.toFloat()
                 updateVolumeText(volume)
                 lastResult = null
                 setVolumeLocked(playerStatus.isVolumeLocked)
@@ -280,7 +279,6 @@ class VolumeFragment : SBDialogFragment() {
             return
         }
         binding.playerNameLabel.text = getString(R.string.player_label, playerStatus.name)
-        binding.volumeLabel.text = getString(R.string.volume_label, volume)
         val newVisibility = if (playerStatus.isVolumeLocked) View.VISIBLE else View.GONE
         if (binding.volumeLockedLabel.visibility != newVisibility) {
             binding.volumeLockedLabel.visibility = newVisibility

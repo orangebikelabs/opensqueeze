@@ -50,25 +50,15 @@
         android:minWidth="125dp"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/volume_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:text="@string/volume_label"
-            android:textAppearance="?android:attr/textAppearanceSmall" />
-
-        <!-- seekbar maxheight set to large value to fix rendering bug on pre-sdk 21 -->
-        <SeekBar
+        <com.google.android.material.slider.Slider
             android:id="@+id/volume_bar"
             android:layout_width="match_parent"
             android:layout_height="32dp"
             android:contentDescription="@string/volume_slider_desc"
-            android:max="@integer/volume_max"
-            android:maxHeight="1000dp" />
+            android:max="@integer/volume_max" />
     </LinearLayout>
 
-    <androidx.appcompat.widget.SwitchCompat
+    <com.google.android.material.switchmaterial.SwitchMaterial
         android:id="@+id/player_power_toggle"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"

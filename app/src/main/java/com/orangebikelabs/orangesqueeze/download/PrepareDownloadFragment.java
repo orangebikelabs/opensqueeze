@@ -30,9 +30,9 @@ import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.google.android.material.snackbar.Snackbar;
 import com.orangebikelabs.orangesqueeze.R;
 import com.orangebikelabs.orangesqueeze.app.SBFragment;
 import com.orangebikelabs.orangesqueeze.common.MenuTools;
@@ -201,7 +201,7 @@ public class PrepareDownloadFragment extends SBFragment {
                     Activity activity = getActivity();
                     if (activity == null) return;
 
-                    Toast.makeText(activity, R.string.download_started, Toast.LENGTH_SHORT)
+                    Snackbar.make(requireView(), R.string.download_started, Snackbar.LENGTH_SHORT)
                             .show();
                     activity.finish();
                 }, (throwable -> {

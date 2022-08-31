@@ -93,7 +93,7 @@ public class BrowseActivity extends DrawerActivity {
     }
 
     @Override
-    protected boolean allowToastDisplay() {
+    protected boolean allowSnackbarDisplay() {
         return true;
     }
 

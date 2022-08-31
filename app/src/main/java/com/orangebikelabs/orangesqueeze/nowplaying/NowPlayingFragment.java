@@ -7,16 +7,16 @@ package com.orangebikelabs.orangesqueeze.nowplaying;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.format.DateUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageSwitcher;
-import android.widget.SeekBar;
-import android.widget.SeekBar.OnSeekBarChangeListener;
 
 import com.github.chrisbanes.photoview.PhotoView;
+import com.google.android.material.slider.Slider;
 import com.google.common.util.concurrent.Futures;
 import com.orangebikelabs.orangesqueeze.R;
 import com.orangebikelabs.orangesqueeze.app.AutoSizeTextHelper;
@@ -36,6 +36,8 @@ import com.orangebikelabs.orangesqueeze.common.ServerStatus.Transaction;
 import com.orangebikelabs.orangesqueeze.databinding.NowplayingBinding;
 
 import javax.annotation.Nullable;
+
+import androidx.annotation.NonNull;
 
 /**
  * TODO detect mog, pandora, link to those pages?
@@ -104,7 +106,30 @@ public class NowPlayingFragment extends AbsNowPlayingFragment {
         mBinding.info.trackText.setOnClickListener(mTrackClickedListener);
         mAutosizeTextHelper.applyAutoSize(mBinding.info.trackText, 2);
 
-        mBinding.progress.seekbar.setOnSeekBarChangeListener(mSeekBarListener);
+        mBinding.progress.seekbar.addOnChangeListener((slider, value, fromUser) -> {
+            PlayerStatus status = mSbContext.getPlayerStatus();
+            if (fromUser && mElapsedText != null && status != null) {
+                PlayerStatus updated = status.withElapsedTime(value);
+
+                quickSetText(mElapsedText, getElapsedText(updated, false));
+                quickSetText(mDurationText, getDurationText(updated, false));
+            }
+        });
+        mBinding.progress.seekbar.addOnSliderTouchListener(new Slider.OnSliderTouchListener() {
+            @Override
+            public void onStartTrackingTouch(@NonNull Slider slider) {
+                mInterimUpdateMode = InterimUpdateMode.OFF;
+            }
+
+            @Override
+            public void onStopTrackingTouch(@NonNull Slider slider) {
+                mInterimUpdateMode = InterimUpdateMode.REENABLE;
+                mLastSeekCommand = mSbContext.sendPlayerCommand("time", String.valueOf(slider.getValue()));
+            }
+        });
+        mBinding.progress.seekbar.setLabelFormatter((value) -> {
+            return DateUtils.formatElapsedTime((int)value);
+        });
 
         mShuffleButton = view.findViewById(R.id.shuffle_button);
         mRepeatButton = view.findViewById(R.id.repeat_button);
@@ -156,7 +181,7 @@ public class NowPlayingFragment extends AbsNowPlayingFragment {
         boolean trackTransition = quickSetText(mTrackText, getTrackText(status));
 
         if (!trackTransition) {
-            trackTransition = (mBinding.progress.seekbar.getMax() != (int) status.getTotalTime());
+            trackTransition = (mBinding.progress.seekbar.getValueTo() != status.getTotalTime());
         }
 
         if (mShuffleButton != null) {
@@ -186,11 +211,11 @@ public class NowPlayingFragment extends AbsNowPlayingFragment {
         int elapsed = (int) (status.getElapsedTime(estimate));
         int total = (int) (status.getTotalTime());
         if (total != 0) {
-            mBinding.progress.seekbar.setProgress(elapsed);
+            mBinding.progress.seekbar.setValue(elapsed);
         } else {
-            mBinding.progress.seekbar.setProgress(0);
+            mBinding.progress.seekbar.setValue(0);
         }
-        mBinding.progress.seekbar.setMax(total);
+        mBinding.progress.seekbar.setValueTo(total);
     }
 
     @Override
@@ -256,34 +281,6 @@ public class NowPlayingFragment extends AbsNowPlayingFragment {
             // ignore
         }
     }
-
-    /**
-     * Support instance to handle dragging around the progressbar
-     */
-    final private OnSeekBarChangeListener mSeekBarListener = new OnSeekBarChangeListener() {
-
-        @Override
-        public void onStopTrackingTouch(SeekBar seekBar) {
-            mInterimUpdateMode = InterimUpdateMode.REENABLE;
-            mLastSeekCommand = mSbContext.sendPlayerCommand("time", String.valueOf(seekBar.getProgress()));
-        }
-
-        @Override
-        public void onStartTrackingTouch(SeekBar seekBar) {
-            mInterimUpdateMode = InterimUpdateMode.OFF;
-        }
-
-        @Override
-        public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-            PlayerStatus status = mSbContext.getPlayerStatus();
-            if (fromUser && mElapsedText != null && status != null) {
-                PlayerStatus updated = status.withElapsedTime(progress);
-
-                quickSetText(mElapsedText, getElapsedText(updated, false));
-                quickSetText(mDurationText, getDurationText(updated, false));
-            }
-        }
-    };
 
     final private OnClickListener mArtistClickedListener = v -> {
         try {

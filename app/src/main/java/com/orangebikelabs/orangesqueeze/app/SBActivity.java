@@ -24,9 +24,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.Toast;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.google.android.material.snackbar.Snackbar;
 import com.orangebikelabs.orangesqueeze.BuildConfig;
 import com.orangebikelabs.orangesqueeze.R;
 import com.orangebikelabs.orangesqueeze.cache.CacheServiceProvider;
@@ -83,10 +83,10 @@ abstract public class SBActivity extends AppCompatActivity {
     static private int sInstanceCount = 0;
 
     /**
-     * track a deferred player toast at startup to make sure we get one when the system starts up
+     * track a deferred player snackbar at startup to make sure we get one when the system starts up
      */
     @Nullable
-    static private PlayerStatus sDeferredPlayerToast;
+    static private PlayerStatus sDeferredPlayerSnackbar;
 
     @Nonnull
     final protected ScopedBus mBus = BusProvider.newScopedInstance();
@@ -115,10 +115,10 @@ abstract public class SBActivity extends AppCompatActivity {
     private boolean mCleanStart;
 
     /**
-     * allows simple suppression of duplicate player change toasts at startup, and other times
+     * allows simple suppression of duplicate player change snackbar at startup, and other times
      */
     @Nullable
-    private PlayerId mLastShownPlayerToast;
+    private PlayerId mLastShownPlayerSnackbar;
 
     @Nullable
     private Disposable mTokenDisposable;
@@ -209,12 +209,12 @@ abstract public class SBActivity extends AppCompatActivity {
         }
         setWindowFlags();
 
-        // show deferred player toast when the UI is ready
-        if (sDeferredPlayerToast != null) {
-            PlayerStatus status = sDeferredPlayerToast;
-            sDeferredPlayerToast = null;
+        // show deferred player snackbar when the UI is ready
+        if (sDeferredPlayerSnackbar != null) {
+            PlayerStatus status = sDeferredPlayerSnackbar;
+            sDeferredPlayerSnackbar = null;
 
-            showPlayerToast(status);
+            showPlayerSnackbar(status);
         }
     }
 
@@ -444,19 +444,18 @@ abstract public class SBActivity extends AppCompatActivity {
         }
     }
 
-    protected void showPlayerToast(PlayerStatus status) {
+    protected void showPlayerSnackbar(PlayerStatus status) {
         OSAssert.assertMainThread();
-        if (!mStarted || isFinishing() || !allowToastDisplay()) {
-            sDeferredPlayerToast = status;
+        if (!mStarted || isFinishing() || !allowSnackbarDisplay() || getContentView() == null) {
+            sDeferredPlayerSnackbar = status;
             return;
         }
 
-        sDeferredPlayerToast = null;
-        if (!status.getId().equals(mLastShownPlayerToast)) {
-            mLastShownPlayerToast = status.getId();
-            String text = getString(R.string.change_player_notification_html, Html.escapeHtml(status.getName()));
-            Toast.makeText(this, HtmlCompat.fromHtml(text, 0), Toast.LENGTH_SHORT)
-                    .show();
+        sDeferredPlayerSnackbar = null;
+        if (!status.getId().equals(mLastShownPlayerSnackbar)) {
+            mLastShownPlayerSnackbar = status.getId();
+            String text = getString(R.string.change_player_snackbar, status.getName());
+            Snackbar.make(getContentView(), HtmlCompat.fromHtml(text, HtmlCompat.FROM_HTML_MODE_COMPACT), Snackbar.LENGTH_SHORT).show();
         }
     }
 
@@ -592,7 +591,7 @@ abstract public class SBActivity extends AppCompatActivity {
         startActivity(MainActivity.Companion.newIntent(this));
     }
 
-    protected boolean allowToastDisplay() {
+    protected boolean allowSnackbarDisplay() {
         return false;
     }
 
@@ -635,7 +634,7 @@ abstract public class SBActivity extends AppCompatActivity {
         public void whenActivePlayerChanges(ActivePlayerChangedEvent event) {
             PlayerStatus status = event.getPlayerStatus().orNull();
             if (status != null) {
-                showPlayerToast(status);
+                showPlayerSnackbar(status);
             }
         }
 
