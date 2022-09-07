@@ -8,6 +8,9 @@ package com.orangebikelabs.orangesqueeze.startup
 import android.app.Application
 import androidx.annotation.StringRes
 import androidx.lifecycle.*
+import arrow.core.Either
+import arrow.core.getOrElse
+import com.google.common.net.HostAndPort
 import com.orangebikelabs.orangesqueeze.R
 import com.orangebikelabs.orangesqueeze.app.PendingConnection
 import com.orangebikelabs.orangesqueeze.common.*
@@ -15,19 +18,32 @@ import com.orangebikelabs.orangesqueeze.common.event.PendingConnectionState
 import com.orangebikelabs.orangesqueeze.database.DatabaseAccess
 import com.orangebikelabs.orangesqueeze.database.deleteServer
 import com.orangebikelabs.orangesqueeze.database.Server
+import com.orangebikelabs.orangesqueeze.net.SendDiscoveryPacketService
 import com.squareup.otto.Subscribe
 import com.squareup.sqldelight.runtime.coroutines.asFlow
 import com.squareup.sqldelight.runtime.coroutines.mapToList
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.lang.IllegalStateException
+import java.net.InetAddress
+import java.net.UnknownHostException
 import java.util.concurrent.TimeUnit
 
-class ConnectViewModel(application: Application) : AndroidViewModel(application) {
+class ConnectViewModel
+    constructor(application: Application, private val ioDispatcher: CoroutineDispatcher): AndroidViewModel(application) {
+
+    // required for all viewmodels
+    @Suppress("unused")
+    constructor(application: Application) : this(application, Dispatchers.IO)
+
     private val database by lazy { DatabaseAccess.getInstance(application) }
     private val context by lazy { SBContextProvider.get() }
+
+    private var sendDiscoveryPacket: SendDiscoveryPacketService? = null
+
     private var ignorePendingConnectionEvent = false
 
     sealed class Events {
@@ -65,6 +81,19 @@ class ConnectViewModel(application: Application) : AndroidViewModel(application)
         super.onCleared()
 
         BusProvider.getInstance().unregister(this)
+
+        sendDiscoveryPacket?.stopAsync()
+        sendDiscoveryPacket = null
+    }
+
+    fun setDiscoveryMode(enabled: Boolean) {
+        if(enabled && sendDiscoveryPacket == null) {
+            sendDiscoveryPacket = SendDiscoveryPacketService(15, TimeUnit.SECONDS)
+            sendDiscoveryPacket?.startAsync()
+        } else if(!enabled && sendDiscoveryPacket != null) {
+            sendDiscoveryPacket?.stopAsync()
+            sendDiscoveryPacket = null
+        }
     }
 
     fun getAvailableServerOperations(server: Server): List<ServerOperation> {
@@ -83,6 +112,10 @@ class ConnectViewModel(application: Application) : AndroidViewModel(application)
             }
         }
         return retval
+    }
+
+    fun getCurrentIpAddress(): String {
+        return DeviceInterfaceInfo.getInstance().mIpAddress ?: "<unknown>"
     }
 
     fun createNewSqueezenetwork() {
@@ -125,28 +158,79 @@ class ConnectViewModel(application: Application) : AndroidViewModel(application)
         }
     }
 
+    fun parseHostAndPort(hostname: String, port: String): Either<String, HostAndPort> {
+        val checkHostname = hostname.trim()
+        val checkPort = port.trim()
+        if (checkHostname.isNotEmpty()) {
+            return try {
+                Either.Right(HostAndPort.fromParts(checkHostname, checkPort.toIntOrNull() ?: 0))
+            } catch (e: IllegalArgumentException) {
+                // invalid hostname format
+                Either.Left(e.message.orEmpty())
+            }
+        }
+        return Either.Left("blank host")
+    }
+
+    suspend fun validateHost(host: String): Boolean {
+        @Suppress("BlockingMethodInNonBlockingContext")
+        return withContext(ioDispatcher) {
+            try {
+                // check hostname
+                InetAddress.getByName(host)
+                true
+            } catch (e: UnknownHostException) {
+                false
+            }
+        }
+    }
+
+    suspend fun createNewServer(hostAndPort: HostAndPort): Either<Exception, Long> {
+        return withContext(ioDispatcher) {
+            database.transactionWithResult {
+                val host = hostAndPort.host
+                val sq = database.serverQueries
+                val server = sq.lookupByName(host).executeAsOneOrNull()
+                if (server?.servertype == ServerType.DISCOVERED) {
+                    database.deleteServer(server._id)
+                }
+                if (sq.lookupByName(host).executeAsOneOrNull() == null) {
+                    sq.insertSimple(serverhost = host, servername = host, serverport = hostAndPort.getPortOrDefault(9000), servertype = ServerType.PINNED)
+                    val serverId = database.globalQueries
+                            .last_insert_rowid()
+                            .executeAsOne()
+                    Either.Right(serverId)
+                } else {
+                    Either.Left(Exception(context.applicationContext.getString(R.string.hostname_already_exists, host)))
+                }
+            }
+        }
+    }
+
     private suspend fun createNewSqueezenetworkRow(): Long {
-        var rowId = 0L
-        withContext(Dispatchers.IO) {
+        var serverId = 0L
+        var serverName: String
+
+        withContext(ioDispatcher) {
             database.transaction {
                 val servers = database.serverQueries
                         .lookupAll()
                         .executeAsList()
                         .map { it.servername }
                 var index = 1
-                var candidateName = Constants.SQUEEZENETWORK_SERVERNAME
-                while (servers.contains(candidateName)) {
+                serverName = Constants.SQUEEZENETWORK_SERVERNAME
+                while (servers.contains(serverName)) {
                     index++
-                    candidateName = Constants.SQUEEZENETWORK_SERVERNAME + " " + index
+                    serverName = Constants.SQUEEZENETWORK_SERVERNAME + " " + index
                 }
                 database.serverQueries
-                        .insertSimple(Constants.SQUEEZENETWORK_HOSTNAME, Constants.SQUEEZENETWORK_PORT, candidateName, ServerType.SQUEEZENETWORK)
-                rowId = database.globalQueries
+                        .insertSimple(Constants.SQUEEZENETWORK_HOSTNAME, Constants.SQUEEZENETWORK_PORT, serverName, ServerType.SQUEEZENETWORK)
+                serverId = database.globalQueries
                         .last_insert_rowid()
                         .executeAsOne()
             }
         }
-        return rowId
+        return serverId
     }
 
     @Subscribe
@@ -156,7 +240,7 @@ class ConnectViewModel(application: Application) : AndroidViewModel(application)
         val pendingConnection = event.pendingConnection ?: return
 
         val state = pendingConnection.state
-        val reason = pendingConnection.failureReason.or("Error")
+        val reason = pendingConnection.failureReason.getOrElse { "Error" }
         OSLog.v("ConnectFragment::whenPendingConnectionChanged $state, reason=$reason")
         when (state) {
             PendingConnection.PendingState.SUCCESS -> context.finalizePendingConnection()

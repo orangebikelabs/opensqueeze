@@ -147,7 +147,7 @@
     <string name="pref_use24hourtimeformat_summaryOn">Utilisez le format horaire 24 heures.</string>
     <string name="pref_use24hourtimeformat_summaryOff">Utilisez le format horaire 12 heures.</string>
     <string name="pref_volumecontrol_notification">Cette application peut utiliser les contrôles de volume de votre appareil pour contrôler le volume de votre appareil Squeezebox. Voulez-vous activer ce comportement?\n\nIl peut être modifié à tout moment dans les préférences de l\'application.</string>
-    <string name="change_player_notification_html"><![CDATA[<b>%1$s</b> est maintenant le lecteur actif]]></string>
+    <string name="change_player_snackbar"><![CDATA[<b>%1$s</b> est maintenant le lecteur actif]]></string>
     <string name="nowplaying_activity_title_off_html"><![CDATA[<b>%1$s</b> • Désactivé]]></string>
     <string name="nowplaying_activity_title_stopped_html"><![CDATA[<b>%1$s</b> • Arrêté]]></string>
     <string name="nowplaying_activity_title_disconnected_html"><![CDATA[<b>%1$s</b> • Débranché]]></string>
@@ -275,13 +275,13 @@
     <string name="synchronized_player_separator">Groupe de synchronisation %1$d</string>
     <string name="player_settings_title">Paramètres %1$s</string>
     <string name="actionmenu_title_html"><![CDATA[Sur <b>%1$s</b>:]]></string>
-    <string name="playnow_action_toast_html"><![CDATA[Lecture <b>%1$s</b>]]></string>
+    <string name="playnow_action_snackbar_html"><![CDATA[Lecture <b>%1$s</b>]]></string>
     <string name="nowplaying_activity_title_playing_html">&lt;b>%1$s&lt;/b> &#8226; %2$d de %3$d</string>
     <string name="nowplaying_activity_title_paused_html">&lt;b>%1$s&lt;/b> &#8226; En pause</string>
-    <string name="addtoplaylist_action_toast_html">Ajout de &lt;b>%1$s&lt;/b> à la liste de lecture actuelle</string>
-    <string name="playnext_action_toast_html">Ajout de &lt;b>%1$s &lt;/b> next dans la playlist en cours</string>
-    <string name="addtofavorites_action_toast_html">Ajouté &lt;b>%1$s&lt;/b> aux favoris</string>
-    <string name="removefavorite_action_toast_html">Suppression des &lt;b>%1$s&lt;/b> des favoris</string>
+    <string name="addtoplaylist_action_snackbar_html">Ajout de &lt;b>%1$s&lt;/b> à la liste de lecture actuelle</string>
+    <string name="playnext_action_snackbar_html">Ajout de &lt;b>%1$s &lt;/b> next dans la playlist en cours</string>
+    <string name="addtofavorites_action_snackbar_html">Ajouté &lt;b>%1$s&lt;/b> aux favoris</string>
+    <string name="removefavorite_action_snackbar_html">Suppression des &lt;b>%1$s&lt;/b> des favoris</string>
     <string name="removefavorite_action_confirmation_html">Voulez-vous vraiment supprimer &lt;b>%1$s&lt;/b> des favoris?</string>
     <string name="saved_playlist_html">Liste de lecture enregistrée &lt;b>%1$s&lt;/b></string>
     <string name="synchronization_title_html">Synchronisez &lt;b>%1$s&lt;/b> avec:</string>

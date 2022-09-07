@@ -10,7 +10,6 @@ import android.text.format.DateUtils;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.MissingNode;
 import com.google.common.base.Objects;
-import com.google.common.base.Optional;
 import com.google.common.base.Strings;
 import com.google.common.base.Throwables;
 import com.google.common.io.ByteSource;
@@ -38,6 +37,9 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.concurrent.GuardedBy;
 
+import arrow.core.Option;
+import arrow.core.OptionKt;
+
 /**
  * Class that provides access to local track information by ID.
  *
@@ -47,12 +49,12 @@ public class TrackInfo {
     final static private int TRACKINFO_VERSION_TAG = 3;
 
     @Nonnull
-    public static Optional<TrackInfo> peek(long serverId, String trackId) {
+    public static Option<TrackInfo> peek(long serverId, String trackId) {
         try {
             Callback callback = new Callback(trackId, serverId);
             return CacheServiceProvider.get().peek(callback);
         } catch (SBCacheException e) {
-            return Optional.absent();
+            return OptionKt.none();
         }
     }
 
@@ -226,13 +228,13 @@ public class TrackInfo {
     }
 
     @Nonnull
-    public Optional<String> getGenre() {
-        return Optional.fromNullable(getString("genre"));
+    public Option<String> getGenre() {
+        return Option.fromNullable(getString("genre"));
     }
 
     @Nonnull
-    public Optional<String> getComments() {
-        return Optional.fromNullable(getString("comment"));
+    public Option<String> getComments() {
+        return Option.fromNullable(getString("comment"));
     }
 
     @Nonnull
@@ -241,13 +243,13 @@ public class TrackInfo {
     }
 
     @Nonnull
-    public Optional<String> getDiscNumber() {
-        return Optional.fromNullable(getString("disc"));
+    public Option<String> getDiscNumber() {
+        return Option.fromNullable(getString("disc"));
     }
 
     @Nonnull
-    public Optional<String> getDiscCount() {
-        return Optional.fromNullable(getString("disccount"));
+    public Option<String> getDiscCount() {
+        return Option.fromNullable(getString("disccount"));
     }
 
     @Nonnull
@@ -256,38 +258,38 @@ public class TrackInfo {
     }
 
     @Nonnull
-    public Optional<String> getArtistId() {
-        return Optional.fromNullable(getString("artist_id"));
+    public Option<String> getArtistId() {
+        return Option.fromNullable(getString("artist_id"));
     }
 
     @Nonnull
-    public Optional<String> getAlbumId() {
-        return Optional.fromNullable(getString("album_id"));
+    public Option<String> getAlbumId() {
+        return Option.fromNullable(getString("album_id"));
     }
 
     @Nonnull
-    public Optional<String> getYear() {
-        Optional<String> retval = Optional.absent();
+    public Option<String> getYear() {
+        Option<String> retval = OptionKt.none();
         String year = getString("year", "0");
         if (!year.equals("0") && !year.equals("")) {
-            retval = Optional.of(year);
+            retval = OptionKt.some(year);
         }
         return retval;
     }
 
     @Nonnull
-    public Optional<String> getTrackNumber() {
-        Optional<String> retval = Optional.absent();
+    public Option<String> getTrackNumber() {
+        Option<String> retval = OptionKt.none();
         String tracknum = getString("tracknum", "0");
         if (!tracknum.equals("0") && !tracknum.equals("")) {
-            retval = Optional.of(tracknum);
+            retval = OptionKt.some(tracknum);
         }
         return retval;
     }
 
     @Nonnull
-    public Optional<String> getCoverId() {
-        return Optional.fromNullable(getString("coverid"));
+    public Option<String> getCoverId() {
+        return Option.fromNullable(getString("coverid"));
     }
 
     @Nonnull
@@ -316,12 +318,12 @@ public class TrackInfo {
     }
 
     @Nonnull
-    public Optional<Float> getDuration() {
-        Optional<Float> retval = Optional.absent();
+    public Option<Float> getDuration() {
+        Option<Float> retval = OptionKt.none();
         String duration = getString("duration", "0");
         if (!duration.equals("0")) {
             try {
-                retval = Optional.of(Float.parseFloat(duration));
+                retval = OptionKt.some(Float.parseFloat(duration));
             } catch (NumberFormatException e) {
                 // ignore
             }
@@ -330,7 +332,7 @@ public class TrackInfo {
     }
 
     @Nonnull
-    public Optional<String> getText2() {
+    public Option<String> getText2() {
         StringBuilder builder = new StringBuilder();
         String year = getYear().orNull();
         String album = Strings.emptyToNull(getTrackAlbum());
@@ -349,19 +351,19 @@ public class TrackInfo {
             builder.append(")");
         }
         if (builder.length() > 0) {
-            return Optional.of(builder.toString());
+            return OptionKt.some(builder.toString());
         } else {
-            return Optional.absent();
+            return OptionKt.none();
         }
     }
 
     @Nonnull
-    public Optional<String> getText3() {
+    public Option<String> getText3() {
         Float duration = getDuration().orNull();
         if (duration == null) {
-            return Optional.absent();
+            return OptionKt.none();
         } else {
-            return Optional.of(DateUtils.formatElapsedTime(duration.longValue()));
+            return OptionKt.some(DateUtils.formatElapsedTime(duration.longValue()));
         }
     }
 

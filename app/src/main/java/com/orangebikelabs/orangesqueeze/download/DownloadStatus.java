@@ -9,7 +9,6 @@ import android.os.SystemClock;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import com.google.common.base.Optional;
 import com.google.common.base.Strings;
 import com.orangebikelabs.orangesqueeze.common.OSAssert;
 import com.orangebikelabs.orangesqueeze.common.JsonHelper;
@@ -26,6 +25,8 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.concurrent.GuardedBy;
 import javax.annotation.concurrent.ThreadSafe;
+
+import arrow.core.Option;
 
 /**
  * Class that represents the current serialized download status.
@@ -122,8 +123,8 @@ public class DownloadStatus {
     }
 
     @Nonnull
-    public synchronized Optional<Long> getContentLength() {
-        return Optional.fromNullable(mContentLength);
+    public synchronized Option<Long> getContentLength() {
+        return Option.fromNullable(mContentLength);
     }
 
     public synchronized void setContentLength(long contentLength) {

@@ -11,7 +11,6 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import com.google.common.base.Optional;
 import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableList;
 import com.orangebikelabs.orangesqueeze.R;
@@ -41,6 +40,8 @@ import javax.annotation.Nullable;
 import javax.annotation.concurrent.GuardedBy;
 
 import androidx.core.text.HtmlCompat;
+import arrow.core.Option;
+import arrow.core.OptionKt;
 
 /**
  * @author tbsandee@orangebikelabs.com
@@ -213,13 +214,13 @@ public class StandardMenuItem extends Item {
     }
 
     @Nonnull
-    public Optional<String> getText2() {
-        return Optional.fromNullable(mMenuElement.getText2());
+    public Option<String> getText2() {
+        return Option.fromNullable(mMenuElement.getText2());
     }
 
     @Nonnull
-    public Optional<String> getText3() {
-        return Optional.absent();
+    public Option<String> getText3() {
+        return OptionKt.none();
     }
 
     @Override

@@ -10,9 +10,10 @@ import android.content.Context;
 
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
+import arrow.core.Option;
+import arrow.core.OptionKt;
 
 import com.google.common.base.MoreObjects;
-import com.google.common.base.Optional;
 import com.google.common.base.Throwables;
 import com.google.common.collect.Queues;
 import com.google.common.io.ByteSource;
@@ -70,7 +71,7 @@ public class CacheService {
     /**
      * the cache version identifier. If the backing cache format changes in an incompatible way this will be bumped and old cache items will
      */
-    private static final int CACHE_VERSION = 6;
+    private static final int CACHE_VERSION = 7;
 
     /**
      * number of items in the renew queue before they are committed to the database
@@ -288,9 +289,9 @@ public class CacheService {
         return found;
     }
 
-    public <T, C> Optional<T> peek(final CacheRequestCallback<T, C> request) throws CachedItemInvalidException, CachedItemNotFoundException {
+    public <T, C> Option<T> peek(final CacheRequestCallback<T, C> request) throws CachedItemInvalidException, CachedItemNotFoundException {
         if (!isRunning()) {
-            return Optional.absent();
+            return OptionKt.none();
         }
 
         final CacheEntry entry = request.getEntry();
@@ -303,12 +304,12 @@ public class CacheService {
                 // trigger row renewal
                 renew(request, entry, false);
             }
-            return Optional.fromNullable(retval);
+            return Option.fromNullable(retval);
         } catch (Exception e) {
             Throwables.propagateIfPossible(e, CachedItemInvalidException.class, CachedItemNotFoundException.class);
 
             OSLog.w(Tag.CACHE, "CacheService.peek(): " + e.getMessage(), e);
-            return Optional.absent();
+            return OptionKt.none();
         }
     }
 
@@ -669,12 +670,14 @@ public class CacheService {
      */
     class CleanupService extends AbstractScheduledService {
         @Override
+        @Nonnull
         protected ScheduledExecutorService executor() {
             // don't use database executor, we don't want startup/shutdown operations to be deferred due to scrolling
             return OSExecutors.getSingleThreadScheduledExecutor();
         }
 
         @Override
+        @Nonnull
         protected String serviceName() {
             return "CleanupService";
         }
@@ -686,6 +689,7 @@ public class CacheService {
         }
 
         @Override
+        @Nonnull
         protected Scheduler scheduler() {
             return Scheduler.newFixedRateSchedule(Constants.CACHEMAINTENANCE_DELAY, Constants.CACHEMAINTENANCE_INTERVAL, Constants.TIME_UNITS);
         }

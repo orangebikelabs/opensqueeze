@@ -4,14 +4,14 @@ updates:
     directory: "/"
     schedule:
       interval: "weekly"
-    target-branch: "main"
+    target-branch: "alpha"
     commit-message:
       prefix: "fix"
 
   - package-ecosystem: "github-actions"
-      directory: "/"
-      schedule:
-        interval: "weekly"
-      target-branch: "main"
-      commit-message:
-        prefix: "ci"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    target-branch: "main"
+    commit-message:
+      prefix: "ci"

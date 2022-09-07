@@ -76,7 +76,7 @@ public class MaintenanceDialogFragment extends SBDialogFragment {
                 .setTitle(R.string.maintenance_title)
                 .setCancelable(true);
         boolean squeezeNetwork = mContext.getConnectionInfo().isSqueezeNetwork();
-        ArrayAdapter<MaintenanceOperations> adapter = new ArrayAdapter<MaintenanceOperations>(requireContext(), R.layout.maintenance_item, R.id.text1) {
+        ArrayAdapter<MaintenanceOperations> adapter = new ArrayAdapter<>(requireContext(), R.layout.maintenance_item, R.id.text1) {
             @Override
             @Nonnull
             public View getView(int position, @Nullable View convertView, ViewGroup parent) {

@@ -33,7 +33,6 @@ public class SBFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         mSbContext = SBContextProvider.get();
-        setHasOptionsMenu(true);
     }
 
     @Override

@@ -8,7 +8,6 @@ package com.orangebikelabs.orangesqueeze.app;
 import android.os.SystemClock;
 
 import com.google.common.base.Objects;
-import com.google.common.base.Optional;
 import com.orangebikelabs.orangesqueeze.common.BusProvider;
 import com.orangebikelabs.orangesqueeze.common.ConnectionInfo;
 import com.orangebikelabs.orangesqueeze.common.OSLog;
@@ -27,6 +26,10 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.concurrent.GuardedBy;
 import javax.annotation.concurrent.ThreadSafe;
+
+import arrow.core.None;
+import arrow.core.Option;
+import arrow.core.OptionKt;
 
 /**
  * This class houses all mutable connection information. It's completely threadsafe and minimizes locking/blocking to prevent deadlocks,
@@ -202,23 +205,24 @@ public class ConnectionState {
         PlayerId oldPlayerId = mCurrentPlayerId;
 
         if (!Objects.equal(newPlayerId, oldPlayerId)) {
-            Optional<PlayerStatus> newPlayerStatus = null;
+            Option<PlayerStatus> newPlayerStatus = null;
             if (newPlayerId == null) {
-                newPlayerStatus = Optional.absent();
+                newPlayerStatus = OptionKt.none();
             } else {
                 PlayerStatus temp = mServerStatus.getPlayerStatus(newPlayerId);
                 if (temp == null) {
                     // invalid player id, just log a message
                     OSLog.i("Invalid player ID " + newPlayerId);
                 } else {
-                    newPlayerStatus = Optional.of(temp);
+                    newPlayerStatus = OptionKt.some(temp);
                 }
             }
             if (newPlayerStatus != null) {
                 retval = true;
                 // update player id
                 mCurrentPlayerId = newPlayerId;
-                if (newPlayerStatus.isPresent() && newPlayerStatus.get().isLocalSqueezePlayer()) {
+                PlayerStatus nps = newPlayerStatus.orNull();
+                if (nps != null && nps.isLocalSqueezePlayer()) {
                     SBPreferences.get().setLastConnectedSqueezePlayerId(newPlayerId);
                 }
 

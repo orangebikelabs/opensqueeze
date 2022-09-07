@@ -101,7 +101,7 @@ public class NodeItem extends StandardMenuItem {
             retval.add(new NodeItem(EXTRAS_NODE, extrasNode, true));
         }
 
-        Collections.sort(retval, new Comparator<NodeItem>() {
+        Collections.sort(retval, new Comparator<>() {
 
             @Override
             public int compare(NodeItem lhs, NodeItem rhs) {

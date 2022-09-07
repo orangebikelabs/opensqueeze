@@ -16,7 +16,7 @@
     <color name="widget_separator">#808080</color>
     <color name="connect_topbar">#C0C0C0</color>
     <color name="grid_border">#404040</color>
-    <color name="separator_background">?attr/colorControlNormal</color>
+    <color name="separator_background">#89000000</color>
     <color name="separator_text">#FFFFFF</color>
 
     <color name="primaryColor">#3ddc84</color>

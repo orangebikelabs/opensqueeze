@@ -6,10 +6,10 @@
 package com.orangebikelabs.orangesqueeze.common;
 
 import androidx.annotation.Keep;
+import arrow.core.Option;
 
 import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
-import com.google.common.base.Optional;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.ImmutableSetMultimap;
 import com.google.common.collect.SetMultimap;
@@ -52,8 +52,8 @@ public class SyncStatus {
     }
 
     @Nonnull
-    synchronized public Optional<Integer> getSyncGroup(PlayerId playerId) {
-        return Optional.fromNullable(mPlayers.get(playerId));
+    synchronized public Option<Integer> getSyncGroup(PlayerId playerId) {
+        return Option.fromNullable(mPlayers.get(playerId));
     }
 
     @Nonnull

@@ -42,7 +42,7 @@
             android:src="@drawable/ic_volume_down" />
 
         <!-- seekbar maxheight set to large value to fix rendering bug on pre-sdk 21 -->
-        <SeekBar
+        <com.google.android.material.slider.Slider
             android:id="@+id/volume"
             android:layout_width="0dp"
             android:layout_height="52dp"
@@ -62,15 +62,6 @@
             android:paddingBottom="16dp"
             android:src="@drawable/ic_volume_up" />
     </LinearLayout>
-
-    <TextView
-        android:id="@+id/volume_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:padding="16dp"
-        android:text="@string/volume_label"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <TextView
         android:id="@+id/volume_locked_label"

@@ -18,6 +18,7 @@ import com.squareup.otto.Subscribe;
 
 import javax.annotation.Nullable;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.core.text.HtmlCompat;
 
 /**
@@ -36,6 +37,15 @@ public class ConnectingActivity extends SBActivity {
         }
 
         setContentView(R.layout.connecting);
+
+        getOnBackPressedDispatcher().addCallback(new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                if (mContext.abortPendingConnection()) {
+                    launchConnectActivity();
+                }
+            }
+        });
     }
 
     @Override
@@ -54,18 +64,16 @@ public class ConnectingActivity extends SBActivity {
     }
 
     @Override
-    public void onBackPressed() {
-        if (mContext.abortPendingConnection()) {
-            launchConnectActivity();
-        }
-    }
-
-    @Override
     protected void showConnectingDialog() {
         // don't show connecting dialog in this activity
     }
 
     private void launchConnectActivity() {
+        if (isFinishing()) {
+            // we've already launched it
+            return;
+        }
+
         startActivity(new Intent(this, ConnectActivity.class));
         finish();
 

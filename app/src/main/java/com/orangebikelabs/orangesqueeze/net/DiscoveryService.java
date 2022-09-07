@@ -14,6 +14,7 @@ import com.google.common.base.Objects;
 import com.google.common.io.BaseEncoding;
 import com.google.common.net.InetAddresses;
 import com.google.common.util.concurrent.AbstractExecutionThreadService;
+import com.orangebikelabs.orangesqueeze.BuildConfig;
 import com.orangebikelabs.orangesqueeze.common.Actions;
 import com.orangebikelabs.orangesqueeze.common.Constants;
 import com.orangebikelabs.orangesqueeze.common.OSAssert;
@@ -59,6 +60,7 @@ final public class DiscoveryService extends AbstractExecutionThreadService {
 
     static public void triggerDiscovery(Context context) {
         Intent discoveryIntent = new Intent(ACTION_TRIGGER_DISCOVERY);
+        discoveryIntent.setPackage(BuildConfig.APPLICATION_ID);
         context.sendBroadcast(discoveryIntent);
     }
 
@@ -215,6 +217,7 @@ final public class DiscoveryService extends AbstractExecutionThreadService {
             }
             if (servername != null) {
                 Intent discoveryIntent = new Intent(ACTION_NOTIFY_DISCOVERED_SERVER);
+                discoveryIntent.setPackage(BuildConfig.APPLICATION_ID);
                 discoveryIntent.putExtra(PARAM_DISCOVERED_SERVER_NAME, servername);
                 discoveryIntent.putExtra(PARAM_DISCOVERED_SERVER_IP, ipaddress);
                 discoveryIntent.putExtra(PARAM_DISCOVERED_SERVER_JSONPORT, jsonport);

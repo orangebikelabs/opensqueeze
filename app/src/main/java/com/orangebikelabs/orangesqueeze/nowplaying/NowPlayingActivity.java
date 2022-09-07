@@ -11,6 +11,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.core.content.ContextCompat;
 import androidx.core.text.HtmlCompat;
 import androidx.fragment.app.Fragment;
@@ -29,6 +30,7 @@ import com.orangebikelabs.orangesqueeze.app.DrawerActivity;
 import com.orangebikelabs.orangesqueeze.cache.CacheServiceProvider;
 import com.orangebikelabs.orangesqueeze.common.Drawables;
 import com.orangebikelabs.orangesqueeze.common.MenuTools;
+import com.orangebikelabs.orangesqueeze.common.OSAssert;
 import com.orangebikelabs.orangesqueeze.common.PlayerStatus;
 import com.orangebikelabs.orangesqueeze.common.event.CurrentPlayerState;
 import com.orangebikelabs.orangesqueeze.ui.MainActivity;
@@ -75,6 +77,14 @@ public class NowPlayingActivity extends DrawerActivity implements CurrentPlaylis
         ActionBar ab = getSupportActionBar();
         ab.setDisplayHomeAsUpEnabled(true);
         ab.setDisplayShowTitleEnabled(true);
+
+        getOnBackPressedDispatcher().addCallback(new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                finish();
+                overridePendingTransition(android.R.anim.fade_in, R.anim.out_to_bottom);
+            }
+        });
     }
 
     @Override
@@ -98,13 +108,6 @@ public class NowPlayingActivity extends DrawerActivity implements CurrentPlaylis
         super.onStop();
 
         CacheServiceProvider.get().setUsingLargeArtwork(false);
-    }
-
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-
-        overridePendingTransition(android.R.anim.fade_in, R.anim.out_to_bottom);
     }
 
     @Override
@@ -155,7 +158,10 @@ public class NowPlayingActivity extends DrawerActivity implements CurrentPlaylis
             return true;
         } else if (item.getItemId() == R.id.menu_nowplaying_showplaylist) {
             CurrentPlaylistFragment playlistFragment = (CurrentPlaylistFragment) getSupportFragmentManager().findFragmentByTag(CurrentPlaylistFragment.TAG);
+            OSAssert.assertNotNull(playlistFragment, "expected fragment to be nonnull");
+
             NowPlayingFragment nowPlayingFragment = (NowPlayingFragment) getSupportFragmentManager().findFragmentByTag(NowPlayingFragment.TAG);
+            OSAssert.assertNotNull(nowPlayingFragment, "expected fragment to be nonnull");
 
             getSupportFragmentManager().beginTransaction()
                     .setCustomAnimations(R.anim.in_from_bottom, android.R.anim.fade_out)
@@ -166,7 +172,10 @@ public class NowPlayingActivity extends DrawerActivity implements CurrentPlaylis
             return true;
         } else if (item.getItemId() == R.id.menu_nowplaying_hideplaylist) {
             CurrentPlaylistFragment playlistFragment = (CurrentPlaylistFragment) getSupportFragmentManager().findFragmentByTag(CurrentPlaylistFragment.TAG);
+            OSAssert.assertNotNull(playlistFragment, "expected fragment to be nonnull");
+
             NowPlayingFragment nowPlayingFragment = (NowPlayingFragment) getSupportFragmentManager().findFragmentByTag(NowPlayingFragment.TAG);
+            OSAssert.assertNotNull(nowPlayingFragment, "expected fragment to be nonnull");
 
             getSupportFragmentManager().beginTransaction()
                     .setCustomAnimations(android.R.anim.fade_in, R.anim.out_to_bottom)
@@ -189,6 +198,8 @@ public class NowPlayingActivity extends DrawerActivity implements CurrentPlaylis
             mHidePlaylistItem.setIcon(mHidePlaylistItemDrawable);
         } else {
             Drawable d = ContextCompat.getDrawable(this, R.drawable.ic_playlist);
+            OSAssert.assertNotNull(d, "drawable should be non-null");
+
             Drawable newDrawable = Drawables.getTintedDrawable(this, d);
             mHidePlaylistItem.setIcon(newDrawable);
         }
