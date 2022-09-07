@@ -247,7 +247,8 @@ class VolumeFragment : SBDialogFragment() {
 
     private fun controlChangeVolume(diff: Int) {
         val playerStatus = playerStatus ?: return
-        binding.volume.value += diff
+        val newVolume = (binding.volume.value + diff).coerceAtMost(100f)
+        binding.volume.value = newVolume
         lastResult = mContext.incrementPlayerVolume(playerStatus.id, diff)
         updateVolumeText(binding.volume.value.toInt())
         setTimeout(true)
