@@ -490,7 +490,11 @@ public class ManagePlayersAdapter extends ArrayAdapter<AbsPlayerItem> {
                     }
                 } else {
                     if (volumeBar != null) {
-                        volumeBar.setValue(mPlayerStatus.getVolume());
+                        // ensure received values are within 0 <= value <= 100
+                        int clampedVolume = mPlayerStatus.getVolume();
+                        clampedVolume = Math.min(100, clampedVolume);
+                        clampedVolume = Math.max(0, clampedVolume);
+                        volumeBar.setValue(clampedVolume);
                     }
                 }
 

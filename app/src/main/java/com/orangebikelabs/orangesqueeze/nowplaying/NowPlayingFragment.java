@@ -213,7 +213,9 @@ public class NowPlayingFragment extends AbsNowPlayingFragment {
         int elapsed = (int) (status.getElapsedTime(estimate));
         int total = (int) (status.getTotalTime());
         if (total != 0) {
-            mBinding.progress.seekbar.setValue(elapsed);
+            // ensure value never exceeds total time
+            int clampedValue = Math.min(elapsed, total);
+            mBinding.progress.seekbar.setValue(clampedValue);
         } else {
             mBinding.progress.seekbar.setValue(0);
         }
