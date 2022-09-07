@@ -1,3 +1,11 @@
+## [2.6.0-alpha.14](https://github.com/orangebikelabs/opensqueeze/compare/v2.6.0-alpha.13...v2.6.0-alpha.14) (2022-09-07)
+
+
+### Bug Fixes
+
+* clamp inbound volume values ([3025a02](https://github.com/orangebikelabs/opensqueeze/commit/3025a02c733fa64f6cd1926d1f181e678d881a65))
+* crash when bumping volume close to 100 due to bounds issue ([c7f748d](https://github.com/orangebikelabs/opensqueeze/commit/c7f748da93a603c541847f35d60476c252fcc9f1))
+
 ## [2.6.0-alpha.13](https://github.com/orangebikelabs/opensqueeze/compare/v2.6.0-alpha.12...v2.6.0-alpha.13) (2022-08-31)
 
 
