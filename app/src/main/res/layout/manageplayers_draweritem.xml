@@ -39,13 +39,13 @@
         </TextView>
     </LinearLayout>
 
-    <androidx.appcompat.widget.SwitchCompat
+    <com.google.android.material.switchmaterial.SwitchMaterial
         android:id="@+id/player_power_toggle"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:paddingLeft="16dp"
         android:paddingRight="16dp"
         android:layout_gravity="center_vertical">
-    </androidx.appcompat.widget.SwitchCompat>
+    </com.google.android.material.switchmaterial.SwitchMaterial>
 
 </LinearLayout>

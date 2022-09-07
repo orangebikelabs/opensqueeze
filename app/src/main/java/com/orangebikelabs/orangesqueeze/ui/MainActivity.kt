@@ -101,7 +101,7 @@ class MainActivity : DrawerActivity() {
         outState.putString(STATE_TITLE, title)
     }
 
-    override fun allowToastDisplay(): Boolean {
+    override fun allowSnackbarDisplay(): Boolean {
         return true
     }
 

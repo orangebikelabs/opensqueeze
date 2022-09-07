@@ -63,7 +63,7 @@ public class DownloadAction extends AbsItemAction {
 
     @Override
     public boolean execute(Fragment controller) {
-        Intent intent = PrepareDownloadActivity.newIntent(controller.requireContext(), mCommandList, mParamList, mDownloadTitle);
+        Intent intent = PrepareDownloadActivity.Companion.newIntent(controller.requireContext(), mCommandList, mParamList, mDownloadTitle);
         controller.startActivity(intent);
         return true;
     }

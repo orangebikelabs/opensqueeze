@@ -31,7 +31,7 @@
         "assets": [
           "CHANGELOG.md"
         ],
-        "message": "chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
+        "message": "chore(release): OpenSqueeze ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
       }
     ],
     "semantic-release-export-data",
@@ -40,9 +40,9 @@
       {
         "assets": [
           {
-            "path": "app/build/outputs/apk/release/app-release-unsigned.apk",
-            "name": "OpenSqueeze-${nextRelease.gitTag}-release-unsigned.apk",
-            "label": "Release APK file (minified, unsigned)"
+            "path": "app/build/outputs/apk/release/app-release.apk",
+            "name": "OpenSqueeze-${nextRelease.gitTag}-release.apk",
+            "label": "Release APK file (minified, signed)"
           },
           {
             "path": "app/build/outputs/apk/debug/app-debug.apk",

@@ -12,6 +12,7 @@ import android.graphics.Canvas
 import android.graphics.Paint
 import android.graphics.RectF
 import android.media.AudioManager
+import android.os.Bundle
 import android.support.v4.media.MediaMetadataCompat
 import androidx.media.VolumeProviderCompat
 import androidx.media.session.MediaButtonReceiver
@@ -130,13 +131,16 @@ class MediaSessionHelper private constructor(private val context: Context) {
                 override fun onStop() {
                     PlayerCommands.sendStop()
                 }
+
+                override fun onCustomAction(action: String?, extras: Bundle?) {
+                    OSLog.i("Unhandled custom action $action")
+                }
             })
             setPlaybackState(PlaybackStateCompat.Builder().setState(PlaybackStateCompat.STATE_NONE, 0, 1.0f).build())
             isActive = true
             tokenSubject.onNext(sessionToken)
         }
         updateVolumeStatus()
-
 
         // force status update next in queue
         AndroidSchedulers.mainThread().scheduleDirect {
@@ -173,10 +177,10 @@ class MediaSessionHelper private constructor(private val context: Context) {
             return
         }
 
-
         metadataBuilder.putString(MediaMetadataCompat.METADATA_KEY_ALBUM, status.album)
         metadataBuilder.putString(MediaMetadataCompat.METADATA_KEY_ALBUM_ARTIST, status.displayArtist)
-        metadataBuilder.putString(MediaMetadataCompat.METADATA_KEY_ARTIST, status.trackArtist)
+        metadataBuilder.putString(MediaMetadataCompat.METADATA_KEY_ARTIST, status.artist)
+
         metadataBuilder.putString(MediaMetadataCompat.METADATA_KEY_TITLE, status.track)
 
         val duration = (status.totalTime * 1000).toLong()
@@ -228,7 +232,7 @@ class MediaSessionHelper private constructor(private val context: Context) {
         }
         psBuilder.setActions(PlaybackStateCompat.ACTION_PAUSE or PlaybackStateCompat.ACTION_PLAY or
                 PlaybackStateCompat.ACTION_SEEK_TO or PlaybackStateCompat.ACTION_SKIP_TO_NEXT or PlaybackStateCompat.ACTION_SKIP_TO_PREVIOUS or
-                PlaybackStateCompat.ACTION_SET_RATING
+                PlaybackStateCompat.ACTION_SET_RATING or PlaybackStateCompat.ACTION_PLAY_PAUSE
         )
         psBuilder.setState(playbackState, position, speed)
         session?.setPlaybackState(psBuilder.build())
@@ -296,6 +300,7 @@ class MediaSessionHelper private constructor(private val context: Context) {
         } catch (e: TimeoutException) {
             // no worries
         } catch (e: InterruptedException) {
+            // ignore
         } catch (e: ExecutionException) {
             OSLog.e(e.message ?: "", e)
         }

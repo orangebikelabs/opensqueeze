@@ -52,10 +52,10 @@ class SBPreferences private constructor(private val context: Context) {
                 if (value == null) {
                     return DEFAULT
                 }
-                try {
-                    return valueOf(value.toString().uppercase(Locale.ROOT))
+                return try {
+                    valueOf(value.toString().uppercase(Locale.ROOT))
                 } catch (e: IllegalArgumentException) {
-                    return DEFAULT
+                    DEFAULT
                 }
             }
         }
@@ -72,8 +72,6 @@ class SBPreferences private constructor(private val context: Context) {
         private const val LAST_MUTEDPLAYERS = "LastMutedPlayers"
         private const val LAST_RUN_VERSIONCODE = "LastRunVersionCode"
         private const val LAST_CONNECTED_SQUEEZEPLAYER = "LastConnectedSqueezePlayer"
-        private const val SHOWED_VOLUMECONTROL_NOTIFICATION = "ShowedVolumeControlNotification"
-        private const val SHOWED_SQUEEZEPLAYER_MARKET = "ShowedSqueezePlayerMarket"
         private const val SHOWED_SQUEEZEPLAYER_STARTUP = "ShowedSqueezePlayerStartup"
         private const val GLOBALSEARCH_AUTOEXPAND = "GlobalSearchAutoExpand"
         private const val LAST_PLAYER_SLEEP_TIME = "LastPlayerSleepTime"
@@ -311,12 +309,6 @@ class SBPreferences private constructor(private val context: Context) {
 
     val compactModeKey: String
         get() = context.getString(R.string.pref_compactmode_key)
-
-    var isShowedSqueezePlayerMarket: Boolean
-        get() = getBoolean(SHOWED_SQUEEZEPLAYER_MARKET, false)
-        set(value) {
-            setBoolean(SHOWED_SQUEEZEPLAYER_MARKET, value)
-        }
 
     val isBrowseActionBarEnabled: Boolean
         get() = getBoolean(R.string.pref_browse_showactionbar_key, R.bool.default_pref_browse_showactionbar)

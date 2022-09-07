@@ -20,12 +20,11 @@
         app:autoSizeMinTextSize="10sp" />
 
     <!-- seekbar maxheight set to large value to fix rendering bug on pre-sdk 21 -->
-    <SeekBar
+    <com.google.android.material.slider.Slider
         android:id="@+id/sleepBar"
         android:layout_width="match_parent"
         android:layout_height="36dp"
-        android:contentDescription="@string/sleep_slider_desc"
-        android:maxHeight="1000dp" />
+        android:contentDescription="@string/sleep_slider_desc" />
 
     <TimePicker
         android:id="@+id/timePicker"

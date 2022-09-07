@@ -50,6 +50,9 @@ class StartupActivity : SBActivity() {
                 doUpgrade = true
             }
         }
+        if(doUpgrade) {
+            handleUpgrade()
+        }
         if (!ci.isConnected && mContext.isConnecting) {
             logVerbose("checkConnectionState ci=$ci, connecting=true, launchConnectingActivity")
             startActivity(Intent(this, ConnectingActivity::class.java))
@@ -68,5 +71,9 @@ class StartupActivity : SBActivity() {
         } else {
             return super.checkConnectionState()
         }
+    }
+
+    private fun handleUpgrade() {
+        // insert future upgrade logic here, if necessary
     }
 }

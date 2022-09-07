@@ -102,6 +102,7 @@ class ManagedTemporaryImpl implements ManagedTemporary {
     public ByteSink asByteSink() {
         return new ByteSink() {
             @Override
+            @Nonnull
             public OutputStream openStream() {
                 FileBackedOutputStream retval = new FileBackedOutputStream(mFile, MEMORY_THRESHOLD);
                 mFileBackedStream = retval;
@@ -217,6 +218,7 @@ class ManagedTemporaryImpl implements ManagedTemporary {
             } else {
                 return new ByteSource() {
                     @Override
+                    @Nonnull
                     public InputStream openStream() throws IOException {
                         return FileBackedOutputStream.this.openStream();
                     }

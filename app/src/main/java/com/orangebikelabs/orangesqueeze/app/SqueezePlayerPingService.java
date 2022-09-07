@@ -17,6 +17,8 @@ import com.orangebikelabs.orangesqueeze.players.SqueezePlayerHelper;
 
 import java.util.concurrent.ScheduledExecutorService;
 
+import javax.annotation.Nonnull;
+
 /**
  * @author tbsandee@orangebikelabs.com
  */
@@ -30,6 +32,7 @@ public class SqueezePlayerPingService extends AbstractScheduledService {
     }
 
     @Override
+    @Nonnull
     protected ScheduledExecutorService executor() {
         return OSExecutors.getSingleThreadScheduledExecutor();
     }
@@ -46,6 +49,7 @@ public class SqueezePlayerPingService extends AbstractScheduledService {
     }
 
     @Override
+    @Nonnull
     protected Scheduler scheduler() {
         return Scheduler.newFixedRateSchedule(0, Constants.SQUEEZEPLAYER_PING_INTERVAL, Constants.TIME_UNITS);
     }

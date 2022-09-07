@@ -11,9 +11,9 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
 import com.google.common.util.concurrent.Futures;
@@ -28,6 +28,7 @@ import com.orangebikelabs.orangesqueeze.browse.common.PlayNextAction;
 import com.orangebikelabs.orangesqueeze.browse.common.PlayNowAction;
 import com.orangebikelabs.orangesqueeze.common.AbsFragmentResultReceiver;
 import com.orangebikelabs.orangesqueeze.common.FutureResult;
+import com.orangebikelabs.orangesqueeze.common.MoreOption;
 import com.orangebikelabs.orangesqueeze.common.NavigationCommandSet;
 import com.orangebikelabs.orangesqueeze.common.NavigationItem;
 import com.orangebikelabs.orangesqueeze.common.NavigationManager;
@@ -75,7 +76,7 @@ abstract public class AbsMenuFragment extends SBFragment {
 
     // we store the last snackbar so we can cancel it if necessary
     @Nullable
-    private Toast mLastSnackbar;
+    private Snackbar mLastSnackbar;
 
     @Nullable
     public PlayerId getFillPlayerId() {
@@ -121,8 +122,8 @@ abstract public class AbsMenuFragment extends SBFragment {
                         executeMenuCommand(itemTitle, element, action, params, nextWindow, fromContextMenu, fillValue);
                     }
                 }
-            } else if (element.getSelectedIndex().isPresent() && !action.getChoices().isEmpty()) {
-                int ndx = element.getSelectedIndex().get();
+            } else if (element.getSelectedIndex().isDefined() && !action.getChoices().isEmpty()) {
+                int ndx = MoreOption.get(element.getSelectedIndex());
                 if (ndx >= 0 && ndx < action.getChoices().size()) {
                     // advance the selection
                     // TODO temporary behavior, use a dialog?
@@ -230,15 +231,21 @@ abstract public class AbsMenuFragment extends SBFragment {
 
     public void showSnackbar(CharSequence text, SnackbarLength length) {
         if (mLastSnackbar != null) {
-            mLastSnackbar.cancel();
+            mLastSnackbar.dismiss();
         }
         mLastSnackbar = null;
 
         Activity activity = getActivity();
-        if (activity == null || activity.isFinishing() || !isAdded()) {
+        if (activity == null || activity.isFinishing() || !isAdded() || getSnackbarView() != null) {
             return;
         }
-        mLastSnackbar = Toast.makeText(getContext(), text, length == SnackbarLength.LONG ? Toast.LENGTH_LONG : Toast.LENGTH_SHORT);
+        int translatedLength;
+        if(length == SnackbarLength.LONG) {
+            translatedLength = Snackbar.LENGTH_LONG;
+        } else {
+            translatedLength = Snackbar.LENGTH_SHORT;
+        }
+        mLastSnackbar = Snackbar.make(getSnackbarView(), text, translatedLength);
         mLastSnackbar.show();
     }
 
@@ -262,7 +269,7 @@ abstract public class AbsMenuFragment extends SBFragment {
 
         SBRequest request = mSbContext.newRequest(Type.COMET, cmds);
 
-        CharSequence toastMessage = CommandTools.lookupToast(requireContext(), request, title);
+        CharSequence toastMessage = CommandTools.lookupSnackbar(requireContext(), request, title);
 
         // use effective player id for commands that we execute
         request.setPlayerId(getEffectivePlayerId());
@@ -273,16 +280,16 @@ abstract public class AbsMenuFragment extends SBFragment {
 
     static class CommandResultReceiver extends AbsFragmentResultReceiver<AbsMenuFragment> {
         @Nullable
-        final private CharSequence mToastMessage;
+        final private CharSequence mSnackbarMessage;
         final private boolean mFromContextMenu;
 
         @Nullable
         final private String mNextWindow;
 
-        CommandResultReceiver(AbsMenuFragment fragment, @Nullable CharSequence toastMessage, boolean fromContextMenu, @Nullable String nextWindow) {
+        CommandResultReceiver(AbsMenuFragment fragment, @Nullable CharSequence snackbarMessage, boolean fromContextMenu, @Nullable String nextWindow) {
             super(fragment);
 
-            mToastMessage = toastMessage;
+            mSnackbarMessage = snackbarMessage;
             mFromContextMenu = fromContextMenu;
             mNextWindow = nextWindow;
         }
@@ -296,8 +303,8 @@ abstract public class AbsMenuFragment extends SBFragment {
 
         @Override
         public void onEventualSuccess(AbsMenuFragment fragment, SBResult result) {
-            if (mToastMessage != null) {
-                fragment.showSnackbar(mToastMessage, SnackbarLength.LONG);
+            if (mSnackbarMessage != null) {
+                fragment.showSnackbar(mSnackbarMessage, SnackbarLength.LONG);
             }
             fragment.setShowProgressIndicator(false);
             if (NextWindowNames.GRANDPARENT.equals(mNextWindow)) {

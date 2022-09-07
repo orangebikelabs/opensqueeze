@@ -81,7 +81,11 @@ public class SBContextProvider {
                 try {
                     return method.invoke(getBase(), args);
                 } catch (InvocationTargetException e) {
-                    throw e.getCause();
+                    Throwable cause = e.getCause();
+                    if(cause == null) {
+                        cause = e;
+                    }
+                    throw cause;
                 }
             }
         }

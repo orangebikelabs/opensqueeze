@@ -212,7 +212,7 @@ public class ConnectionInfo implements Parcelable {
         dest.writeString(mWolSettings.toJson());
     }
 
-    public static final Parcelable.Creator<ConnectionInfo> CREATOR = new Parcelable.Creator<ConnectionInfo>() {
+    public static final Parcelable.Creator<ConnectionInfo> CREATOR = new Parcelable.Creator<>() {
         @Override
         public ConnectionInfo createFromParcel(Parcel in) {
 

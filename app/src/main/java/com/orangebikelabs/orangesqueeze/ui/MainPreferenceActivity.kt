@@ -14,10 +14,6 @@ import com.google.android.material.snackbar.Snackbar
 
 import com.afollestad.materialdialogs.MaterialDialog
 import com.orangebikelabs.orangesqueeze.cache.CacheServiceProvider
-import com.orangebikelabs.orangesqueeze.common.Constants
-import com.orangebikelabs.orangesqueeze.common.OnCallMuteBehavior
-import com.orangebikelabs.orangesqueeze.common.SBContextProvider
-import com.orangebikelabs.orangesqueeze.common.SBPreferences
 import com.orangebikelabs.orangesqueeze.players.SqueezePlayerHelper
 
 import java.util.Locale
@@ -27,13 +23,11 @@ import androidx.preference.Preference
 import androidx.preference.PreferenceCategory
 import com.afollestad.materialdialogs.lifecycle.lifecycleOwner
 import com.afollestad.materialdialogs.list.listItemsSingleChoice
+import com.fondesa.kpermissions.PermissionStatus
+import com.fondesa.kpermissions.extension.permissionsBuilder
+import com.fondesa.kpermissions.extension.send
 import com.orangebikelabs.orangesqueeze.R
-import permissions.dispatcher.NeedsPermission
-import permissions.dispatcher.OnNeverAskAgain
-import permissions.dispatcher.OnPermissionDenied
-import permissions.dispatcher.OnShowRationale
-import permissions.dispatcher.PermissionRequest
-import permissions.dispatcher.RuntimePermissions
+import com.orangebikelabs.orangesqueeze.common.*
 import kotlin.math.min
 
 /**
@@ -56,8 +50,12 @@ class MainPreferenceActivity : AbsPreferenceActivity() {
         }
     }
 
-    @RuntimePermissions
     class MainPreferenceFragment : AbsPreferenceFragment() {
+
+        private val phoneStatePermissionRequest by lazy {
+            permissionsBuilder(Manifest.permission.READ_PHONE_STATE).build()
+        }
+
         override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
             addPreferencesFromResource(R.xml.main_preferences)
             updatePreferences()
@@ -112,7 +110,7 @@ class MainPreferenceActivity : AbsPreferenceActivity() {
 
             val pref = findPreference<Preference>(getString(R.string.pref_automaticmute_key))
             pref?.setOnPreferenceClickListener {
-                showAutomaticMuteOptionsWithPermissionCheck()
+                onAutomaticMutePreferenceSelected()
                 true
             }
             val currentOrdinal = SBPreferences.get().onCallBehavior.ordinal
@@ -153,49 +151,56 @@ class MainPreferenceActivity : AbsPreferenceActivity() {
                 cellCountPref.setDefaultValue(SBPreferences.get().browseGridCount.toString())
                 cellCountPref.value = SBPreferences.get().browseGridCount.toString()
             }
-
         }
 
-        override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
-            onRequestPermissionsResult(requestCode, grantResults)
-        }
-
-        @NeedsPermission(Manifest.permission.READ_PHONE_STATE)
-        fun showAutomaticMuteOptions() {
-            val initialIndex = SBPreferences.get().onCallBehavior.ordinal
-            MaterialDialog(requireContext()).show {
-                lifecycleOwner(this@MainPreferenceFragment)
-                title(res = R.string.pref_automaticmute_title)
-                listItemsSingleChoice(res = R.array.pref_automaticmute_entries, initialSelection = initialIndex) { _, ndx, _ ->
-                    val behavior = OnCallMuteBehavior.values()[ndx]
-                    SBPreferences.get().onCallBehavior = behavior
+        private fun onAutomaticMutePreferenceSelected() {
+            phoneStatePermissionRequest.send { results ->
+                check(results.size == 1) {
+                    "permission size should be 1"
                 }
-                positiveButton(res = R.string.ok)
-                negativeButton(res = R.string.cancel)
+                when(results[0]) {
+                    is PermissionStatus.Granted -> onPhonePermissionGranted()
+                    is PermissionStatus.Denied.Permanently -> showDeniedPhone()
+                    is PermissionStatus.Denied.ShouldShowRationale -> onShowRationale()
+                    is PermissionStatus.RequestRequired -> {
+                        OSLog.e("request required")
+                    }
+                }
             }
         }
 
-        @OnShowRationale(Manifest.permission.READ_PHONE_STATE)
-        fun onShowRationale(request: PermissionRequest) {
+        private fun onPhonePermissionGranted() {
+            val initialIndex = SBPreferences.get().onCallBehavior.ordinal
+            MaterialDialog(requireContext())
+                    .lifecycleOwner(this@MainPreferenceFragment)
+                    .title(res = R.string.pref_automaticmute_title)
+                    .listItemsSingleChoice(res = R.array.pref_automaticmute_entries, initialSelection = initialIndex) { _, ndx, _ ->
+                        val behavior = OnCallMuteBehavior.values()[ndx]
+                        SBPreferences.get().onCallBehavior = behavior
+                    }
+                    .positiveButton(res = R.string.ok)
+                    .negativeButton(res = R.string.cancel)
+                    .show()
+        }
+
+        private fun onShowRationale() {
             MaterialDialog(requireContext()).show {
                 lifecycleOwner(this@MainPreferenceFragment)
                 title(res = R.string.permission_read_phone_state_rationale_title)
                 message(res = R.string.permission_read_phone_state_rationale_content)
                 positiveButton(res = R.string.ok) {
-                    request.proceed()
+                    onAutomaticMutePreferenceSelected()
                 }
                 negativeButton(res = R.string.cancel)
             }
         }
 
-        @OnPermissionDenied(Manifest.permission.READ_PHONE_STATE)
-        fun showDeniedPhone() {
+        private fun showDeniedPhone() {
             Snackbar.make(requireView(), R.string.permission_read_phone_state_denied, Snackbar.LENGTH_LONG)
                     .show()
         }
 
-        @OnNeverAskAgain(Manifest.permission.READ_PHONE_STATE)
-        fun showNeverAskPhone() {
+        private fun showNeverAskPhone() {
             Snackbar.make(requireView(), R.string.permission_read_phone_state_neverask, Snackbar.LENGTH_LONG)
                     .show()
         }

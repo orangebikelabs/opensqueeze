@@ -556,7 +556,7 @@ abstract public class AbsNowPlayingFragment extends AbsMenuFragment {
             executor = MoreExecutors.directExecutor();
         }
 
-        Futures.addCallback(future, new FutureCallback<Bitmap>() {
+        Futures.addCallback(future, new FutureCallback<>() {
             @Override
             public void onSuccess(@Nullable Bitmap bmp) {
                 if (!isAdded()) {

@@ -9,13 +9,13 @@ import android.content.Context;
 import android.os.SystemClock;
 
 import androidx.annotation.Keep;
+import arrow.core.Option;
 
 import android.util.SparseArray;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
-import com.google.common.base.Optional;
 import com.google.common.collect.ComparisonChain;
 import com.google.common.collect.ImmutableSet;
 import com.orangebikelabs.orangesqueeze.R;
@@ -189,9 +189,9 @@ public class PlayerStatus {
     }
 
     @Nonnull
-    public Optional<ButtonStatus> getButtonStatus(PlayerButton button) {
+    public Option<ButtonStatus> getButtonStatus(PlayerButton button) {
         Map<PlayerButton, ButtonStatus> status = get(Attributes.BUTTONSTATUS_MAP, Collections.emptyMap());
-        return Optional.fromNullable(status.get(button));
+        return Option.fromNullable(status.get(button));
     }
 
     @Nonnull
@@ -227,13 +227,13 @@ public class PlayerStatus {
     }
 
     @Nonnull
-    public Optional<String> getArtistId() {
-        return Optional.fromNullable(get(Attributes.ARTISTID, null));
+    public Option<String> getArtistId() {
+        return Option.fromNullable(get(Attributes.ARTISTID, null));
     }
 
     @Nonnull
-    public Optional<String> getAlbumId() {
-        return Optional.fromNullable(get(Attributes.ALBUMID, null));
+    public Option<String> getAlbumId() {
+        return Option.fromNullable(get(Attributes.ALBUMID, null));
     }
 
     @Nonnull
@@ -247,14 +247,14 @@ public class PlayerStatus {
     }
 
     @Nonnull
-    public Optional<String> getTrackId() {
-        return Optional.fromNullable(get(Attributes.TRACKID, null));
+    public Option<String> getTrackId() {
+        return Option.fromNullable(get(Attributes.TRACKID, null));
     }
 
     @Nonnull
-    public Optional<String> getYear() {
+    public Option<String> getYear() {
         String year = (String) get(Attributes.YEAR);
-        return Optional.fromNullable(year);
+        return Option.fromNullable(year);
     }
 
     @Nonnull
@@ -298,9 +298,9 @@ public class PlayerStatus {
     }
 
     @Nonnull
-    public Optional<String> getTrackNumber() {
+    public Option<String> getTrackNumber() {
         String trackNumber = (String) mAttributes.get(Attributes.TRACKNUMBER.ordinal());
-        return Optional.fromNullable(trackNumber);
+        return Option.fromNullable(trackNumber);
     }
 
     public boolean isConnected() {
@@ -699,7 +699,7 @@ public class PlayerStatus {
         }
 
         String oldTrackId = getTrackId().orNull();
-        if(!Objects.equal(oldTrackId, loadTrackId)) {
+        if (!Objects.equal(oldTrackId, loadTrackId)) {
             clearTrackInfo(override, newTrackHash);
             if (loadTrackId != null) {
                 put(override, Attributes.TRACKID, loadTrackId);
@@ -748,7 +748,7 @@ public class PlayerStatus {
     }
 
     public boolean needsTrackLookup() {
-        return get(Attributes.TRACKINFO) == null && getTrackId().isPresent();
+        return get(Attributes.TRACKINFO) == null && getTrackId().isDefined();
     }
 
     protected void applyTrackInfo(SparseArray<Object> override, TrackInfo trackInfo) {
@@ -822,7 +822,7 @@ public class PlayerStatus {
 
         String trackId = temp.getTrackId().orNull();
         if (trackId == null) {
-            trackId = temp.getTrack() + temp.getDisplayArtist() + temp.getTrackNumber().or("-");
+            trackId = temp.getTrack() + temp.getDisplayArtist() + MoreOption.getOrElse(temp.getTrackNumber(), "-");
         }
         String retval = trackId + temp.getPlaylistIndex() + temp.getPlaylistTimestamp();
 

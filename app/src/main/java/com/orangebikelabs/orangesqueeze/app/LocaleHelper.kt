@@ -5,6 +5,7 @@
 
 package com.orangebikelabs.orangesqueeze.app
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.ContextWrapper
 import android.content.res.Configuration
@@ -111,6 +112,7 @@ object LocaleHelper {
             return base
         }
 
+        @SuppressLint("AppBundleLocaleChanges")
         override fun applyOverrideConfiguration(overrideConfiguration: Configuration) {
             val newConfig = Configuration(overrideConfiguration)
             newConfig.setLocale(Locale.getDefault())

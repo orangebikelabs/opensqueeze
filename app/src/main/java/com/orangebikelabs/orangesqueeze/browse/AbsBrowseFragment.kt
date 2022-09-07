@@ -7,8 +7,6 @@ package com.orangebikelabs.orangesqueeze.browse
 
 import android.content.Intent
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.os.Parcelable
 import androidx.annotation.LayoutRes
 import androidx.loader.app.LoaderManager.LoaderCallbacks
@@ -17,6 +15,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.ViewStub
 import android.widget.*
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
+import androidx.loader.app.LoaderManager
 
 import com.orangebikelabs.orangesqueeze.R
 import com.orangebikelabs.orangesqueeze.artwork.ThumbnailProcessor
@@ -27,6 +29,7 @@ import com.orangebikelabs.orangesqueeze.common.*
 import com.orangebikelabs.orangesqueeze.common.event.ItemActionButtonClickEvent
 import com.orangebikelabs.orangesqueeze.common.event.ItemSliderChangedEvent
 import com.orangebikelabs.orangesqueeze.common.event.TriggerListPreload
+import com.orangebikelabs.orangesqueeze.compat.getParcelableCompat
 import com.orangebikelabs.orangesqueeze.menu.AbsMenuFragment
 import com.orangebikelabs.orangesqueeze.menu.ActionNames
 import com.orangebikelabs.orangesqueeze.menu.MenuElement
@@ -36,6 +39,7 @@ import com.orangebikelabs.orangesqueeze.menu.SimpleImageItem
 import com.orangebikelabs.orangesqueeze.menu.StandardMenuItem
 import com.orangebikelabs.orangesqueeze.widget.HeaderCapable
 import com.squareup.otto.Subscribe
+import kotlinx.coroutines.launch
 
 /**
  * Base fragment for use with the various browse lists/grids.
@@ -43,6 +47,20 @@ import com.squareup.otto.Subscribe
  * @author tsandee
  */
 abstract class AbsBrowseFragment<T : BrowseItemBaseAdapter, L> : AbsMenuFragment() {
+
+    companion object {
+        private val sArtworkLoadsAfterComplete = Runtime.getRuntime().availableProcessors() <= 1
+
+        protected const val BROWSE_LOADER_ID = 0
+
+        private const val SAVESTATE_MUTABLE_ARGS = "MutableArgs"
+        private const val SAVESTATE_REFRESHORIGIN = "RefreshOrigin"
+        private const val SAVESTATE_NEEDREFRESH = "NeedsRefresh"
+
+        const val PARAM_SHORT_MODE = "browseShortMode"
+        const val PARAM_BROWSE_STYLE = "browseStyle"
+        const val PARAM_ALWAYS_REFRESH_ON_RESTART = "alwaysRefreshOnRestart"
+    }
 
     /**
      * holds the effective browse style
@@ -57,7 +75,7 @@ abstract class AbsBrowseFragment<T : BrowseItemBaseAdapter, L> : AbsMenuFragment
     /**
      * should we always refresh on restart
      */
-    private var alwaysRefreshOnRestart: Boolean = false
+    private var alwaysRefreshOnRestart = false
 
     private var _mutableArguments: Bundle? = null
 
@@ -67,7 +85,7 @@ abstract class AbsBrowseFragment<T : BrowseItemBaseAdapter, L> : AbsMenuFragment
     private var browseView: ViewGroup? = null
 
     @LayoutRes
-    protected var initBrowseViewLayoutRid: Int = 0
+    protected var initBrowseViewLayoutRid = 0
 
     protected var browseListView: AbsListView? = null
 
@@ -76,17 +94,21 @@ abstract class AbsBrowseFragment<T : BrowseItemBaseAdapter, L> : AbsMenuFragment
     lateinit var adapter: OSBrowseAdapter
         private set
 
-    private var isShortMode: Boolean = false
+    private var isShortMode = false
 
     /**
      * when we finish to the parent, do we force a refresh?
      */
-    private var refreshOrigin: Boolean = false
+    private var refreshOrigin = false
 
     /**
      * when we next start, should we trigger a refresh
      */
-    private var needsRefresh: Boolean = false
+    private var needsRefresh = false
+
+    private val browseHeaderCallbacks = BrowseHeaderCallbacks()
+    private var browseHeader: View? = null
+
 
     // default to LIST
     open val defaultBrowseStyle: BrowseStyle
@@ -188,7 +210,7 @@ abstract class AbsBrowseFragment<T : BrowseItemBaseAdapter, L> : AbsMenuFragment
 
         alwaysRefreshOnRestart = mutableArguments.getBoolean(PARAM_ALWAYS_REFRESH_ON_RESTART, false)
 
-        suppliedBrowseStyle = mutableArguments.getParcelable(PARAM_BROWSE_STYLE)
+        suppliedBrowseStyle = mutableArguments.getParcelableCompat(PARAM_BROWSE_STYLE, BrowseStyle::class.java)
         browseStyle = suppliedBrowseStyle ?: defaultBrowseStyle
 
         isShortMode = mutableArguments.getBoolean(PARAM_SHORT_MODE, false)
@@ -204,10 +226,11 @@ abstract class AbsBrowseFragment<T : BrowseItemBaseAdapter, L> : AbsMenuFragment
     }
 
     @Suppress("DEPRECATION")
+    @Deprecated("by superclass")
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        loaderManager.initLoader(BROWSE_LOADER_ID, mutableArguments, createLoaderCallbacks())
+        LoaderManager.getInstance(this).initLoader(BROWSE_LOADER_ID, mutableArguments, createLoaderCallbacks())
     }
 
     protected open fun onLoaderDataReceived(data: L?, empty: Boolean, complete: Boolean) {
@@ -230,7 +253,7 @@ abstract class AbsBrowseFragment<T : BrowseItemBaseAdapter, L> : AbsMenuFragment
             }
         }
         if (prepareBrowseHeader(browseStyle)) {
-            setupBrowseHeader(browseStyle)
+            setupBrowseHeader()
         }
         // TODO show error message if it exists
     }
@@ -255,21 +278,6 @@ abstract class AbsBrowseFragment<T : BrowseItemBaseAdapter, L> : AbsMenuFragment
 
     override fun onResume() {
         super.onResume()
-
-        if (needsRefresh) {
-            // issue a refresh very soon
-            sHandler.post {
-                if (isAdded) {
-                    requery(null)
-                }
-            }
-            needsRefresh = false
-        }
-
-        if (alwaysRefreshOnRestart) {
-            // next time, refresh
-            needsRefresh = true
-        }
 
         browseHeaderCallbacks.addButton?.visibility = View.VISIBLE
         browseHeaderCallbacks.playButton?.visibility = View.VISIBLE
@@ -335,49 +343,47 @@ abstract class AbsBrowseFragment<T : BrowseItemBaseAdapter, L> : AbsMenuFragment
 
         container.addView(browseView, FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT))
 
-        if (browseView is AbsListView) {
-            browseListView = browseView as AbsListView
+        browseListView = if (browseView is AbsListView) {
+            browseView as AbsListView
         } else {
-            browseListView = null
+            null
         }
-
-        if (browseListView != null) {
-            if (browseListView is GridView) {
-                val gv = browseListView as GridView
-                gv.numColumns = GridView.AUTO_FIT
-                gv.columnWidth = SBPreferences.get().gridCellWidth
-                gv.stretchMode = GridView.STRETCH_SPACING_UNIFORM
-                gv.horizontalSpacing = 0
-                gv.verticalSpacing = SBPreferences.get().gridCellSpacing
+        browseListView?.also { blv ->
+            if (blv is GridView) {
+                blv.numColumns = GridView.AUTO_FIT
+                blv.columnWidth = SBPreferences.get().gridCellWidth
+                blv.stretchMode = GridView.STRETCH_SPACING_UNIFORM
+                blv.horizontalSpacing = 0
+                blv.verticalSpacing = SBPreferences.get().gridCellSpacing
             }
 
-            ScrollingState.monitorScrolling(browseListView!!)
+            ScrollingState.monitorScrolling(blv)
 
-            browseListView!!.setOnItemClickListener { parent, itemView, pos, _ ->
+            blv.setOnItemClickListener { parent, itemView, pos, _ ->
                 val item = parent.getItemAtPosition(pos) as? Item
                 if (item != null) {
                     this@AbsBrowseFragment.onItemClick(item, itemView, pos)
                 }
             }
-            browseListView!!.setOnItemLongClickListener { parent, itemView, pos, _ ->
+            blv.setOnItemLongClickListener { parent, itemView, pos, _ ->
                 var consumed = false
                 val item = parent.getItemAtPosition(pos) as? Item
                 if (item is StandardMenuItem) {
                     var actionButtonView: View? = itemView.findViewById(R.id.action_button)
                     if (actionButtonView == null) {
-                        actionButtonView = itemView
+                        actionButtonView = checkNotNull(itemView)
                     }
-                    consumed = onActionButtonClicked(item, actionButtonView!!, pos)
+                    consumed = onActionButtonClicked(item, actionButtonView, pos)
                 }
                 consumed
             }
             createListAdapter().apply {
                 adapter = this
-                (browseListView as AdapterView<ListAdapter>).adapter = this
+                blv.adapter = this
             }
 
             if (isShortMode) {
-                browseListView!!.isFastScrollEnabled = false
+                blv.isFastScrollEnabled = false
             }
         }
     }
@@ -405,9 +411,25 @@ abstract class AbsBrowseFragment<T : BrowseItemBaseAdapter, L> : AbsMenuFragment
 
         if (isShortMode) {
             // in short mode we don't display the progress bar
-            val progress = view.findViewById<View>(R.id.listload_progress)
-            if (progress != null) {
-                progress.visibility = View.GONE
+            view.findViewById<View>(R.id.listload_progress)?.visibility = View.GONE
+        }
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.RESUMED) {
+                if (needsRefresh) {
+                    // issue a refresh very soon
+                    viewLifecycleOwner.lifecycleScope.launch {
+                        if (isAdded) {
+                            requery(null)
+                        }
+                    }
+                    needsRefresh = false
+                }
+
+                if (alwaysRefreshOnRestart) {
+                    // next time, refresh
+                    needsRefresh = true
+                }
             }
         }
     }
@@ -417,10 +439,7 @@ abstract class AbsBrowseFragment<T : BrowseItemBaseAdapter, L> : AbsMenuFragment
 
         val frame = container.findViewById<FrameLayout>(R.id.browseview_container)
         if (frame != null) {
-            val view = frame.findViewById<View>(viewId)
-            if (view != null) {
-                view.visibility = View.VISIBLE
-            }
+            frame.findViewById<View>(viewId)?.visibility = View.VISIBLE
             for (i in 0 until frame.childCount) {
                 val child = frame.getChildAt(i)
 
@@ -429,10 +448,7 @@ abstract class AbsBrowseFragment<T : BrowseItemBaseAdapter, L> : AbsMenuFragment
                 }
             }
         } else {
-            val view = container.findViewById<View>(viewId)
-            if (view != null) {
-                view.visibility = View.VISIBLE
-            }
+            container.findViewById<View>(viewId)?.visibility = View.VISIBLE
         }
     }
 
@@ -499,15 +515,15 @@ abstract class AbsBrowseFragment<T : BrowseItemBaseAdapter, L> : AbsMenuFragment
             val playMode = SBPreferences.get().trackSelectPlayMode
             val action = playMode.action
 
-            when (playMode) {
-                PlayOptions.PROMPT -> handled = item.showContextMenu(this, itemView)
+            handled = when (playMode) {
+                PlayOptions.PROMPT -> item.showContextMenu(this, itemView)
                 PlayOptions.ADD, PlayOptions.INSERT -> {
                     checkNotNull(action) { "action can't be null for these playmodes" }
-                    handled = executeAction(item, element, action, NextWindowNames.NOREFRESH, null)
+                    executeAction(item, element, action, NextWindowNames.NOREFRESH, null)
                 }
                 PlayOptions.PLAY -> {
                     checkNotNull(action) { "action can't be null for these playmodes" }
-                    handled = executeAction(item, element, action, NextWindowNames.NOWPLAYING, null)
+                    executeAction(item, element, action, NextWindowNames.NOWPLAYING, null)
                 }
             }
         }
@@ -562,10 +578,7 @@ abstract class AbsBrowseFragment<T : BrowseItemBaseAdapter, L> : AbsMenuFragment
         return navigationItem?.playCommandSet != null || navigationItem?.addCommandSet != null
     }
 
-    private val browseHeaderCallbacks = BrowseHeaderCallbacks()
-    private var browseHeader: View? = null
-
-    private fun setupBrowseHeader(style: BrowseStyle) {
+    private fun setupBrowseHeader() {
         val blv = checkNotNull(browseListView)
         val hc = blv as HeaderCapable
 
@@ -612,21 +625,5 @@ abstract class AbsBrowseFragment<T : BrowseItemBaseAdapter, L> : AbsMenuFragment
             playButton = null
             addButton = null
         }
-    }
-
-
-    companion object {
-        private val sHandler = Handler(Looper.getMainLooper())
-        private val sArtworkLoadsAfterComplete = Runtime.getRuntime().availableProcessors() <= 1
-
-        protected const val BROWSE_LOADER_ID = 0
-
-        private const val SAVESTATE_MUTABLE_ARGS = "MutableArgs"
-        private const val SAVESTATE_REFRESHORIGIN = "RefreshOrigin"
-        private const val SAVESTATE_NEEDREFRESH = "NeedsRefresh"
-
-        const val PARAM_SHORT_MODE = "browseShortMode"
-        const val PARAM_BROWSE_STYLE = "browseStyle"
-        const val PARAM_ALWAYS_REFRESH_ON_RESTART = "alwaysRefreshOnRestart"
     }
 }

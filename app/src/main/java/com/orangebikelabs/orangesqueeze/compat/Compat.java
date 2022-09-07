@@ -15,7 +15,6 @@ import android.os.Environment;
 import android.os.StatFs;
 import android.text.format.Formatter;
 
-import com.google.common.base.Optional;
 import com.google.common.collect.Iterables;
 import com.orangebikelabs.orangesqueeze.common.OSAssert;
 import com.orangebikelabs.orangesqueeze.common.OSLog;
@@ -34,6 +33,8 @@ import java.util.Enumeration;
 import java.util.List;
 
 import javax.annotation.Nonnull;
+
+import arrow.core.Option;
 
 /**
  * Various helper functions that provide access to, to some extent, various APIs that are not universally available
@@ -75,7 +76,7 @@ public class Compat {
     /**
      * retrieve the InetAddress broadcast address
      */
-    public static Optional<InetAddress> getBroadcastAddress(Context context) throws SocketException, UnknownHostException {
+    public static Option<InetAddress> getBroadcastAddress(Context context) throws SocketException, UnknownHostException {
         InetAddress retval = internalGetBroadcastAdddress(context);
         if (retval == null) {
             WifiManager wifiManager = (WifiManager) context.getApplicationContext().getSystemService(Context.WIFI_SERVICE);
@@ -91,7 +92,7 @@ public class Compat {
                 retval = InetAddress.getByAddress(quads);
             }
         }
-        return Optional.fromNullable(retval);
+        return Option.fromNullable(retval);
     }
 
     @Nonnull

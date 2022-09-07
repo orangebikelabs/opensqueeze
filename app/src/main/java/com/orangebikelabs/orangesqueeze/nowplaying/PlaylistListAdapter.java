@@ -12,17 +12,18 @@ import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.google.common.base.Optional;
-
 import com.orangebikelabs.orangesqueeze.R;
 import com.orangebikelabs.orangesqueeze.artwork.ThumbnailProcessor;
 import com.orangebikelabs.orangesqueeze.browse.common.ItemBaseAdapter;
+import com.orangebikelabs.orangesqueeze.common.MoreOption;
 import com.orangebikelabs.orangesqueeze.common.OSAssert;
 import com.orangebikelabs.orangesqueeze.common.Reporting;
 import com.orangebikelabs.orangesqueeze.menu.StandardMenuItem;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+
+import arrow.core.Option;
 
 /**
  * @author tbsandee@orangebikelabs.com
@@ -63,8 +64,8 @@ public class PlaylistListAdapter extends ItemBaseAdapter {
     }
 
     @Nonnull
-    public Optional<String> getPlaylistTimestamp() {
-        return Optional.fromNullable(mPlaylistTimestamp);
+    public Option<String> getPlaylistTimestamp() {
+        return Option.fromNullable(mPlaylistTimestamp);
     }
 
     public int getPlaylistIndex() {
@@ -144,14 +145,14 @@ public class PlaylistListAdapter extends ItemBaseAdapter {
 
     @Override
     protected void bindText2(StandardMenuItem item, TextView text2) {
-        String text = item.getText2().or("");
+        String text = MoreOption.getOrElse(item.getText2(), "");
         text2.setText(text);
     }
 
     @Override
     protected void bindText3(StandardMenuItem item, TextView text3) {
         PlaylistItem pi = (PlaylistItem) item;
-        String text = pi.getText3().or("");
+        String text = MoreOption.getOrElse(item.getText3(), "");
         text3.setText(text);
     }
 }

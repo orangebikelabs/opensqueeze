@@ -7,6 +7,7 @@ package com.orangebikelabs.orangesqueeze.browse;
 
 import android.content.Intent;
 import android.os.Bundle;
+
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.core.app.NavUtils;
@@ -84,14 +85,6 @@ public class BrowseActivity extends DrawerActivity {
     }
 
     @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-
-        // TODO do we want transitions for exiting?
-        // overridePendingTransition(R.anim.in_from_left, android.R.anim.fade_out);
-    }
-
-    @Override
     protected void onDestroy() {
 
         mBus.unregister(mEventReceiver);
@@ -100,7 +93,7 @@ public class BrowseActivity extends DrawerActivity {
     }
 
     @Override
-    protected boolean allowToastDisplay() {
+    protected boolean allowSnackbarDisplay() {
         return true;
     }
 

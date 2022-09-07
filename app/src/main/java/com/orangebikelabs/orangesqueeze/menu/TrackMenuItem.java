@@ -12,7 +12,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import com.google.common.base.Optional;
 import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableList;
 import com.google.common.util.concurrent.MoreExecutors;
@@ -37,6 +36,9 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.concurrent.GuardedBy;
 
+import arrow.core.Option;
+import arrow.core.OptionKt;
+
 /**
  * @author tbsandee@orangebikelabs.com
  */
@@ -54,7 +56,7 @@ public class TrackMenuItem extends StandardMenuItem {
         @Override
         public boolean applies(Item item) {
             TrackMenuItem tmi = (TrackMenuItem) item;
-            return tmi.getCoverId().isPresent();
+            return tmi.getCoverId().isDefined();
         }
 
         @Override
@@ -117,20 +119,20 @@ public class TrackMenuItem extends StandardMenuItem {
 
     @Nonnull
     @Override
-    synchronized public Optional<String> getText2() {
-        return Optional.fromNullable(mText2);
+    synchronized public Option<String> getText2() {
+        return Option.fromNullable(mText2);
     }
 
     @Nonnull
     @Override
-    synchronized public Optional<String> getText3() {
-        return Optional.fromNullable(mText3);
+    synchronized public Option<String> getText3() {
+        return Option.fromNullable(mText3);
     }
 
     @Nonnull
-    synchronized public Optional<String> getCoverId() {
+    synchronized public Option<String> getCoverId() {
         if (mTrackInfo == null) {
-            return Optional.absent();
+            return OptionKt.none();
         }
         return mTrackInfo.getCoverId();
     }

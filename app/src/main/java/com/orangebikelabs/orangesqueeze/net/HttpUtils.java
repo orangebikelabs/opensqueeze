@@ -6,7 +6,6 @@
 package com.orangebikelabs.orangesqueeze.net;
 
 import com.google.common.base.Charsets;
-import com.google.common.base.Optional;
 import com.orangebikelabs.orangesqueeze.BuildConfig;
 import com.orangebikelabs.orangesqueeze.common.ConnectionInfo;
 import com.orangebikelabs.orangesqueeze.common.Constants;
@@ -24,6 +23,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import arrow.core.Option;
 import okhttp3.CacheControl;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -58,7 +58,7 @@ public class HttpUtils {
     final static public char CR = '\r';
     final static public char LF = '\n';
 
-    static private OkHttpClient sHttpClient;
+    final static private OkHttpClient sHttpClient;
 
     static {
         sHttpClient = new OkHttpClient.Builder()
@@ -179,13 +179,13 @@ public class HttpUtils {
     }
 
     @Nonnull
-    static public Optional<Header> getCookieHeader(URL url) {
+    static public Option<Header> getCookieHeader(URL url) {
         Header retval = null;
         String cookieValue = getCookieValue(url);
         if (cookieValue != null) {
             retval = new Header("Cookie", cookieValue);
         }
-        return Optional.fromNullable(retval);
+        return Option.fromNullable(retval);
     }
 
     @Nullable

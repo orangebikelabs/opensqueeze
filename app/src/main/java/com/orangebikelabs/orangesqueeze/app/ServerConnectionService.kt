@@ -14,11 +14,11 @@ import android.media.AudioManager
 import android.os.*
 import android.support.v4.media.session.MediaSessionCompat
 import androidx.core.content.ContextCompat
-import com.gojuno.koptional.None
-import com.gojuno.koptional.Optional
-import com.gojuno.koptional.Some
-import com.gojuno.koptional.toOptional
+import arrow.core.None
+import arrow.core.Option
+import arrow.core.Some
 import com.google.common.base.MoreObjects
+import com.orangebikelabs.orangesqueeze.BuildConfig
 import com.orangebikelabs.orangesqueeze.appwidget.WidgetCommon
 import com.orangebikelabs.orangesqueeze.common.*
 import com.orangebikelabs.orangesqueeze.common.PlayerStatus.PlayerButton
@@ -50,10 +50,12 @@ class ServerConnectionService : Service() {
         private const val SERVICE_TIMEOUT_IN_MILLIS = 120_000L
 
         // accessed from main thread only
+        @Suppress("ObjectPropertyName")
         private var _serviceMayBeStarted = false
 
         // written from main thread, read from anywhere
         @Volatile
+        @Suppress("ObjectPropertyName")
         private var _serviceWasStopped = false
 
         /**
@@ -69,8 +71,8 @@ class ServerConnectionService : Service() {
          * retrieve an intent targeting this service. sets the service key automatically
          */
         fun getBroadcastIntent(action: BroadcastServiceActions): Intent {
-            val newIntent = Intent()
-            newIntent.action = action.intentAction
+            val newIntent = Intent(action.intentAction)
+            newIntent.`package` = BuildConfig.APPLICATION_ID
             return newIntent
         }
 
@@ -152,7 +154,7 @@ class ServerConnectionService : Service() {
 
     private var pendingShutdownDisposable: Disposable? = null
 
-    private val playerStatusProcessor: PublishProcessor<Optional<PlayerStatus>> = PublishProcessor.create()
+    private val playerStatusProcessor: PublishProcessor<Option<PlayerStatus>> = PublishProcessor.create()
 
     private val compositeDisposable = CompositeDisposable()
 
@@ -174,7 +176,6 @@ class ServerConnectionService : Service() {
         powerManager = getSystemService(Context.POWER_SERVICE) as PowerManager?
 
         val filter = IntentFilter()
-        @Suppress("DEPRECATION")
         filter.addAction(Intent.ACTION_POWER_CONNECTED)
         filter.addAction(Intent.ACTION_POWER_DISCONNECTED)
         filter.addAction(AudioManager.ACTION_AUDIO_BECOMING_NOISY)
@@ -208,7 +209,7 @@ class ServerConnectionService : Service() {
                 .observeOn(OSExecutors.singleThreadScheduler())
                 .onBackpressureLatest()
                 .subscribe { status ->
-                    WidgetCommon.updateWidgetsWithPlayerStatus(this@ServerConnectionService, status.toNullable())
+                    WidgetCommon.updateWidgetsWithPlayerStatus(this@ServerConnectionService, status.orNull())
                 }
 
         // handle notification updates
@@ -412,7 +413,7 @@ class ServerConnectionService : Service() {
 
     private fun fireCurrentPlayerStatus() {
         val status = SBContextProvider.get().playerStatus
-        playerStatusProcessor.onNext(status.toOptional())
+        playerStatusProcessor.onNext(Option.fromNullable(status))
     }
 
     private fun shouldAllowServiceTimeout(isPlayerStatusUpdate: Boolean): Boolean {
@@ -464,7 +465,7 @@ class ServerConnectionService : Service() {
 
     @Subscribe
     fun whenCurrentPlayerStatusChanges(event: CurrentPlayerState) {
-        playerStatusProcessor.onNext(event.playerStatus.toOptional())
+        playerStatusProcessor.onNext(Option.fromNullable(event.playerStatus))
     }
 
     private fun onDeviceStatusChange() {
@@ -478,15 +479,13 @@ class ServerConnectionService : Service() {
 
         updateChargingStatus()
 
-        val newEligibleForShutdown: EligibleForShutdown
-
         // we no longer worry about metered/unmetered since there's a notification. also doze.
         // val isMetered = ConnectivityManagerCompat.isActiveNetworkMetered(connectivityManager)
-        if (!uiGone) {
+        val newEligibleForShutdown = if (!uiGone) {
             // ui is visible, no shutdown
-            newEligibleForShutdown = EligibleForShutdown.NO
+            EligibleForShutdown.NO
         } else {
-            newEligibleForShutdown = EligibleForShutdown.IFSTOPPED
+            EligibleForShutdown.IFSTOPPED
         }
         if (OSLog.isLoggable(OSLog.DEBUG)) {
             val toString = MoreObjects.toStringHelper("ServerConnectionService status change")
@@ -544,7 +543,6 @@ class ServerConnectionService : Service() {
             val action = intent.action ?: return
 
             var unhandled = false
-            @Suppress("DEPRECATION")
             when (action) {
                 PowerManager.ACTION_DEVICE_IDLE_MODE_CHANGED -> {
                     // do nothing
@@ -558,7 +556,7 @@ class ServerConnectionService : Service() {
                 BroadcastServiceActions.UPDATE_WIDGETS.intentAction -> {
                     OSExecutors.getUnboundedPool().execute(ConnectionAwareRunnable(location = "UPDATE_WIDGETS") {
                         AndroidSchedulers.mainThread().scheduleDirect {
-                            playerStatusProcessor.onNext(it.playerStatus.toOptional())
+                            playerStatusProcessor.onNext(Option.fromNullable(it.playerStatus))
                         }
                     })
                 }

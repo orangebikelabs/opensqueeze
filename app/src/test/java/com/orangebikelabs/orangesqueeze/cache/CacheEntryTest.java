@@ -18,11 +18,8 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.greaterThan;
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.not;
-import static org.hamcrest.Matchers.nullValue;
+import static com.google.common.truth.Truth.assertThat;
+import static com.google.common.truth.Truth.assertWithMessage;
 
 public class CacheEntryTest {
 
@@ -56,15 +53,15 @@ public class CacheEntryTest {
 
     @Test
     public void testCacheEntryEquality() {
-        assertThat(mKeyA1, is(mKeyA2));
+        assertThat(mKeyA1).isEqualTo(mKeyA2);
     }
 
     @Test
     public void testCacheEntryInequality() {
-        assertThat(mKeyA1, not(mKeyB1));
-        assertThat(mKeyA1, not(new CacheEntry(Type.TIMEOUT, mKeyA1.getServerId(), mKeyA1.getKey())));
-        assertThat(mKeyA1, not(new CacheEntry(mKeyA1.getCacheType(), mKeyA1.getServerId() + 1, mKeyA1.getKey())));
-        assertThat(mKeyA1, not(new CacheEntry(mKeyA1.getCacheType(), mKeyA1.getServerId(), mKeyA1.getKey() + "added")));
+        assertThat(mKeyA1).isNotEqualTo(mKeyB1);
+        assertThat(mKeyA1).isNotEqualTo(new CacheEntry(Type.TIMEOUT, mKeyA1.getServerId(), mKeyA1.getKey()));
+        assertThat(mKeyA1).isNotEqualTo(new CacheEntry(mKeyA1.getCacheType(), mKeyA1.getServerId() + 1, mKeyA1.getKey()));
+        assertThat(mKeyA1).isNotEqualTo(new CacheEntry(mKeyA1.getCacheType(), mKeyA1.getServerId(), mKeyA1.getKey() + "added"));
     }
 
     /**
@@ -72,9 +69,9 @@ public class CacheEntryTest {
      */
     @Test
     public void testCacheEntryLockSuccess() throws Exception {
-        assertThat(mKeyA1.tryLock(0, TimeUnit.SECONDS), is(true));
+        assertThat(mKeyA1.tryLock(0, TimeUnit.SECONDS)).isTrue();
         try {
-            assertThat(mKeyA2.tryLock(0, TimeUnit.SECONDS), is(true));
+            assertThat(mKeyA2.tryLock(0, TimeUnit.SECONDS)).isTrue();
             mKeyA2.releaseLock();
         } finally {
             mKeyA1.releaseLock();
@@ -89,17 +86,17 @@ public class CacheEntryTest {
         final CountDownLatch latch = new CountDownLatch(1);
         final CountDownLatch latch2 = new CountDownLatch(1);
         Future<Void> future = mExecutorService.submit(() -> {
-            assertThat(mKeyA1.tryLock(0, TimeUnit.SECONDS), is(true));
+            assertThat(mKeyA1.tryLock(0, TimeUnit.SECONDS)).isTrue();
             latch.countDown();
-            assertThat(latch2.await(1, TimeUnit.SECONDS), is(true));
+            assertThat(latch2.await(1, TimeUnit.SECONDS)).isTrue();
             mKeyA1.releaseLock();
             return null;
         });
-        assertThat(latch.await(1, TimeUnit.SECONDS), is(true));
-        assertThat(mKeyA2.tryLock(0, TimeUnit.SECONDS), is(false));
+        assertThat(latch.await(1, TimeUnit.SECONDS)).isTrue();
+        assertThat(mKeyA2.tryLock(0, TimeUnit.SECONDS)).isFalse();
         latch2.countDown();
 
-        assertThat(future.get(1, TimeUnit.SECONDS), is(nullValue()));
+        assertThat(future.get(1, TimeUnit.SECONDS)).isNull();
     }
 
     /**
@@ -110,7 +107,7 @@ public class CacheEntryTest {
         final int WAIT_SECONDS = 5;
         final CountDownLatch lockHeldLatch = new CountDownLatch(1);
         Future<Void> future = mExecutorService.submit(() -> {
-            assertThat(mKeyA1.tryLock(0, TimeUnit.SECONDS), is(true));
+            assertThat(mKeyA1.tryLock(0, TimeUnit.SECONDS)).isTrue();
             try {
                 // signal that lock is held
                 lockHeldLatch.countDown();
@@ -123,19 +120,19 @@ public class CacheEntryTest {
         });
 
         // wait for lock to be held
-        assertThat("lock is held", lockHeldLatch.await(1, TimeUnit.SECONDS), is(true));
+        assertWithMessage("lock is held").that(lockHeldLatch.await(1, TimeUnit.SECONDS)).isTrue();
 
         mStopwatch.start();
         // now wait at least one second
         Thread.sleep(1000);
-        assertThat("lock acquired", mKeyA2.tryLock(WAIT_SECONDS, TimeUnit.SECONDS), is(true));
+        assertWithMessage("lock acquired").that(mKeyA2.tryLock(WAIT_SECONDS, TimeUnit.SECONDS)).isTrue();
         try {
-            assertThat("we actually waited 4 seconds", mStopwatch.elapsed(TimeUnit.MILLISECONDS), greaterThan((WAIT_SECONDS - 1) * 1000L));
+            assertWithMessage("we actually waited 4 seconds").that(mStopwatch.elapsed(TimeUnit.MILLISECONDS)).isGreaterThan((WAIT_SECONDS - 1) * 1000L);
         } finally {
             mKeyA2.releaseLock();
         }
 
         // future should complete relatively quickly, one second should be plenty
-        assertThat(future.get(1, TimeUnit.SECONDS), is(nullValue()));
+        assertThat(future.get(1, TimeUnit.SECONDS)).isNull();
     }
 }

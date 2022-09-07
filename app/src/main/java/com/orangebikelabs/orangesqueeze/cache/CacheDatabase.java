@@ -12,7 +12,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteDoneException;
 import android.database.sqlite.SQLiteException;
 
-import com.google.common.base.Optional;
 import com.google.common.io.ByteSource;
 import com.google.common.io.Closer;
 import com.google.common.io.Files;
@@ -49,6 +48,8 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 import androidx.sqlite.db.SupportSQLiteQuery;
 import androidx.sqlite.db.SupportSQLiteQueryBuilder;
 import androidx.sqlite.db.SupportSQLiteStatement;
+import arrow.core.Option;
+import arrow.core.OptionKt;
 
 import static com.orangebikelabs.orangesqueeze.common.CacheContent.COLUMN_CACHE_EXPIRES_TIMESTAMP;
 import static com.orangebikelabs.orangesqueeze.common.CacheContent.COLUMN_CACHE_ID;
@@ -277,7 +278,7 @@ public class CacheDatabase {
     }
 
     @Nonnull
-    public Optional<ByteSource> loadEntry(CacheEntry entry, String extraSelection, String extraArg) throws CachedItemNotFoundException {
+    public Option<ByteSource> loadEntry(CacheEntry entry, String extraSelection, String extraArg) throws CachedItemNotFoundException {
         String selection = getCacheSelectionClause(extraSelection);
         String[] args = getCacheSelectionArguments(entry, extraArg);
         SupportSQLiteQuery query = SupportSQLiteQueryBuilder.builder(TABLE_CACHE)
@@ -288,7 +289,7 @@ public class CacheDatabase {
         if (cursor == null) {
             Reporting.report("expected non-null cursor");
             // problem with query
-            return Optional.absent();
+            return OptionKt.none();
         }
 
         ByteSource retval = null;
@@ -320,7 +321,7 @@ public class CacheDatabase {
             cursor.close();
         }
 
-        return Optional.fromNullable(retval);
+        return Option.fromNullable(retval);
     }
 
     public void cleanupShrinkExternalCache() {
