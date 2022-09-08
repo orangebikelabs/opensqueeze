@@ -1,3 +1,10 @@
+## [2.6.0-beta.3](https://github.com/orangebikelabs/opensqueeze/compare/v2.6.0-beta.2...v2.6.0-beta.3) (2022-09-08)
+
+
+### Bug Fixes
+
+* crash when total time reported is zero ([f442cf9](https://github.com/orangebikelabs/opensqueeze/commit/f442cf94af5a1158e787458b39f26cd640f4bf43))
+
 ## [2.6.0-beta.2](https://github.com/orangebikelabs/opensqueeze/compare/v2.6.0-beta.1...v2.6.0-beta.2) (2022-09-07)
 
 
