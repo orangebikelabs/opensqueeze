@@ -128,7 +128,7 @@ public class NowPlayingFragment extends AbsNowPlayingFragment {
             }
         });
         mBinding.progress.seekbar.setLabelFormatter((value) -> {
-            return DateUtils.formatElapsedTime((int)value);
+            return DateUtils.formatElapsedTime((int) value);
         });
 
         mShuffleButton = view.findViewById(R.id.shuffle_button);
@@ -212,14 +212,19 @@ public class NowPlayingFragment extends AbsNowPlayingFragment {
     protected void setProgress(PlayerStatus status, boolean estimate) {
         int elapsed = (int) (status.getElapsedTime(estimate));
         int total = (int) (status.getTotalTime());
-        if (total != 0) {
+        if (total > 0) {
             // ensure value never exceeds total time
             int clampedValue = Math.min(elapsed, total);
+
+            // and is never lt zero
+            clampedValue = Math.max(0, clampedValue);
             mBinding.progress.seekbar.setValue(clampedValue);
+            mBinding.progress.seekbar.setValueTo(total);
         } else {
+            // valueTo must always be > valueFrom (which is zero)
             mBinding.progress.seekbar.setValue(0);
+            mBinding.progress.seekbar.setValueTo(1);
         }
-        mBinding.progress.seekbar.setValueTo(total);
     }
 
     @Override
