@@ -1,3 +1,10 @@
+## [2.6.0-alpha.16](https://github.com/orangebikelabs/opensqueeze/compare/v2.6.0-alpha.15...v2.6.0-alpha.16) (2022-09-08)
+
+
+### Bug Fixes
+
+* revert change to default artwork zoom levels ([54ca0a5](https://github.com/orangebikelabs/opensqueeze/commit/54ca0a510893646af49ea2d9e18de07ac0db22a6))
+
 ## [2.6.0-alpha.15](https://github.com/orangebikelabs/opensqueeze/compare/v2.6.0-alpha.14...v2.6.0-alpha.15) (2022-09-08)
 
 
