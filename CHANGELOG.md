@@ -1,3 +1,10 @@
+## [2.6.0-alpha.17](https://github.com/orangebikelabs/opensqueeze/compare/v2.6.0-alpha.16...v2.6.0-alpha.17) (2022-09-08)
+
+
+### Bug Fixes
+
+* volume value should always be visible in main volume control dialog ([396f422](https://github.com/orangebikelabs/opensqueeze/commit/396f422b9a62140739d1c6ad3def5221f5af5592))
+
 ## [2.6.0-alpha.16](https://github.com/orangebikelabs/opensqueeze/compare/v2.6.0-alpha.15...v2.6.0-alpha.16) (2022-09-08)
 
 
