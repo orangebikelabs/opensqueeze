@@ -1,3 +1,16 @@
+## [2.6.0-beta.4](https://github.com/orangebikelabs/opensqueeze/compare/v2.6.0-beta.3...v2.6.0-beta.4) (2022-09-09)
+
+
+### Bug Fixes
+
+* further tweaking to spacing around nowplaying slider ([4bd87d6](https://github.com/orangebikelabs/opensqueeze/commit/4bd87d6c0c145497fa51def707e00432bc2f8ca0))
+* migrate inline seekbars to sliders ([98a4546](https://github.com/orangebikelabs/opensqueeze/commit/98a4546ac1133caeeb5967c0c16422b31b01beaf))
+* revert change to default artwork zoom levels ([54ca0a5](https://github.com/orangebikelabs/opensqueeze/commit/54ca0a510893646af49ea2d9e18de07ac0db22a6))
+* show/hide current playlist button wasn't being updated properly ([2217ebf](https://github.com/orangebikelabs/opensqueeze/commit/2217ebfc455df7c1c70cd72b48e49459fdc3ab75))
+* snackbars were not dismissable ([3403b1c](https://github.com/orangebikelabs/opensqueeze/commit/3403b1c4b551bf50372dbd525d608b0745184b83))
+* tweak now playing slider layout ([0d36dbe](https://github.com/orangebikelabs/opensqueeze/commit/0d36dbe3eb40ba16e92991e8069109376400338d))
+* volume value should always be visible in main volume control dialog ([396f422](https://github.com/orangebikelabs/opensqueeze/commit/396f422b9a62140739d1c6ad3def5221f5af5592))
+
 ## [2.6.0-beta.3](https://github.com/orangebikelabs/opensqueeze/compare/v2.6.0-beta.2...v2.6.0-beta.3) (2022-09-08)
 
 
