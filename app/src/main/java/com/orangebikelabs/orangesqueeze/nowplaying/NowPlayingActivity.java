@@ -169,6 +169,7 @@ public class NowPlayingActivity extends DrawerActivity implements CurrentPlaylis
                     .show(playlistFragment)
                     .commitNow();
             mShowingPlaylist = true;
+            invalidateOptionsMenu();
             return true;
         } else if (item.getItemId() == R.id.menu_nowplaying_hideplaylist) {
             CurrentPlaylistFragment playlistFragment = (CurrentPlaylistFragment) getSupportFragmentManager().findFragmentByTag(CurrentPlaylistFragment.TAG);
@@ -183,6 +184,7 @@ public class NowPlayingActivity extends DrawerActivity implements CurrentPlaylis
                     .show(nowPlayingFragment)
                     .commitNow();
             mShowingPlaylist = false;
+            invalidateOptionsMenu();
             return true;
         } else {
             return super.onOptionsItemSelected(item);
