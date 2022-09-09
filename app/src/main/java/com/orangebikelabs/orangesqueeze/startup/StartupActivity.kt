@@ -7,6 +7,9 @@ package com.orangebikelabs.orangesqueeze.startup
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
+import android.widget.FrameLayout
+import com.orangebikelabs.orangesqueeze.R
 import com.orangebikelabs.orangesqueeze.app.SBActivity
 import com.orangebikelabs.orangesqueeze.common.ConnectionInfo
 import com.orangebikelabs.orangesqueeze.common.LaunchFlags
@@ -37,6 +40,10 @@ class StartupActivity : SBActivity() {
         }
         // unique to startupactivity, check connection state onCreate()
         checkConnectionState()
+    }
+
+    override fun getSnackbarView(): View? {
+        return null
     }
 
     override fun checkConnectionState(): Boolean {

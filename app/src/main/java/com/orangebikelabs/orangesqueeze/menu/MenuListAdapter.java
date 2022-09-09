@@ -8,9 +8,9 @@ package com.orangebikelabs.orangesqueeze.menu;
 import android.content.Context;
 import android.view.View;
 import android.widget.CheckBox;
-import android.widget.SeekBar;
 import android.widget.TextView;
 
+import com.google.android.material.slider.Slider;
 import com.google.common.base.Objects;
 import com.orangebikelabs.orangesqueeze.R;
 import com.orangebikelabs.orangesqueeze.artwork.ThumbnailProcessor;
@@ -35,7 +35,7 @@ public class MenuListAdapter extends BrowseItemBaseAdapter {
     @Override
     protected void bindText1(StandardMenuItem item, TextView text1) {
         if (getItemType(item) == ItemType.IVT_SLIDER) {
-            final int displayValue = item.getMutatedSliderValue() + item.getMenuElement().getSliderMinValue();
+            int displayValue = item.getMutatedSliderValue();
             String iconStyle = item.getMenuElement().getSliderIcons();
             if (Objects.equal(iconStyle, "volume")) {
                 iconStyle = mContext.getString(R.string.menu_volume_slider_label, displayValue);
@@ -49,8 +49,8 @@ public class MenuListAdapter extends BrowseItemBaseAdapter {
     }
 
     @Override
-    protected void bindSlider(StandardMenuItem item, SeekBar seek) {
-        super.bindSlider(item, seek);
+    protected void bindSlider(StandardMenuItem item, Slider slider) {
+        super.bindSlider(item, slider);
     }
 
     @Override

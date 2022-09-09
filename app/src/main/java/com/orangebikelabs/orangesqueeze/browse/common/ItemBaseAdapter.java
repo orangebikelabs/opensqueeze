@@ -8,6 +8,7 @@ package com.orangebikelabs.orangesqueeze.browse.common;
 import android.content.Context;
 
 import androidx.annotation.LayoutRes;
+import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 
 import android.graphics.drawable.Drawable;
@@ -24,10 +25,9 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.SectionIndexer;
-import android.widget.SeekBar;
-import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
 
+import com.google.android.material.slider.Slider;
 import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableList;
 import com.nhaarman.listviewanimations.util.Swappable;
@@ -271,6 +271,7 @@ abstract public class ItemBaseAdapter extends BaseAdapter implements SectionInde
                 } else {
                     iv.setVisibility(View.VISIBLE);
                     Drawable d = ContextCompat.getDrawable(iv.getContext(), iconRid);
+                    OSAssert.assertNotNull(d, "not null");
                     Drawable newDrawable = Drawables.getTintedDrawable(iv.getContext(), d);
                     iv.setImageDrawable(newDrawable);
                     iv.setContentDescription(mContext.getString(R.string.item_icon_desc));
@@ -426,7 +427,8 @@ abstract public class ItemBaseAdapter extends BaseAdapter implements SectionInde
             }
         }
         if (holder.slider != null) {
-            holder.slider.setOnSeekBarChangeListener(mSeekBarChangeListener);
+            holder.slider.addOnChangeListener(mSliderChangeListener);
+            holder.slider.addOnSliderTouchListener(mSliderTouchListener);
 
             // make viewholder available to the slider
             holder.slider.setTag(R.id.tag_viewholder, holder);
@@ -494,11 +496,11 @@ abstract public class ItemBaseAdapter extends BaseAdapter implements SectionInde
         radio.setChecked(item.getMenuElement().isRadioChecked());
     }
 
-    protected void bindSlider(StandardMenuItem item, SeekBar seek) {
+    protected void bindSlider(StandardMenuItem item, Slider slider) {
         MenuElement elem = item.getMenuElement();
-        int offset = elem.getSliderMinValue();
-        seek.setMax(elem.getSliderMaxValue() - offset);
-        seek.setProgress(elem.getSliderInitialValue() - offset);
+        slider.setValueFrom(elem.getSliderMinValue());
+        slider.setValueTo(elem.getSliderMaxValue());
+        slider.setValue(elem.getSliderInitialValue());
     }
 
     protected void bindStandardItem(ViewGroup parentView, View view, StandardMenuItem item, int position) {
@@ -550,30 +552,28 @@ abstract public class ItemBaseAdapter extends BaseAdapter implements SectionInde
         BusProvider.getInstance().post(new ItemActionButtonClickEvent(v, holder.mItem, holder.mPosition));
     };
 
-    final private OnSeekBarChangeListener mSeekBarChangeListener = new OnSeekBarChangeListener() {
-
-        @Override
-        public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-            ViewHolder viewHolder = (ViewHolder) seekBar.getTag(R.id.tag_viewholder);
-            if (viewHolder != null && viewHolder.text1 != null) {
-                ClickableItemHolder holder = (ClickableItemHolder) seekBar.getTag(R.id.tag_clickableitem);
-                if (holder != null) {
-                    holder.mItem.setMutatedSliderValue(progress);
-                    bindText1(holder.mItem, viewHolder.text1);
-                }
+    final private Slider.OnChangeListener mSliderChangeListener = (slider, value, fromUser) -> {
+        ViewHolder viewHolder = (ViewHolder) slider.getTag(R.id.tag_viewholder);
+        if (viewHolder != null && viewHolder.text1 != null) {
+            ClickableItemHolder holder = (ClickableItemHolder) slider.getTag(R.id.tag_clickableitem);
+            if (holder != null) {
+                holder.mItem.setMutatedSliderValue((int)value);
+                bindText1(holder.mItem, viewHolder.text1);
             }
         }
+    };
 
+    final private Slider.OnSliderTouchListener mSliderTouchListener = new Slider.OnSliderTouchListener() {
         @Override
-        public void onStartTrackingTouch(SeekBar seekBar) {
+        public void onStartTrackingTouch(@NonNull Slider slider) {
             // intentionally blank
         }
 
         @Override
-        public void onStopTrackingTouch(SeekBar seekBar) {
-            ClickableItemHolder holder = (ClickableItemHolder) seekBar.getTag(R.id.tag_clickableitem);
-            holder.mItem.setMutatedSliderValue(seekBar.getProgress());
-            BusProvider.getInstance().post(new ItemSliderChangedEvent(seekBar, holder.mItem));
+        public void onStopTrackingTouch(@NonNull Slider slider) {
+            ClickableItemHolder holder = (ClickableItemHolder) slider.getTag(R.id.tag_clickableitem);
+            holder.mItem.setMutatedSliderValue((int)slider.getValue());
+            BusProvider.getInstance().post(new ItemSliderChangedEvent(slider, holder.mItem));
         }
     };
 
@@ -613,7 +613,7 @@ abstract public class ItemBaseAdapter extends BaseAdapter implements SectionInde
         final public RadioButton radio;
 
         @Nullable
-        final public SeekBar slider;
+        final public Slider slider;
     }
 
     static private class ClickableItemHolder {
@@ -705,10 +705,11 @@ abstract public class ItemBaseAdapter extends BaseAdapter implements SectionInde
 
         /**
          * Constructs the indexer.
+         *
          * @param alphabet string containing the alphabet, with space as the first character.
-         *        For example, use the string " ABCDEFGHIJKLMNOPQRSTUVWXYZ" for English indexing.
-         *        The characters must be uppercase and be sorted in ascii/unicode order. Basically
-         *        characters in the alphabet will show up as preview letters.
+         *                 For example, use the string " ABCDEFGHIJKLMNOPQRSTUVWXYZ" for English indexing.
+         *                 The characters must be uppercase and be sorted in ascii/unicode order. Basically
+         *                 characters in the alphabet will show up as preview letters.
          */
         public SimpleAlphabetIndexer(CharSequence alphabet) {
             mAlphabet = alphabet;
@@ -725,6 +726,7 @@ abstract public class ItemBaseAdapter extends BaseAdapter implements SectionInde
 
         /**
          * Returns the section array constructed from the alphabet provided in the constructor.
+         *
          * @return the section array
          */
         @Override
@@ -749,6 +751,7 @@ abstract public class ItemBaseAdapter extends BaseAdapter implements SectionInde
         /**
          * Performs a binary search or cache lookup to find the first row that
          * matches a given section's starting letter.
+         *
          * @param sectionIndex the section to search for
          * @return the row index of the first occurrence, or the nearest next letter.
          * For instance, if searching for "T" and no "T" is found, then the first
@@ -777,6 +780,7 @@ abstract public class ItemBaseAdapter extends BaseAdapter implements SectionInde
 
             char letter = mAlphabet.charAt(sectionIndex);
             String targetLetter = Character.toString(letter);
+            //noinspection UnnecessaryLocalVariable
             int key = letter;
             // Check map
             if (Integer.MIN_VALUE != (pos = alphaMap.get(key, Integer.MIN_VALUE))) {

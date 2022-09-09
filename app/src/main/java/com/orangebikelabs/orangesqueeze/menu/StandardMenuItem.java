@@ -145,7 +145,6 @@ public class StandardMenuItem extends Item {
 
     synchronized public void setMutatedSliderValue(int value) {
         mMutatedSliderValue = value;
-
     }
 
     synchronized public int getMutatedSliderValue() {

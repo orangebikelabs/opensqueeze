@@ -62,8 +62,10 @@ class PlayerSleepDialog private constructor(private val lifecycleOwner: Lifecycl
 
     private fun initViews() {
         binding.timePicker.setIs24HourView(SBPreferences.get().shouldUse24HourTimeFormat())
+        binding.sleepBar.valueFrom = 0f
         binding.sleepBar.valueTo = MAX_SLEEP_TIME.toFloat() / SEEKER_MULTIPLIER
-        binding.sleepBar.value = SBPreferences.get().getLastPlayerSleepTime(TimeUnit.SECONDS).toInt() / 60f / SEEKER_MULTIPLIER
+        binding.sleepBar.value = (SBPreferences.get().getLastPlayerSleepTime(TimeUnit.SECONDS).toInt() / 60f / SEEKER_MULTIPLIER)
+                .coerceIn(binding.sleepBar.valueFrom, binding.sleepBar.valueTo)
         binding.sleepBar.addOnChangeListener(Slider.OnChangeListener { _, _, fromUser ->
             if (fromUser) {
                 updateText()
@@ -97,7 +99,7 @@ class PlayerSleepDialog private constructor(private val lifecycleOwner: Lifecycl
     }
 
     private fun updateText() {
-        // for visual consistency, always use sleep time displayed by seekbar
+        // for visual consistency, always use sleep time displayed by slider
         val sleepTime = binding.sleepBar.value.toInt() * SEEKER_MULTIPLIER
         if (sleepTime == 0) {
             val diff = playerStatus.totalTime - playerStatus.getElapsedTime(true)

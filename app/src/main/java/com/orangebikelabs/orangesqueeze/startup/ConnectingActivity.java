@@ -7,6 +7,7 @@ package com.orangebikelabs.orangesqueeze.startup;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 
 import com.orangebikelabs.orangesqueeze.R;
@@ -53,6 +54,12 @@ public class ConnectingActivity extends SBActivity {
         super.onDestroy();
 
         mBus.unregister(mEventReceiver);
+    }
+
+    @Nullable
+    @Override
+    protected View getSnackbarView() {
+        return findViewById(R.id.connecting_text);
     }
 
     /**
