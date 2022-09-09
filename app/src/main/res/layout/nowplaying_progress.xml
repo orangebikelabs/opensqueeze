@@ -10,7 +10,7 @@
 
     <Space
         android:layout_width="1px"
-        android:layout_height="50dp" />
+        android:layout_height="56dp" />
 
     <TextView
         android:id="@+id/current_time"
@@ -18,7 +18,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="start|bottom"
         android:layout_marginStart="12dp"
-        android:text="--:--"
+        android:text="00:45"
         android:textAppearance="?android:attr/textAppearanceSmall"
         tools:ignore="HardcodedText" />
 
@@ -38,7 +38,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="end|bottom"
         android:layout_marginEnd="12dp"
-        android:text="--:--"
+        android:text="5:03"
         android:textAppearance="?android:attr/textAppearanceSmall"
         tools:ignore="HardcodedText">
 
