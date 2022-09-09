@@ -1,3 +1,12 @@
+## [2.6.0-alpha.18](https://github.com/orangebikelabs/opensqueeze/compare/v2.6.0-alpha.17...v2.6.0-alpha.18) (2022-09-09)
+
+
+### Bug Fixes
+
+* further tweaking to spacing around nowplaying slider ([4bd87d6](https://github.com/orangebikelabs/opensqueeze/commit/4bd87d6c0c145497fa51def707e00432bc2f8ca0))
+* show/hide current playlist button wasn't being updated properly ([2217ebf](https://github.com/orangebikelabs/opensqueeze/commit/2217ebfc455df7c1c70cd72b48e49459fdc3ab75))
+* tweak now playing slider layout ([0d36dbe](https://github.com/orangebikelabs/opensqueeze/commit/0d36dbe3eb40ba16e92991e8069109376400338d))
+
 ## [2.6.0-alpha.17](https://github.com/orangebikelabs/opensqueeze/compare/v2.6.0-alpha.16...v2.6.0-alpha.17) (2022-09-08)
 
 
