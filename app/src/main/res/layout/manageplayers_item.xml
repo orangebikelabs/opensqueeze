@@ -7,6 +7,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:minHeight="?attr/listPreferredItemHeight"
     android:orientation="horizontal"
     tools:context=".ui.MainActivity">
@@ -53,9 +54,11 @@
         <com.google.android.material.slider.Slider
             android:id="@+id/volume_bar"
             android:layout_width="match_parent"
-            android:layout_height="32dp"
-            android:contentDescription="@string/volume_slider_desc"
-            android:max="@integer/volume_max" />
+            android:layout_height="wrap_content"
+            android:value="50"
+            android:valueTo="@integer/volume_max"
+            app:labelBehavior="visible"
+            android:contentDescription="@string/volume_slider_desc" />
     </LinearLayout>
 
     <com.google.android.material.switchmaterial.SwitchMaterial

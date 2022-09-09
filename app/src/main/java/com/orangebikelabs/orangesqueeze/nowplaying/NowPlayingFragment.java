@@ -106,7 +106,7 @@ public class NowPlayingFragment extends AbsNowPlayingFragment {
         mBinding.info.trackText.setOnClickListener(mTrackClickedListener);
         mAutosizeTextHelper.applyAutoSize(mBinding.info.trackText, 2);
 
-        mBinding.progress.seekbar.addOnChangeListener((slider, value, fromUser) -> {
+        mBinding.progress.slider.addOnChangeListener((slider, value, fromUser) -> {
             PlayerStatus status = mSbContext.getPlayerStatus();
             if (fromUser && mElapsedText != null && status != null) {
                 PlayerStatus updated = status.withElapsedTime(value);
@@ -115,7 +115,7 @@ public class NowPlayingFragment extends AbsNowPlayingFragment {
                 quickSetText(mDurationText, getDurationText(updated, false));
             }
         });
-        mBinding.progress.seekbar.addOnSliderTouchListener(new Slider.OnSliderTouchListener() {
+        mBinding.progress.slider.addOnSliderTouchListener(new Slider.OnSliderTouchListener() {
             @Override
             public void onStartTrackingTouch(@NonNull Slider slider) {
                 mInterimUpdateMode = InterimUpdateMode.OFF;
@@ -127,7 +127,7 @@ public class NowPlayingFragment extends AbsNowPlayingFragment {
                 mLastSeekCommand = mSbContext.sendPlayerCommand("time", String.valueOf(slider.getValue()));
             }
         });
-        mBinding.progress.seekbar.setLabelFormatter((value) -> {
+        mBinding.progress.slider.setLabelFormatter((value) -> {
             return DateUtils.formatElapsedTime((int) value);
         });
 
@@ -176,14 +176,14 @@ public class NowPlayingFragment extends AbsNowPlayingFragment {
 //        } else {
 //            mTrackPositionBar.setVisibility(View.INVISIBLE);
 //        }
-        mBinding.progress.seekbar.setEnabled(true);
+        mBinding.progress.slider.setEnabled(true);
 
         boolean trackTransition = quickSetText(mTrackText, getTrackText(status));
 
         if (!trackTransition) {
             // don't transition on new track text if we are at the very end of the track
             // this prevents some superflous transition animations
-            trackTransition = Math.abs(mBinding.progress.seekbar.getValueTo() - status.getTotalTime()) >= 0.1;
+            trackTransition = Math.abs(mBinding.progress.slider.getValueTo() - status.getTotalTime()) >= 0.1;
         }
 
         if (mShuffleButton != null) {
@@ -218,12 +218,12 @@ public class NowPlayingFragment extends AbsNowPlayingFragment {
 
             // and is never lt zero
             clampedValue = Math.max(0, clampedValue);
-            mBinding.progress.seekbar.setValue(clampedValue);
-            mBinding.progress.seekbar.setValueTo(total);
+            mBinding.progress.slider.setValue(clampedValue);
+            mBinding.progress.slider.setValueTo(total);
         } else {
             // valueTo must always be > valueFrom (which is zero)
-            mBinding.progress.seekbar.setValue(0);
-            mBinding.progress.seekbar.setValueTo(1);
+            mBinding.progress.slider.setValue(0);
+            mBinding.progress.slider.setValueTo(1);
         }
     }
 

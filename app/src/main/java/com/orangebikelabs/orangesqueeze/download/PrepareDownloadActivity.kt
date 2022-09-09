@@ -14,11 +14,12 @@ import androidx.core.app.NavUtils
 import android.view.MenuItem
 import android.view.View
 import android.widget.FrameLayout
-import androidx.appcompat.widget.Toolbar
 import androidx.core.app.TaskStackBuilder
 import androidx.fragment.app.commitNow
 import com.orangebikelabs.orangesqueeze.common.NavigationCommandSet
 import com.orangebikelabs.orangesqueeze.common.NavigationItem
+import com.orangebikelabs.orangesqueeze.databinding.ToolbarActivityBinding
+import com.orangebikelabs.orangesqueeze.databinding.ToolbarBinding
 
 /**
  * @author tsandee
@@ -34,16 +35,18 @@ class PrepareDownloadActivity : SBActivity() {
         }
     }
 
-    override fun getSnackbarView(): View? {
-        return findViewById<FrameLayout>(R.id.toolbar_content)
-    }
+    // avoid use of lateinit because sometimes snackbar notice comes before onCreate() and it would crash
+    private var binding: ToolbarActivityBinding? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.toolbar_activity)
 
-        val toolbar: Toolbar = findViewById(R.id.toolbar)
-        setSupportActionBar(toolbar)
+        binding = ToolbarActivityBinding.inflate(layoutInflater).also {
+            setContentView(it.root)
+
+            val toolbarBinding = ToolbarBinding.bind(it.root)
+            setSupportActionBar(toolbarBinding.toolbar)
+        }
 
         supportActionBar?.setHomeButtonEnabled(true)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
@@ -57,6 +60,10 @@ class PrepareDownloadActivity : SBActivity() {
                 add(R.id.toolbar_content, PrepareDownloadFragment.newInstance(item))
             }
         }
+    }
+
+    override fun getSnackbarView(): View? {
+        return binding?.toolbarContent
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

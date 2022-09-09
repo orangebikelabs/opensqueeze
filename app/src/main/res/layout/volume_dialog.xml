@@ -45,7 +45,7 @@
         <com.google.android.material.slider.Slider
             android:id="@+id/volume"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             app:labelBehavior="visible"
             android:contentDescription="@string/volume_slider_desc" />

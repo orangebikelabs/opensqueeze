@@ -6,8 +6,8 @@
 package com.orangebikelabs.orangesqueeze.common.event;
 
 import androidx.annotation.Keep;
-import android.widget.SeekBar;
 
+import com.google.android.material.slider.Slider;
 import com.google.common.base.MoreObjects;
 import com.orangebikelabs.orangesqueeze.menu.StandardMenuItem;
 
@@ -22,12 +22,12 @@ public class ItemSliderChangedEvent extends AbsViewEvent {
     final private StandardMenuItem mItem;
 
     @Nonnull
-    final private SeekBar mSeekBar;
+    final private Slider mSlider;
 
-    public ItemSliderChangedEvent(SeekBar seekBar, StandardMenuItem item) {
-        super(seekBar);
+    public ItemSliderChangedEvent(Slider slider, StandardMenuItem item) {
+        super(slider);
 
-        mSeekBar = seekBar;
+        mSlider = slider;
         mItem = item;
     }
 
@@ -37,8 +37,8 @@ public class ItemSliderChangedEvent extends AbsViewEvent {
     }
 
     @Nonnull
-    public SeekBar getSeekBar() {
-        return mSeekBar;
+    public Slider getSlider() {
+        return mSlider;
     }
 
     @Override

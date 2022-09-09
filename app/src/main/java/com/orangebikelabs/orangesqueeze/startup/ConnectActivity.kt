@@ -6,7 +6,6 @@ package com.orangebikelabs.orangesqueeze.startup
 
 import android.os.Bundle
 import android.view.View
-import android.widget.FrameLayout
 import androidx.fragment.app.commitNow
 import com.orangebikelabs.orangesqueeze.R
 import com.orangebikelabs.orangesqueeze.app.SBActivity
@@ -20,15 +19,20 @@ import com.orangebikelabs.orangesqueeze.databinding.ToolbarBinding
  * @author tbsandee@orangebikelabs.com
  */
 open class ConnectActivity : SBActivity() {
+
+    // avoid use of lateinit because sometimes snackbar notice comes before onCreate() and it would crash
+    protected var binding: ToolbarActivityBinding? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val binding = ToolbarActivityBinding.inflate(layoutInflater)
-        val toolbarBinding = ToolbarBinding.bind(binding.root)
-        setContentView(binding.root)
+        binding = ToolbarActivityBinding.inflate(layoutInflater).also {
+            setContentView(it.root)
 
-        setSupportActionBar(toolbarBinding.toolbar)
-        supportActionBar?.hide()
+            val toolbarBinding = ToolbarBinding.bind(it.root)
+            setSupportActionBar(toolbarBinding.toolbar)
+            supportActionBar?.hide()
+        }
 
         if (savedInstanceState == null) {
             supportFragmentManager.commitNow {
@@ -38,7 +42,7 @@ open class ConnectActivity : SBActivity() {
     }
 
     override fun getSnackbarView(): View? {
-        return findViewById<FrameLayout>(R.id.toolbar_content)
+        return binding?.toolbarContent
     }
 
     override fun isSupportedConnectionState(ci: ConnectionInfo): Boolean {
