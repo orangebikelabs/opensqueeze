@@ -1,3 +1,11 @@
+## [2.6.0-alpha.19](https://github.com/orangebikelabs/opensqueeze/compare/v2.6.0-alpha.18...v2.6.0-alpha.19) (2022-09-09)
+
+
+### Bug Fixes
+
+* migrate inline seekbars to sliders ([98a4546](https://github.com/orangebikelabs/opensqueeze/commit/98a4546ac1133caeeb5967c0c16422b31b01beaf))
+* snackbars were not dismissable ([3403b1c](https://github.com/orangebikelabs/opensqueeze/commit/3403b1c4b551bf50372dbd525d608b0745184b83))
+
 ## [2.6.0-alpha.18](https://github.com/orangebikelabs/opensqueeze/compare/v2.6.0-alpha.17...v2.6.0-alpha.18) (2022-09-09)
 
 
