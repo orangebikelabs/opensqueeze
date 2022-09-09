@@ -8,12 +8,16 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
+    <Space
+        android:layout_width="1px"
+        android:layout_height="50dp" />
+
     <TextView
         android:id="@+id/current_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="start|bottom"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="12dp"
         android:text="--:--"
         android:textAppearance="?android:attr/textAppearanceSmall"
         tools:ignore="HardcodedText" />
@@ -21,11 +25,11 @@
     <com.google.android.material.slider.Slider
         android:id="@+id/seekbar"
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:value="50"
+        android:valueTo="100"
         android:layout_marginStart="4dp"
         android:layout_marginEnd="4dp"
-        android:maxHeight="60dp"
-        android:minHeight="60dp"
-        android:layout_height="wrap_content"
         android:contentDescription="@string/track_progress_seek_desc" />
 
     <TextView
@@ -33,7 +37,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end|bottom"
-        android:layout_marginEnd="8dp"
+        android:layout_marginEnd="12dp"
         android:text="--:--"
         android:textAppearance="?android:attr/textAppearanceSmall"
         tools:ignore="HardcodedText">
