@@ -235,10 +235,6 @@ abstract public class SBActivity extends AppCompatActivity {
         super.onStop();
     }
 
-    protected View getContentView() {
-        return findViewById(android.R.id.content);
-    }
-
     @Override
     protected void onRestart() {
         logVerbose("onRestart");
@@ -310,6 +306,9 @@ abstract public class SBActivity extends AppCompatActivity {
 
         return handled;
     }
+
+    @Nullable
+    protected abstract View getSnackbarView();
 
     private boolean handleVolumeKeycodes(int keyCode) {
         boolean handled = false;
@@ -446,7 +445,7 @@ abstract public class SBActivity extends AppCompatActivity {
 
     protected void showPlayerSnackbar(PlayerStatus status) {
         OSAssert.assertMainThread();
-        if (!mStarted || isFinishing() || !allowSnackbarDisplay() || getContentView() == null) {
+        if (!mStarted || isFinishing() || !allowSnackbarDisplay() || getSnackbarView() == null) {
             sDeferredPlayerSnackbar = status;
             return;
         }
@@ -455,7 +454,7 @@ abstract public class SBActivity extends AppCompatActivity {
         if (!status.getId().equals(mLastShownPlayerSnackbar)) {
             mLastShownPlayerSnackbar = status.getId();
             String text = getString(R.string.change_player_snackbar, status.getName());
-            Snackbar.make(getContentView(), HtmlCompat.fromHtml(text, HtmlCompat.FROM_HTML_MODE_COMPACT), Snackbar.LENGTH_SHORT).show();
+            Snackbar.make(getSnackbarView(), HtmlCompat.fromHtml(text, HtmlCompat.FROM_HTML_MODE_COMPACT), Snackbar.LENGTH_SHORT).show();
         }
     }
 

@@ -98,7 +98,7 @@ abstract class DrawerActivity : SBActivity() {
         super.onCreate(savedInstanceState)
         drawerBinding = DrawerBinding.inflate(layoutInflater)
         toolbarBinding = ToolbarBinding.bind(drawerBinding.root)
-        contentView = drawerBinding.root
+        setContentView(drawerBinding.root)
 
         drawerBinding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED, GRAVITY_BROWSE_DRAWER)
         drawerBinding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED, GRAVITY_PLAYER_DRAWER)
@@ -196,6 +196,10 @@ abstract class DrawerActivity : SBActivity() {
                 drawerBinding.drawerLayout.closeDrawer(GRAVITY_PLAYER_DRAWER)
             }
         }
+    }
+
+    override fun getSnackbarView(): View? {
+        return drawerBinding.drawerLayout
     }
 
     override fun onStart() {

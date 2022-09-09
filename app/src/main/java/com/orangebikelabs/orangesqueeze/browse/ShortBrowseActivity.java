@@ -15,6 +15,7 @@ import androidx.core.app.TaskStackBuilder;
 import androidx.appcompat.app.ActionBar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.orangebikelabs.orangesqueeze.R;
 import com.orangebikelabs.orangesqueeze.app.SBActivity;
@@ -102,6 +103,12 @@ public class ShortBrowseActivity extends SBActivity {
             transaction.add(R.id.toolbar_content, newFragment);
             transaction.commitNow();
         }
+    }
+
+    @Nullable
+    @Override
+    protected View getSnackbarView() {
+        return findViewById(R.id.toolbar_content);
     }
 
     @Override

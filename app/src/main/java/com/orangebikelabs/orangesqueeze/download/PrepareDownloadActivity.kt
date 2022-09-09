@@ -12,6 +12,8 @@ import android.content.Intent
 import com.orangebikelabs.orangesqueeze.ui.MainActivity
 import androidx.core.app.NavUtils
 import android.view.MenuItem
+import android.view.View
+import android.widget.FrameLayout
 import androidx.appcompat.widget.Toolbar
 import androidx.core.app.TaskStackBuilder
 import androidx.fragment.app.commitNow
@@ -30,6 +32,10 @@ class PrepareDownloadActivity : SBActivity() {
             NavigationItem.putNavigationItem(intent, item)
             return intent
         }
+    }
+
+    override fun getSnackbarView(): View? {
+        return findViewById<FrameLayout>(R.id.toolbar_content)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

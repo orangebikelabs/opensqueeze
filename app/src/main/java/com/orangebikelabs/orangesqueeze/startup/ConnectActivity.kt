@@ -5,6 +5,8 @@
 package com.orangebikelabs.orangesqueeze.startup
 
 import android.os.Bundle
+import android.view.View
+import android.widget.FrameLayout
 import androidx.fragment.app.commitNow
 import com.orangebikelabs.orangesqueeze.R
 import com.orangebikelabs.orangesqueeze.app.SBActivity
@@ -23,7 +25,7 @@ open class ConnectActivity : SBActivity() {
 
         val binding = ToolbarActivityBinding.inflate(layoutInflater)
         val toolbarBinding = ToolbarBinding.bind(binding.root)
-        contentView = binding.root
+        setContentView(binding.root)
 
         setSupportActionBar(toolbarBinding.toolbar)
         supportActionBar?.hide()
@@ -33,6 +35,10 @@ open class ConnectActivity : SBActivity() {
                 add(R.id.toolbar_content, ConnectFragment(), null)
             }
         }
+    }
+
+    override fun getSnackbarView(): View? {
+        return findViewById<FrameLayout>(R.id.toolbar_content)
     }
 
     override fun isSupportedConnectionState(ci: ConnectionInfo): Boolean {
