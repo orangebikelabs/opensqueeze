@@ -1,3 +1,10 @@
+## [2.6.0-alpha.20](https://github.com/orangebikelabs/opensqueeze/compare/v2.6.0-alpha.19...v2.6.0-alpha.20) (2022-09-12)
+
+
+### Bug Fixes
+
+* bump core-ktx from 1.8.0 to 1.9.0 ([25b0f03](https://github.com/orangebikelabs/opensqueeze/commit/25b0f032ec7a2863ecaa0d2b2435ca5f8677fe9f))
+
 ## [2.6.0-alpha.19](https://github.com/orangebikelabs/opensqueeze/compare/v2.6.0-alpha.18...v2.6.0-alpha.19) (2022-09-09)
 
 
