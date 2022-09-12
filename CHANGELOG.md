@@ -1,3 +1,10 @@
+## [2.6.0-alpha.21](https://github.com/orangebikelabs/opensqueeze/compare/v2.6.0-alpha.20...v2.6.0-alpha.21) (2022-09-12)
+
+
+### Bug Fixes
+
+* bump appcompat from 1.6.0-beta01 to 1.6.0-rc01 ([c8339a1](https://github.com/orangebikelabs/opensqueeze/commit/c8339a1e2d4d481a521809a3775279b5bdc997ce))
+
 ## [2.6.0-alpha.20](https://github.com/orangebikelabs/opensqueeze/compare/v2.6.0-alpha.19...v2.6.0-alpha.20) (2022-09-12)
 
 
