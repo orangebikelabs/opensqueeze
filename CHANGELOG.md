@@ -1,3 +1,10 @@
+## [2.6.0-alpha.22](https://github.com/orangebikelabs/opensqueeze/compare/v2.6.0-alpha.21...v2.6.0-alpha.22) (2022-09-19)
+
+
+### Bug Fixes
+
+* bump mockk from 1.12.7 to 1.12.8 ([ff74d40](https://github.com/orangebikelabs/opensqueeze/commit/ff74d409446ec233560be524cf0620963afc60f7))
+
 ## [2.6.0-alpha.21](https://github.com/orangebikelabs/opensqueeze/compare/v2.6.0-alpha.20...v2.6.0-alpha.21) (2022-09-12)
 
 
