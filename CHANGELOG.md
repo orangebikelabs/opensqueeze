@@ -1,3 +1,12 @@
+## [2.6.0-alpha.23](https://github.com/orangebikelabs/opensqueeze/compare/v2.6.0-alpha.22...v2.6.0-alpha.23) (2022-09-26)
+
+
+### Bug Fixes
+
+* bump arrow-core from 1.1.2 to 1.1.3 ([225d676](https://github.com/orangebikelabs/opensqueeze/commit/225d67630f8ab1fff997e4e22725421ae1f21574))
+* bump fragment-ktx from 1.5.2 to 1.5.3 ([7dc269c](https://github.com/orangebikelabs/opensqueeze/commit/7dc269c330bd3b0cf45933524d016cf32f3f6071))
+* bump mockk from 1.12.8 to 1.13.1 ([d00dc72](https://github.com/orangebikelabs/opensqueeze/commit/d00dc7243c784b0f902ad0d9efdd463f786d9f40))
+
 ## [2.6.0-alpha.22](https://github.com/orangebikelabs/opensqueeze/compare/v2.6.0-alpha.21...v2.6.0-alpha.22) (2022-09-19)
 
 
