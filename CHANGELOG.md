@@ -1,3 +1,10 @@
+## [2.6.0-alpha.24](https://github.com/orangebikelabs/opensqueeze/compare/v2.6.0-alpha.23...v2.6.0-alpha.24) (2022-09-27)
+
+
+### Bug Fixes
+
+* increase/tweak sizes of now playing controls ([05168bf](https://github.com/orangebikelabs/opensqueeze/commit/05168bf2b9adc6d85d365dc646c8676e45dfb859))
+
 ## [2.6.0-alpha.23](https://github.com/orangebikelabs/opensqueeze/compare/v2.6.0-alpha.22...v2.6.0-alpha.23) (2022-09-26)
 
 
