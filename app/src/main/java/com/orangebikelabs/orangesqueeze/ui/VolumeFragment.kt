@@ -14,6 +14,7 @@ import android.os.SystemClock
 import android.view.KeyEvent
 import android.view.MotionEvent
 import android.view.View
+import androidx.core.view.isVisible
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.customview.customView
 import com.afollestad.materialdialogs.customview.getCustomView
@@ -171,7 +172,9 @@ class VolumeFragment : SBDialogFragment() {
             })
             binding.volume.setLabelFormatter { value -> value.toInt().toString() }
 
-            binding.volume.valueTo = 100.toFloat()
+            binding.volume.stepSize = 1f
+            binding.volume.isTickVisible = false
+            binding.volume.valueTo = 100f
             binding.increaseVolumeButton.setOnClickListener {
                 controlChangeVolumeSmallUp()
             }
@@ -187,13 +190,6 @@ class VolumeFragment : SBDialogFragment() {
     override fun onStart() {
         super.onStart()
         setTimeout(true)
-    }
-
-    private fun setVolumeLocked(locked: Boolean) {
-        // TODO implement configurable volume lock behavior
-//		mVolume.setEnabled(!locked);
-//		mIncreaseButton.setEnabled(!locked);
-//		mDecreaseButton.setEnabled(!locked);
     }
 
     private val eventReceiver: Any = object : Any() {
@@ -269,21 +265,17 @@ class VolumeFragment : SBDialogFragment() {
                 binding.volume.value = volume.toFloat()
                 updateVolumeText(volume)
                 lastResult = null
-                setVolumeLocked(playerStatus.isVolumeLocked)
             }
         }
     }
 
-    private fun updateVolumeText(volume: Int) {
+    private fun updateVolumeText(@Suppress("UNUSED_PARAMETER") volume: Int) {
         val playerStatus = playerStatus ?: return
         if (!isAdded) {
             return
         }
         binding.playerNameLabel.text = getString(R.string.player_label, playerStatus.name)
-        val newVisibility = if (playerStatus.isVolumeLocked) View.VISIBLE else View.GONE
-        if (binding.volumeLockedLabel.visibility != newVisibility) {
-            binding.volumeLockedLabel.visibility = newVisibility
-        }
+        binding.volumeLockedLabel.isVisible = playerStatus.isVolumeLocked
     }
 
     override fun onDismiss(dialog: DialogInterface) {

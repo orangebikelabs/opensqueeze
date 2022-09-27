@@ -7,7 +7,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:minHeight="?attr/listPreferredItemHeight"
     android:orientation="horizontal"
     tools:context=".ui.MainActivity">
@@ -48,17 +47,28 @@
         android:layout_marginEnd="0dp"
         android:layout_marginRight="0dp"
         android:layout_weight="0.5"
+        android:gravity="center"
         android:minWidth="125dp"
         android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/player_volume_label"
+            style="@style/Text.SecondLine"
+            android:padding="0dp"
+            android:layout_marginBottom="-14dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="35"
+            android:labelFor="@+id/volume_bar"
+            tools:ignore="HardcodedText" />
 
         <com.google.android.material.slider.Slider
             android:id="@+id/volume_bar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:contentDescription="@string/volume_slider_desc"
             android:value="50"
-            android:valueTo="@integer/volume_max"
-            app:labelBehavior="visible"
-            android:contentDescription="@string/volume_slider_desc" />
+            android:valueTo="@integer/volume_max" />
     </LinearLayout>
 
     <com.google.android.material.switchmaterial.SwitchMaterial

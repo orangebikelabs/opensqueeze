@@ -5,9 +5,9 @@
 
 package com.orangebikelabs.orangesqueeze.players;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 
-import androidx.annotation.NonNull;
 import arrow.core.Option;
 
 import android.view.LayoutInflater;
@@ -290,9 +290,11 @@ public class ManagePlayersAdapter extends ArrayAdapter<AbsPlayerItem> {
         return convertView;
     }
 
-    protected void setVolume(Slider sb, int volume) {
+    @SuppressLint("SetTextI18n")
+    protected void setVolume(Slider sb, TextView playerVolumeLabel, int volume) {
         View parentView = (View) sb.getTag(R.id.tag_containerview);
         PlayerId pid = (PlayerId) parentView.getTag(R.id.tag_playerid);
+        playerVolumeLabel.setText(Integer.toString(volume));
 
         mOnPlayerCommandListener.onPlayerCommand(pid, PlayerCommand.VOLUME, volume);
     }
@@ -420,33 +422,41 @@ public class ManagePlayersAdapter extends ArrayAdapter<AbsPlayerItem> {
             Slider volumeBar = view.findViewById(R.id.volume_bar);
             View actionButton = view.findViewById(R.id.action_button);
             TextView playerStatusText = view.findViewById(R.id.player_status_label);
+            final TextView playerVolumeLabel = view.findViewById(R.id.player_volume_label);
+
             if (powerButton != null) {
                 powerButton.setTag(R.id.tag_containerview, view);
                 powerButton.setOnClickListener(mPowerButtonClicked);
             }
 
             if (volumeBar != null) {
+                OSAssert.assertNotNull(playerVolumeLabel, "should never be null if volumebar is non-null");
+
+                volumeBar.setTickVisible(false);
+                volumeBar.setStepSize(1.0f);
                 volumeBar.setValueFrom(0);
                 volumeBar.setValueTo(100);
                 volumeBar.setTag(R.id.tag_containerview, view);
                 volumeBar.addOnChangeListener((slider, value, fromUser) -> {
                     if (fromUser) {
                         // only respond to user-generated events
-                        setVolume(slider, (int) value);
+                        setVolume(slider, playerVolumeLabel, (int) value);
                     }
                 });
                 volumeBar.addOnSliderTouchListener(new Slider.OnSliderTouchListener() {
                     @Override
-                    public void onStartTrackingTouch(@NonNull Slider slider) {
+                    public void onStartTrackingTouch(Slider slider) {
                         mInVolumeDrag = true;
+                        playerVolumeLabel.setVisibility(View.INVISIBLE);
                     }
 
                     @Override
-                    public void onStopTrackingTouch(@NonNull Slider slider) {
+                    public void onStopTrackingTouch(Slider slider) {
                         mInVolumeDrag = false;
+                        playerVolumeLabel.setVisibility(View.VISIBLE);
                         // called at the end of a touch/drag cycle, call with update to make
                         // sure we are in sync with remote volume
-                        setVolume(slider, (int) slider.getValue());
+                        setVolume(slider, playerVolumeLabel, (int) slider.getValue());
                     }
                 });
                 volumeBar.setLabelFormatter((value -> Integer.toString((int) value)));
