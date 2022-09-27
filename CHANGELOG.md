@@ -1,3 +1,10 @@
+## [2.6.0-alpha.27](https://github.com/orangebikelabs/opensqueeze/compare/v2.6.0-alpha.26...v2.6.0-alpha.27) (2022-09-27)
+
+
+### Bug Fixes
+
+* remove unused mockk agent dependency ([46e49d0](https://github.com/orangebikelabs/opensqueeze/commit/46e49d08aaf7125b92ccb72f532f82f6496b87f9))
+
 ## [2.6.0-alpha.26](https://github.com/orangebikelabs/opensqueeze/compare/v2.6.0-alpha.25...v2.6.0-alpha.26) (2022-09-27)
 
 
