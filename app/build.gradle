@@ -3,10 +3,6 @@
  * Use of this source code is governed by the license that can be found in the LICENSE file.
  */
 
-plugins {
-    id 'com.adarshr.test-logger' version '3.2.0'
-}
-
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
@@ -34,8 +30,6 @@ android {
         exclude 'META-INF/NOTICE'
         exclude 'META-INF/services/com.fasterxml.jackson.core.JsonFactory'
         exclude 'META-INF/MANIFEST.MF'
-        exclude 'META-INF/LICENSE.md'
-        exclude 'META-INF/LICENSE-notice.md'
     }
 
     defaultConfig {
@@ -256,3 +250,10 @@ task archiveApks {
     }
 }
 archiveApks.mustRunAfter assemble
+
+// Test Logging
+tasks.withType(Test) {
+    testLogging {
+        events "started", "passed", "skipped", "failed"
+    }
+}
