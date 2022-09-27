@@ -157,8 +157,8 @@
 
     <style name="Button.Control">
         <item name="android:padding">?attr/controlButtonPadding</item>
-        <item name="android:layout_width">56dp</item>
-        <item name="android:layout_height">56dp</item>
+        <item name="android:layout_width">64dp</item>
+        <item name="android:layout_height">64dp</item>
         <item name="android:background">?attr/selectableItemBackgroundBorderless</item>
         <item name="android:scaleType">centerCrop</item>
         <item name="android:tag">control</item>
@@ -169,6 +169,8 @@
     </style>
 
     <style name="Button.Control.Tinted.Large">
+        <item name="android:layout_width">72dp</item>
+        <item name="android:layout_height">72dp</item>
     </style>
 
     <style name="Button.AppWidgetControl">
