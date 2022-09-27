@@ -1,3 +1,10 @@
+## [2.6.0-alpha.26](https://github.com/orangebikelabs/opensqueeze/compare/v2.6.0-alpha.25...v2.6.0-alpha.26) (2022-09-27)
+
+
+### Bug Fixes
+
+* change to simpler test logging that doesn't use plugin so avoid pulling junit 5 into classpath ([788a380](https://github.com/orangebikelabs/opensqueeze/commit/788a3804daf68bfed0ff326b2e0b3f510f8d0306))
+
 ## [2.6.0-alpha.25](https://github.com/orangebikelabs/opensqueeze/compare/v2.6.0-alpha.24...v2.6.0-alpha.25) (2022-09-27)
 
 
