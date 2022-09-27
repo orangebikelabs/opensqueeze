@@ -35,6 +35,7 @@ android {
         exclude 'META-INF/services/com.fasterxml.jackson.core.JsonFactory'
         exclude 'META-INF/MANIFEST.MF'
         exclude 'META-INF/LICENSE.md'
+        exclude 'META-INF/LICENSE-notice.md'
     }
 
     defaultConfig {
