@@ -27,7 +27,7 @@ You can also just get the [latest release here](https://github.com/orangebikelab
 
 ## Building
 
-Use Android Studio Dolphin (2021.3.1) beta releases to build the project. You need to [install and configure](https://developer.android.com/about/versions/12/setup-sdk) the Android SDK first.
+Use Android Studio Dolphin (2021.3.1) release to build the project. You need to [install and configure](https://developer.android.com/about/versions/12/setup-sdk) the Android SDK first.
 
 ```
 # .\gradlew assembleRelease
