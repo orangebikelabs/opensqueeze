@@ -1,3 +1,10 @@
+## [2.6.0-alpha.29](https://github.com/orangebikelabs/opensqueeze/compare/v2.6.0-alpha.28...v2.6.0-alpha.29) (2022-10-10)
+
+
+### Bug Fixes
+
+* bump kotlin_version from 1.7.10 to 1.7.20 ([e3b4e61](https://github.com/orangebikelabs/opensqueeze/commit/e3b4e6107abb78f36ad2c1d2b8665ffce3538603))
+
 ## [2.6.0-alpha.28](https://github.com/orangebikelabs/opensqueeze/compare/v2.6.0-alpha.27...v2.6.0-alpha.28) (2022-10-10)
 
 
