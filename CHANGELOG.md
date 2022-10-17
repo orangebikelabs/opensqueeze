@@ -1,3 +1,10 @@
+## [2.6.0-alpha.30](https://github.com/orangebikelabs/opensqueeze/compare/v2.6.0-alpha.29...v2.6.0-alpha.30) (2022-10-17)
+
+
+### Bug Fixes
+
+* bump error_prone_annotations from 2.15.0 to 2.16 ([033c286](https://github.com/orangebikelabs/opensqueeze/commit/033c2866c9adfd10e29b5577192b8769ff64c517))
+
 ## [2.6.0-alpha.29](https://github.com/orangebikelabs/opensqueeze/compare/v2.6.0-alpha.28...v2.6.0-alpha.29) (2022-10-10)
 
 
