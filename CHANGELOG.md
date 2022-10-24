@@ -1,3 +1,10 @@
+## [2.6.0-alpha.31](https://github.com/orangebikelabs/opensqueeze/compare/v2.6.0-alpha.30...v2.6.0-alpha.31) (2022-10-24)
+
+
+### Bug Fixes
+
+* bump fragment-ktx from 1.5.3 to 1.5.4 ([17b68f1](https://github.com/orangebikelabs/opensqueeze/commit/17b68f11e82efd9dab5b46c6e94801ff529c98a6))
+
 ## [2.6.0-alpha.30](https://github.com/orangebikelabs/opensqueeze/compare/v2.6.0-alpha.29...v2.6.0-alpha.30) (2022-10-17)
 
 
