@@ -13,7 +13,7 @@ import android.os.Looper
 import android.os.SystemClock
 import android.view.KeyEvent
 import android.view.MotionEvent
-import android.view.View
+import androidx.core.view.isVisible
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.customview.customView
 import com.afollestad.materialdialogs.customview.getCustomView
@@ -44,12 +44,15 @@ class VolumeFragment : SBDialogFragment() {
 
     companion object {
         const val TAG = "VolumeFragment"
+
         private const val SMALL_INCREMENT_MIN = 1
         private const val SMALL_INCREMENT_MAX = 5
-        private const val SMALL_INCREMENT_CURVE_DELAY: Long = 750
+        private const val SMALL_INCREMENT_CURVE_DELAY = 750L
         private const val TIMEOUT_DELAY = 3000
         private const val ARG_PLAYERID = "playerId"
         private const val ARG_AUTOTIMEOUT = "autoTimeout"
+        private const val MAX_VOLUME = 100f
+        private const val MIN_VOLUME = 0f
         private val sHandler = Handler(Looper.getMainLooper())
 
         @JvmStatic
@@ -73,14 +76,14 @@ class VolumeFragment : SBDialogFragment() {
     }
 
     private lateinit var binding: VolumeDialogBinding
-    private var autoTimeout: Boolean = false
+    private var autoTimeout = false
 
     private var inTouch = false
     private var lastResult: FutureResult? = null
-    private var autoTimeoutTime: Long = 0
+    private var autoTimeoutTime = 0L
     private var smallIncrementCurveFactor = 0
-    private var lastSmallIncrementTime: Long = 0
-    private var effectiveVolumeDragTimestamp: Long = 0
+    private var lastSmallIncrementTime = 0L
+    private var effectiveVolumeDragTimestamp = 0L
     private var playerStatus: PlayerStatus? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -134,20 +137,18 @@ class VolumeFragment : SBDialogFragment() {
                     if (SystemClock.uptimeMillis() < effectiveVolumeDragTimestamp) {
                         return@setOnTouchListener true
                     }
+                    if (v.width == 0) return@setOnTouchListener false
+
                     val width = v.width.toFloat()
-                    if (width == 0f) {
-                        return@setOnTouchListener false
-                    }
                     val x = event.x
-                    val clamped = max(min(x, width), 0.0f)
-                    val volume = (clamped / width * 100.0f).roundToInt()
+                    val clampedVolume = (x.coerceIn(MIN_VOLUME, width) / width * MAX_VOLUME).roundToInt()
 
-                    lastResult = mContext.setPlayerVolume(playerId, volume)
+                    lastResult = mContext.setPlayerVolume(playerId, clampedVolume)
 
-                    updateVolumeText(volume)
+                    updateVolumeText(clampedVolume)
                     setTimeout(true)
 
-                    binding.volume.value = volume.toFloat()
+                    binding.volume.value = clampedVolume.toFloat()
                     return@setOnTouchListener true
                 }
                 return@setOnTouchListener true
@@ -171,7 +172,10 @@ class VolumeFragment : SBDialogFragment() {
             })
             binding.volume.setLabelFormatter { value -> value.toInt().toString() }
 
-            binding.volume.valueTo = 100.toFloat()
+            binding.volume.stepSize = 1f
+            binding.volume.isTickVisible = false
+            binding.volume.valueFrom = MIN_VOLUME
+            binding.volume.valueTo = MAX_VOLUME
             binding.increaseVolumeButton.setOnClickListener {
                 controlChangeVolumeSmallUp()
             }
@@ -187,13 +191,6 @@ class VolumeFragment : SBDialogFragment() {
     override fun onStart() {
         super.onStart()
         setTimeout(true)
-    }
-
-    private fun setVolumeLocked(locked: Boolean) {
-        // TODO implement configurable volume lock behavior
-//		mVolume.setEnabled(!locked);
-//		mIncreaseButton.setEnabled(!locked);
-//		mDecreaseButton.setEnabled(!locked);
     }
 
     private val eventReceiver: Any = object : Any() {
@@ -247,7 +244,7 @@ class VolumeFragment : SBDialogFragment() {
 
     private fun controlChangeVolume(diff: Int) {
         val playerStatus = playerStatus ?: return
-        val clampedVolume = (binding.volume.value + diff).coerceIn(0f, 100f)
+        val clampedVolume = (binding.volume.value + diff).coerceIn(MIN_VOLUME, MAX_VOLUME)
         binding.volume.value = clampedVolume
         lastResult = mContext.incrementPlayerVolume(playerStatus.id, diff)
         updateVolumeText(binding.volume.value.toInt())
@@ -261,29 +258,25 @@ class VolumeFragment : SBDialogFragment() {
         }
         lastResult.let {
             if (it == null || it.isCommitted) {
-                var volume = playerStatus.volume
+                var volume = playerStatus.volume.toFloat()
                 if (playerStatus.isMuted) {
                     // TODO show graphic for muted?
-                    volume = 0
+                    volume = MIN_VOLUME
                 }
-                binding.volume.value = volume.toFloat()
-                updateVolumeText(volume)
+                binding.volume.value = volume.coerceIn(MIN_VOLUME, MAX_VOLUME)
+                updateVolumeText(volume.toInt())
                 lastResult = null
-                setVolumeLocked(playerStatus.isVolumeLocked)
             }
         }
     }
 
-    private fun updateVolumeText(volume: Int) {
+    private fun updateVolumeText(@Suppress("UNUSED_PARAMETER") volume: Int) {
         val playerStatus = playerStatus ?: return
         if (!isAdded) {
             return
         }
         binding.playerNameLabel.text = getString(R.string.player_label, playerStatus.name)
-        val newVisibility = if (playerStatus.isVolumeLocked) View.VISIBLE else View.GONE
-        if (binding.volumeLockedLabel.visibility != newVisibility) {
-            binding.volumeLockedLabel.visibility = newVisibility
-        }
+        binding.volumeLockedLabel.isVisible = playerStatus.isVolumeLocked
     }
 
     override fun onDismiss(dialog: DialogInterface) {

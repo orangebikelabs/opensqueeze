@@ -21,14 +21,13 @@ public class ItemSliderChangedEvent extends AbsViewEvent {
     @Nonnull
     final private StandardMenuItem mItem;
 
-    @Nonnull
-    final private Slider mSlider;
+    final private int mNewValue;
 
-    public ItemSliderChangedEvent(Slider slider, StandardMenuItem item) {
+    public ItemSliderChangedEvent(Slider slider, StandardMenuItem item, int newValue) {
         super(slider);
 
-        mSlider = slider;
         mItem = item;
+        mNewValue = newValue;
     }
 
     @Nonnull
@@ -36,14 +35,11 @@ public class ItemSliderChangedEvent extends AbsViewEvent {
         return mItem;
     }
 
-    @Nonnull
-    public Slider getSlider() {
-        return mSlider;
-    }
+    public int getNewValue() { return mNewValue; }
 
     @Override
     @Nonnull
     public String toString() {
-        return MoreObjects.toStringHelper(this).add("item", mItem).toString();
+        return MoreObjects.toStringHelper(this).add("newValue", mNewValue).add("item", mItem).toString();
     }
 }

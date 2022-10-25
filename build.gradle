@@ -4,8 +4,8 @@
  */
 
 buildscript {
-    ext.kotlin_version = '1.7.10'
-    ext.sqldelight_version = '1.5.3'
+    ext.kotlin_version = '1.7.20'
+    ext.sqldelight_version = '1.5.4'
 
     repositories {
         google()
@@ -13,7 +13,7 @@ buildscript {
     }
     dependencies {
         //noinspection GradleDependency
-        classpath 'com.android.tools.build:gradle:7.3.0-rc01'
+        classpath 'com.android.tools.build:gradle:7.3.1'
 
         // kotlin
         //noinspection DifferentKotlinGradleVersion
@@ -29,7 +29,7 @@ allprojects {
     ext.obl_android_app_versionCode = obl_android_app_buildNumber.toInteger()
 
     ext.obl_guavaVersion = '31.1-android'
-    ext.obl_errorProneVersion = '2.15.0'
+    ext.obl_errorProneVersion = '2.16'
 
     // must stay at 3.12.x until minsdk >= 25
     ext.obl_okhttpVersion = '3.12.13'

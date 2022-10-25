@@ -31,6 +31,9 @@ class PlayerSleepDialog private constructor(private val lifecycleOwner: Lifecycl
         private const val SEEKER_MULTIPLIER = 10 // minutes
         private const val MAX_SLEEP_TIME = 180 // minutes
 
+        private const val MIN_SLEEP_SEEK_BAR = 0f
+        private const val MAX_SLEEP_SEEK_BAR = MAX_SLEEP_TIME.toFloat() / SEEKER_MULTIPLIER
+
         @JvmStatic
         fun create(fragment: Fragment, playerId: PlayerId, callback: OnSetPlayerSleep): MaterialDialog {
             val playerStatus = SBContextProvider.get().serverStatus.getCheckedPlayerStatus(playerId)
@@ -61,11 +64,12 @@ class PlayerSleepDialog private constructor(private val lifecycleOwner: Lifecycl
     }
 
     private fun initViews() {
+
         binding.timePicker.setIs24HourView(SBPreferences.get().shouldUse24HourTimeFormat())
-        binding.sleepBar.valueFrom = 0f
-        binding.sleepBar.valueTo = MAX_SLEEP_TIME.toFloat() / SEEKER_MULTIPLIER
+        binding.sleepBar.valueFrom = MIN_SLEEP_SEEK_BAR
+        binding.sleepBar.valueTo = MAX_SLEEP_SEEK_BAR
         binding.sleepBar.value = (SBPreferences.get().getLastPlayerSleepTime(TimeUnit.SECONDS).toInt() / 60f / SEEKER_MULTIPLIER)
-                .coerceIn(binding.sleepBar.valueFrom, binding.sleepBar.valueTo)
+                .coerceIn(MIN_SLEEP_SEEK_BAR, MAX_SLEEP_SEEK_BAR)
         binding.sleepBar.addOnChangeListener(Slider.OnChangeListener { _, _, fromUser ->
             if (fromUser) {
                 updateText()
@@ -82,7 +86,8 @@ class PlayerSleepDialog private constructor(private val lifecycleOwner: Lifecycl
                 cal.add(Calendar.DATE, 1)
             }
             val diff = cal.timeInMillis - current.timeInMillis
-            binding.sleepBar.value = diff.toFloat() / 1000 / 60 / SEEKER_MULTIPLIER
+            binding.sleepBar.value = (TimeUnit.MILLISECONDS.toMinutes(diff).toFloat() / SEEKER_MULTIPLIER)
+                    .coerceIn(MIN_SLEEP_SEEK_BAR, MAX_SLEEP_SEEK_BAR)
             updateText()
         }
 
