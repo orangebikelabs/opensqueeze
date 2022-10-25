@@ -27,6 +27,7 @@ import com.google.common.collect.Multimap;
 import com.google.common.collect.Ordering;
 import com.orangebikelabs.orangesqueeze.R;
 import com.orangebikelabs.orangesqueeze.common.FutureResult;
+import com.orangebikelabs.orangesqueeze.common.MoreMath;
 import com.orangebikelabs.orangesqueeze.common.MoreOption;
 import com.orangebikelabs.orangesqueeze.common.OSAssert;
 import com.orangebikelabs.orangesqueeze.common.OtherPlayerInfo;
@@ -501,9 +502,7 @@ public class ManagePlayersAdapter extends ArrayAdapter<AbsPlayerItem> {
                 } else {
                     if (volumeBar != null) {
                         // ensure received values are within 0 <= value <= 100
-                        int clampedVolume = mPlayerStatus.getVolume();
-                        clampedVolume = Math.min(100, clampedVolume);
-                        clampedVolume = Math.max(0, clampedVolume);
+                        int clampedVolume = MoreMath.coerceIn(mPlayerStatus.getVolume(), 0, 100);
                         volumeBar.setValue(clampedVolume);
                     }
                 }

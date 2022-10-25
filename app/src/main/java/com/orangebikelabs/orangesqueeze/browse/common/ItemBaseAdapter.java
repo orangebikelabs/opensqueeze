@@ -8,7 +8,6 @@ package com.orangebikelabs.orangesqueeze.browse.common;
 import android.content.Context;
 
 import androidx.annotation.LayoutRes;
-import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 
 import android.graphics.drawable.Drawable;
@@ -37,6 +36,7 @@ import com.orangebikelabs.orangesqueeze.artwork.ListPreloadFragment.PreloadAdapt
 import com.orangebikelabs.orangesqueeze.artwork.ThumbnailProcessor;
 import com.orangebikelabs.orangesqueeze.browse.OSBrowseAdapter;
 import com.orangebikelabs.orangesqueeze.common.Drawables;
+import com.orangebikelabs.orangesqueeze.common.MoreMath;
 import com.orangebikelabs.orangesqueeze.common.OSAssert;
 import com.orangebikelabs.orangesqueeze.common.BusProvider;
 import com.orangebikelabs.orangesqueeze.common.Reporting;
@@ -499,8 +499,16 @@ abstract public class ItemBaseAdapter extends BaseAdapter implements SectionInde
     protected void bindSlider(StandardMenuItem item, Slider slider) {
         MenuElement elem = item.getMenuElement();
         slider.setValueFrom(elem.getSliderMinValue());
-        slider.setValueTo(elem.getSliderMaxValue());
-        slider.setValue(elem.getSliderInitialValue());
+        if(elem.getSliderMaxValue() > elem.getSliderMinValue()) {
+            // normal case
+            slider.setValueTo(elem.getSliderMaxValue());
+        } else {
+            // bad data from remote, prevent a slider crash
+            slider.setValueTo(elem.getSliderMinValue() + 1.0f);
+        }
+
+        float clampedValue = MoreMath.coerceIn(elem.getSliderInitialValue(), slider.getValueFrom(), slider.getValueTo());
+        slider.setValue(clampedValue);
     }
 
     protected void bindStandardItem(ViewGroup parentView, View view, StandardMenuItem item, int position) {
@@ -565,15 +573,15 @@ abstract public class ItemBaseAdapter extends BaseAdapter implements SectionInde
 
     final private Slider.OnSliderTouchListener mSliderTouchListener = new Slider.OnSliderTouchListener() {
         @Override
-        public void onStartTrackingTouch(@NonNull Slider slider) {
+        public void onStartTrackingTouch(Slider slider) {
             // intentionally blank
         }
 
         @Override
-        public void onStopTrackingTouch(@NonNull Slider slider) {
+        public void onStopTrackingTouch(Slider slider) {
             ClickableItemHolder holder = (ClickableItemHolder) slider.getTag(R.id.tag_clickableitem);
             holder.mItem.setMutatedSliderValue((int)slider.getValue());
-            BusProvider.getInstance().post(new ItemSliderChangedEvent(slider, holder.mItem));
+            BusProvider.getInstance().post(new ItemSliderChangedEvent(slider, holder.mItem, (int)slider.getValue()));
         }
     };
 

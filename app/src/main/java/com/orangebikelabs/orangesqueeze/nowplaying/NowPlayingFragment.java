@@ -21,6 +21,7 @@ import com.google.common.util.concurrent.Futures;
 import com.orangebikelabs.orangesqueeze.R;
 import com.orangebikelabs.orangesqueeze.app.AutoSizeTextHelper;
 import com.orangebikelabs.orangesqueeze.common.AbsFragmentResultReceiver;
+import com.orangebikelabs.orangesqueeze.common.MoreMath;
 import com.orangebikelabs.orangesqueeze.common.NavigationItem;
 import com.orangebikelabs.orangesqueeze.common.OSAssert;
 import com.orangebikelabs.orangesqueeze.common.FutureResult;
@@ -214,10 +215,7 @@ public class NowPlayingFragment extends AbsNowPlayingFragment {
         int total = (int) (status.getTotalTime());
         if (total > 0) {
             // ensure value never exceeds total time
-            int clampedValue = Math.min(elapsed, total);
-
-            // and is never lt zero
-            clampedValue = Math.max(0, clampedValue);
+            int clampedValue = MoreMath.coerceIn(elapsed, 0, total);
             mBinding.progress.slider.setValue(clampedValue);
             mBinding.progress.slider.setValueTo(total);
         } else {

@@ -170,8 +170,7 @@ abstract class AbsBrowseFragment<T : BrowseItemBaseAdapter, L> : AbsMenuFragment
             val item = event.item
             val menuElement = item.menuElement
 
-            val value: Int = event.slider.value.toInt() + menuElement.sliderMinValue
-            executeAction(item, menuElement, ActionNames.GO, null, value.toString())
+            executeAction(item, menuElement, ActionNames.GO, null, event.newValue.toString())
         }
 
         @Subscribe
