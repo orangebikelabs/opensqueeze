@@ -1,3 +1,10 @@
+## [2.6.0-alpha.32](https://github.com/orangebikelabs/opensqueeze/compare/v2.6.0-alpha.31...v2.6.0-alpha.32) (2022-10-25)
+
+
+### Bug Fixes
+
+* a crash where inbound data not sanitized ([cf7b7dd](https://github.com/orangebikelabs/opensqueeze/commit/cf7b7ddc645aed2f9b563c395476b867b7791d67))
+
 ## [2.6.0-alpha.31](https://github.com/orangebikelabs/opensqueeze/compare/v2.6.0-alpha.30...v2.6.0-alpha.31) (2022-10-24)
 
 
