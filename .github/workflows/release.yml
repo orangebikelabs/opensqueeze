@@ -127,7 +127,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Cleanup beta builds
-        uses: dev-drprasad/delete-older-releases@v0.2.0
+        uses: bensandee/delete-older-releases@v0.2.1
         with:
           keep_latest: 3
           delete_tag_pattern: beta
@@ -135,7 +135,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Cleanup alpha builds
-        uses: dev-drprasad/delete-older-releases@v0.2.0
+        uses: bensandee/delete-older-releases@v0.2.1
         with:
           keep_latest: 3
           delete_tag_pattern: alpha
