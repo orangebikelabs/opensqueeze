@@ -1,3 +1,24 @@
+## [2.6.0-beta.5](https://github.com/orangebikelabs/opensqueeze/compare/v2.6.0-beta.4...v2.6.0-beta.5) (2022-10-25)
+
+
+### Bug Fixes
+
+* a crash where inbound data not sanitized ([cf7b7dd](https://github.com/orangebikelabs/opensqueeze/commit/cf7b7ddc645aed2f9b563c395476b867b7791d67))
+* bump appcompat from 1.6.0-beta01 to 1.6.0-rc01 ([c8339a1](https://github.com/orangebikelabs/opensqueeze/commit/c8339a1e2d4d481a521809a3775279b5bdc997ce))
+* bump arrow-core from 1.1.2 to 1.1.3 ([225d676](https://github.com/orangebikelabs/opensqueeze/commit/225d67630f8ab1fff997e4e22725421ae1f21574))
+* bump core-ktx from 1.8.0 to 1.9.0 ([25b0f03](https://github.com/orangebikelabs/opensqueeze/commit/25b0f032ec7a2863ecaa0d2b2435ca5f8677fe9f))
+* bump error_prone_annotations from 2.15.0 to 2.16 ([033c286](https://github.com/orangebikelabs/opensqueeze/commit/033c2866c9adfd10e29b5577192b8769ff64c517))
+* bump fragment-ktx from 1.5.2 to 1.5.3 ([7dc269c](https://github.com/orangebikelabs/opensqueeze/commit/7dc269c330bd3b0cf45933524d016cf32f3f6071))
+* bump fragment-ktx from 1.5.3 to 1.5.4 ([17b68f1](https://github.com/orangebikelabs/opensqueeze/commit/17b68f11e82efd9dab5b46c6e94801ff529c98a6))
+* bump kotlin_version from 1.7.10 to 1.7.20 ([e3b4e61](https://github.com/orangebikelabs/opensqueeze/commit/e3b4e6107abb78f36ad2c1d2b8665ffce3538603))
+* bump mockk from 1.12.7 to 1.12.8 ([ff74d40](https://github.com/orangebikelabs/opensqueeze/commit/ff74d409446ec233560be524cf0620963afc60f7))
+* bump mockk from 1.12.8 to 1.13.1 ([d00dc72](https://github.com/orangebikelabs/opensqueeze/commit/d00dc7243c784b0f902ad0d9efdd463f786d9f40))
+* bump sqldelight_version from 1.5.3 to 1.5.4 ([2e84e42](https://github.com/orangebikelabs/opensqueeze/commit/2e84e421da0bc86d3b6467236836b210ac17c32e))
+* change to simpler test logging that doesn't use plugin so avoid pulling junit 5 into classpath ([788a380](https://github.com/orangebikelabs/opensqueeze/commit/788a3804daf68bfed0ff326b2e0b3f510f8d0306))
+* increase/tweak sizes of now playing controls ([05168bf](https://github.com/orangebikelabs/opensqueeze/commit/05168bf2b9adc6d85d365dc646c8676e45dfb859))
+* remove unused mockk agent dependency ([46e49d0](https://github.com/orangebikelabs/opensqueeze/commit/46e49d08aaf7125b92ccb72f532f82f6496b87f9))
+* slider handles were obtrusive and would overdraw on drawer pullouts ([69f3231](https://github.com/orangebikelabs/opensqueeze/commit/69f3231dbf4efded1f94ca107cd3ab01794bd671))
+
 ## [2.6.0-beta.4](https://github.com/orangebikelabs/opensqueeze/compare/v2.6.0-beta.3...v2.6.0-beta.4) (2022-09-09)
 
 
