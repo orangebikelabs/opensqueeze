@@ -1,5 +1,6 @@
-## [2.6.0](https://github.com/orangebikelabs/opensqueeze/compare/v2.5.3...v2.6.0) (2022-11-01)
+# Open Squeeze Detailed Changelog
 
+## [2.6.0](https://github.com/orangebikelabs/opensqueeze/compare/v2.5.3...v2.6.0) (2022-11-01)
 
 ### Features
 
@@ -88,5 +89,3 @@
 * upgrade to material components 1.7.0-rc1 and transition away from old Android widgets ([e592d0a](https://github.com/orangebikelabs/opensqueeze/commit/e592d0a5888ca12a37389a5bae5b63424b9b8145))
 * use a consistent debug keystore for github builds ([70b26c1](https://github.com/orangebikelabs/opensqueeze/commit/70b26c1c097c8a843ad71ff5700b48af494ed9bb))
 * volume value should always be visible in main volume control dialog ([396f422](https://github.com/orangebikelabs/opensqueeze/commit/396f422b9a62140739d1c6ad3def5221f5af5592))
-
-* OpenSqueeze Changelog *
