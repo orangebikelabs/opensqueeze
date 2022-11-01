@@ -7,6 +7,9 @@ package com.orangebikelabs.orangesqueeze.startup
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
+import android.widget.FrameLayout
+import com.orangebikelabs.orangesqueeze.R
 import com.orangebikelabs.orangesqueeze.app.SBActivity
 import com.orangebikelabs.orangesqueeze.common.ConnectionInfo
 import com.orangebikelabs.orangesqueeze.common.LaunchFlags
@@ -39,6 +42,10 @@ class StartupActivity : SBActivity() {
         checkConnectionState()
     }
 
+    override fun getSnackbarView(): View? {
+        return null
+    }
+
     override fun checkConnectionState(): Boolean {
         val ci = mContext.connectionInfo
 
@@ -49,6 +56,9 @@ class StartupActivity : SBActivity() {
             } else if (SBPreferences.get().shouldUpgradeFirstLaunch) {
                 doUpgrade = true
             }
+        }
+        if(doUpgrade) {
+            handleUpgrade()
         }
         if (!ci.isConnected && mContext.isConnecting) {
             logVerbose("checkConnectionState ci=$ci, connecting=true, launchConnectingActivity")
@@ -68,5 +78,9 @@ class StartupActivity : SBActivity() {
         } else {
             return super.checkConnectionState()
         }
+    }
+
+    private fun handleUpgrade() {
+        // insert future upgrade logic here, if necessary
     }
 }

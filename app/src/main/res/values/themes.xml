@@ -5,7 +5,7 @@
 
 <resources>
     <!-- main theme for Orange Squeeze -->
-    <style name="Theme.OrangeSqueeze" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="Theme.OrangeSqueeze" parent="Theme.Material3.DayNight.NoActionBar">
         <item name="colorPrimary">@color/primaryColor</item>
         <item name="colorPrimaryDark">@color/primaryDarkColor</item>
         <item name="colorPrimaryVariant">@color/primaryDarkColor</item>

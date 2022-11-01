@@ -86,7 +86,7 @@
     <string name="empty_downloads_text">No active or completed downloads</string>
     <string name="empty_text">No Items</string>
     <string name="select_player_prompt">Select player:</string>
-    <string name="change_player_notification_html">&lt;b>%1$s&lt;/b> is now the active player</string>
+    <string name="change_player_snackbar">&lt;b>%1$s&lt;/b> is now the active player</string>
     <!-- 
     <string name="compilation_options">Compilation Options</string>
     <string name="shown">Shown</string>
@@ -95,15 +95,15 @@
     <string name="serverdiscovery_label">Server Discovery</string>
     <string name="squeezenetwork_button_text" translatable="false">mysqueezebox.com</string>
     <string name="network_error">Network Error</string>
-    <string name="addtoplaylist_action_toast_html">Added &lt;b>%1$s&lt;/b> to the current playlist
+    <string name="addtoplaylist_action_snackbar_html">Added &lt;b>%1$s&lt;/b> to the current playlist
     </string>
-    <string name="playnext_action_toast_html">Added &lt;b>%1$s&lt;/b> next in the current playlist
+    <string name="playnext_action_snackbar_html">Added &lt;b>%1$s&lt;/b> next in the current playlist
     </string>
-    <string name="playnow_action_toast_html">Playing &lt;b>%1$s&lt;/b></string>
-    <string name="addtofavorites_action_toast_html">Added &lt;b>%1$s&lt;/b> to favorites</string>
+    <string name="playnow_action_snackbar_html">Playing &lt;b>%1$s&lt;/b></string>
+    <string name="addtofavorites_action_snackbar_html">Added &lt;b>%1$s&lt;/b> to favorites</string>
     <string name="action_addfavorite">Add to Favorites</string>
     <string name="action_removefavorite">Remove Favorite</string>
-    <string name="removefavorite_action_toast_html">Removed &lt;b>%1$s&lt;/b> from favorites
+    <string name="removefavorite_action_snackbar_html">Removed &lt;b>%1$s&lt;/b> from favorites
     </string>
     <string name="removefavorite_action_confirmation_html">Are you sure you want to remove &lt;b>%1$s&lt;/b>
         from favorites?

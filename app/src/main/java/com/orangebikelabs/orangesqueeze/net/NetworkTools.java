@@ -152,7 +152,7 @@ public class NetworkTools {
 
         String retval = null;
         try {
-            retval = Files.asCharSource(new File("/proc/net/arp"), Charsets.UTF_8).readLines(new LineProcessor<String>() {
+            retval = Files.asCharSource(new File("/proc/net/arp"), Charsets.UTF_8).readLines(new LineProcessor<>() {
                 private String mResult;
 
                 @Override

@@ -46,7 +46,6 @@ public class ActionListAdapter<T> extends ArrayAdapter<AbsAction<T>> {
     @Nonnull
     @Override
     public AbsAction<T> getItem(int position) {
-        //noinspection ConstantConditions
         return super.getItem(position);
     }
 

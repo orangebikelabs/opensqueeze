@@ -9,11 +9,12 @@ apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-parcelize'
 apply plugin: 'com.squareup.sqldelight'
 
+
 android {
     namespace 'com.orangebikelabs.orangesqueeze'
 
     // use most recent so we can use most recent support library
-    compileSdkVersion 32
+    compileSdkVersion 33
 
     sourceSets {
         main {
@@ -29,17 +30,21 @@ android {
         exclude 'META-INF/NOTICE'
         exclude 'META-INF/services/com.fasterxml.jackson.core.JsonFactory'
         exclude 'META-INF/MANIFEST.MF'
+        exclude 'META-INF/LICENSE.md'
+        exclude 'META-INF/LICENSE-notice.md'
     }
 
     defaultConfig {
-        applicationId 'com.orangebikelabs.opensqueeze'
+        applicationId 'org.opensqueeze'
 
         versionCode obl_android_app_versionCode
         versionName obl_android_app_versionName
 
         // android >= 5.0
         minSdkVersion 21
-        targetSdkVersion 32
+        targetSdkVersion 33
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
@@ -74,6 +79,27 @@ android {
         // if true, stop the gradle build if errors are found
         abortOnError true
     }
+
+    signingConfigs {
+        release {
+            storeFile file('release_keystore.jks')
+            keyAlias 'signing'
+        }
+    }
+
+    // enable release signing if we have password
+    if (project.hasProperty('releaseKeystorePassword')) {
+        signingConfigs.release.storePassword = releaseKeystorePassword
+        signingConfigs.release.keyPassword = releaseKeystorePassword
+
+        // actually set the config here
+        buildTypes.release.signingConfig = signingConfigs.release
+    }
+
+    // use debug keystore if it's supplied
+    if (project.hasProperty('debugKeystore')) {
+        signingConfigs.debug.storeFile = file(debugKeystore)
+    }
 }
 
 sqldelight {
@@ -95,11 +121,11 @@ dependencies {
     implementation 'com.github.chrisbanes:PhotoView:2.3.0'
 
     // coroutines
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.1'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4'
 
     // lifecycle
-    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.0'
-    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.5.0'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1'
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.5.1'
 
     // recyclerview
     implementation 'androidx.recyclerview:recyclerview:1.2.1'
@@ -118,25 +144,28 @@ dependencies {
     // NineOldAndroids for ListViewAnimations
     implementation 'com.nineoldandroids:library:2.4.0'
 
-    implementation 'androidx.core:core-ktx:1.8.0'
-    implementation 'androidx.appcompat:appcompat:1.4.2'
-    implementation 'androidx.fragment:fragment-ktx:1.5.0'
+    implementation 'androidx.core:core-ktx:1.9.0'
+    implementation 'androidx.appcompat:appcompat:1.6.0-rc01'
+    implementation 'androidx.fragment:fragment-ktx:1.5.4'
     implementation 'androidx.preference:preference-ktx:1.2.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'androidx.media:media:1.6.0'
 
-    //noinspection GradleDependency
-    implementation 'com.google.android.material:material:1.3.0'
+    // functional programming in kotlin
+    implementation 'io.arrow-kt:arrow-core:1.1.3'
 
+    implementation 'com.google.android.material:material:1.7.0'
+
+    //noinspection GradleDependency
     implementation "com.fasterxml.jackson.core:jackson-core:${obl_jacksonVersion}"
+    //noinspection GradleDependency
     implementation "com.fasterxml.jackson.core:jackson-annotations:${obl_jacksonVersion}"
+    //noinspection GradleDependency
     implementation "com.fasterxml.jackson.core:jackson-databind:${obl_jacksonVersion}"
+    //noinspection GradleDependency
     implementation "com.fasterxml.jackson.dataformat:jackson-dataformat-smile:${obl_jacksonVersion}"
 
     implementation "com.google.guava:guava:${obl_guavaVersion}"
-
-    // this relies on now-deprecated jcenter, we moved dependency jar directly into lib for now
-    //implementation "com.gojuno.koptional:koptional:${obl_koptionalVersion}"
 
     // required for Guava
     implementation 'javax.inject:javax.inject:1'
@@ -145,9 +174,14 @@ dependencies {
     // HTTP client
     //noinspection GradleDependency
     implementation "com.squareup.okhttp3:okhttp:${obl_okhttpVersion}"
+    //noinspection GradleDependency
     implementation "com.squareup.okhttp3:logging-interceptor:${obl_okhttpVersion}"
+    //noinspection GradleDependency
     implementation "com.squareup.okhttp3:okhttp-urlconnection:${obl_okhttpVersion}"
-    implementation 'com.squareup.okio:okio:2.9.0'
+    implementation 'com.squareup.okio:okio:3.2.0'
+
+    // permissions
+    implementation 'com.github.fondesa:kpermissions:3.3.0'
 
     // event bus
     implementation 'com.squareup:otto:1.3.8'
@@ -157,19 +191,14 @@ dependencies {
 
     // ReactiveX
     implementation "io.reactivex.rxjava3:rxandroid:3.0.0"
-    implementation "io.reactivex.rxjava3:rxjava:3.0.13"
+    implementation "io.reactivex.rxjava3:rxjava:3.1.5"
     implementation "io.reactivex.rxjava3:rxkotlin:3.0.1"
 
     // sqldelight
     implementation "com.squareup.sqldelight:android-driver:${sqldelight_version}"
     implementation "com.squareup.sqldelight:coroutines-extensions:${sqldelight_version}"
 
-    // permissions
-    //noinspection GradleDependency
-    implementation "com.github.permissions-dispatcher:permissionsdispatcher:${obl_permissionsDispatcherVersion}"
-    kapt "com.github.permissions-dispatcher:permissionsdispatcher-processor:${obl_permissionsDispatcherVersion}"
-
-    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.7'
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.9.1'
 
     implementation 'androidx.multidex:multidex:2.0.1'
 
@@ -179,14 +208,25 @@ dependencies {
     implementation fileTree(dir: 'lib', include: ['*.jar'])
 
     testImplementation 'junit:junit:4.13.2'
-    testImplementation 'org.robolectric:robolectric:4.6.1'
-    testImplementation 'org.hamcrest:hamcrest:2.2'
-    testImplementation 'org.hamcrest:hamcrest-library:2.2'
+    testImplementation "io.mockk:mockk-android:1.13.2"
+    testImplementation "com.google.truth:truth:1.1.3"
+
+    androidTestImplementation "androidx.test:runner:1.4.0"
+    androidTestImplementation "androidx.test:rules:1.4.0"
+    androidTestImplementation "androidx.test:core:1.4.0"
+    androidTestImplementation "androidx.test:core-ktx:1.4.0"
+    androidTestImplementation "androidx.test.espresso:espresso-core:3.4.0"
+    androidTestImplementation "androidx.test.espresso:espresso-intents:3.4.0"
+    androidTestImplementation "androidx.test.ext:junit:1.1.3"
+    androidTestImplementation "androidx.test.ext:junit-ktx:1.1.3"
+    androidTestImplementation "androidx.test.ext:truth:1.4.0"
+    androidTestImplementation "io.mockk:mockk-android:1.13.2"
+    androidTestUtil "androidx.test:orchestrator:1.4.1"
 }
 
 tasks.withType(JavaCompile) {
     // uncomment this for more detailed deprecation warnings
-    //options.compilerArgs << "-Xlint:deprecation"
+    options.compilerArgs << "-Xlint:deprecation"
     options.compilerArgs << "-Xlint:unchecked"
 }
 
@@ -210,3 +250,10 @@ task archiveApks {
     }
 }
 archiveApks.mustRunAfter assemble
+
+// Test Logging
+tasks.withType(Test) {
+    testLogging {
+        events "started", "passed", "skipped", "failed"
+    }
+}

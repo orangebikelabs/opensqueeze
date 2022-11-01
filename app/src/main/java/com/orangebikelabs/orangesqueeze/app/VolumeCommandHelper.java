@@ -135,7 +135,7 @@ public class VolumeCommandHelper {
                 FutureResult result = SBContextProvider.get().sendPlayerCommand(mPlayerId, "mixer", "volume", volumeStr);
 
                 final List<SettableFuture<SBResult>> futureList = settableFutureList;
-                Futures.addCallback(result, new FutureCallback<SBResult>() {
+                Futures.addCallback(result, new FutureCallback<>() {
                     @Override
                     public void onFailure(Throwable e) {
                         for (SettableFuture<SBResult> future : futureList) {

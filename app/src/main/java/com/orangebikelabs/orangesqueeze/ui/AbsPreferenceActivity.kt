@@ -11,6 +11,7 @@ import android.view.Menu
 import androidx.core.app.NavUtils
 import androidx.core.app.TaskStackBuilder
 import android.view.MenuItem
+import android.view.View
 
 import com.orangebikelabs.orangesqueeze.app.SBActivity
 import com.orangebikelabs.orangesqueeze.common.BusProvider
@@ -31,12 +32,16 @@ abstract class AbsPreferenceActivity : SBActivity() {
 
         val activityBinding = ToolbarActivityBinding.inflate(layoutInflater)
         val toolbar = ToolbarBinding.bind(activityBinding.root)
-        contentView = activityBinding.root
+        setContentView(activityBinding.root)
 
         setSupportActionBar(toolbar.toolbar)
 
         supportActionBar?.setHomeButtonEnabled(true)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+    }
+
+    override fun getSnackbarView(): View? {
+        return null
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

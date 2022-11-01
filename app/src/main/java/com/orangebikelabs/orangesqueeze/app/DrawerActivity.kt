@@ -17,12 +17,15 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.ActionBar
 import com.orangebikelabs.orangesqueeze.BuildConfig
 import com.orangebikelabs.orangesqueeze.R
 import com.orangebikelabs.orangesqueeze.common.NavigationItem
 import com.orangebikelabs.orangesqueeze.common.NavigationManager
 import com.orangebikelabs.orangesqueeze.common.OSLog
+import com.orangebikelabs.orangesqueeze.compat.getParcelableArrayListCompat
+import com.orangebikelabs.orangesqueeze.compat.getParcelableCompat
 import com.orangebikelabs.orangesqueeze.databinding.DrawerBinding
 import com.orangebikelabs.orangesqueeze.databinding.ToolbarBinding
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
@@ -95,7 +98,7 @@ abstract class DrawerActivity : SBActivity() {
         super.onCreate(savedInstanceState)
         drawerBinding = DrawerBinding.inflate(layoutInflater)
         toolbarBinding = ToolbarBinding.bind(drawerBinding.root)
-        contentView = drawerBinding.root
+        setContentView(drawerBinding.root)
 
         drawerBinding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED, GRAVITY_BROWSE_DRAWER)
         drawerBinding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED, GRAVITY_PLAYER_DRAWER)
@@ -132,6 +135,7 @@ abstract class DrawerActivity : SBActivity() {
                     browseDrawerOpen = false
                     drawerBinding.drawerLayout.closeDrawer(GRAVITY_BROWSE_DRAWER)
                 }
+                drawerBackPressedCallback.isEnabled = true
                 doApplyDrawerState()
             }
 
@@ -142,6 +146,7 @@ abstract class DrawerActivity : SBActivity() {
                 } else {
                     playerDrawerOpen = false
                 }
+                drawerBackPressedCallback.isEnabled = false
                 doApplyDrawerState()
             }
 
@@ -171,14 +176,30 @@ abstract class DrawerActivity : SBActivity() {
         } else {
             // when we restore, a fragment is already created and the nav index is restored with the spinner state
             // but an event will trigger, so ignore that one
-            currentItem = checkNotNull(savedInstanceState.getParcelable(STATE_NAV_ITEM))
+            currentItem = checkNotNull(savedInstanceState.getParcelableCompat(STATE_NAV_ITEM, NavigationItem::class.java))
             { "saved item shouldn't be null: $savedInstanceState" }
 
-            navigationStack = checkNotNull(savedInstanceState.getParcelableArrayList(STATE_NAV_STACK))
+            navigationStack = checkNotNull(savedInstanceState.getParcelableArrayListCompat(STATE_NAV_STACK, NavigationItem::class.java))
             { "nav stack shouldn't be null: $savedInstanceState" }
 
             refreshNavigationList()
         }
+        onBackPressedDispatcher.addCallback(this, drawerBackPressedCallback)
+    }
+
+    private val drawerBackPressedCallback = object: OnBackPressedCallback(false) {
+        override fun handleOnBackPressed() {
+            if(browseDrawerOpen) {
+                drawerBinding.drawerLayout.closeDrawer(GRAVITY_BROWSE_DRAWER)
+            }
+            if(playerDrawerOpen) {
+                drawerBinding.drawerLayout.closeDrawer(GRAVITY_PLAYER_DRAWER)
+            }
+        }
+    }
+
+    override fun getSnackbarView(): View? {
+        return drawerBinding.drawerLayout
     }
 
     override fun onStart() {
@@ -319,7 +340,9 @@ abstract class DrawerActivity : SBActivity() {
         outState.putParcelableArrayList(STATE_NAV_STACK, ArrayList(navigationStack))
     }
 
+    @Deprecated("Deprecated in Java")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        @Suppress("DEPRECATION")
         super.onActivityResult(requestCode, resultCode, data)
 
         if (requestCode != NavigationManager.ACTIVITY_REQUESTCODE || data == null) {

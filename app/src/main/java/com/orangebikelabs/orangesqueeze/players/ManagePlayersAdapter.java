@@ -5,9 +5,10 @@
 
 package com.orangebikelabs.orangesqueeze.players;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 
-import androidx.appcompat.widget.SwitchCompat;
+import arrow.core.Option;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,18 +16,19 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ProgressBar;
-import android.widget.SeekBar;
-import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
-import com.google.common.base.Optional;
+import com.google.android.material.slider.Slider;
+import com.google.android.material.switchmaterial.SwitchMaterial;
 import com.google.common.collect.ComparisonChain;
 import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Ordering;
 import com.orangebikelabs.orangesqueeze.R;
 import com.orangebikelabs.orangesqueeze.common.FutureResult;
+import com.orangebikelabs.orangesqueeze.common.MoreMath;
+import com.orangebikelabs.orangesqueeze.common.MoreOption;
 import com.orangebikelabs.orangesqueeze.common.OSAssert;
 import com.orangebikelabs.orangesqueeze.common.OtherPlayerInfo;
 import com.orangebikelabs.orangesqueeze.common.PlayerId;
@@ -92,7 +94,6 @@ public class ManagePlayersAdapter extends ArrayAdapter<AbsPlayerItem> {
     @Nonnull
     @Override
     public AbsPlayerItem getItem(int position) {
-        //noinspection ConstantConditions
         return super.getItem(position);
     }
 
@@ -126,7 +127,7 @@ public class ManagePlayersAdapter extends ArrayAdapter<AbsPlayerItem> {
                 groups.add(s);
                 continue;
             }
-            int syncGroup = mSyncStatus.getSyncGroup(s.getId()).or(0);
+            int syncGroup = MoreOption.getOrElse(mSyncStatus.getSyncGroup(s.getId()), 0);
             if (lastSyncGroup != syncGroup) {
                 if (syncGroup == 0) {
                     add(new SeparatorItem(getContext().getString(R.string.unsynchronized_player_separator)));
@@ -290,17 +291,11 @@ public class ManagePlayersAdapter extends ArrayAdapter<AbsPlayerItem> {
         return convertView;
     }
 
-    protected void setVolumeLabel(View parent, int volume) {
-        TextView volumeLabel = parent.findViewById(R.id.volume_label);
-        if (volumeLabel != null) {
-            volumeLabel.setText(getContext().getString(R.string.volume_label, volume));
-        }
-    }
-
-    protected void setVolume(SeekBar sb, int volume) {
+    @SuppressLint("SetTextI18n")
+    protected void setVolume(Slider sb, TextView playerVolumeLabel, int volume) {
         View parentView = (View) sb.getTag(R.id.tag_containerview);
         PlayerId pid = (PlayerId) parentView.getTag(R.id.tag_playerid);
-        setVolumeLabel(parentView, volume);
+        playerVolumeLabel.setText(Integer.toString(volume));
 
         mOnPlayerCommandListener.onPlayerCommand(pid, PlayerCommand.VOLUME, volume);
     }
@@ -312,7 +307,7 @@ public class ManagePlayersAdapter extends ArrayAdapter<AbsPlayerItem> {
 
         @Override
         public void onClick(View v) {
-            SwitchCompat powerButton = (SwitchCompat) v;
+            SwitchMaterial powerButton = (SwitchMaterial) v;
             View parentView = (View) v.getTag(R.id.tag_containerview);
             PlayerId pid = (PlayerId) parentView.getTag(R.id.tag_playerid);
             mOnPlayerCommandListener.onPlayerCommand(pid, PlayerCommand.POWER, powerButton.isChecked());
@@ -328,30 +323,6 @@ public class ManagePlayersAdapter extends ArrayAdapter<AbsPlayerItem> {
         public void onClick(View v) {
             AbsPlayerItem item = (AbsPlayerItem) v.getTag(R.id.tag_item);
             mOnPlayerCommandListener.onActionButton(v, item);
-        }
-    };
-
-    final private OnSeekBarChangeListener mVolumeChanged = new OnSeekBarChangeListener() {
-
-        @Override
-        public void onProgressChanged(SeekBar bar, int val, boolean fromUser) {
-            if (fromUser) {
-                // only respond to user-generated events
-                setVolume(bar, val);
-            }
-        }
-
-        @Override
-        public void onStartTrackingTouch(SeekBar bar) {
-            mInVolumeDrag = true;
-        }
-
-        @Override
-        public void onStopTrackingTouch(SeekBar bar) {
-            mInVolumeDrag = false;
-            // called at the end of a touch/drag cycle, call with update to make
-            // sure we are in sync with remote volume
-            setVolume(bar, bar.getProgress());
         }
     };
 
@@ -419,7 +390,7 @@ public class ManagePlayersAdapter extends ArrayAdapter<AbsPlayerItem> {
         }
 
         @Nonnull
-        public Optional<Integer> getSyncGroup() {
+        public Option<Integer> getSyncGroup() {
             return mSyncStatus.getSyncGroup(mPlayerStatus.getId());
         }
 
@@ -448,19 +419,48 @@ public class ManagePlayersAdapter extends ArrayAdapter<AbsPlayerItem> {
         @Override
         protected void updateView(View view) {
             TextView playerNameText = view.findViewById(R.id.player_name_label);
-            SwitchCompat powerButton = view.findViewById(R.id.player_power_toggle);
-            SeekBar volumeBar = view.findViewById(R.id.volume_bar);
+            SwitchMaterial powerButton = view.findViewById(R.id.player_power_toggle);
+            Slider volumeBar = view.findViewById(R.id.volume_bar);
             View actionButton = view.findViewById(R.id.action_button);
             TextView playerStatusText = view.findViewById(R.id.player_status_label);
-            TextView volumeText = view.findViewById(R.id.volume_label);
+            final TextView playerVolumeLabel = view.findViewById(R.id.player_volume_label);
+
             if (powerButton != null) {
                 powerButton.setTag(R.id.tag_containerview, view);
                 powerButton.setOnClickListener(mPowerButtonClicked);
             }
 
             if (volumeBar != null) {
+                OSAssert.assertNotNull(playerVolumeLabel, "should never be null if volumebar is non-null");
+
+                volumeBar.setTickVisible(false);
+                volumeBar.setStepSize(1.0f);
+                volumeBar.setValueFrom(0);
+                volumeBar.setValueTo(100);
                 volumeBar.setTag(R.id.tag_containerview, view);
-                volumeBar.setOnSeekBarChangeListener(mVolumeChanged);
+                volumeBar.addOnChangeListener((slider, value, fromUser) -> {
+                    if (fromUser) {
+                        // only respond to user-generated events
+                        setVolume(slider, playerVolumeLabel, (int) value);
+                    }
+                });
+                volumeBar.addOnSliderTouchListener(new Slider.OnSliderTouchListener() {
+                    @Override
+                    public void onStartTrackingTouch(Slider slider) {
+                        mInVolumeDrag = true;
+                        playerVolumeLabel.setVisibility(View.INVISIBLE);
+                    }
+
+                    @Override
+                    public void onStopTrackingTouch(Slider slider) {
+                        mInVolumeDrag = false;
+                        playerVolumeLabel.setVisibility(View.VISIBLE);
+                        // called at the end of a touch/drag cycle, call with update to make
+                        // sure we are in sync with remote volume
+                        setVolume(slider, playerVolumeLabel, (int) slider.getValue());
+                    }
+                });
+                volumeBar.setLabelFormatter((value -> Integer.toString((int) value)));
             }
 
             if (actionButton != null) {
@@ -480,9 +480,8 @@ public class ManagePlayersAdapter extends ArrayAdapter<AbsPlayerItem> {
             if (!mPlayerStatus.isInitialized()) {
                 progressVisible = true;
 
-                volumeText.setText("");
                 if (volumeBar != null) {
-                    volumeBar.setProgress(0);
+                    volumeBar.setValue(0);
                     volumeBar.setEnabled(false);
                 }
 
@@ -497,14 +496,14 @@ public class ManagePlayersAdapter extends ArrayAdapter<AbsPlayerItem> {
                 }
                 if (mPlayerStatus.isMuted()) {
                     // TODO show different info for muted player
-                    setVolumeLabel(view, 0);
                     if (volumeBar != null) {
-                        volumeBar.setProgress(0);
+                        volumeBar.setValue(0);
                     }
                 } else {
-                    setVolumeLabel(view, mPlayerStatus.getVolume());
                     if (volumeBar != null) {
-                        volumeBar.setProgress(mPlayerStatus.getVolume());
+                        // ensure received values are within 0 <= value <= 100
+                        int clampedVolume = MoreMath.coerceIn(mPlayerStatus.getVolume(), 0, 100);
+                        volumeBar.setValue(clampedVolume);
                     }
                 }
 
@@ -515,7 +514,7 @@ public class ManagePlayersAdapter extends ArrayAdapter<AbsPlayerItem> {
                 if (mPlayerStatus.isPowered()) {
                     playerStatusVisibility = View.VISIBLE;
                     if (playerStatusText != null) {
-                        if(mPlayerStatus.isConnected()) {
+                        if (mPlayerStatus.isConnected()) {
                             playerStatusText.setText(mPlayerStatus.getMode().getRid());
                         } else {
                             playerStatusText.setText(getContext().getString(R.string.disconnected));
@@ -635,9 +634,9 @@ public class ManagePlayersAdapter extends ArrayAdapter<AbsPlayerItem> {
 
         @Override
         public int compare(PlayerStatus lhs, PlayerStatus rhs) {
-            int lhsSyncGroup = mSyncStatus.getSyncGroup(lhs.getId()).or(0);
+            int lhsSyncGroup = MoreOption.getOrElse(mSyncStatus.getSyncGroup(lhs.getId()), 0);
 
-            int rhsSyncGroup = mSyncStatus.getSyncGroup(rhs.getId()).or(0);
+            int rhsSyncGroup = MoreOption.getOrElse(mSyncStatus.getSyncGroup(rhs.getId()), 0);
             return ComparisonChain.start().
                     // all players in sync group first
                             compareTrueFirst(lhsSyncGroup != 0, rhsSyncGroup != 0).
@@ -652,7 +651,7 @@ public class ManagePlayersAdapter extends ArrayAdapter<AbsPlayerItem> {
                     // sort by player id
                             compare(lhs.getId(), rhs.getId(), Ordering.usingToString()).
 
-                            result();
+                    result();
         }
     }
 }

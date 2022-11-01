@@ -413,7 +413,7 @@ public class ContextImpl extends AbsContext {
         ListenableFuture<PendingState> connectionFuture = newPendingConnection.submit(OSExecutors.getUnboundedPool());
 
         // ensure this callback runs on a background thread, if pending connection completes/succeeds very quickly this could run on samethread otherwise
-        Futures.addCallback(connectionFuture, new FutureCallback<PendingState>() {
+        Futures.addCallback(connectionFuture, new FutureCallback<>() {
             @Override
             public void onFailure(@Nullable Throwable e) {
                 if (e != null) {

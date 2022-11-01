@@ -11,7 +11,6 @@ import android.widget.ImageView.ScaleType;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.google.common.base.Objects;
-import com.google.common.base.Optional;
 import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableList;
 import com.orangebikelabs.orangesqueeze.artwork.ArtworkType;
@@ -26,6 +25,9 @@ import com.orangebikelabs.orangesqueeze.menu.MenuElement;
 import com.orangebikelabs.orangesqueeze.menu.StandardMenuItem;
 
 import javax.annotation.Nonnull;
+
+import arrow.core.Option;
+import arrow.core.OptionKt;
 
 /**
  * @author tbsandee@orangebikelabs.com
@@ -83,7 +85,7 @@ public class PlaylistItem extends StandardMenuItem {
 
     @Nonnull
     @Override
-    public Optional<String> getText2() {
+    public Option<String> getText2() {
 
         StringBuilder builder = new StringBuilder(100);
 
@@ -104,20 +106,20 @@ public class PlaylistItem extends StandardMenuItem {
             builder.append(")");
         }
         if (builder.length() > 0) {
-            return Optional.of(builder.toString());
+            return OptionKt.some(builder.toString());
         } else {
-            return Optional.absent();
+            return OptionKt.none();
         }
     }
 
     @Nonnull
     @Override
-    public Optional<String> getText3() {
+    public Option<String> getText3() {
         int duration = mJson.path("duration").asInt();
         if (duration > 0) {
-            return Optional.of(DateUtils.formatElapsedTime(duration));
+            return OptionKt.some(DateUtils.formatElapsedTime(duration));
         } else {
-            return Optional.absent();
+            return OptionKt.none();
         }
     }
 

@@ -1,0 +1,1 @@
+* OpenSqueeze Changelog *

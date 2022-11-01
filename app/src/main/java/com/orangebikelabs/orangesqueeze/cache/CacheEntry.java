@@ -66,7 +66,7 @@ public class CacheEntry {
         // use slightly better hash function than standard for persistent hash codes
         // IF YOU CHANGE THIS YOU MUST BUMP THE DATABASE REV!
         // this is plenty good for general hashing as well, don't bother creating a better hash function
-        mKeyHash = Hashing.murmur3_32().hashUnencodedChars(key).asInt();
+        mKeyHash = Hashing.murmur3_32_fixed().hashUnencodedChars(key).asInt();
     }
 
     @Nonnull

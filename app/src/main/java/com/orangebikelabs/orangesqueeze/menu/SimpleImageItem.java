@@ -6,7 +6,6 @@
 package com.orangebikelabs.orangesqueeze.menu;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import com.google.common.base.Optional;
 import com.google.common.collect.ImmutableList;
 import com.orangebikelabs.orangesqueeze.artwork.ArtworkType;
 import com.orangebikelabs.orangesqueeze.browse.common.IconRetriever;
@@ -15,6 +14,8 @@ import com.orangebikelabs.orangesqueeze.browse.common.StandardIconRetriever;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+
+import arrow.core.Option;
 
 /**
  * Image item from slideshows.
@@ -83,19 +84,19 @@ public class SimpleImageItem extends StandardMenuItem {
 
     @Nonnull
     @Override
-    public Optional<String> getText2() {
-        return Optional.fromNullable(mOwner);
+    public Option<String> getText2() {
+        return Option.fromNullable(mOwner);
     }
 
     @Nonnull
     @Override
-    public Optional<String> getText3() {
-        return Optional.fromNullable(mDate);
+    public Option<String> getText3() {
+        return Option.fromNullable(mDate);
     }
 
     @Nonnull
-    public Optional<String> getImageUrl() {
-        return Optional.fromNullable(mImage);
+    public Option<String> getImageUrl() {
+        return Option.fromNullable(mImage);
     }
 
     @Override

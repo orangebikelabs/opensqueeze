@@ -10,7 +10,6 @@ import android.content.Context;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.google.common.base.Joiner;
-import com.google.common.base.Optional;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.io.ByteSource;
 import com.google.common.util.concurrent.MoreExecutors;
@@ -42,6 +41,8 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.concurrent.GuardedBy;
 
+import arrow.core.Option;
+
 /**
  * Implementation of most common type of request. Uses Comet protocol to send response and asynchronously receive a response.
  * <p/>
@@ -58,10 +59,9 @@ public class CometRequest extends AbsRequest {
     @Nonnull
     final private Context mContext;
 
-    @SuppressWarnings("OptionalUsedAsFieldOrParameterType")
     @GuardedBy("this")
     @Nullable
-    private Optional<CacheEntry> mCacheEntry;
+    private Option<CacheEntry> mCacheEntry;
 
     CometRequest(Context context, ContextImpl masterContext, List<?> commands) {
         super(commands);
@@ -117,7 +117,7 @@ public class CometRequest extends AbsRequest {
 
     @Nullable
     synchronized protected CacheEntry getCacheEntry() {
-        Optional<CacheEntry> retval = mCacheEntry;
+        Option<CacheEntry> retval = mCacheEntry;
         if (retval == null) {
             CacheEntry newVal = null;
             if (isCacheable()) {
@@ -129,7 +129,7 @@ public class CometRequest extends AbsRequest {
                     }
                 }
             }
-            retval = Optional.fromNullable(newVal);
+            retval = Option.fromNullable(newVal);
             mCacheEntry = retval;
         }
         return retval.orNull();
@@ -175,7 +175,7 @@ public class CometRequest extends AbsRequest {
         }
     }
 
-    final private CacheRequestCallback<JsonNode, byte[]> mCacheCallback = new CacheRequestCallback<JsonNode, byte[]>() {
+    final private CacheRequestCallback<JsonNode, byte[]> mCacheCallback = new CacheRequestCallback<>() {
 
         @Override
         @Nonnull
@@ -184,7 +184,9 @@ public class CometRequest extends AbsRequest {
             return getCacheEntry();
         }
 
-        /** converts ByteSource from cache to our cache result */
+        /**
+         * converts ByteSource from cache to our cache result
+         */
         @Override
         @Nonnull
         public JsonNode onDeserializeCacheData(CacheService service, ByteSource byteSource, long expectedLength) throws IOException {
@@ -265,7 +267,7 @@ public class CometRequest extends AbsRequest {
             "jiveupdatealarm;", "favorites;items;");
 
     @Nonnull
-    static private Optional<CacheEntry.Type> checkServerCacheWhitelist(List<Object> commands) {
+    static private Option<CacheEntry.Type> checkServerCacheWhitelist(List<Object> commands) {
         CacheEntry.Type retval = null;
         if (OSLog.isLoggable(Tag.CACHE, OSLog.VERBOSE)) {
             OSLog.v(Tag.CACHE, "cache whitelist check " + commands);
@@ -306,7 +308,7 @@ public class CometRequest extends AbsRequest {
                 OSLog.d(Tag.CACHE, "Unhandled uncached/nocachelist command string: " + commands);
             }
         }
-        return Optional.fromNullable(retval);
+        return Option.fromNullable(retval);
     }
 
     static class InvalidDataException extends SBRequestException {

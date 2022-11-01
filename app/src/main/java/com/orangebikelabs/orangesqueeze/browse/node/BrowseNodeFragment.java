@@ -7,6 +7,8 @@ package com.orangebikelabs.orangesqueeze.browse.node;
 
 import android.content.Intent;
 import android.os.Bundle;
+
+import androidx.loader.app.LoaderManager;
 import androidx.loader.app.LoaderManager.LoaderCallbacks;
 import androidx.loader.content.Loader;
 import android.view.View;
@@ -81,19 +83,21 @@ public class BrowseNodeFragment extends AbsBrowseFragment<NodeItemAdapter, List<
         return new NodeLoaderCallbacks();
     }
 
-    @SuppressWarnings("deprecation")
     @Override
     public void requery(@Nullable Bundle args) {
         super.requery(args);
 
         if (isResumed()) {
-            getLoaderManager().restartLoader(BROWSE_LOADER_ID, getMutableArguments(), createLoaderCallbacks());
+            LoaderManager.getInstance(this).restartLoader(BROWSE_LOADER_ID, getMutableArguments(), createLoaderCallbacks());
         }
     }
 
     @Nonnull
     protected String getParentNodeId() {
         NavigationItem item = NavigationItem.Companion.getNavigationItem(getMutableArguments());
+        if(item == null) {
+            throw new IllegalStateException("require navigation item");
+        }
         String nodeId = item.getNodeId();
         if (nodeId == null) {
             throw new IllegalStateException("require nodeid");

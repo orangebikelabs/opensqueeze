@@ -17,7 +17,6 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.ImageView.ScaleType;
 
-import com.google.common.base.Optional;
 import com.google.common.collect.MapMaker;
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.MoreExecutors;
@@ -46,6 +45,9 @@ import java.util.concurrent.TimeoutException;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+
+import arrow.core.Option;
+import arrow.core.OptionKt;
 
 /**
  * @author tbsandee@orangebikelabs.com
@@ -374,8 +376,8 @@ public class ThumbnailProcessor extends ListJobProcessor<View> {
         }
 
         @Nonnull
-        protected Optional<Animation> getAnimation() {
-            return Optional.of(AnimationUtils.loadAnimation(mContext, R.anim.thumbnail_fadein));
+        protected Option<Animation> getAnimation() {
+            return OptionKt.some(AnimationUtils.loadAnimation(mContext, R.anim.thumbnail_fadein));
         }
 
         @Nonnull

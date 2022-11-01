@@ -1,6 +1,7 @@
 name: Release
 concurrency: ci-release
 
+# only completes full build & test cycle if release will be issued
 on:
   push:
     branches:
@@ -8,15 +9,49 @@ on:
       - beta
       - alpha
 
-permissions: write-all
+env:
+  # this is the command needed to bootstrap the tooling for semantic-release based on our release configuration
+  semrel_package_bootstrap: "npm i semantic-release @semantic-release/changelog @semantic-release/git semantic-release-export-data conventional-changelog-conventionalcommits -D"
 
 jobs:
-  release:
-    name: Release
+  get-next-version:
+    name: Detect next semantic version
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - name: set up JDK 11
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Prepare Node environment
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      - run: ${{ env.semrel_package_bootstrap }}
+      - run: npx semantic-release --dry-run
+        id: get-next-version
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}     # use limited token for readonly version probing
+
+      - run: "echo Detected next version: ${{ steps.get-next-version.outputs.new-release-version }}"
+      - run: "echo Release will be published: ${{ steps.get-next-version.outputs.new-release-published }}"
+
+    outputs:
+      new-release-published: ${{ steps.get-next-version.outputs.new-release-published }}
+      new-release-version: ${{ steps.get-next-version.outputs.new-release-version }}
+
+  build:
+    env:
+      next_version_name: ${{ needs.get-next-version.outputs.new-release-version }}
+      next_build_number: ${{ github.run_number }}
+
+    name: Build & Test
+    needs: get-next-version
+    if: needs.get-next-version.outputs.new-release-published == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Set up JDK 11
         uses: actions/setup-java@v3
         with:
           java-version: '11'
@@ -26,8 +61,21 @@ jobs:
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
 
+      - name: Setting up keystores
+        run: |
+          echo ${{ secrets.RELEASE_KEYSTORE_BASE64 }} | base64 --decode > app/release_keystore.jks
+          echo ${{ secrets.DEBUG_KEYSTORE_BASE64 }} | base64 --decode > app/debug_keystore.jks
+
+      - run: echo Building with version ${{ env.next_version_name }}, build number ${{ env.next_build_number }}
+
       - name: Build with Gradle
-        run: ./gradlew build
+        run: >
+          ./gradlew --no-daemon
+          -PversionName=${{ env.next_version_name }}
+          -PbuildNumber=${{ env.next_build_number }}
+          -PreleaseKeystorePassword=${{ secrets.RELEASE_KEYSTORE_PASSWORD }}
+          -PdebugKeystore=debug_keystore.jks
+          build
 
       - name: Test Report
         uses: dorny/test-reporter@v1
@@ -37,12 +85,59 @@ jobs:
           path: "**/test-results/**/*.xml"    # Path to test results
           reporter: java-junit        # Format of test results
 
-      - name: Setup Node.js
+      - uses: actions/upload-artifact@v3
+        with:
+          retention-days: 1
+          name: builds
+          path: |
+            app/build/outputs/**/*.apk
+            app/build/outputs/mapping/**/mapping.txt
+
+  release:
+    name: Release to Github
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          persist-credentials: false
+
+      - uses: actions/download-artifact@v3
+        with:
+          name: builds
+          path: app/build/outputs
+
+      - name: Prepare Node environment
         uses: actions/setup-node@v3
         with:
           node-version: 16
 
+      - name: Bootstrap npm Semantic Release packages
+        run: ${{ env.semrel_package_bootstrap }}
+
       - name: Release
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }} # use supplied semantic release gh-token with extra permissions
         run: npx semantic-release
+
+  cleanup:
+    name: Cleanup old builds
+    needs: release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Cleanup beta builds
+        uses: bensandee/delete-older-releases@v0.2.1
+        with:
+          keep_latest: 3
+          delete_tag_pattern: beta
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Cleanup alpha builds
+        uses: bensandee/delete-older-releases@v0.2.1
+        with:
+          keep_latest: 3
+          delete_tag_pattern: alpha
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

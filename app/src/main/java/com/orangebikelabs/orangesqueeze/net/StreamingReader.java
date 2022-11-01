@@ -23,6 +23,7 @@ import java.net.Socket;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.annotation.Nonnull;
 import javax.annotation.concurrent.GuardedBy;
 
 /**
@@ -41,6 +42,7 @@ public class StreamingReader extends AbsInterruptibleThreadService {
     }
 
     @Override
+    @Nonnull
     protected String serviceName() {
         return "StreamingReaderThread";
     }

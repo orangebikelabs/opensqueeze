@@ -11,6 +11,7 @@ import android.os.Bundle
 import android.os.Parcelable
 import com.orangebikelabs.orangesqueeze.BuildConfig
 import com.orangebikelabs.orangesqueeze.R
+import com.orangebikelabs.orangesqueeze.compat.getParcelableCompat
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
@@ -59,7 +60,7 @@ data class NavigationItem(
         fun getNavigationItem(bundle: Bundle?): NavigationItem? {
             var retval: NavigationItem? = null
             if (bundle != null) {
-                retval = bundle.getParcelable(EXTRA_NAVIGATIONITEM)
+                retval = bundle.getParcelableCompat(EXTRA_NAVIGATIONITEM, NavigationItem::class.java)
             }
             return retval
         }
@@ -133,6 +134,7 @@ data class NavigationItem(
             )
         }
 
+        @Suppress("unused")
         fun newBrowseYear(year: String): NavigationItem {
             val requestCommandSet: NavigationCommandSet
             var addCommandSet: NavigationCommandSet? = null
@@ -159,6 +161,7 @@ data class NavigationItem(
             )
         }
 
+        @Suppress("unused")
         fun newBrowseGenre(genreId: String, genre: String): NavigationItem {
             val requestCommandSet: NavigationCommandSet
             var addCommandSet: NavigationCommandSet? = null

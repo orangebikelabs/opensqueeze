@@ -4,8 +4,8 @@
  */
 
 buildscript {
-    ext.kotlin_version = '1.7.0'
-    ext.sqldelight_version = '1.5.1'
+    ext.kotlin_version = '1.7.20'
+    ext.sqldelight_version = '1.5.4'
 
     repositories {
         google()
@@ -13,9 +13,10 @@ buildscript {
     }
     dependencies {
         //noinspection GradleDependency
-        classpath 'com.android.tools.build:gradle:7.3.0-beta05'
+        classpath 'com.android.tools.build:gradle:7.3.1'
 
         // kotlin
+        //noinspection DifferentKotlinGradleVersion
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
 
         classpath "com.squareup.sqldelight:gradle-plugin:$sqldelight_version"
@@ -23,22 +24,19 @@ buildscript {
 }
 
 allprojects {
-    // update this when it's time to bump the app version
-    ext.obl_android_app_versionName = '2.6.0'
-
-    // pull version code from jenkins build id
-    ext.obl_android_app_buildNumber = System.getenv("BUILD_NUMBER") ?: "1"
+    ext.obl_android_app_versionName = versionName
+    ext.obl_android_app_buildNumber = buildNumber
     ext.obl_android_app_versionCode = obl_android_app_buildNumber.toInteger()
 
-    ext.obl_guavaVersion = '30.1.1-android'
-    ext.obl_errorProneVersion = '2.8.0'
+    ext.obl_guavaVersion = '31.1-android'
+    ext.obl_errorProneVersion = '2.16'
 
     // must stay at 3.12.x until minsdk >= 25
-    ext.obl_okhttpVersion = '3.12.9'
+    ext.obl_okhttpVersion = '3.12.13'
     ext.obl_jsr305Version = '3.0.2'
-    ext.obl_jacksonVersion = '2.12.4'
-    ext.obl_koptionalVersion = '1.7.0'
-    ext.obl_permissionsDispatcherVersion = '4.9.2'
+
+    // must stay at 2.12.7 for sdk 21
+    ext.obl_jacksonVersion = '2.12.7'
     ext.obl_materialdialogsVersion = '3.3.0'
 
     repositories {

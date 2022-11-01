@@ -12,6 +12,8 @@ import com.orangebikelabs.orangesqueeze.common.SBContextProvider;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
+import javax.annotation.Nonnull;
+
 public class SendDiscoveryPacketService extends AbstractScheduledService {
     private long mInterval;
     private TimeUnit mUnits;
@@ -22,6 +24,7 @@ public class SendDiscoveryPacketService extends AbstractScheduledService {
     }
 
     @Override
+    @Nonnull
     protected ScheduledExecutorService executor() {
         return OSExecutors.getSingleThreadScheduledExecutor();
     }
@@ -32,6 +35,7 @@ public class SendDiscoveryPacketService extends AbstractScheduledService {
     }
 
     @Override
+    @Nonnull
     protected Scheduler scheduler() {
         return Scheduler.newFixedRateSchedule(0, mInterval, mUnits);
     }

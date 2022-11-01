@@ -20,7 +20,7 @@ import javax.annotation.Nullable;
  */
 public class Closeables {
 
-    final static private FutureCallback<Closeable> sCloserCallback = new FutureCallback<Closeable>() {
+    final static private FutureCallback<Closeable> sCloserCallback = new FutureCallback<>() {
         @Override
         public void onSuccess(@Nullable Closeable closeable) {
             try {

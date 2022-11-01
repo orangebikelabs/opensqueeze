@@ -56,7 +56,7 @@ class DeviceConnectivity private constructor(context: Context) {
 
     val deviceConnectivity: Boolean
         get() {
-            return deviceConnectivitySubject.value
+            return checkNotNull(deviceConnectivitySubject.value)
         }
 
     fun observeDeviceConnectivity(): Observable<Boolean> {
@@ -65,14 +65,14 @@ class DeviceConnectivity private constructor(context: Context) {
 
     fun awaitNetwork(time: Long, units: TimeUnit): Boolean {
         OSAssert.assertNotMainThread()
-        try {
-            return deviceConnectivitySubject
+        return try {
+            deviceConnectivitySubject
                     .filter { it }
                     .firstOrError()
                     .toFuture()
                     .get(time, units)
         } catch (e: TimeoutException) {
-            return false
+            false
         }
     }
 

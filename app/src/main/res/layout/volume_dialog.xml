@@ -7,6 +7,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_marginLeft="13dp"
     android:layout_marginTop="8dp"
     android:layout_marginRight="13dp"
@@ -36,19 +37,18 @@
             android:layout_height="wrap_content"
             android:contentDescription="@string/decrease_volume_desc"
             android:paddingStart="16dp"
-            android:paddingTop="16dp"
+            android:paddingTop="46dp"
             android:paddingEnd="0dp"
             android:paddingBottom="16dp"
             android:src="@drawable/ic_volume_down" />
 
-        <!-- seekbar maxheight set to large value to fix rendering bug on pre-sdk 21 -->
-        <SeekBar
+        <com.google.android.material.slider.Slider
             android:id="@+id/volume"
             android:layout_width="0dp"
-            android:layout_height="52dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:contentDescription="@string/volume_slider_desc"
-            android:maxHeight="1000dp" />
+            app:labelBehavior="visible"
+            android:contentDescription="@string/volume_slider_desc" />
 
         <ImageButton
             android:id="@+id/increase_volume_button"
@@ -62,15 +62,6 @@
             android:paddingBottom="16dp"
             android:src="@drawable/ic_volume_up" />
     </LinearLayout>
-
-    <TextView
-        android:id="@+id/volume_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:padding="16dp"
-        android:text="@string/volume_label"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <TextView
         android:id="@+id/volume_locked_label"

@@ -37,7 +37,7 @@ public enum BrowseStyle implements Parcelable {
 
     // @formatter:on
 
-    public static final Parcelable.Creator<BrowseStyle> CREATOR = new Parcelable.Creator<BrowseStyle>() {
+    public static final Parcelable.Creator<BrowseStyle> CREATOR = new Parcelable.Creator<>() {
         @Override
         public BrowseStyle createFromParcel(Parcel in) {
             return BrowseStyle.values()[in.readInt()];

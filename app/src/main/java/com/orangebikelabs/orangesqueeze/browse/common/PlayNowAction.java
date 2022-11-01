@@ -70,7 +70,7 @@ public class PlayNowAction extends AbsItemAction {
             SBContext context = SBContextProvider.get();
 
             SBRequest request = context.newRequest("playlistcontrol", "cmd:" + getPlayCommand(), mFilterParam);
-            CharSequence toastMessage = CommandTools.lookupToast(controller.requireContext(), request, mItemTitle);
+            CharSequence toastMessage = CommandTools.lookupSnackbar(controller.requireContext(), request, mItemTitle);
 
             request.setPlayerId(context.getPlayerId());
             FutureResult result = request.submit(OSExecutors.getUnboundedPool());
@@ -85,18 +85,18 @@ public class PlayNowAction extends AbsItemAction {
     static class PlayCommandResultReceiver extends AbsFragmentResultReceiver<AbsMenuFragment> {
 
         @Nullable
-        final private CharSequence mToastMessage;
+        final private CharSequence mSnackbarMessage;
 
-        PlayCommandResultReceiver(AbsMenuFragment fragment, @Nullable CharSequence toastMessage) {
+        PlayCommandResultReceiver(AbsMenuFragment fragment, @Nullable CharSequence snackbarMessage) {
             super(fragment);
 
-            mToastMessage = toastMessage;
+            mSnackbarMessage = snackbarMessage;
         }
 
         @Override
         public void onEventualSuccess(AbsMenuFragment fragment, SBResult result) {
-            if (mToastMessage != null) {
-                fragment.showSnackbar(mToastMessage, AbsMenuFragment.SnackbarLength.LONG);
+            if (mSnackbarMessage != null) {
+                fragment.showSnackbar(mSnackbarMessage, AbsMenuFragment.SnackbarLength.LONG);
             }
         }
     }

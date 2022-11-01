@@ -162,7 +162,7 @@ public class DownloadService extends Service {
 
             final ListeningExecutorService fExecutor = mDownloadExecutor;
             ListenableFuture<List<Long>> future = OSExecutors.getSingleThreadScheduledExecutor().submit(new StartAllDownloadsTask(this, serverId));
-            Futures.addCallback(future, new FutureCallback<List<Long>>() {
+            Futures.addCallback(future, new FutureCallback<>() {
                 @Override
                 public void onSuccess(@Nullable List<Long> candidateList) {
                     if (mDownloadExecutor != fExecutor || candidateList == null) {

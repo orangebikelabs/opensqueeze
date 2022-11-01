@@ -7,20 +7,21 @@ package com.orangebikelabs.orangesqueeze.nowplaying;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.format.DateUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageSwitcher;
-import android.widget.SeekBar;
-import android.widget.SeekBar.OnSeekBarChangeListener;
 
 import com.github.chrisbanes.photoview.PhotoView;
+import com.google.android.material.slider.Slider;
 import com.google.common.util.concurrent.Futures;
 import com.orangebikelabs.orangesqueeze.R;
 import com.orangebikelabs.orangesqueeze.app.AutoSizeTextHelper;
 import com.orangebikelabs.orangesqueeze.common.AbsFragmentResultReceiver;
+import com.orangebikelabs.orangesqueeze.common.MoreMath;
 import com.orangebikelabs.orangesqueeze.common.NavigationItem;
 import com.orangebikelabs.orangesqueeze.common.OSAssert;
 import com.orangebikelabs.orangesqueeze.common.FutureResult;
@@ -36,6 +37,8 @@ import com.orangebikelabs.orangesqueeze.common.ServerStatus.Transaction;
 import com.orangebikelabs.orangesqueeze.databinding.NowplayingBinding;
 
 import javax.annotation.Nullable;
+
+import androidx.annotation.NonNull;
 
 /**
  * TODO detect mog, pandora, link to those pages?
@@ -59,7 +62,7 @@ public class NowPlayingFragment extends AbsNowPlayingFragment {
 
     private NowplayingBinding mBinding;
 
-    private AutoSizeTextHelper mAutosizeTextHelper = new AutoSizeTextHelper();
+    final private AutoSizeTextHelper mAutosizeTextHelper = new AutoSizeTextHelper();
 
     public NowPlayingFragment() {
     }
@@ -67,8 +70,6 @@ public class NowPlayingFragment extends AbsNowPlayingFragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        setHasOptionsMenu(true);
 
         mShuffleStrings = getResources().getStringArray(R.array.shuffle_strings);
         mRepeatStrings = getResources().getStringArray(R.array.repeat_strings);
@@ -106,7 +107,30 @@ public class NowPlayingFragment extends AbsNowPlayingFragment {
         mBinding.info.trackText.setOnClickListener(mTrackClickedListener);
         mAutosizeTextHelper.applyAutoSize(mBinding.info.trackText, 2);
 
-        mBinding.progress.seekbar.setOnSeekBarChangeListener(mSeekBarListener);
+        mBinding.progress.slider.addOnChangeListener((slider, value, fromUser) -> {
+            PlayerStatus status = mSbContext.getPlayerStatus();
+            if (fromUser && mElapsedText != null && status != null) {
+                PlayerStatus updated = status.withElapsedTime(value);
+
+                quickSetText(mElapsedText, getElapsedText(updated, false));
+                quickSetText(mDurationText, getDurationText(updated, false));
+            }
+        });
+        mBinding.progress.slider.addOnSliderTouchListener(new Slider.OnSliderTouchListener() {
+            @Override
+            public void onStartTrackingTouch(@NonNull Slider slider) {
+                mInterimUpdateMode = InterimUpdateMode.OFF;
+            }
+
+            @Override
+            public void onStopTrackingTouch(@NonNull Slider slider) {
+                mInterimUpdateMode = InterimUpdateMode.REENABLE;
+                mLastSeekCommand = mSbContext.sendPlayerCommand("time", String.valueOf(slider.getValue()));
+            }
+        });
+        mBinding.progress.slider.setLabelFormatter((value) -> {
+            return DateUtils.formatElapsedTime((int) value);
+        });
 
         mShuffleButton = view.findViewById(R.id.shuffle_button);
         mRepeatButton = view.findViewById(R.id.repeat_button);
@@ -153,12 +177,14 @@ public class NowPlayingFragment extends AbsNowPlayingFragment {
 //        } else {
 //            mTrackPositionBar.setVisibility(View.INVISIBLE);
 //        }
-        mBinding.progress.seekbar.setEnabled(true);
+        mBinding.progress.slider.setEnabled(true);
 
         boolean trackTransition = quickSetText(mTrackText, getTrackText(status));
 
         if (!trackTransition) {
-            trackTransition = (mBinding.progress.seekbar.getMax() != (int) status.getTotalTime());
+            // don't transition on new track text if we are at the very end of the track
+            // this prevents some superflous transition animations
+            trackTransition = Math.abs(mBinding.progress.slider.getValueTo() - status.getTotalTime()) >= 0.1;
         }
 
         if (mShuffleButton != null) {
@@ -187,12 +213,16 @@ public class NowPlayingFragment extends AbsNowPlayingFragment {
     protected void setProgress(PlayerStatus status, boolean estimate) {
         int elapsed = (int) (status.getElapsedTime(estimate));
         int total = (int) (status.getTotalTime());
-        if (total != 0) {
-            mBinding.progress.seekbar.setProgress(elapsed);
+        if (total > 0) {
+            // ensure value never exceeds total time
+            int clampedValue = MoreMath.coerceIn(elapsed, 0, total);
+            mBinding.progress.slider.setValue(clampedValue);
+            mBinding.progress.slider.setValueTo(total);
         } else {
-            mBinding.progress.seekbar.setProgress(0);
+            // valueTo must always be > valueFrom (which is zero)
+            mBinding.progress.slider.setValue(0);
+            mBinding.progress.slider.setValueTo(1);
         }
-        mBinding.progress.seekbar.setMax(total);
     }
 
     @Override
@@ -205,7 +235,7 @@ public class NowPlayingFragment extends AbsNowPlayingFragment {
             if (id == R.id.shuffle_button) {
                 final ShuffleMode initialShuffleMode = playerStatus.getShuffleMode();
                 FutureResult futureResult = mSbContext.sendPlayerCommand("playlist", "shuffle");
-                Futures.addCallback(futureResult, new AbsFragmentResultReceiver<NowPlayingFragment>(this) {
+                Futures.addCallback(futureResult, new AbsFragmentResultReceiver<>(this) {
                     @Override
                     public void onEventualSuccess(NowPlayingFragment fragment, SBResult result) {
                         int newVal = initialShuffleMode.ordinal() + 1;
@@ -230,7 +260,7 @@ public class NowPlayingFragment extends AbsNowPlayingFragment {
             } else if (id == R.id.repeat_button) {
                 final RepeatMode initialRepeatMode = playerStatus.getRepeatMode();
                 FutureResult futureResult = mSbContext.sendPlayerCommand("playlist", "repeat");
-                Futures.addCallback(futureResult, new AbsFragmentResultReceiver<NowPlayingFragment>(this) {
+                Futures.addCallback(futureResult, new AbsFragmentResultReceiver<>(this) {
 
                     @Override
                     public void onEventualSuccess(NowPlayingFragment fragment, SBResult result) {
@@ -258,34 +288,6 @@ public class NowPlayingFragment extends AbsNowPlayingFragment {
             // ignore
         }
     }
-
-    /**
-     * Support instance to handle dragging around the progressbar
-     */
-    final private OnSeekBarChangeListener mSeekBarListener = new OnSeekBarChangeListener() {
-
-        @Override
-        public void onStopTrackingTouch(SeekBar seekBar) {
-            mInterimUpdateMode = InterimUpdateMode.REENABLE;
-            mLastSeekCommand = mSbContext.sendPlayerCommand("time", String.valueOf(seekBar.getProgress()));
-        }
-
-        @Override
-        public void onStartTrackingTouch(SeekBar seekBar) {
-            mInterimUpdateMode = InterimUpdateMode.OFF;
-        }
-
-        @Override
-        public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-            PlayerStatus status = mSbContext.getPlayerStatus();
-            if (fromUser && mElapsedText != null && status != null) {
-                PlayerStatus updated = status.withElapsedTime(progress);
-
-                quickSetText(mElapsedText, getElapsedText(updated, false));
-                quickSetText(mDurationText, getDurationText(updated, false));
-            }
-        }
-    };
 
     final private OnClickListener mArtistClickedListener = v -> {
         try {
