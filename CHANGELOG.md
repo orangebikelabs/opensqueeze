@@ -1,5 +1,3 @@
-# Open Squeeze Detailed Changelog
-
 ## [2.6.0](https://github.com/orangebikelabs/opensqueeze/compare/v2.5.3...v2.6.0) (2022-11-01)
 
 ### Features
