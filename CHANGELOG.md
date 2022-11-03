@@ -1,3 +1,10 @@
+## [2.6.0-alpha.33](https://github.com/orangebikelabs/opensqueeze/compare/v2.6.0-alpha.32...v2.6.0-alpha.33) (2022-11-03)
+
+
+### Bug Fixes
+
+* add missing shuffle and repeat buttons to now playing ([68453b8](https://github.com/orangebikelabs/opensqueeze/commit/68453b822139ace430eeb802e8746ad2ceca1ef2))
+
 ## [2.6.0-alpha.32](https://github.com/orangebikelabs/opensqueeze/compare/v2.6.0-alpha.31...v2.6.0-alpha.32) (2022-10-25)
 
 
