@@ -45,6 +45,12 @@
         android:gravity="center">
 
         <ImageButton
+            android:id="@+id/shuffle_button"
+            style="@style/Button.Control"
+            android:contentDescription="@string/shuffle_toggle_desc"
+            android:src="@drawable/control_shuffle_tinted" />
+
+        <ImageButton
             android:id="@+id/thumbsdown_button"
             style="@style/Button.Control"
             android:contentDescription="@string/thumbsdown_desc"
@@ -61,6 +67,12 @@
             style="@style/Button.Control"
             android:contentDescription="@string/thumbsup_desc"
             android:src="@drawable/control_thumbsup_tinted" />
+
+        <ImageButton
+            android:id="@+id/repeat_button"
+            style="@style/Button.Control"
+            android:contentDescription="@string/repeat_toggle_desc"
+            android:src="@drawable/control_repeat_tinted" />
 
     </LinearLayout>
 
