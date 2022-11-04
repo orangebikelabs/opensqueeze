@@ -1,3 +1,10 @@
+## [2.6.1-alpha.2](https://github.com/orangebikelabs/opensqueeze/compare/v2.6.1-alpha.1...v2.6.1-alpha.2) (2022-11-04)
+
+
+### Bug Fixes
+
+* improve button sizing on now playing screen for various device sizes ([3e4b857](https://github.com/orangebikelabs/opensqueeze/commit/3e4b8571e116899bda982acff4ee9f76ef4d2d04))
+
 ## [2.6.1-alpha.1](https://github.com/orangebikelabs/opensqueeze/compare/v2.6.0...v2.6.1-alpha.1) (2022-11-03)
 
 
