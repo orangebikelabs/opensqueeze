@@ -5,6 +5,5 @@
   -->
 
 <resources>
-    <dimen name="notification_button_size">48dp</dimen>
     <dimen name="popup_list_window_width">400dp</dimen>
 </resources>
