@@ -5,13 +5,6 @@
 
 * add missing shuffle and repeat buttons to now playing ([68453b8](https://github.com/orangebikelabs/opensqueeze/commit/68453b822139ace430eeb802e8746ad2ceca1ef2))
 
-## [2.6.0-beta.6](https://github.com/orangebikelabs/opensqueeze/compare/v2.6.0-beta.5...v2.6.0-beta.6) (2022-11-03)
-
-
-### Bug Fixes
-
-* add missing shuffle and repeat buttons to now playing ([68453b8](https://github.com/orangebikelabs/opensqueeze/commit/68453b822139ace430eeb802e8746ad2ceca1ef2))
-
 ## [2.6.0-beta.5](https://github.com/orangebikelabs/opensqueeze/compare/v2.6.0-beta.4...v2.6.0-beta.5) (2022-10-25)
 
 
