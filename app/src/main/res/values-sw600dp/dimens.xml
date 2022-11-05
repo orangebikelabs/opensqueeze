@@ -7,4 +7,6 @@
 <resources>
     <dimen name="control_button_padding">16dp</dimen>
     <dimen name="control_button_padding_compact">8dp</dimen>
+    <dimen name="control_button_size">72dp</dimen>
+    <dimen name="large_control_button_size">96dp</dimen>
 </resources>
