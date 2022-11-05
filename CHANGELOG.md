@@ -1,3 +1,10 @@
+## [2.6.1-alpha.3](https://github.com/orangebikelabs/opensqueeze/compare/v2.6.1-alpha.2...v2.6.1-alpha.3) (2022-11-05)
+
+
+### Bug Fixes
+
+* connecting progress dialog was not handling embedded html properly ([cd6f351](https://github.com/orangebikelabs/opensqueeze/commit/cd6f351701fb7d5b1c21704a3766b85fd8e01036))
+
 ## [2.6.1-alpha.2](https://github.com/orangebikelabs/opensqueeze/compare/v2.6.1-alpha.1...v2.6.1-alpha.2) (2022-11-04)
 
 
