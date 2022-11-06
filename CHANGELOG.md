@@ -1,3 +1,10 @@
+## [2.6.1-alpha.4](https://github.com/orangebikelabs/opensqueeze/compare/v2.6.1-alpha.3...v2.6.1-alpha.4) (2022-11-06)
+
+
+### Bug Fixes
+
+* storage permission check not always applied ([bf70424](https://github.com/orangebikelabs/opensqueeze/commit/bf70424f69e9b7dc264fd2b637ace33b2b51d5cf))
+
 ## [2.6.1-alpha.3](https://github.com/orangebikelabs/opensqueeze/compare/v2.6.1-alpha.2...v2.6.1-alpha.3) (2022-11-05)
 
 
