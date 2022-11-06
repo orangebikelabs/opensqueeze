@@ -1,3 +1,12 @@
+## [2.6.1-beta.2](https://github.com/orangebikelabs/opensqueeze/compare/v2.6.1-beta.1...v2.6.1-beta.2) (2022-11-06)
+
+
+### Bug Fixes
+
+* connecting progress dialog was not handling embedded html properly ([cd6f351](https://github.com/orangebikelabs/opensqueeze/commit/cd6f351701fb7d5b1c21704a3766b85fd8e01036))
+* improve button sizing on now playing screen for various device sizes ([3e4b857](https://github.com/orangebikelabs/opensqueeze/commit/3e4b8571e116899bda982acff4ee9f76ef4d2d04))
+* storage permission check not always applied ([bf70424](https://github.com/orangebikelabs/opensqueeze/commit/bf70424f69e9b7dc264fd2b637ace33b2b51d5cf))
+
 ## [2.6.1-beta.1](https://github.com/orangebikelabs/opensqueeze/compare/v2.6.0...v2.6.1-beta.1) (2022-11-03)
 
 
