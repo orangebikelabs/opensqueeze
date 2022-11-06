@@ -22,11 +22,15 @@ jobs:
           distribution: 'temurin'
           cache: gradle
 
-      - name: Grant execute permission for gradlew
-        run: chmod +x gradlew
+      - name: Prepare gradle environment
+        run: |
+          mkdir -p ~/.gradle
+          rm -f ~/.gradle/gradle.properties
+          touch ~/.gradle/gradle.properties
+          echo "org.gradle.daemon=false" >> ~/.gradle/gradle.properties
 
       - name: Build with Gradle
-        run: ./gradlew --no-daemon build
+        run: ./gradlew build test
 
       - name: Test Report
         uses: dorny/test-reporter@v1
@@ -50,12 +54,19 @@ jobs:
           distribution: 'temurin'
           cache: gradle
 
+      - name: Prepare gradle environment
+        run: |
+          mkdir -p ~/.gradle
+          rm -f ~/.gradle/gradle.properties
+          touch ~/.gradle/gradle.properties
+          echo "org.gradle.daemon=false" >> ~/.gradle/gradle.properties
+
       - name: Run connected tests
         uses: reactivecircus/android-emulator-runner@v2
         with:
           arch: 'x86_64'
           api-level: 30
-          script: ./gradlew --no-daemon connectedCheck
+          script: ./gradlew connectedAndroidTest
 
       - name: Test Report
         uses: dorny/test-reporter@v1

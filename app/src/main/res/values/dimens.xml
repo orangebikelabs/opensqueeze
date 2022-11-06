@@ -27,9 +27,7 @@
     <dimen name="serverlist_popup_list_width">240dp</dimen>
     <dimen name="popup_list_window_width">320dp</dimen>
 
-    <dimen name="notification_large_bitmap_size">64dp</dimen>
     <dimen name="notification_bigpicture_bitmap_size">256dp</dimen>
-    <dimen name="notification_button_size">40dp</dimen>
 
     <dimen name="player_switch_padding">8dp</dimen>
 
@@ -49,4 +47,7 @@
     <dimen name="autosize_granularity">2sp</dimen>
     <dimen name="actionitem_icon_padding">8dp</dimen>
     <dimen name="sib_shadow_size">0.5dp</dimen>
+
+    <dimen name="control_button_size">44dp</dimen>
+    <dimen name="large_control_button_size">56dp</dimen>
 </resources>

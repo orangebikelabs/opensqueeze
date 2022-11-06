@@ -488,7 +488,7 @@ abstract public class SBActivity extends AppCompatActivity {
 
         mConnectingDialog = ProgressDialog.show(this,
                 getString(R.string.connecting_title),
-                getString(R.string.connecting_message_html, Html.escapeHtml(serverName)),
+                HtmlCompat.fromHtml(getString(R.string.connecting_message_html, Html.escapeHtml(serverName)), 0),
                 true,
                 true, dialog -> mContext.abortPendingConnection());
     }
