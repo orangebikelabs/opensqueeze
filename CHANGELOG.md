@@ -1,3 +1,13 @@
+## [2.6.1](https://github.com/orangebikelabs/opensqueeze/compare/v2.6.0...v2.6.1) (2022-11-06)
+
+
+### Bug Fixes
+
+* add missing shuffle and repeat buttons to now playing ([68453b8](https://github.com/orangebikelabs/opensqueeze/commit/68453b822139ace430eeb802e8746ad2ceca1ef2))
+* connecting progress dialog was not handling embedded html properly ([cd6f351](https://github.com/orangebikelabs/opensqueeze/commit/cd6f351701fb7d5b1c21704a3766b85fd8e01036))
+* improve button sizing on now playing screen for various device sizes ([3e4b857](https://github.com/orangebikelabs/opensqueeze/commit/3e4b8571e116899bda982acff4ee9f76ef4d2d04))
+* storage permission check not always applied ([bf70424](https://github.com/orangebikelabs/opensqueeze/commit/bf70424f69e9b7dc264fd2b637ace33b2b51d5cf))
+
 ## [2.6.0](https://github.com/orangebikelabs/opensqueeze/compare/v2.5.3...v2.6.0) (2022-11-01)
 
 ### Features
@@ -89,4 +99,3 @@
 * bump sqldelight_version from 1.5.3 to 1.5.4 ([2e84e42](https://github.com/orangebikelabs/opensqueeze/commit/2e84e421da0bc86d3b6467236836b210ac17c32e))
 * **deps:** update leakcanary to 2.9.1 ([f8cc0bb](https://github.com/orangebikelabs/opensqueeze/commit/f8cc0bbcabcacb1e97db44dd16b2d5060d286d77))
 * **deps:** upgrade to rxjava 3.1.5 ([ed3cfe1](https://github.com/orangebikelabs/opensqueeze/commit/ed3cfe1e84bf936e77be88cddd3dec8bf912f432))
-
