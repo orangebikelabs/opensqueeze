@@ -6,7 +6,11 @@
 package com.orangebikelabs.orangesqueeze.download
 
 import android.Manifest
+import android.content.Context
+import android.content.pm.PackageManager
 import android.os.Build.VERSION
+import android.os.Build.VERSION_CODES
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.fondesa.kpermissions.PermissionStatus
 import com.fondesa.kpermissions.extension.permissionsBuilder
@@ -19,7 +23,8 @@ import com.orangebikelabs.orangesqueeze.common.OSLog
 abstract class StoragePermissionHelper {
     companion object {
         fun getInstance(fragment: Fragment): StoragePermissionHelper {
-            return if(VERSION.SDK_INT <= 28) {
+            return if(VERSION.SDK_INT <= VERSION_CODES.S_V2) {
+                // this is actually for <= Android 12
                 Android9StoragePermissionHelper(fragment)
             } else {
                 Android13StoragePermissionHelper()
@@ -29,6 +34,10 @@ abstract class StoragePermissionHelper {
 
 
     abstract fun send(grantedCallback: () -> Unit)
+
+    fun hasReadExternalStoragePermssion(context: Context): Boolean {
+        return ContextCompat.checkSelfPermission(context, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED
+    }
 
     class Android13StoragePermissionHelper : StoragePermissionHelper() {
         override fun send(grantedCallback: () -> Unit) {

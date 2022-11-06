@@ -5,6 +5,8 @@
 
 package com.orangebikelabs.orangesqueeze.ui
 
+import android.os.Build.VERSION
+import android.os.Build.VERSION_CODES
 import android.os.Bundle
 import androidx.fragment.app.commitNow
 import androidx.preference.Preference
@@ -104,7 +106,7 @@ class TrackDownloadPreferenceActivity : AbsPreferenceActivity() {
             val selectedIndex = items.indexOfFirst { it.absolutePath == currentDownloadLocation.absolutePath }
 
             @Suppress("DEPRECATION")
-            MaterialDialog(requireContext())
+            val dialog = MaterialDialog(requireContext())
                     .lifecycleOwner(this@TrackDownloadPreferenceFragment)
                     .title(res = R.string.pref_trackdownload_location_title)
                     .listItemsSingleChoice(items = stringItems, initialSelection = selectedIndex) { _, ndx, _ ->
@@ -112,12 +114,20 @@ class TrackDownloadPreferenceActivity : AbsPreferenceActivity() {
                         SBPreferences.get().downloadLocation = file
                         updatePreferences()
                     }
-                    .neutralButton(res = R.string.custom_path) {
-                        showCustomPathChooser()
-                    }
                     .positiveButton(res = R.string.ok)
                     .negativeButton(res = R.string.cancel)
-                    .show()
+
+            // custom path cannot work on Android higher than 13
+            if (VERSION.SDK_INT < VERSION_CODES.TIRAMISU) {
+                // also requires that READ_EXTERNAL_STORAGE was granted
+                if (storagePermissionHelper.hasReadExternalStoragePermssion(requireContext())) {
+                    @Suppress("DEPRECATION")
+                    dialog.neutralButton(res = R.string.custom_path) {
+                        showCustomPathChooser()
+                    }
+                }
+            }
+            dialog.show()
         }
 
         private fun showCustomPathChooser() {
