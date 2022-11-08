@@ -191,6 +191,11 @@ public class NowPlayingActivity extends DrawerActivity implements CurrentPlaylis
         }
     }
 
+    @Override
+    protected boolean allowSnackbarDisplay() {
+        return true;
+    }
+
     private void setHidePlaylistItemDrawable() {
         if (mHidePlaylistItem == null) {
             return;
