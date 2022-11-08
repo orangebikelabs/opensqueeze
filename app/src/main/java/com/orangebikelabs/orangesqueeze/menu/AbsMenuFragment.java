@@ -245,7 +245,7 @@ abstract public class AbsMenuFragment extends SBFragment {
         } else {
             translatedLength = Snackbar.LENGTH_SHORT;
         }
-        mLastSnackbar = Snackbar.make(getSnackbarView(), text, translatedLength);
+        mLastSnackbar = Snackbar.make(getSnackbarView(), text, translatedLength).setAnchorView(getSnackbarView());
         mLastSnackbar.show();
     }
 

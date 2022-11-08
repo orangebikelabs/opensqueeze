@@ -8,6 +8,7 @@ package com.orangebikelabs.orangesqueeze.ui
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import androidx.fragment.app.commitNow
 
 import com.orangebikelabs.orangesqueeze.BuildConfig
@@ -103,6 +104,11 @@ class MainActivity : DrawerActivity() {
 
     override fun allowSnackbarDisplay(): Boolean {
         return true
+    }
+
+    override fun getSnackbarView(): View? {
+        val retval = findViewById<View>(R.id.tiny_nowplaying_container)
+        return retval
     }
 
     override fun applyDrawerState(drawerState: DrawerState) {
