@@ -1,3 +1,11 @@
+## [2.6.2-alpha.1](https://github.com/orangebikelabs/opensqueeze/compare/v2.6.1...v2.6.2-alpha.1) (2022-11-08)
+
+
+### Bug Fixes
+
+* player change snackbar should display on now playing view ([ccd1c28](https://github.com/orangebikelabs/opensqueeze/commit/ccd1c28ef93f2fd9ca122b2cfce85a8c017f47ca))
+* snackbar notifications should be offset above the player controls ([ca624a4](https://github.com/orangebikelabs/opensqueeze/commit/ca624a4f6316bd41b20a90843f0abbd3172f8c7e))
+
 ## [2.6.1-alpha.5](https://github.com/orangebikelabs/opensqueeze/compare/v2.6.1-alpha.4...v2.6.1-alpha.5) (2022-11-08)
 
 
