@@ -1,3 +1,14 @@
+## [2.6.2-alpha.2](https://github.com/orangebikelabs/opensqueeze/compare/v2.6.2-alpha.1...v2.6.2-alpha.2) (2022-11-14)
+
+
+### Bug Fixes
+
+* bump kotlin_version from 1.7.20 to 1.7.21 ([d4cfe10](https://github.com/orangebikelabs/opensqueeze/commit/d4cfe10aad4f3ced284acc9a24cdec4abd4c11d0))
+* bump leakcanary-android from 2.9.1 to 2.10 ([0dd29cc](https://github.com/orangebikelabs/opensqueeze/commit/0dd29ccbe42e9b97efe97b7ad3512cdc31d67771))
+* bump orchestrator from 1.4.1 to 1.4.2 ([e6c0a10](https://github.com/orangebikelabs/opensqueeze/commit/e6c0a10ed9a63419f33fe26da99eecc2edac0bfa))
+* bump rxandroid from 3.0.0 to 3.0.2 ([af4780a](https://github.com/orangebikelabs/opensqueeze/commit/af4780aa24dd00e6c736901bb6c599aa2be5f731))
+* bump truth from 1.4.0 to 1.5.0 ([0a8f42d](https://github.com/orangebikelabs/opensqueeze/commit/0a8f42d1210977e2834a6f71e08a7a25652a539e))
+
 ## [2.6.2-alpha.1](https://github.com/orangebikelabs/opensqueeze/compare/v2.6.1...v2.6.2-alpha.1) (2022-11-08)
 
 
