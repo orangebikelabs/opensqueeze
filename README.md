@@ -52,6 +52,15 @@ avoided for new code (e.g. the "m" member variable prefix).
 It's possible that contributions may be folded into future releases of Orange Squeeze. If so, the
 authors will be recognized in the release notes.
 
+## Languages and Translations
+
+Open Squeeze was developed by a native American English speaker. The German and French translations were
+initially machine generated and then heavily modified by users and contributors.
+
+Translations to new languages and modifications to existing translations should be done via
+[Weblate](https://hosted.weblate.org/projects/open-squeeze/) which is freely provided for
+Open Source projects. Thank you to them for providing this service!
+
 ## License
 
 The license for the code is [Apache License, Version 2.0](https://www.apache.org/licenses/LICENSE-2.0).
