@@ -276,4 +276,171 @@
     <string name="close">Close</string>
     <string name="snap_to_current_item">Snap to Current Track</string>
     <string name="forgot_password">Forgot your password?</string>
+
+
+    <string name="pref_autoconnect_summary">Automatically connect to the last connected server</string>
+    <string name="pref_autoconnect_title">Automatic Connect</string>
+    <string name="pref_autodiscovery_summary">Periodically send discovery broadcast requests to
+		find local servers</string>
+    <string name="pref_autodiscovery_title">Automatic Discovery</string>
+    <string name="pref_advancedprefs_title">Advanced</string>
+    <string name="pref_advancedprefs_summary">Shows advanced preferences</string>
+    <string name="pref_downloadprefs_title">Download</string>
+    <string name="pref_downloadprefs_summary">Shows download preferences</string>
+    <string name="pref_cachelocation_title">Cache Location</string>
+    <string name="pref_cachelocation_summary">Artwork cache will be stored on %1$s</string>
+
+    <!-- update corresponding entries in prefs_nls.xml -->
+    <string-array name="pref_cachelocation_entries">
+        <item>Use Internal Storage</item>
+        <item>Use External Storage (SD card, etc)</item>
+    </string-array>
+
+    <string name="pref_cache_storagesize_title">Storage Cache Size</string>
+    <string name="pref_cache_storagesize_summary">The maximum amount of space that the artwork cache will
+		use on device storage.\n\nThe current maximum value is %1$s MB.</string>
+
+    <!-- update corresponding entries in prefs_nls.xml -->
+    <string-array name="pref_cache_storagesize_entries">
+        <item>Automatic</item>
+        <item>50 MB</item>
+        <item>100 MB</item>
+        <item>250 MB</item>
+        <item>500 MB</item>
+        <item>1000 MB</item>
+    </string-array>
+
+    <string name="pref_artwork_category">Artwork</string>
+    <string name="pref_cache_category">Caching</string>
+    <string name="pref_wipeartwork_summary">Removes all cache data from storage</string>
+    <string name="pref_wipeartwork_title">Wipe Cache</string>
+    <string name="pref_wipeartwork_message">Do you want to remove all cache data from
+		permanent storage? If you select yes, then the cache will begin to
+		fill again on demand.</string>
+    <string name="pref_automaticmute_category_title">On-Call Behavior</string>
+    <string name="pref_automaticmute_title">On Call Received</string>
+    <string name="pref_automaticmute_summary">What to do when a call is made or received and connected players are playing.\n\nCurrent value: \"%1$s\"</string>
+
+    <string-array name="pref_automaticmute_entries">
+        <item>Nothing</item>
+        <item>Mute All Players</item>
+        <item>Mute Current Player</item>
+        <item>Pause All Players</item>
+        <item>Pause Current Player</item>
+    </string-array>
+
+    <string name="pref_automaticunmute_title">Resume Playback</string>
+    <string name="pref_automaticunmute_summary">For paused and muted players, playback continues automatically if the call ends within the configured time.</string>
+
+    <string-array name="pref_automaticunmute_entries">
+        <item>Never</item>
+        <item>1 minute</item>
+        <item>5 minutes</item>
+        <item>10 minutes</item>
+        <item>30 minutes</item>
+        <item>60 minutes</item>
+        <item>Forever</item>
+    </string-array>
+
+    <string name="pref_systemvolumecontrol_title">Integrate with System Volume Control</string>
+    <string name="pref_systemvolumecontrol_summaryOn">The app will integrate into the system volume.</string>
+    <string name="pref_systemvolumecontrol_summaryOff">The app\'s volume control will operate independent of the system volume control.</string>
+
+    <string name="pref_silentaudiohack_title">Play Silent Audio</string>
+    <string name="pref_silentaudiohack_summaryOn">The app will play silent audio in the background to help manage audio focus on newer Android versions.</string>
+    <string name="pref_silentaudiohack_summaryOff">The app will not play silent audio.</string>
+
+    <string name="pref_pauseonheadphonedisconnect_title">Pause when Headphones Disconnect</string>
+    <string name="pref_pauseonheadphonedisconnect_summaryOn">The current player will pause whenever bluetooth or wired headphones disconnect when audio is playing (requires that "Play Silent Audio" be enabled).</string>
+    <string name="pref_pauseonheadphonedisconnect_summaryOff">Playback continues unaffected by headphones status.</string>
+
+    <string name="pref_use24hourtimeformat_title">Time Format</string>
+    <string name="pref_use24hourtimeformat_summaryOn">Use 24 hour time format.</string>
+    <string name="pref_use24hourtimeformat_summaryOff">Use 12 hour time format.</string>
+    <string name="pref_volumecontrol_notification">This app can use your device
+		volume controls to control your Squeezebox device volume. Would you like to
+		enable this behavior?\n\nIt can be changed at any time within
+		the app preferences.</string>
+    <string name="pref_browse_category">Browse Preferences</string>
+    <string name="pref_browse_albumsort_title">Album Sort</string>
+    <string name="pref_browse_albumsort_summary">Choose the way that albums are sorted. Please note that this preference is stored on the server and can only be changed when connected.</string>
+    <string name="pref_browse_showactionbar_title">Show Title Bar</string>
+    <string name="pref_browse_showactionbar_summary">If selected, during browsing the title bar has breadcrumbs to navigate the browse history.</string>
+    <string name="pref_browse_shownowplaying_title">Show Now Playing Bar</string>
+    <string name="pref_browse_shownowplaying_summary">If selected, during browsing the bottom bar shows the now playing information and allows quick access to the now playing screen.</string>
+    <string name="pref_browse_disableartistartwork_title">Disable Artist Artwork</string>
+    <string name="pref_browse_disableartistartwork_summary">Disables generation of the artist artwork on devices where this feature does not work properly or is undesired.</string>
+    <string name="pref_browse_gridcellcount_title">Browse Column Count</string>
+    <string name="pref_browse_gridcellcount_summary">Configure the number of columns (in portrait mode) that browsing will use for grid-based items.</string>
+    <string name="pref_general_category_title">General</string>
+    <string name="pref_keepscreenon_summary">Keep screen on whenever this app is in the foreground.</string>
+    <string name="pref_keepscreenon_title">Keep Screen On</string>
+    <string name="pref_autolaunch_squeezeplayer_title">SqueezePlayer Start</string>
+    <string name="pref_autolaunch_squeezeplayer_summary">When connection established to a server, automatically start SqueezePlayer and connect it to the server.</string>
+    <string name="pref_autolaunch_squeezeplayer_message">Great, you\'ve got SqueezePlayer installed!  Would you like to automatically start SqueezePlayer whenever this app connects to a server?</string>
+    <string name="pref_trackselect_playmode_title">Default Play Mode</string>
+    <string name="pref_trackselect_playmode_summary">Choose the play mode to use when selecting tracks directly</string>
+
+    <string-array name="pref_trackselect_playmode_entries">
+        <item>Prompt</item>
+        <item>Play Now</item>
+        <item>Play Next</item>
+        <item>Add to Playlist</item>
+    </string-array>
+
+    <string name="pref_other_category">Other</string>
+    <string name="pref_volume_category">Volume</string>
+    <string name="pref_verboselogging_summary">Temporarily enable this, then perform a troublesome operation. Then return and use the &#8220;Send Feedback&#8221; option.</string>
+    <string name="pref_verboselogging_title">Verbose Logging</string>
+    <string name="pref_showreleasenotes_summary">Disable this if you don\'t want to read the release notes whenever the app is upgraded.</string>
+    <string name="pref_showreleasenotes_title">Show Release Notes</string>
+    <string name="pref_theme_title">Theme</string>
+    <string name="pref_theme_summary">Choose a visual style for the app.</string>
+
+    <!-- make sure to change corresponding entry in prefs_nls.xml -->
+    <string-array name="pref_theme_entries" translatable="false">
+        <item>Light</item>
+        <item>Dark</item>
+        <item>Set by Battery Saver</item>
+    </string-array>
+
+    <string name="pref_compactmode_title">Compact Mode</string>
+    <string name="pref_compactmode_summaryOn">Use a compact visual style</string>
+    <string name="pref_compactmode_summaryOff">Use a normal visual style</string>
+
+    <string name="pref_language_title">Language</string>
+    <string name="pref_language_summary">Choose the language for text within this app</string>
+    <string-array name="pref_language_entries" translatable="false">
+        <item>English</item>
+        <item>Français</item>
+        <item>Deutsch</item>
+    </string-array>
+
+    <string name="pref_trackdownload_location_title">Download location</string>
+    <string name="pref_trackdownload_location_summary">The location on your device to which downloads will be stored.\n\nCurrent value:\n  %1$s</string>
+    <string name="pref_trackdownload_category">Track download</string>
+    <string name="pref_trackdownload_transcodeenabled_off">Tracks will be download in the native format as they are hosted on your server.</string>
+    <string name="pref_trackdownload_transcodeenabled_on">Tracks will be transcoded to an alternative format as they are downloaded to your device.</string>
+    <string name="pref_trackdownload_transcodeenabled_title">Transcoding</string>
+    <string name="pref_trackdownload_transcodeformat_summary">If transcoding is enabled, downloads will be transcoded to %1$s format.</string>
+    <string name="pref_trackdownload_transcodeformat_title">Transcode Format</string>
+    <string name="pref_trackdownload_transcodeoptions_summary">Comma-delimited list of transcoding options.\n\nCurrent value: %1$s</string>
+    <string name="pref_trackdownload_transcodeoptions_title">Transcode Options</string>
+
+    <string name="pref_browse_gridcellcount_uselist">Always use lists for browsing</string>
+
+    <string name="pref_shownowplayingnotification_title">Show Now Playing Notification</string>
+    <string name="pref_shownowplayingnotification_summaryOn">When leaving the app with a player playing, a notification will be presented that can be used to control that player.</string>
+    <string name="pref_shownowplayingnotification_summaryOff">No notification will be shown.</string>
+
+    <string name="pref_autosizetext_title">Automatic Text Size</string>
+    <string name="pref_autosizetext_summaryOn">The text size will dynamically shrink to fit more when necessary</string>
+    <string name="pref_autosizetext_summaryOff">Longer text will be truncated when necessary</string>
+
+    <string name="about_title">About %1$s</string>
+    <string name="about_message">Version %1$s</string>
+
+    <string name="exception_connection_timeout">Timeout waiting for server connection to complete</string>
+    <string name="exception_no_network_available">No Network Available</string>
+    <string name="exception_connection_error">Connection error</string>
 </resources>
