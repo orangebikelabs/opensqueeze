@@ -1,3 +1,10 @@
+## [2.6.2-alpha.3](https://github.com/orangebikelabs/opensqueeze/compare/v2.6.2-alpha.2...v2.6.2-alpha.3) (2022-11-17)
+
+
+### Bug Fixes
+
+* Volume text in player display was not initialized at first ([a210216](https://github.com/orangebikelabs/opensqueeze/commit/a21021691e93c6a7f3117e81f27a33ffeab187df)), closes [#49](https://github.com/orangebikelabs/opensqueeze/issues/49)
+
 ## [2.6.2-alpha.2](https://github.com/orangebikelabs/opensqueeze/compare/v2.6.2-alpha.1...v2.6.2-alpha.2) (2022-11-14)
 
 
