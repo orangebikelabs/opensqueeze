@@ -273,7 +273,7 @@
     <string name="nowplaying_shortcut_short_label">Now Playing</string>
     <string name="nowplaying_shortcut_long_label">Launch direct to Now Playing</string>
     <string name="all_items">All Items</string>
-    <string name="close">Close</string>
+    <string name="dismiss_dialog">Close</string>
     <string name="snap_to_current_item">Snap to Current Track</string>
     <string name="forgot_password">Forgot your password?</string>
 

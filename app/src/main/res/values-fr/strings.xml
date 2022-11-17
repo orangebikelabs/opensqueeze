@@ -100,7 +100,7 @@
     <string name="pause_desc">Pause de la lecture</string>
     <string name="error_invalid_credentials">Nom d\'utilisateur et/ou mot de passe incorrect</string>
     <string name="no">Annuler</string>
-    <string name="close">OK</string>
+    <string name="dismiss_dialog">OK</string>
     <string name="empty_downloads_text">Aucun téléchargement actif ou terminé</string>
     <string name="empty_text">Pas d\'objet</string>
     <string name="select_player_prompt">Sélectionner un platine:</string>
