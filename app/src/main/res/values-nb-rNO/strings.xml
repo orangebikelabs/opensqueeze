@@ -65,7 +65,6 @@
     <string name="track_progress_seek_desc">Blafre i nåværende spor</string>
     <string name="ok">OK</string>
     <string name="nowplaying_shortcut_short_label">Spilles nå</string>
-    <string name="close">Lukk</string>
     <string name="forgot_password">Glemt passordet ditt\?</string>
     <string name="add_server_button_text">Spesifikk tjener</string>
     <string name="connectserver_title">Koble til mediatjener</string>
