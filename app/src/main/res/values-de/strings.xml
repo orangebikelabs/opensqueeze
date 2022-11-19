@@ -160,7 +160,7 @@
     <string name="invalid_hostname_port">Ungültiger Hostname und/oder Port</string>
     <string name="no_player_available_label_html"><![CDATA[Keine Player mit <b>%1$s</b> verbunden.]]></string>
     <string name="actionmenu_title_html"><![CDATA[Zu <b>%1$s</b>:]]></string>
-    <string name="connecting_message_html"><![CDATA[Connecting an: %1$s]]></string>
+    <string name="connecting_message_html">Connecting an: <b>%1$s</b></string>
     <string name="pref_systemvolumecontrol_title">Mit Systemlautstärkeregelung integrieren</string>
     <string name="pref_browse_shownowplaying_summary">Wenn diese Option aktiviert ist, werden in der unteren Leiste die Informationen angezeigt, die gerade wiedergegeben werden, und es wird ein schneller Zugriff auf den aktuellen Bildschirm ermöglicht.</string>
     <string name="pref_autolaunch_squeezeplayer_title">SqueezePlayer Start</string>

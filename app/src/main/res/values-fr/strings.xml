@@ -9,11 +9,11 @@
     <string name="action_removefavorite">Supprimer favori</string>
     <string name="cancel">Annuler</string>
     <string name="cancel_notification_desc">Annuler la notification, déconnecter</string>
-    <string name="confirmation_title">Êtes-vous sûr?</string>
+    <string name="confirmation_title">Êtes-vous sûr \?</string>
     <string name="connect_button">Connecter</string>
     <string name="connect_hostname">Nom d\'hôte ou adresse IP</string>
     <string name="connect_port">Port</string>
-    <string name="clearplaylist_action_confirmation">Êtes-vous sûr de vouloir effacer la liste de lecture actuelle?</string>
+    <string name="clearplaylist_action_confirmation">Êtes-vous sûr de vouloir effacer la liste de lecture actuelle \?</string>
     <string name="connecting_message_noserver">Connexion au serveur</string>
     <string name="connecting_title">Connexion</string>
     <string name="connection_error_title">Erreur de connexion</string>
@@ -32,7 +32,7 @@
     <string name="menu_search">Recherche</string>
     <string name="menu_browse_refresh">Rafraîchir</string>
     <string name="menu_maintenance">Entretien</string>
-    <string name="error_cannot_resolve_hostname">Impossible de résoudre le nom d\'hôte: %1$s</string>
+    <string name="error_cannot_resolve_hostname">Impossible de résoudre le nom d\'hôte  : %1$s</string>
     <string name="hostname_already_exists">Le serveur avec le nom d\'hôte « %1$s » existe déjà.</string>
     <string name="invalid_hostname_port">Nom d\'hôte et / ou port non valide.</string>
     <string name="awaitingnetwork_title">En attente de réseau</string>
@@ -74,7 +74,7 @@
     <string name="dismiss_dialog">OK</string>
     <string name="empty_downloads_text">Aucun téléchargement actif ou terminé</string>
     <string name="empty_text">Pas d\'objet</string>
-    <string name="select_player_prompt">Sélectionner un platine:</string>
+    <string name="select_player_prompt">Sélectionner un platine :</string>
     <string name="serverdiscovery_label">Découverte du serveur</string>
     <string name="network_error">Erreur réseau</string>
     <string name="menu_nowplaying_saveplaylist">Sauvegarder la playlist</string>
@@ -83,7 +83,7 @@
     <string name="menu_nowplaying_hideplaylist">Masquer la playlist</string>
     <string name="cleared_playlist">Liste de lecture effacée</string>
     <string name="nowplaying_saveplaylist_title">Sauvegarder la playlist</string>
-    <string name="nowplaying_saveplaylist_message">Entrez le nouveau nom de la playlist:</string>
+    <string name="nowplaying_saveplaylist_message">Entrez le nouveau nom de la playlist :</string>
     <string name="nowplaying_saveplaylist_hint">Nouveau nom de la playlist</string>
     <string name="playmode_stopped">Arrêté</string>
     <string name="save">Sauvegarder</string>
@@ -164,13 +164,13 @@
     <string name="permission_write_external_storage_rationale_content">L\'autorisation de stockage est requise pour pouvoir télécharger des fichiers vers des emplacements externes. Si vous refusez cette autorisation, vous serez peut-être limité à l\'endroit où vous pourrez télécharger des fichiers.</string>
     <string name="permission_write_external_storage_denied">La permission de stockage a été refusée.</string>
     <string name="permission_write_external_storage_neverask">L\'autorisation de stockage ne sera plus jamais demandée.</string>
-    <string name="menu_volume_slider_label">Volume: %1$d</string>
-    <string name="menu_generic_slider_label">Faites glisser pour sélectionner votre valeur: %1$d</string>
+    <string name="menu_volume_slider_label">Volume : %1$d</string>
+    <string name="menu_generic_slider_label">Faites glisser pour sélectionner votre valeur : %1$d</string>
     <string name="navigation_downloads">Téléchargements</string>
     <string name="navigation_customize">Personnaliser les menus</string>
     <string name="navigation_nowplaying">Lecture en cours</string>
     <string name="menu_startdownload">Télécharger</string>
-    <string name="download_activity_title">Télécharger: %1$s</string>
+    <string name="download_activity_title">Télécharger : %1$s</string>
     <string name="notification_downloads_text">%1$d sur %2$d</string>
     <string name="wipingcache_notification_text">Effacement des données du serveur multimédia en cache.</string>
     <string name="playmode_paused">En pause</string>
@@ -183,8 +183,11 @@
     <string name="playnext_desc">Lire à la suite</string>
     <string name="pref_browse_disableartistartwork_summary">Désactive la génération de l\'illustration de l\'artiste sur les périphériques où cette fonctionnalité ne fonctionne pas correctement ou est indésirable.</string>
     <string name="pref_trackselect_playmode_title">Mode de lecture par défaut</string>
-    <string name="pref_trackdownload_location_summary">L\'emplacement sur votre appareil où les téléchargements seront stockés.\n\nValeur actuelle:\n  %1$s</string>
-    <string name="search_item_name">Rechercher: %1$s</string>
+    <string name="pref_trackdownload_location_summary">L\'emplacement sur votre appareil où les téléchargements seront stockés.
+\n
+\nValeur actuelle :
+\n %1$s</string>
+    <string name="search_item_name">Rechercher : %1$s</string>
     <string name="login_title">Connectez-vous à %1$s</string>
     <string name="play_desc">Lecture</string>
     <string name="shuffle_toggle_desc">Mélanger</string>
@@ -197,17 +200,18 @@
     <string name="thumbsdown_desc">Pouces vers le bas</string>
     <string name="repeat_toggle_desc">Répéter</string>
     <string name="maintenance_server_rescan_clear_desc">Déclenche un effacement et une réanalyse côté serveur, reconstruisant la base de données à partir de zéro.</string>
-    <string name="ip_address">Adresse IP actuelle du périphérique: %1$s</string>
-    <string name="widget_playername_text">Platine: %1$s</string>
+    <string name="ip_address">Adresse IP actuelle du périphérique : %1$s
+\n(peut en avoir d\'autres)</string>
+    <string name="widget_playername_text">Platine : %1$s</string>
     <string name="player_sleep_never">Ne dormez pas « %1$s »</string>
     <string name="player_sleep_endoftrack">Dormir « %1$s » lorsque la piste se termine dans %2$d minutes</string>
     <string name="player_sleep_text">Dormir «%1$s» dans %2$d minutes</string>
     <string name="globalsearch_moreitem">%1$d plus items</string>
     <string name="randomplay_genreselect">%1$d genres actifs</string>
-    <string name="wakeonlan_dialog_title">Réveil sur place: %1$s</string>
+    <string name="wakeonlan_dialog_title">Réveil sur place : %1$s</string>
     <string name="synchronized_player_separator">Groupe de synchronisation %1$d</string>
     <string name="player_settings_title">Paramètres %1$s</string>
-    <string name="actionmenu_title_html"><![CDATA[Sur <b>%1$s</b>:]]></string>
+    <string name="actionmenu_title_html">Sur <b>%1$s</b> :</string>
     <string name="playnow_action_snackbar_html"><![CDATA[Lecture <b>%1$s</b>]]></string>
     <string name="nowplaying_activity_title_playing_html">&lt;b&gt;%1$s&lt;/b&gt; • %2$d de %3$d</string>
     <string name="nowplaying_activity_title_paused_html">&lt;b&gt;%1$s&lt;/b&gt; • En pause</string>
@@ -215,10 +219,10 @@
     <string name="playnext_action_snackbar_html">Ajout de &lt;b&gt;%1$s &lt;/b&gt; next dans la playlist en cours</string>
     <string name="addtofavorites_action_snackbar_html">Ajouté &lt;b&gt;%1$s&lt;/b&gt; aux favoris</string>
     <string name="removefavorite_action_snackbar_html">Suppression des &lt;b&gt;%1$s&lt;/b&gt; des favoris</string>
-    <string name="removefavorite_action_confirmation_html">Voulez-vous vraiment supprimer &lt;b&gt;%1$s&lt;/b&gt; des favoris?</string>
+    <string name="removefavorite_action_confirmation_html">Voulez-vous vraiment supprimer <b>%1$s</b> des favoris \?</string>
     <string name="saved_playlist_html">Liste de lecture enregistrée &lt;b&gt;%1$s&lt;/b&gt;</string>
-    <string name="synchronization_title_html">Synchronisez &lt;b&gt;%1$s&lt;/b&gt; avec:</string>
-    <string name="player_connect_server_confirmation_message">Connecter %1$s au serveur « %2$s »?\n\nNotez que le lecteur peut prendre un certain temps pour devenir visible après le changement.</string>
+    <string name="synchronization_title_html">Synchronisez <b>%1$s</b> avec :</string>
+    <string name="player_connect_server_confirmation_message">Connecter %1$s au serveur « %2$s » \? Notez que le lecteur peut prendre un certain temps pour devenir visible après le changement.</string>
     <string-array name="repeat_strings">
         <item>Répétition désactivée</item>
         <item>Répéter le morceau</item>
