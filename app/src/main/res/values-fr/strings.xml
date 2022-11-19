@@ -1,9 +1,8 @@
-<?xml version="1.0" encoding="utf-8"?><!--
+<?xml version="1.0" encoding="utf-8"?>
+<!--
   ~ Copyright (c) 2020-2022 The OpenSqueeze Authors. All Rights Reserved.
   ~ Use of this source code is governed by the license that can be found in the LICENSE file.
-  -->
-
-<resources>
+  --><resources>
     <string name="about_app">Sur</string>
     <string name="action_addfavorite">Ajouter aux Favoris</string>
     <string name="action_moreplayermenu">Plus</string>
@@ -276,39 +275,34 @@
     <string name="player_settings_title">Paramètres %1$s</string>
     <string name="actionmenu_title_html"><![CDATA[Sur <b>%1$s</b>:]]></string>
     <string name="playnow_action_snackbar_html"><![CDATA[Lecture <b>%1$s</b>]]></string>
-    <string name="nowplaying_activity_title_playing_html">&lt;b>%1$s&lt;/b> &#8226; %2$d de %3$d</string>
-    <string name="nowplaying_activity_title_paused_html">&lt;b>%1$s&lt;/b> &#8226; En pause</string>
-    <string name="addtoplaylist_action_snackbar_html">Ajout de &lt;b>%1$s&lt;/b> à la liste de lecture actuelle</string>
-    <string name="playnext_action_snackbar_html">Ajout de &lt;b>%1$s &lt;/b> next dans la playlist en cours</string>
-    <string name="addtofavorites_action_snackbar_html">Ajouté &lt;b>%1$s&lt;/b> aux favoris</string>
-    <string name="removefavorite_action_snackbar_html">Suppression des &lt;b>%1$s&lt;/b> des favoris</string>
-    <string name="removefavorite_action_confirmation_html">Voulez-vous vraiment supprimer &lt;b>%1$s&lt;/b> des favoris?</string>
-    <string name="saved_playlist_html">Liste de lecture enregistrée &lt;b>%1$s&lt;/b></string>
-    <string name="synchronization_title_html">Synchronisez &lt;b>%1$s&lt;/b> avec:</string>
+    <string name="nowplaying_activity_title_playing_html">&lt;b&gt;%1$s&lt;/b&gt; • %2$d de %3$d</string>
+    <string name="nowplaying_activity_title_paused_html">&lt;b&gt;%1$s&lt;/b&gt; • En pause</string>
+    <string name="addtoplaylist_action_snackbar_html">Ajout de &lt;b&gt;%1$s&lt;/b&gt; à la liste de lecture actuelle</string>
+    <string name="playnext_action_snackbar_html">Ajout de &lt;b&gt;%1$s &lt;/b&gt; next dans la playlist en cours</string>
+    <string name="addtofavorites_action_snackbar_html">Ajouté &lt;b&gt;%1$s&lt;/b&gt; aux favoris</string>
+    <string name="removefavorite_action_snackbar_html">Suppression des &lt;b&gt;%1$s&lt;/b&gt; des favoris</string>
+    <string name="removefavorite_action_confirmation_html">Voulez-vous vraiment supprimer &lt;b&gt;%1$s&lt;/b&gt; des favoris?</string>
+    <string name="saved_playlist_html">Liste de lecture enregistrée &lt;b&gt;%1$s&lt;/b&gt;</string>
+    <string name="synchronization_title_html">Synchronisez &lt;b&gt;%1$s&lt;/b&gt; avec:</string>
     <string name="player_connect_server_confirmation_message">Connecter %1$s au serveur « %2$s »?\n\nNotez que le lecteur peut prendre un certain temps pour devenir visible après le changement.</string>
-
     <string-array name="repeat_strings">
         <item>Répétition désactivée</item>
         <item>Répéter le morceau</item>
         <item>Répète la liste de lecture</item>
     </string-array>
-
     <string-array name="shuffle_strings">
         <item>Ne pas mélanger</item>
         <item>Mélanger par morceau</item>
         <item>Mélanger par album</item>
     </string-array>
-
     <string-array name="wakeonlan_policy_entries">
         <item>Jamais</item>
         <item>Sur connecter ou reconnecter</item>
     </string-array>
-
     <string-array name="pref_cachelocation_entries">
         <item>Utiliser le stockage interne</item>
         <item>Utiliser un stockage externe (carte SD, etc.)</item>
     </string-array>
-
     <string-array name="pref_cache_storagesize_entries">
         <item>Automatique</item>
         <item>50 Mo</item>
@@ -317,7 +311,6 @@
         <item>500 Mo</item>
         <item>1000 Mo</item>
     </string-array>
-
     <string-array name="pref_automaticmute_entries">
         <item>Rien</item>
         <item>Désactiver tous les platines</item>
@@ -325,7 +318,6 @@
         <item>Pause tous les platines</item>
         <item>Pause actuel platine</item>
     </string-array>
-
     <string-array name="pref_automaticunmute_entries">
         <item>Jamais</item>
         <item>1 minute</item>
@@ -335,18 +327,17 @@
         <item>60 minutes</item>
         <item>Pour toujours</item>
     </string-array>
-
     <string-array name="pref_trackselect_playmode_entries">
         <item>Interroger</item>
         <item>Lecture maintenant</item>
         <item>Lecture ensuite</item>
         <item>Ajouter à la playlist</item>
     </string-array>
-
     <string name="pref_language_title">Langue</string>
     <string name="pref_language_summary">Choisissez la langue du texte dans cette application</string>
     <string name="nowplaying_shortcut_short_label">Lecture en cours</string>
     <string name="nowplaying_shortcut_long_label">lancer directement à lecture en cours</string>
     <string name="all_items">Tous les eléments</string>
     <string name="pref_volume_category">Volume</string>
+    <string name="forgot_password">Mot de passe oublié \?</string>
 </resources>
