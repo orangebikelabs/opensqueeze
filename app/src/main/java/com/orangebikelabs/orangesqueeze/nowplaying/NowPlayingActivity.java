@@ -23,6 +23,7 @@ import androidx.appcompat.app.ActionBar;
 
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.orangebikelabs.orangesqueeze.BuildConfig;
 import com.orangebikelabs.orangesqueeze.R;
@@ -189,6 +190,17 @@ public class NowPlayingActivity extends DrawerActivity implements CurrentPlaylis
         } else {
             return super.onOptionsItemSelected(item);
         }
+    }
+
+    @Override
+    protected boolean allowSnackbarDisplay() {
+        return true;
+    }
+
+    @Nullable
+    @Override
+    protected View getSnackbarView() {
+        return findViewById(R.id.controls);
     }
 
     private void setHidePlaylistItemDrawable() {

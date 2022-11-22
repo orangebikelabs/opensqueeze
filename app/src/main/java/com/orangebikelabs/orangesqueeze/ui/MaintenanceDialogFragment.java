@@ -118,7 +118,7 @@ public class MaintenanceDialogFragment extends SBDialogFragment {
             }
             dialog.dismiss();
         });
-        builder.setNegativeButton(R.string.close, (dialog, which) -> {
+        builder.setNegativeButton(R.string.dismiss_dialog, (dialog, which) -> {
             // nothing to do
         });
         Dialog retval = builder.create();
