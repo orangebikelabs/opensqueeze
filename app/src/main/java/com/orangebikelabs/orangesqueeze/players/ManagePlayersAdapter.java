@@ -294,11 +294,9 @@ public class ManagePlayersAdapter extends ArrayAdapter<AbsPlayerItem> {
     }
 
     /** called when volume is set by user */
-    protected void setVolumeFromUser(Slider sb, TextView playerVolumeLabel, int volume) {
+    protected void triggerVolumeChangeFromUser(Slider sb, int volume) {
         View parentView = (View) sb.getTag(R.id.tag_containerview);
         PlayerId pid = (PlayerId) parentView.getTag(R.id.tag_playerid);
-        updateVolumeText(playerVolumeLabel, volume);
-
         mOnPlayerCommandListener.onPlayerCommand(pid, PlayerCommand.VOLUME, volume);
     }
 
@@ -309,8 +307,8 @@ public class ManagePlayersAdapter extends ArrayAdapter<AbsPlayerItem> {
     }
 
     /** called to update the text field to a specific volume level */
-    protected void updateVolumeText(@Nullable TextView playerVolumeLabel, int volume) {
-        if(playerVolumeLabel != null) {
+    protected void showVolumeText(@Nullable TextView playerVolumeLabel, int volume) {
+        if(playerVolumeLabel != null && !mInVolumeDrag) {
             if(playerVolumeLabel.getVisibility() != View.VISIBLE) {
                 playerVolumeLabel.setVisibility(View.VISIBLE);
             }
@@ -457,25 +455,27 @@ public class ManagePlayersAdapter extends ArrayAdapter<AbsPlayerItem> {
                 volumeBar.setValueTo(100);
                 volumeBar.setTag(R.id.tag_containerview, view);
                 volumeBar.addOnChangeListener((slider, value, fromUser) -> {
+                    int volume = (int)value;
+                    showVolumeText(playerVolumeLabel, volume);
                     if (fromUser) {
-                        // only respond to user-generated events
-                        setVolumeFromUser(slider, playerVolumeLabel, (int) value);
+                        // send volume change to server
+                        triggerVolumeChangeFromUser(slider, volume);
                     }
                 });
                 volumeBar.addOnSliderTouchListener(new Slider.OnSliderTouchListener() {
                     @Override
                     public void onStartTrackingTouch(Slider slider) {
                         mInVolumeDrag = true;
-                        playerVolumeLabel.setVisibility(View.INVISIBLE);
+                        hideVolumeText(playerVolumeLabel);
                     }
 
                     @Override
                     public void onStopTrackingTouch(Slider slider) {
                         mInVolumeDrag = false;
-                        playerVolumeLabel.setVisibility(View.VISIBLE);
                         // called at the end of a touch/drag cycle, call with update to make
                         // sure we are in sync with remote volume
-                        setVolumeFromUser(slider, playerVolumeLabel, (int) slider.getValue());
+                        int volume = (int)slider.getValue();
+                        showVolumeText(playerVolumeLabel, volume);
                     }
                 });
                 volumeBar.setLabelFormatter((value -> Integer.toString((int) value)));
@@ -524,7 +524,7 @@ public class ManagePlayersAdapter extends ArrayAdapter<AbsPlayerItem> {
                         volumeBar.setValue(clampedVolume);
                     }
                 }
-                updateVolumeText(playerVolumeLabel, clampedVolume);
+                showVolumeText(playerVolumeLabel, clampedVolume);
 
                 // TODO add different text if mPlayerStatus.isVolumeLocked()
                 if (volumeBar != null) {
@@ -545,7 +545,7 @@ public class ManagePlayersAdapter extends ArrayAdapter<AbsPlayerItem> {
             if(statusInProgress) {
                 hideVolumeText(playerVolumeLabel);
             } else {
-                updateVolumeText(playerVolumeLabel, clampedVolume);
+                showVolumeText(playerVolumeLabel, clampedVolume);
             }
             if (playerStatusLabel != null) {
                 playerStatusLabel.setVisibility(playerStatusVisibility);
