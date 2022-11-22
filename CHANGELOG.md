@@ -1,3 +1,10 @@
+## [2.6.2-beta.2](https://github.com/orangebikelabs/opensqueeze/compare/v2.6.2-beta.1...v2.6.2-beta.2) (2022-11-22)
+
+
+### Bug Fixes
+
+* volume text should not show while slider value is showing ([143a22e](https://github.com/orangebikelabs/opensqueeze/commit/143a22e847a4be6710010e8c5452c889c5ab415a))
+
 ## [2.6.2-beta.1](https://github.com/orangebikelabs/opensqueeze/compare/v2.6.1...v2.6.2-beta.1) (2022-11-22)
 
 
