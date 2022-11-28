@@ -1,9 +1,4 @@
-<<<<<<< HEAD
 ## [2.6.2](https://github.com/orangebikelabs/opensqueeze/compare/v2.6.1...v2.6.2) (2022-11-28)
-=======
-## [2.6.2-beta.1](https://github.com/orangebikelabs/opensqueeze/compare/v2.6.1...v2.6.2-beta.1) (2022-11-22)
->>>>>>> parent of 143befd (Auxiliary commit to revert individual files from 85c2d7b633bf5374e6841b19a91bdcab3d7b1be8)
-
 
 ### Bug Fixes
 
