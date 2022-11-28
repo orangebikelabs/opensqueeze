@@ -2,10 +2,10 @@
 
 ### Bug Fixes
 
-* snackbar notifications should be offset above the player controls ([ca624a4](https://github.com/orangebikelabs/opensqueeze/commit/ca624a4f6316bd41b20a90843f0abbd3172f8c7e))
+* Snackbar notifications should be offset above the player controls ([ca624a4](https://github.com/orangebikelabs/opensqueeze/commit/ca624a4f6316bd41b20a90843f0abbd3172f8c7e))
 * Volume text in player display was not initialized at first ([a210216](https://github.com/orangebikelabs/opensqueeze/commit/a21021691e93c6a7f3117e81f27a33ffeab187df)), closes [#49](https://github.com/orangebikelabs/opensqueeze/issues/49)
-* volume text should not show while slider value is showing ([143a22e](https://github.com/orangebikelabs/opensqueeze/commit/143a22e847a4be6710010e8c5452c889c5ab415a))
-* player change snackbar should display on now playing view ([ccd1c28](https://github.com/orangebikelabs/opensqueeze/commit/ccd1c28ef93f2fd9ca122b2cfce85a8c017f47ca))
+* Volume text should not show while slider value is showing ([143a22e](https://github.com/orangebikelabs/opensqueeze/commit/143a22e847a4be6710010e8c5452c889c5ab415a))
+* Player change snackbar should display on now playing view ([ccd1c28](https://github.com/orangebikelabs/opensqueeze/commit/ccd1c28ef93f2fd9ca122b2cfce85a8c017f47ca))
 
 ### Dependency updates
 
