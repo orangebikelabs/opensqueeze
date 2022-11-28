@@ -11,6 +11,8 @@ import android.app.SearchableInfo;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.v4.media.session.MediaControllerCompat;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -77,6 +79,8 @@ abstract public class SBActivity extends AppCompatActivity {
     public static int getInstanceCount() {
         return sInstanceCount;
     }
+
+    final static private Handler sHandler = new Handler(Looper.getMainLooper());
 
     static public boolean sShouldAutoStart = true;
 
@@ -209,13 +213,15 @@ abstract public class SBActivity extends AppCompatActivity {
         }
         setWindowFlags();
 
-        // show deferred player snackbar when the UI is ready
-        if (sDeferredPlayerSnackbar != null) {
-            PlayerStatus status = sDeferredPlayerSnackbar;
-            sDeferredPlayerSnackbar = null;
+        sHandler.postDelayed(() -> {
+            // show deferred player snackbar when the UI is ready
+            if (sDeferredPlayerSnackbar != null) {
+                PlayerStatus status = sDeferredPlayerSnackbar;
+                sDeferredPlayerSnackbar = null;
 
-            showPlayerSnackbar(status);
-        }
+                showPlayerSnackbar(status);
+            }
+        }, 250);
     }
 
     @Override
@@ -445,7 +451,8 @@ abstract public class SBActivity extends AppCompatActivity {
 
     protected void showPlayerSnackbar(PlayerStatus status) {
         OSAssert.assertMainThread();
-        if (!mStarted || isFinishing() || !allowSnackbarDisplay() || getSnackbarView() == null) {
+        View snackbarView = getSnackbarView();
+        if (!mStarted || isFinishing() || !allowSnackbarDisplay() || snackbarView == null || snackbarView.getWidth() <= 0 || snackbarView.getHeight() <= 0) {
             sDeferredPlayerSnackbar = status;
             return;
         }
@@ -454,7 +461,10 @@ abstract public class SBActivity extends AppCompatActivity {
         if (!status.getId().equals(mLastShownPlayerSnackbar)) {
             mLastShownPlayerSnackbar = status.getId();
             String text = getString(R.string.change_player_snackbar, status.getName());
-            Snackbar.make(getSnackbarView(), HtmlCompat.fromHtml(text, HtmlCompat.FROM_HTML_MODE_COMPACT), Snackbar.LENGTH_SHORT).show();
+            Snackbar
+                    .make(snackbarView, HtmlCompat.fromHtml(text, HtmlCompat.FROM_HTML_MODE_COMPACT), Snackbar.LENGTH_SHORT)
+                    .setAnchorView(snackbarView)
+                    .show();
         }
     }
 

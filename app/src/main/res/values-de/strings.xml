@@ -104,7 +104,7 @@
     <string name="nextbutton_label">Weiter</string>
     <string name="cancel">Abbrechen</string>
     <string name="ok">OK</string>
-    <string name="close">OK</string>
+    <string name="dismiss_dialog">OK</string>
     <string name="permission_write_external_storage_rationale_title">Speicherberechtigung</string>
     <string name="permission_write_external_storage_neverask">Die Berechtigung zu speichern wird nie wieder angefordert.</string>
     <string name="permission_write_external_storage_denied">Die Berechtigung zu speichern wurde abgelehnt.</string>
