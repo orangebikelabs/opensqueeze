@@ -1,3 +1,16 @@
+## [2.6.3-alpha.1](https://github.com/orangebikelabs/opensqueeze/compare/v2.6.2...v2.6.3-alpha.1) (2022-11-28)
+
+
+### Bug Fixes
+
+* bump kotlin_version from 1.7.21 to 1.7.22 ([85c6ec1](https://github.com/orangebikelabs/opensqueeze/commit/85c6ec198df528508476a85e92716677bb763cd4))
+* bump kpermissions from 3.3.0 to 3.4.0 ([09c41ec](https://github.com/orangebikelabs/opensqueeze/commit/09c41ec2e0c5a8f5ee084375abecf0e3fa858da7))
+
+
+### Reverts
+
+* Revert "Auxiliary commit to revert individual files from 85c2d7b633bf5374e6841b19a91bdcab3d7b1be8" ([68b9bab](https://github.com/orangebikelabs/opensqueeze/commit/68b9bab707d60d372d9cef0338685a67e60da5ae))
+
 ## [2.6.2](https://github.com/orangebikelabs/opensqueeze/compare/v2.6.1...v2.6.2) (2022-11-28)
 
 ### Bug Fixes
