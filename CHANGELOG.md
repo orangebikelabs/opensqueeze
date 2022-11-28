@@ -1,17 +1,19 @@
 ## [2.6.2](https://github.com/orangebikelabs/opensqueeze/compare/v2.6.1...v2.6.2) (2022-11-28)
 
-
 ### Bug Fixes
+
+* snackbar notifications should be offset above the player controls ([ca624a4](https://github.com/orangebikelabs/opensqueeze/commit/ca624a4f6316bd41b20a90843f0abbd3172f8c7e))
+* Volume text in player display was not initialized at first ([a210216](https://github.com/orangebikelabs/opensqueeze/commit/a21021691e93c6a7f3117e81f27a33ffeab187df)), closes [#49](https://github.com/orangebikelabs/opensqueeze/issues/49)
+* volume text should not show while slider value is showing ([143a22e](https://github.com/orangebikelabs/opensqueeze/commit/143a22e847a4be6710010e8c5452c889c5ab415a))
+* player change snackbar should display on now playing view ([ccd1c28](https://github.com/orangebikelabs/opensqueeze/commit/ccd1c28ef93f2fd9ca122b2cfce85a8c017f47ca))
+
+### Dependency updates
 
 * bump kotlin_version from 1.7.20 to 1.7.21 ([d4cfe10](https://github.com/orangebikelabs/opensqueeze/commit/d4cfe10aad4f3ced284acc9a24cdec4abd4c11d0))
 * bump leakcanary-android from 2.9.1 to 2.10 ([0dd29cc](https://github.com/orangebikelabs/opensqueeze/commit/0dd29ccbe42e9b97efe97b7ad3512cdc31d67771))
 * bump orchestrator from 1.4.1 to 1.4.2 ([e6c0a10](https://github.com/orangebikelabs/opensqueeze/commit/e6c0a10ed9a63419f33fe26da99eecc2edac0bfa))
 * bump rxandroid from 3.0.0 to 3.0.2 ([af4780a](https://github.com/orangebikelabs/opensqueeze/commit/af4780aa24dd00e6c736901bb6c599aa2be5f731))
 * bump truth from 1.4.0 to 1.5.0 ([0a8f42d](https://github.com/orangebikelabs/opensqueeze/commit/0a8f42d1210977e2834a6f71e08a7a25652a539e))
-* player change snackbar should display on now playing view ([ccd1c28](https://github.com/orangebikelabs/opensqueeze/commit/ccd1c28ef93f2fd9ca122b2cfce85a8c017f47ca))
-* snackbar notifications should be offset above the player controls ([ca624a4](https://github.com/orangebikelabs/opensqueeze/commit/ca624a4f6316bd41b20a90843f0abbd3172f8c7e))
-* Volume text in player display was not initialized at first ([a210216](https://github.com/orangebikelabs/opensqueeze/commit/a21021691e93c6a7f3117e81f27a33ffeab187df)), closes [#49](https://github.com/orangebikelabs/opensqueeze/issues/49)
-* volume text should not show while slider value is showing ([143a22e](https://github.com/orangebikelabs/opensqueeze/commit/143a22e847a4be6710010e8c5452c889c5ab415a))
 
 ## [2.6.1](https://github.com/orangebikelabs/opensqueeze/compare/v2.6.0...v2.6.1) (2022-11-06)
 
