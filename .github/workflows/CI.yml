@@ -2,11 +2,7 @@ name: Tests
 on: 
   push:
     branches: [main, beta, alpha]
-
   pull_request:
-    types: [opened, synchronize, reopened]
-
-permissions: write-all
 
 jobs:
   buildtest:
@@ -32,13 +28,11 @@ jobs:
       - name: Build with Gradle
         run: ./gradlew build test
 
-      - name: Test Report
-        uses: dorny/test-reporter@v1
-        if: success() || failure()    # run this step even if previous step failed
+      - uses: actions/upload-artifact@v3  # upload test results
+        if: success() || failure()        # run this step even if previous step failed
         with:
-          name: Unit Tests            # Name of the check run which will be created
+          name: unittest-results
           path: "**/test-results/**/*.xml"    # Path to test results
-          reporter: java-junit        # Format of test results
 
   instrumentedTests:
     name: Instrumented Tests
@@ -68,10 +62,8 @@ jobs:
           api-level: 30
           script: ./gradlew connectedAndroidTest
 
-      - name: Test Report
-        uses: dorny/test-reporter@v1
-        if: success() || failure()    # run this step even if previous step failed
+      - uses: actions/upload-artifact@v3  # upload test results
+        if: success() || failure()        # run this step even if previous step failed
         with:
-          name: Instrumentation Tests            # Name of the check run which will be created
+          name: instrumentationtest-results
           path: "**/androidTest-results/**/*.xml"    # Path to test results
-          reporter: java-junit        # Format of test results
