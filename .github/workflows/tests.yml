@@ -6,8 +6,6 @@ on:
   pull_request:
     types: [opened, synchronize, reopened]
 
-permissions: write-all
-
 jobs:
   buildtest:
     name: Build & Unit Tests
