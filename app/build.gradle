@@ -181,7 +181,7 @@ dependencies {
     implementation 'com.squareup.okio:okio:3.2.0'
 
     // permissions
-    implementation 'com.github.fondesa:kpermissions:3.3.0'
+    implementation 'com.github.fondesa:kpermissions:3.4.0'
 
     // event bus
     implementation 'com.squareup:otto:1.3.8'
