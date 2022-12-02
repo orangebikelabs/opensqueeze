@@ -2,7 +2,7 @@ name: 'Test Reports'
 
 on:
   workflow_run:
-    workflows: ['Tests']                     # runs after CI workflow
+    workflows: [ 'Tests' ]                     # runs after CI workflow
     types:
       - completed
 
@@ -14,7 +14,7 @@ jobs:
         with:
           artifact: unittest-results            # artifact name
           name: JEST Tests                  # Name of the check run which will be created
-          path: '*.xml'                     # Path to test results (inside artifact .zip)
+          path: '**/*.xml'                  # Path to test results (inside artifact .zip)
           reporter: jest-junit              # Format of test results
 
   instrumentationtest-report:
@@ -24,5 +24,5 @@ jobs:
         with:
           artifact: instrumentationtest-results            # artifact name
           name: JEST Tests                  # Name of the check run which will be created
-          path: '*.xml'                     # Path to test results (inside artifact .zip)
+          path: '**/*.xml'                  # Path to test results (inside artifact .zip)
           reporter: jest-junit              # Format of test results
