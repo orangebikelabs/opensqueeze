@@ -1,11 +1,11 @@
-name: 'Test Report'
+name: 'Test Reports'
 
 on:
   workflow_run:
-    workflows: ['CI']                     # runs after CI workflow
+    workflows: ['Tests']                     # runs after CI workflow
     types:
       - completed
-      -
+
 jobs:
   unittest-report:
     runs-on: ubuntu-latest
