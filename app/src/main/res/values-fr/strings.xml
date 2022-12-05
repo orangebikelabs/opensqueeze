@@ -275,4 +275,12 @@
     <string name="nowplaying_shortcut_long_label">lancer directement à lecture en cours</string>
     <string name="all_items">Tous les eléments</string>
     <string name="forgot_password">Mot de passe oublié \?</string>
+    <string name="pref_advancedprefs_summary">Affiche les préférences avancées</string>
+    <string name="pref_artwork_category">Ouvrages d\'art</string>
+    <string name="pref_cache_category">Caching</string>
+    <string name="pref_autolaunch_squeezeplayer_title">Lancement de SqueezePlayer</string>
+    <string name="pref_wipeartwork_summary">Supprime toutes les données en cache du stockage</string>
+    <string name="pref_systemvolumecontrol_title">Intégrer avec le contrôle du volume du système</string>
+    <string name="pref_browse_shownowplaying_summary">Si cette option est sélectionnée, pendant la navigation, la barre inférieure affiche les informations en cours de lecture et permet un accès rapide à l\'écran en cours de lecture.</string>
+    <string name="pref_showreleasenotes_summary">Désactivez cette option si vous ne souhaitez pas lire les notes de publication chaque fois que l\'application est mise à niveau.</string>
 </resources>
