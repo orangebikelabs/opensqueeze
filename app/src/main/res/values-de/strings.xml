@@ -270,4 +270,81 @@
     <string name="nowplaying_shortcut_short_label">Aktueller Titel</string>
     <string name="nowplaying_shortcut_long_label">Direkt zu Aktueller Titel starten</string>
     <string name="all_items">Alle Einträge</string>
+    <string name="about_title">Über %1$s</string>
+    <string name="pref_cache_storagesize_title">Speicher-Cache-Größe</string>
+    <string name="pref_cache_storagesize_summary">Der maximale Speicherplatz, den der Grafikcache für den Gerätespeicher verwendet.
+\n
+\nDer aktuelle Maximalwert beträgt %1$s MB.</string>
+    <string name="pref_artwork_category">Artwork</string>
+    <string name="pref_autoconnect_summary">Verbinden Sie sich automatisch mit dem zuletzt verbundenen Server</string>
+    <string name="pref_autoconnect_title">Automatisches Verbinden</string>
+    <string name="pref_autodiscovery_summary">Senden Sie regelmäßig Discovery-Broadcast-Anforderungen, um lokale Server zu finden</string>
+    <string name="pref_autodiscovery_title">Automatische Erkennung</string>
+    <string name="pref_advancedprefs_title">Erweitert</string>
+    <string name="pref_downloadprefs_title">Herunterladen</string>
+    <string name="pref_downloadprefs_summary">Zeigt Download-Einstellungen an</string>
+    <string name="pref_cachelocation_title">Cache-Speicherort</string>
+    <string name="pref_cachelocation_summary">Der Grafikcache wird auf %1$s gespeichert</string>
+    <string name="pref_cache_category">Caching</string>
+    <string name="pref_wipeartwork_title">Cache löschen</string>
+    <string name="pref_wipeartwork_message">Möchten Sie alle Cache-Daten aus dem permanenten Speicher entfernen\? Wenn Sie Ja auswählen, füllt sich der Cache bei Bedarf wieder.</string>
+    <string name="pref_automaticmute_category_title">Verhalten bei Anruf</string>
+    <string name="pref_automaticmute_title">Bei erhaltenem Anruf</string>
+    <string name="pref_systemvolumecontrol_summaryOn">Die App wird in das Systemvolumen integriert.</string>
+    <string name="pref_systemvolumecontrol_summaryOff">Der Lautstärkeregler der App funktioniert unabhängig von der Lautstärkeregelung des Systems.</string>
+    <string name="pref_use24hourtimeformat_title">Zeitformat</string>
+    <string name="pref_automaticmute_summary">Was tun, wenn ein Anruf getätigt oder empfangen wird und verbundene Player spielen.
+\n
+\nAktueller Wert: %1$s</string>
+    <string name="pref_automaticunmute_title">Wiedergabefortsetzung</string>
+    <string name="pref_automaticunmute_summary">Automatische Fortsetzung der Wiedergabe, wenn diese automatisch stummgeschaltet oder pausiert worden ist und der Anruf innerhalb der angegebenen Zeit beendet wird.</string>
+    <string name="pref_use24hourtimeformat_summaryOn">12-Stunden-Zeitformat verwenden.</string>
+    <string name="pref_use24hourtimeformat_summaryOff">24-Stunden-Zeitformat verwenden.</string>
+    <string name="pref_volumecontrol_notification">Diese App kann die Lautstärkeregler Ihres Geräts verwenden, um die Lautstärke des Squeezebox-Geräts zu steuern. Möchten Sie dieses Verhalten aktivieren\?
+\n
+\nSie kann jederzeit in den App-Einstellungen geändert werden.\?</string>
+    <string name="pref_browse_category">Durchsuchen Sie die Einstellungen</string>
+    <string name="pref_browse_albumsort_title">Sortierverfahren für Alben</string>
+    <string name="pref_browse_albumsort_summary">Wählen Sie die Art und Weise, wie Alben sortiert werden. Bitte beachten Sie, dass diese Einstellung auf dem Server gespeichert ist und nur bei Verbindung geändert werden kann.</string>
+    <string name="pref_browse_showactionbar_title">Titelleiste anzeigen</string>
+    <string name="pref_browse_showactionbar_summary">Wenn diese Option ausgewählt ist, enthält die Titelleiste Navigationspfade zum Navigieren im Browserverlauf.</string>
+    <string name="pref_browse_shownowplaying_title">Zeige jetzt Bar spielen</string>
+    <string name="pref_browse_disableartistartwork_title">Künstlergrafik deaktivieren</string>
+    <string name="pref_browse_disableartistartwork_summary">Deaktiviert die Erzeugung von Künstlergrafik auf Geräten, auf denen diese Funktion nicht ordnungsgemäß funktioniert oder unerwünscht ist.</string>
+    <string name="pref_browse_gridcellcount_title">Durchsuchen Sie die Spaltenanzahl</string>
+    <string name="pref_browse_gridcellcount_summary">Konfigurieren Sie die Anzahl der Spalten (im Hochformat), die beim Browsen für gitterbasierte Elemente verwendet werden.</string>
+    <string name="pref_general_category_title">Allgemeines</string>
+    <string name="pref_keepscreenon_summary">Lassen Sie den Bildschirm immer aktiviert, wenn sich diese App im Vordergrund befindet.</string>
+    <string name="pref_keepscreenon_title">Bildschirm anhalten</string>
+    <string name="pref_autolaunch_squeezeplayer_summary">Wenn die Verbindung zu einem Server hergestellt ist, starten Sie den SqueezePlayer automatisch und verbinden Sie ihn mit dem Server.</string>
+    <string name="pref_autolaunch_squeezeplayer_message">Großartig, Sie haben den SqueezePlayer installiert! Möchten Sie den SqueezePlayer automatisch starten, wenn diese App eine Verbindung zu einem Server herstellt\?</string>
+    <string name="pref_trackselect_playmode_title">Standard-Wiedergabemodus</string>
+    <string name="pref_trackselect_playmode_summary">Wählen Sie den Wiedergabemodus für die direkte Auswahl der Titel</string>
+    <string name="pref_other_category">Andere</string>
+    <string name="pref_volume_category">Lautstärke</string>
+    <string name="pref_verboselogging_summary">Vorübergehend aktivieren, bevor Sie dann eine problematische Operation ausführen. Dann kehren Sie zurück und verwenden Sie die Option \"Feedback senden\".</string>
+    <string name="pref_verboselogging_title">Ausführliche Protokollierung</string>
+    <string name="pref_showreleasenotes_title">Versionshinweise anzeigen</string>
+    <string name="pref_theme_title">Thema</string>
+    <string name="pref_theme_summary">Visuellen Stil für die App wählen.</string>
+    <string name="pref_language_title">Sprache</string>
+    <string name="pref_language_summary">Wählen Sie die Sprache für den Text in dieser App</string>
+    <string name="pref_trackdownload_location_title">Standort herunterladen</string>
+    <string name="pref_trackdownload_category">Download verfolgen</string>
+    <string name="pref_trackdownload_transcodeenabled_off">Tracks werden im nativen Format heruntergeladen, sobald sie auf Ihrem Server gehostet werden.</string>
+    <string name="pref_trackdownload_transcodeenabled_on">Titel werden in ein alternatives Format gewandelt, wenn sie auf Ihr Gerät heruntergeladen werden.</string>
+    <string name="pref_trackdownload_transcodeenabled_title">Transkodierungsformat</string>
+    <string name="pref_trackdownload_transcodeformat_summary">Wenn Transkodierung aktiviert ist, werden Downloads in das Format %1$s transcodiert.</string>
+    <string name="pref_trackdownload_transcodeformat_title">Transcode-Format</string>
+    <string name="pref_trackdownload_transcodeoptions_summary">Kommagetrennte Liste der Transkodierungsoptionen.
+\n
+\nAktueller Wert: %1$s</string>
+    <string name="pref_trackdownload_transcodeoptions_title">Transcode-Optionen</string>
+    <string name="pref_browse_gridcellcount_uselist">Verwenden Sie immer Listen zum Browsen</string>
+    <string name="pref_shownowplayingnotification_title">Benachrichtigung beim Abspielen anzeigen</string>
+    <string name="pref_shownowplayingnotification_summaryOn">Wenn Sie die App mit einem spielenden Player verlassen, wird eine Benachrichtigung angezeigt, mit der dieser Player gesteuert werden kann.</string>
+    <string name="pref_shownowplayingnotification_summaryOff">Es wird keine Benachrichtigung angezeigt.</string>
+    <string name="exception_connection_timeout">Timeout der Serververbindung</string>
+    <string name="exception_no_network_available">Kein Netzwerk verfügbar</string>
+    <string name="exception_connection_error">Verbindungsfehler</string>
 </resources>
