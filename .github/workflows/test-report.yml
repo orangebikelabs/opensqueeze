@@ -15,7 +15,7 @@ jobs:
           artifact: unittest-results            # artifact name
           name: JEST Tests                  # Name of the check run which will be created
           path: '**/*.xml'                  # Path to test results (inside artifact .zip)
-          reporter: jest-junit              # Format of test results
+          reporter: java-junit              # Format of test results
 
   instrumentationtest-report:
     runs-on: ubuntu-latest
@@ -25,4 +25,4 @@ jobs:
           artifact: instrumentationtest-results            # artifact name
           name: JEST Tests                  # Name of the check run which will be created
           path: '**/*.xml'                  # Path to test results (inside artifact .zip)
-          reporter: jest-junit              # Format of test results
+          reporter: java-junit              # Format of test results
