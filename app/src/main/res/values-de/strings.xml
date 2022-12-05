@@ -121,7 +121,7 @@
     <string name="connecting_icon_desc">Das Symbol zeigt an, dass die Verbindung hergestellt wird</string>
     <string name="player_overflow_desc">Zeige weitere Playeraktionen</string>
     <string name="player_artwork_desc">Artwork für den aktiven Player</string>
-    <string name="item_overflow_desc">Weitere Aktionen für dieses Element anzeigen.</string>
+    <string name="item_overflow_desc">Weitere Aktionen für dieses Element anzeigen</string>
     <string name="item_icon_desc">Element-Symbol</string>
     <string name="item_icon_missing_desc">Element fehlt</string>
     <string name="connect_server_type_icon">Symbol, das den Servertyp darstellt</string>
@@ -129,7 +129,8 @@
     <string name="sleep_slider_desc">Schlafzeit ändern</string>
     <string name="track_progress_seek_desc">In aktuellem Titel suchen</string>
     <string name="item_artwork_desc">Artwork für das aktuelle Element</string>
-    <string name="ip_address">Aktuelle Geräte-IP-Adresse:%1$s (kann andere haben)</string>
+    <string name="ip_address">Aktuelle Geräte-IP-Adresse:%1$s
+\n(kann andere haben)</string>
     <string name="drawer_open">Öffnen Sie die Navigationsleiste</string>
     <string name="drawer_close">Navigationsleiste schließen</string>
     <string name="feedback_collecting_logs">Protokolle sammeln</string>
@@ -153,11 +154,11 @@
     <string name="maintenance_server_rescan_desc">Löst ein serverseitiges Durchsuchen nach neuen und geänderten Medien aus.</string>
     <string name="maintenance_server_rescan">Scanne Neues und Geändertes</string>
     <string name="maintenance_server_rescan_playlists_desc">Löst ein erneutes serverseitiges Durchsuchen der Playlists aus.</string>
-    <string name="maintenance_server_rescan_playlists">Playlists durchsuchen.</string>
+    <string name="maintenance_server_rescan_playlists">Playlists durchsuchen</string>
     <string name="pref_trackdownload_location_summary">Der Speicherort auf Ihrem Gerät, an dem die Downloads gespeichert werden.\n\nAktueller Wert:\n  %1$s</string>
     <string name="error_cannot_resolve_hostname">Hostname \"%1$s\" kann nicht aufgelöst werden</string>
     <string name="hostname_already_exists">Server mit Hostname \"%1$s\" ist bereits vorhanden.</string>
-    <string name="invalid_hostname_port">Ungültiger Hostname und/oder Port</string>
+    <string name="invalid_hostname_port">Ungültiger Hostname und/oder Port.</string>
     <string name="no_player_available_label_html"><![CDATA[Keine Player mit <b>%1$s</b> verbunden.]]></string>
     <string name="actionmenu_title_html"><![CDATA[Zu <b>%1$s</b>:]]></string>
     <string name="connecting_message_html">Connecting an: <b>%1$s</b></string>
@@ -206,7 +207,7 @@
     <string name="wakeonlan_autodetect">MAC-Adresse automatisch ermitteln</string>
     <string name="wakeonlan_dialog_title">Wake-on-LAN: %1$s</string>
     <string name="synchronized_player_separator">Synchronisationsgruppe %1$d</string>
-    <string name="player_connect_server_confirmation_message">Verbinden Sie %1$s mit dem Server \"%2$s\"?\n\nBeachten Sie, dass es einige Zeit dauern kann, bis der Player nach dem Wechsel sichtbar wird.</string>
+    <string name="player_connect_server_confirmation_message">Verbinden Sie %1$s mit dem Server \"%2$s\"\? Beachten Sie, dass es einige Zeit dauern kann, bis der Player nach dem Wechsel sichtbar wird.</string>
     <string name="playnext_action_snackbar_html">&lt;b&gt;%1$s&lt;/b&gt; als nächstes in der aktuellen Playlist hinzugefügt</string>
     <string name="playnow_action_snackbar_html"><![CDATA[Spielen von <b>%1$s</b>]]></string>
     <string name="addtofavorites_action_snackbar_html"><![CDATA[<b>%1$s</b> zu Favoriten hinzugefügt]]></string>
@@ -217,7 +218,7 @@
     <string name="player_sleep_text">Schlaf \'%1$s\' in %2$d Minuten</string>
     <string name="player_sleep_endoftrack">Schlafe \'%1$s\', wenn der Titel in %2$d Minuten endet</string>
     <string name="action_squeezenetwork_connect_player">Verbinden mit mysqueezebox.com</string>
-    <string name="synchronization_title_html"><![CDATA[Synchronisieren mit <b>%1$s</b>]]></string>
+    <string name="synchronization_title_html">Synchronisieren mit <b>%1$s</b>:</string>
     <string name="player_sleep_never">Schlaf nicht \'%1$s\'</string>
     <string-array name="repeat_strings">
         <item>Wiederholung aus</item>
@@ -302,7 +303,7 @@
     <string name="pref_use24hourtimeformat_summaryOff">24-Stunden-Zeitformat verwenden.</string>
     <string name="pref_volumecontrol_notification">Diese App kann die Lautstärkeregler Ihres Geräts verwenden, um die Lautstärke des Squeezebox-Geräts zu steuern. Möchten Sie dieses Verhalten aktivieren\?
 \n
-\nSie kann jederzeit in den App-Einstellungen geändert werden.\?</string>
+\nSie kann jederzeit in den App-Einstellungen geändert werden.</string>
     <string name="pref_browse_category">Durchsuchen Sie die Einstellungen</string>
     <string name="pref_browse_albumsort_title">Sortierverfahren für Alben</string>
     <string name="pref_browse_albumsort_summary">Wählen Sie die Art und Weise, wie Alben sortiert werden. Bitte beachten Sie, dass diese Einstellung auf dem Server gespeichert ist und nur bei Verbindung geändert werden kann.</string>
