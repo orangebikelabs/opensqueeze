@@ -1,3 +1,10 @@
+## [2.6.3-alpha.2](https://github.com/orangebikelabs/opensqueeze/compare/v2.6.3-alpha.1...v2.6.3-alpha.2) (2022-12-05)
+
+
+### Bug Fixes
+
+* bump mockk-android from 1.13.2 to 1.13.3 ([bc887ac](https://github.com/orangebikelabs/opensqueeze/commit/bc887acae44d6effa16ac5c77e6e00c34c2177c1))
+
 ## [2.6.3-alpha.1](https://github.com/orangebikelabs/opensqueeze/compare/v2.6.2...v2.6.3-alpha.1) (2022-11-28)
 
 
