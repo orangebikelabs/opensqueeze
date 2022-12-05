@@ -12,8 +12,8 @@ jobs:
     steps:
       - uses: dorny/test-reporter@v1
         with:
-          artifact: unittest-results            # artifact name
-          name: JEST Tests                  # Name of the check run which will be created
+          artifact: unittest-results        # artifact name
+          name: Unit Tests                  # Name of the check run which will be created
           path: '**/*.xml'                  # Path to test results (inside artifact .zip)
           reporter: java-junit              # Format of test results
 
@@ -23,6 +23,6 @@ jobs:
       - uses: dorny/test-reporter@v1
         with:
           artifact: instrumentationtest-results            # artifact name
-          name: JEST Tests                  # Name of the check run which will be created
+          name: Instrumentation Tests       # Name of the check run which will be created
           path: '**/*.xml'                  # Path to test results (inside artifact .zip)
           reporter: java-junit              # Format of test results
