@@ -9,11 +9,11 @@
     <string name="action_removefavorite">Supprimer favori</string>
     <string name="cancel">Annuler</string>
     <string name="cancel_notification_desc">Annuler la notification, déconnecter</string>
-    <string name="confirmation_title">Êtes-vous sûr \?</string>
+    <string name="confirmation_title">Êtes-vous sûr \?</string>
     <string name="connect_button">Connecter</string>
     <string name="connect_hostname">Nom d\'hôte ou adresse IP</string>
     <string name="connect_port">Port</string>
-    <string name="clearplaylist_action_confirmation">Êtes-vous sûr de vouloir effacer la liste de lecture actuelle \?</string>
+    <string name="clearplaylist_action_confirmation">Êtes-vous sûr de vouloir effacer la liste de lecture actuelle \?</string>
     <string name="connecting_message_noserver">Connexion au serveur</string>
     <string name="connecting_title">Connexion</string>
     <string name="connection_error_title">Erreur de connexion</string>
@@ -32,7 +32,7 @@
     <string name="menu_search">Recherche</string>
     <string name="menu_browse_refresh">Rafraîchir</string>
     <string name="menu_maintenance">Entretien</string>
-    <string name="error_cannot_resolve_hostname">Impossible de résoudre le nom d\'hôte  : %1$s</string>
+    <string name="error_cannot_resolve_hostname">Impossible de résoudre le nom d\'hôte : %1$s</string>
     <string name="hostname_already_exists">Le serveur avec le nom d\'hôte « %1$s » existe déjà.</string>
     <string name="invalid_hostname_port">Nom d\'hôte et / ou port non valide.</string>
     <string name="awaitingnetwork_title">En attente de réseau</string>
@@ -74,7 +74,7 @@
     <string name="dismiss_dialog">OK</string>
     <string name="empty_downloads_text">Aucun téléchargement actif ou terminé</string>
     <string name="empty_text">Pas d\'objet</string>
-    <string name="select_player_prompt">Sélectionner un platine :</string>
+    <string name="select_player_prompt">Sélectionner un platine :</string>
     <string name="serverdiscovery_label">Découverte du serveur</string>
     <string name="network_error">Erreur réseau</string>
     <string name="menu_nowplaying_saveplaylist">Sauvegarder la playlist</string>
@@ -83,7 +83,7 @@
     <string name="menu_nowplaying_hideplaylist">Masquer la playlist</string>
     <string name="cleared_playlist">Liste de lecture effacée</string>
     <string name="nowplaying_saveplaylist_title">Sauvegarder la playlist</string>
-    <string name="nowplaying_saveplaylist_message">Entrez le nouveau nom de la playlist :</string>
+    <string name="nowplaying_saveplaylist_message">Entrez le nouveau nom de la playlist :</string>
     <string name="nowplaying_saveplaylist_hint">Nouveau nom de la playlist</string>
     <string name="playmode_stopped">Arrêté</string>
     <string name="save">Sauvegarder</string>
@@ -187,7 +187,7 @@
 \n
 \nValeur actuelle :
 \n %1$s</string>
-    <string name="search_item_name">Rechercher : %1$s</string>
+    <string name="search_item_name">Rechercher : %1$s</string>
     <string name="login_title">Connectez-vous à %1$s</string>
     <string name="play_desc">Lecture</string>
     <string name="shuffle_toggle_desc">Mélanger</string>
@@ -200,8 +200,7 @@
     <string name="thumbsdown_desc">Pouces vers le bas</string>
     <string name="repeat_toggle_desc">Répéter</string>
     <string name="maintenance_server_rescan_clear_desc">Déclenche un effacement et une réanalyse côté serveur, reconstruisant la base de données à partir de zéro.</string>
-    <string name="ip_address">Adresse IP actuelle du périphérique : %1$s
-\n(peut en avoir d\'autres)</string>
+    <string name="ip_address">Adresse IP actuelle du périphérique : %1$s</string>
     <string name="widget_playername_text">Platine : %1$s</string>
     <string name="player_sleep_never">Ne dormez pas « %1$s »</string>
     <string name="player_sleep_endoftrack">Dormir « %1$s » lorsque la piste se termine dans %2$d minutes</string>
@@ -211,7 +210,7 @@
     <string name="wakeonlan_dialog_title">Réveil sur place : %1$s</string>
     <string name="synchronized_player_separator">Groupe de synchronisation %1$d</string>
     <string name="player_settings_title">Paramètres %1$s</string>
-    <string name="actionmenu_title_html">Sur <b>%1$s</b> :</string>
+    <string name="actionmenu_title_html">Sur <b>%1$s</b> :</string>
     <string name="playnow_action_snackbar_html"><![CDATA[Lecture <b>%1$s</b>]]></string>
     <string name="nowplaying_activity_title_playing_html">&lt;b&gt;%1$s&lt;/b&gt; • %2$d de %3$d</string>
     <string name="nowplaying_activity_title_paused_html">&lt;b&gt;%1$s&lt;/b&gt; • En pause</string>
@@ -219,10 +218,10 @@
     <string name="playnext_action_snackbar_html">Ajout de &lt;b&gt;%1$s &lt;/b&gt; next dans la playlist en cours</string>
     <string name="addtofavorites_action_snackbar_html">Ajouté &lt;b&gt;%1$s&lt;/b&gt; aux favoris</string>
     <string name="removefavorite_action_snackbar_html">Suppression des &lt;b&gt;%1$s&lt;/b&gt; des favoris</string>
-    <string name="removefavorite_action_confirmation_html">Voulez-vous vraiment supprimer <b>%1$s</b> des favoris \?</string>
+    <string name="removefavorite_action_confirmation_html">Voulez-vous vraiment supprimer <b>%1$s</b> des favoris \?</string>
     <string name="saved_playlist_html">Liste de lecture enregistrée &lt;b&gt;%1$s&lt;/b&gt;</string>
-    <string name="synchronization_title_html">Synchronisez <b>%1$s</b> avec :</string>
-    <string name="player_connect_server_confirmation_message">Connecter %1$s au serveur « %2$s » \? Notez que le lecteur peut prendre un certain temps pour devenir visible après le changement.</string>
+    <string name="synchronization_title_html">Synchronisez <b>%1$s</b> avec :</string>
+    <string name="player_connect_server_confirmation_message">Connecter %1$s au serveur « %2$s » \? Notez que le lecteur peut prendre un certain temps pour devenir visible après le changement.</string>
     <string-array name="repeat_strings">
         <item>Répétition désactivée</item>
         <item>Répéter le morceau</item>
@@ -283,4 +282,73 @@
     <string name="pref_systemvolumecontrol_title">Intégrer avec le contrôle du volume du système</string>
     <string name="pref_browse_shownowplaying_summary">Si cette option est sélectionnée, pendant la navigation, la barre inférieure affiche les informations en cours de lecture et permet un accès rapide à l\'écran en cours de lecture.</string>
     <string name="pref_showreleasenotes_summary">Désactivez cette option si vous ne souhaitez pas lire les notes de publication chaque fois que l\'application est mise à niveau.</string>
+    <string name="pref_autoconnect_summary">Se connecter automatiquement au dernier serveur connecté</string>
+    <string name="pref_autoconnect_title">Connexion automatique</string>
+    <string name="pref_autodiscovery_title">Découverte automatique</string>
+    <string name="pref_browse_category">Parcourir les préférences</string>
+    <string name="pref_browse_albumsort_title">Méthode de tri des albums</string>
+    <string name="pref_general_category_title">Général</string>
+    <string name="pref_trackdownload_transcodeformat_summary">Si le transcodage est activé, les téléchargements seront transcodés au format %1$s.</string>
+    <string name="about_title">Sur %1$s</string>
+    <string name="pref_automaticmute_category_title">Comportement sur appel</string>
+    <string name="pref_automaticmute_title">Sur appel reçu</string>
+    <string name="pref_automaticunmute_title">Reprise du seuil</string>
+    <string name="pref_autodiscovery_summary">Envoyer périodiquement des demandes de diffusion de découverte pour trouver des serveurs locaux</string>
+    <string name="pref_advancedprefs_title">Avancé</string>
+    <string name="pref_downloadprefs_title">Télécharger</string>
+    <string name="pref_cachelocation_title">Cache Location</string>
+    <string name="pref_cachelocation_summary">Le cache d\'illustration sera stocké sur %1$s</string>
+    <string name="pref_cache_storagesize_title">Taille du cache de stockage</string>
+    <string name="pref_cache_storagesize_summary">La quantité maximale d\'espace que le cache d\'illustrations utilisera sur le stockage de périphérique.
+\n
+\nLa valeur maximale actuelle est de %1$s Mo.</string>
+    <string name="pref_automaticunmute_summary">Désactivez ou réactivez automatiquement les lecteurs s\'ils ont été automatiquement désactivés ou mis en pause et si l\'appel prend fin dans le délai spécifié.</string>
+    <string name="pref_systemvolumecontrol_summaryOn">Que faire lorsqu\'un appel est passé ou reçu et que les platines connectés lecture.</string>
+    <string name="pref_systemvolumecontrol_summaryOff">Le contrôle du volume de l\'application fonctionnera indépendamment du contrôle du volume du système.</string>
+    <string name="pref_use24hourtimeformat_title">Format de l\'heure</string>
+    <string name="pref_use24hourtimeformat_summaryOff">Utilisez le format horaire 12 heures.</string>
+    <string name="pref_wipeartwork_message">Voulez-vous supprimer toutes les données en cache du stockage permanent \? Si vous sélectionnez oui, le cache commencera à se remplir à nouveau à la demande.</string>
+    <string name="pref_browse_albumsort_summary">Choisissez la manière dont les albums sont triés. Veuillez noter que cette préférence est stockée sur le serveur et ne peut être modifiée qu’une fois connecté.</string>
+    <string name="pref_browse_showactionbar_title">Afficher la barre de titre</string>
+    <string name="pref_browse_showactionbar_summary">Si cette option est sélectionnée, pendant la navigation, la barre de titre contient des éléments de navigation pour parcourir l\'historique de navigation.</string>
+    <string name="pref_browse_shownowplaying_title">Montrer la barre de jeu en cours</string>
+    <string name="pref_browse_disableartistartwork_title">Désactiver l\'oeuvre d\'artiste</string>
+    <string name="pref_browse_gridcellcount_title">Parcourir le nombre de colonnes</string>
+    <string name="pref_browse_gridcellcount_summary">Configurez le nombre de colonnes (en mode portrait) que la navigation utilisera pour les éléments basés sur une grille.</string>
+    <string name="pref_keepscreenon_summary">Gardez l\'écran sur chaque fois que cette application est au premier plan.</string>
+    <string name="pref_keepscreenon_title">Gardez l\'écran allumé</string>
+    <string name="pref_autolaunch_squeezeplayer_summary">Une fois la connexion établie avec un serveur, démarrez automatiquement SqueezePlayer et connectez-le au serveur.</string>
+    <string name="pref_trackselect_playmode_summary">Choisissez le mode de lecture à utiliser lors de la sélection directe de pistes</string>
+    <string name="pref_other_category">Autre</string>
+    <string name="pref_volume_category">Volume</string>
+    <string name="pref_verboselogging_summary">Activez-le temporairement, puis effectuez une opération pénible. Puis revenez et utilisez l\'option «Envoyer un commentaire».</string>
+    <string name="pref_verboselogging_title">Enregistrement détaillé</string>
+    <string name="pref_showreleasenotes_title">Afficher les notes de publication</string>
+    <string name="pref_theme_title">Thème</string>
+    <string name="pref_autolaunch_squeezeplayer_message">Super, vous avez installé SqueezePlayer ! Voulez-vous démarrer automatiquement SqueezePlayer chaque fois que cette application se connecte à un serveur \?</string>
+    <string name="pref_theme_summary">Choisissez un style visuel pour l\'application.</string>
+    <string name="pref_language_title">Langue</string>
+    <string name="pref_language_summary">Choisissez la langue du texte dans cette application</string>
+    <string name="pref_trackdownload_location_title">Lieu de téléchargement</string>
+    <string name="pref_trackdownload_category">Suivre le téléchargement</string>
+    <string name="pref_trackdownload_transcodeenabled_off">Les pistes seront téléchargées au format natif car elles sont hébergées sur votre serveur.</string>
+    <string name="pref_trackdownload_transcodeenabled_on">Les pistes seront transcodées vers un autre format au fur et à mesure de leur téléchargement sur votre appareil.</string>
+    <string name="pref_trackdownload_transcodeenabled_title">Transcodage</string>
+    <string name="pref_trackdownload_transcodeformat_title">Format de transcodage</string>
+    <string name="pref_trackdownload_transcodeoptions_title">Options de transcodage</string>
+    <string name="pref_browse_gridcellcount_uselist">Toujours utiliser des listes pour la navigation</string>
+    <string name="pref_shownowplayingnotification_title">Afficher la notification en cours de lecture</string>
+    <string name="pref_shownowplayingnotification_summaryOn">Lorsque vous quittez l\'application lorsqu\'un platine est en train de platine, une notification vous permettant de contrôler cette platine s\'affiche.</string>
+    <string name="pref_shownowplayingnotification_summaryOff">Aucune notification ne sera affichée.</string>
+    <string name="exception_connection_timeout">Délai d\'attente en attente de la connexion au serveur</string>
+    <string name="exception_no_network_available">Pas de réseau disponible</string>
+    <string name="pref_volumecontrol_notification">Cette application peut utiliser les contrôles de volume de votre appareil pour contrôler le volume de votre appareil Squeezebox. Voulez-vous activer ce comportement \?
+\n
+\nIl peut être modifié à tout moment dans les préférences de l\'application.</string>
+    <string name="pref_trackdownload_transcodeoptions_summary">Liste délimitée par des virgules d\'options de transcodage.
+\n
+\nValeur actuelle : %1$s</string>
+    <string name="pref_automaticmute_summary">Que faire lorsqu\'un appel est passé ou reçu et que les platines connectés lecture.
+\n
+\nValeur actuelle : %1$s</string>
 </resources>
