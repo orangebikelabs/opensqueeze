@@ -24,7 +24,7 @@ jobs:
       - name: Prepare Node environment
         uses: actions/setup-node@v3
         with:
-          node-version: 16
+          node-version: 18
       - run: ${{ env.semrel_package_bootstrap }}
       - run: npx semantic-release --dry-run
         id: get-next-version
@@ -115,7 +115,7 @@ jobs:
       - name: Prepare Node environment
         uses: actions/setup-node@v3
         with:
-          node-version: 16
+          node-version: 18
 
       - name: Bootstrap npm Semantic Release packages
         run: ${{ env.semrel_package_bootstrap }}
