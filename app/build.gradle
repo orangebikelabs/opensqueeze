@@ -23,16 +23,12 @@ android {
             }
         }
     }
-
     packagingOptions {
-        // work around duplicate license files in jackson JARs
-        exclude 'META-INF/LICENSE'
-        exclude 'META-INF/NOTICE'
-        exclude 'META-INF/services/com.fasterxml.jackson.core.JsonFactory'
-        exclude 'META-INF/MANIFEST.MF'
-        exclude 'META-INF/LICENSE.md'
-        exclude 'META-INF/LICENSE-notice.md'
+        resources {
+            excludes += ['META-INF/LICENSE', 'META-INF/NOTICE', 'META-INF/services/com.fasterxml.jackson.core.JsonFactory', 'META-INF/MANIFEST.MF', 'META-INF/LICENSE.md', 'META-INF/LICENSE-notice.md']
+        }
     }
+
 
     defaultConfig {
         applicationId 'org.opensqueeze'
@@ -75,16 +71,15 @@ android {
         jvmTarget = JavaVersion.VERSION_11
     }
 
-    lintOptions {
-        // if true, stop the gradle build if errors are found
-        abortOnError true
-    }
 
     signingConfigs {
         release {
             storeFile file('release_keystore.jks')
             keyAlias 'signing'
         }
+    }
+    lint {
+        abortOnError true
     }
 
     // enable release signing if we have password
