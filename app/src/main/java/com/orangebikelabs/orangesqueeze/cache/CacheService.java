@@ -5,9 +5,12 @@
 
 package com.orangebikelabs.orangesqueeze.cache;
 
+import android.Manifest;
 import android.app.PendingIntent;
 import android.content.Context;
+import android.content.pm.PackageManager;
 
+import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 import arrow.core.Option;
@@ -255,17 +258,18 @@ public class CacheService {
             return;
         }
         try {
-            NotificationCompat.Builder builder = new NotificationCompat.Builder(mApplicationContext, NotificationCommon.CACHE_NOTIFICATION_CHANNEL_ID);
-            builder.setOngoing(true);
-            builder.setPriority(NotificationCompat.PRIORITY_DEFAULT);
-            builder.setContentTitle(mApplicationContext.getString(R.string.app_name));
-            builder.setContentText(mApplicationContext.getString(R.string.wipingcache_notification_text));
-            builder.setSmallIcon(R.drawable.ic_notification);
-            builder.setContentIntent(PendingIntent.getActivity(mApplicationContext, 0,
-                    MainActivity.Companion.newIntent(mApplicationContext),
-                    Compat.getDefaultPendingIntentFlags() | PendingIntent.FLAG_UPDATE_CURRENT));
-
-            notificationManager.notify(Constants.NOTIFICATIONID_CACHEWIPE, builder.build());
+            if (ActivityCompat.checkSelfPermission(mApplicationContext, Manifest.permission.POST_NOTIFICATIONS) == PackageManager.PERMISSION_GRANTED) {
+                NotificationCompat.Builder builder = new NotificationCompat.Builder(mApplicationContext, NotificationCommon.CACHE_NOTIFICATION_CHANNEL_ID);
+                builder.setOngoing(true);
+                builder.setPriority(NotificationCompat.PRIORITY_DEFAULT);
+                builder.setContentTitle(mApplicationContext.getString(R.string.app_name));
+                builder.setContentText(mApplicationContext.getString(R.string.wipingcache_notification_text));
+                builder.setSmallIcon(R.drawable.ic_notification);
+                builder.setContentIntent(PendingIntent.getActivity(mApplicationContext, 0,
+                        MainActivity.Companion.newIntent(mApplicationContext),
+                        Compat.getDefaultPendingIntentFlags() | PendingIntent.FLAG_UPDATE_CURRENT));
+                notificationManager.notify(Constants.NOTIFICATIONID_CACHEWIPE, builder.build());
+            }
 
             // not required that the service be running for this method to execute
             getMemoryCache().clear();
