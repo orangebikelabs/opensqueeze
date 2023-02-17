@@ -1,3 +1,16 @@
+## [2.6.3-alpha.4](https://github.com/orangebikelabs/opensqueeze/compare/v2.6.3-alpha.3...v2.6.3-alpha.4) (2023-02-17)
+
+
+### Bug Fixes
+
+* bump error_prone_annotations from 2.16 to 2.18.0 ([71bf436](https://github.com/orangebikelabs/opensqueeze/commit/71bf436a95bb11254fa255faf6f72c0a8b181ca2))
+* bump espresso-core from 3.5.0 to 3.5.1 ([019dbc0](https://github.com/orangebikelabs/opensqueeze/commit/019dbc0200cb38c06ea2deb7a5873387a7c05d81))
+* bump espresso-intents from 3.5.0 to 3.5.1 ([d024b80](https://github.com/orangebikelabs/opensqueeze/commit/d024b80cebcac39e08175f4e3c36cc4066723fa6))
+* bump runner from 1.5.1 to 1.5.2 ([960681b](https://github.com/orangebikelabs/opensqueeze/commit/960681b29871c4b5970177fa8d6f745b5d6d8c56))
+* check for permission to post notification to satisfy lint ([8994728](https://github.com/orangebikelabs/opensqueeze/commit/8994728c49fde736571da81f965a7d8da0e5e332))
+* more lint fixes related to notification permissions ([aada94e](https://github.com/orangebikelabs/opensqueeze/commit/aada94e84c2fc52c45fb74ed53d30768791b85c7))
+* semantic release requires node 18 now ([a6d2d1e](https://github.com/orangebikelabs/opensqueeze/commit/a6d2d1e7be7f6c17289961bdd750f1887a76c616))
+
 ## [2.6.3-alpha.3](https://github.com/orangebikelabs/opensqueeze/compare/v2.6.3-alpha.2...v2.6.3-alpha.3) (2022-12-12)
 
 
