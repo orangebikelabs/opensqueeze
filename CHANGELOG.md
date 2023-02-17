@@ -1,3 +1,10 @@
+## [2.7.0-alpha.1](https://github.com/orangebikelabs/opensqueeze/compare/v2.6.3-alpha.4...v2.7.0-alpha.1) (2023-02-17)
+
+
+### Features
+
+* add initial support for Swedish (Svenska) language ([5ed3a2f](https://github.com/orangebikelabs/opensqueeze/commit/5ed3a2f7b3f1612cf4b9ef0c2fbb1af30fd3cab7))
+
 ## [2.6.3-alpha.4](https://github.com/orangebikelabs/opensqueeze/compare/v2.6.3-alpha.3...v2.6.3-alpha.4) (2023-02-17)
 
 
