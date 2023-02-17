@@ -77,14 +77,14 @@ class MainPreferenceActivity : AbsPreferenceActivity() {
             val languagePref = findPreference<ListPreference>(getString(R.string.pref_language_key))
             if (languagePref != null) {
                 languagePref.onPreferenceChangeListener = null
-
                 val savedLanguage = Locale(SBPreferences.get().selectedLanguage).language
-                if (savedLanguage == Locale("fr").language) {
-                    languagePref.value = "fr"
-                } else if (savedLanguage == Locale("de").language) {
-                    languagePref.value = "de"
-                } else {
-                    languagePref.value = "en"
+                val languageKeyArray = resources.getStringArray(R.array.pref_language_values)
+                languagePref.value = languageKeyArray[0]
+                for(languageKey in languageKeyArray) {
+                    if(savedLanguage == Locale(languageKey).language) {
+                        languagePref.value = languageKey
+                        break
+                    }
                 }
                 languagePref.setOnPreferenceChangeListener { _, newValue ->
                     SBPreferences.get().selectedLanguage = newValue as String

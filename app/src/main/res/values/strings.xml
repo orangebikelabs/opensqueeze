@@ -414,6 +414,7 @@
         <item>English</item>
         <item>Français</item>
         <item>Deutsch</item>
+        <item>Svenska</item>
     </string-array>
 
     <string name="pref_trackdownload_location_title">Download location</string>

@@ -114,6 +114,7 @@
         <item>en</item>
         <item>fr</item>
         <item>de</item>
+        <item>sv</item>
     </string-array>
 
     <string name="pref_silentaudiohack_key" translatable="false">SilentAudioHack</string>
