@@ -220,4 +220,99 @@
     <string name="track_progress_seek_desc">Sök inom aktuellt spår</string>
     <string name="permission_read_phone_state_neverask">Telefonbehörigheten kommer aldrig begäras igen.</string>
     <string name="permission_write_external_storage_rationale_content">Lagringsbehörigheten krävs för att hämta filer till extern lagring. Om du nekar denna behörighet kan du begränsas i var du kan lagra hämtade filer.</string>
+    <string name="maintenance_local_cleardevicecache_desc">Rensa posters och andra cachade objekt på enheten. Cachen kommer byggas upp igen efter behov.</string>
+    <string name="artwork_missing_desc">Poster saknas</string>
+    <string name="player_artwork_desc">Poster för den aktiva spelaren</string>
+    <string name="artwork_loading_desc">Poster laddas</string>
+    <string name="item_artwork_desc">Poster för det aktuella objektet</string>
+    <string name="reset">Återställ</string>
+    <string name="nowplaying_shortcut_long_label">Starta direkt i vyn \"Nu spelas\"</string>
+    <string name="snap_to_current_item">Hoppa till aktuellt spår</string>
+    <string name="cancel_notification_desc">Avbryt avisering, koppla från</string>
+    <string name="pref_cachelocation_title">Cache-plats</string>
+    <string name="pref_cachelocation_summary">Posters-cache kommer lagras i %1$s</string>
+    <string name="pref_cache_storagesize_title">Cachens lagringsutrymme</string>
+    <string name="pref_cache_storagesize_summary">Maximala lagringsutrymmet som posters-cachen använder på enheten.
+\n
+\nAktuellt max-värde är %1$s MB.</string>
+    <string name="pref_artwork_category">Posters</string>
+    <string name="pref_cache_category">Cache</string>
+    <string name="pref_wipeartwork_summary">Tar bort alla cachade filer</string>
+    <string name="pref_wipeartwork_title">Rensa cachen</string>
+    <string name="pref_wipeartwork_message">Vill du ta bort alla cachade filer\? Om du svarar ja kommer cachen byggas upp igen från grunden efter behov.</string>
+    <string name="pref_automaticmute_category_title">Beteende vid samtal</string>
+    <string name="pref_automaticmute_title">Vid inkommande samtal</string>
+    <string name="pref_automaticmute_summary">Vad ska hända om ett samtal rings eller tas emot medan en spelare spelar\?
+\n
+\nAktuellt värde: \"%1$s\"</string>
+    <string name="pref_automaticunmute_title">Återuppta uppspelning</string>
+    <string name="pref_automaticunmute_summary">För pausade och tystade spelare återupptas uppspelningen automatiskt om samtalet avslutas inom den konfigurerade tiden.</string>
+    <string name="pref_systemvolumecontrol_title">Integrera med systemets volymkontroll</string>
+    <string name="pref_systemvolumecontrol_summaryOn">Appen integrerar med systemvolymen.</string>
+    <string name="pref_systemvolumecontrol_summaryOff">Appens volymkontroll styrs fristående från systemvolymkontrollen.</string>
+    <string name="pref_silentaudiohack_title">Spela tystnad</string>
+    <string name="pref_silentaudiohack_summaryOn">Appen spelar tystnad i bakgrunden för att hantera ljudfokus i nyare Android-versioner.</string>
+    <string name="pref_silentaudiohack_summaryOff">Appen spelar inte tystnad.</string>
+    <string name="pref_pauseonheadphonedisconnect_title">Pausa när hörlurar kopplas ur</string>
+    <string name="pref_pauseonheadphonedisconnect_summaryOff">Uppspelning fortsätter oavsett om hörlurar kopplas ur.</string>
+    <string name="pref_use24hourtimeformat_title">Tidsformat</string>
+    <string name="pref_use24hourtimeformat_summaryOn">Använd 24-timmarsklocka.</string>
+    <string name="pref_use24hourtimeformat_summaryOff">Använd 12-timmarsklocka.</string>
+    <string name="pref_browse_category">Inställningar vid bläddring</string>
+    <string name="pref_browse_albumsort_title">Albumsortering</string>
+    <string name="pref_browse_albumsort_summary">Välj hur album sorteras. Notera att den här inställningen sparas på servern och kan bara ändras när det finns en anslutning till servern.</string>
+    <string name="pref_browse_showactionbar_title">Visa titelraden</string>
+    <string name="pref_browse_shownowplaying_title">Visa Nu spelas-rad</string>
+    <string name="pref_browse_shownowplaying_summary">Välj detta för att visa Nu spelas-raden längst ner som ger snabb åtkomst till Nu spelas-vyn medan du bläddrar innehåll.</string>
+    <string name="pref_browse_disableartistartwork_title">Inaktivera artist-posters</string>
+    <string name="pref_browse_disableartistartwork_summary">Stänger av visning av artist-posters på enheter där den här funktionen inte fungerar korrekt eller inte är önskvärd.</string>
+    <string name="pref_browse_gridcellcount_title">Antal kolumner vid bläddring</string>
+    <string name="pref_browse_gridcellcount_summary">Ställ in antalet kolumner som används (i porträttläge) vid bläddring av innehåll i rutnätsvyer.</string>
+    <string name="pref_general_category_title">Allmänt</string>
+    <string name="pref_keepscreenon_summary">Håll skärmen påslagen när den här appen körs i förgrunden.</string>
+    <string name="pref_keepscreenon_title">Håll skärmen påslagen</string>
+    <string name="pref_autolaunch_squeezeplayer_title">Starta SqueezePlayer</string>
+    <string name="pref_trackselect_playmode_title">Förvalt spelläge</string>
+    <string name="pref_trackselect_playmode_summary">Välj hur spår ska spelas när de väljs</string>
+    <string name="pref_other_category">Annat</string>
+    <string name="pref_verboselogging_summary">Slå på detta temporärt, utför något som inte fungerar korrekt och använd sedan \"Skicka återkoppling\".</string>
+    <string name="pref_verboselogging_title">Utförlig loggning</string>
+    <string name="pref_showreleasenotes_summary">Inaktivera detta om du inte vill läsa vad som är nytt när appen uppgraderas.</string>
+    <string name="pref_showreleasenotes_title">Visa appnyheter</string>
+    <string name="pref_theme_summary">Välj ett visuellt tema för appen.</string>
+    <string name="pref_compactmode_title">Kompakt läge</string>
+    <string name="pref_compactmode_summaryOn">Använd kompakt utseende</string>
+    <string name="pref_compactmode_summaryOff">Använd normalt utseende</string>
+    <string name="pref_language_summary">Välj önskat språk på text i den här appen</string>
+    <string name="pref_trackdownload_location_title">Plats för hämtningar</string>
+    <string name="pref_trackdownload_location_summary">Platsen på din enhet där du vill att hämtningar ska lagras.
+\n
+\nAktuellt värde:
+\n %1$s</string>
+    <string name="pref_trackdownload_category">Hämta spår</string>
+    <string name="pref_trackdownload_transcodeenabled_off">Spår hämtas i originalformatet, som de lagras på din server.</string>
+    <string name="pref_trackdownload_transcodeenabled_on">Spår konverteras till ett annat format när de hämtas till din enhet.</string>
+    <string name="pref_trackdownload_transcodeenabled_title">Konvertering</string>
+    <string name="pref_trackdownload_transcodeformat_summary">Om konvertering är aktiverat hämtas spår i formatet %1$s.</string>
+    <string name="pref_trackdownload_transcodeformat_title">Format vid konvertering</string>
+    <string name="pref_trackdownload_transcodeoptions_summary">Kommaseparerad lista av konverteringsinställningar.
+\n
+\nAktuellt värde: %1$s</string>
+    <string name="pref_trackdownload_transcodeoptions_title">Konverteringsinställningar</string>
+    <string name="pref_browse_gridcellcount_uselist">Använd alltid listor vid bläddring</string>
+    <string name="pref_shownowplayingnotification_title">Visa Nu spelas-avisering</string>
+    <string name="pref_shownowplayingnotification_summaryOn">Om appen lämnas medan en spelare spelar aktiveras en avisering som kan användas för att styra spelaren.</string>
+    <string name="pref_shownowplayingnotification_summaryOff">Ingen avisering kommer visas.</string>
+    <string name="pref_autosizetext_title">Automatisk textstorlek</string>
+    <string name="pref_autosizetext_summaryOn">Textstorleken minskas vid behov för att få plats med mer text</string>
+    <string name="pref_autosizetext_summaryOff">Lång text klipps av vid behov</string>
+    <string name="exception_connection_timeout">Anslutningen till servern tog för lång tid att slutföra</string>
+    <string name="exception_connection_error">Anslutningsfel</string>
+    <string name="pref_pauseonheadphonedisconnect_summaryOn">Den aktuella spelaren pausar uppspelning när hörlurar (blåtand eller trådanslutna) kopplas ur (kräver att Spela tystnad är aktiverat).</string>
+    <string name="pref_volumecontrol_notification">Appen kan använda din enhets volymkontroller för att styra Squeezebox-enhetens volym. Vill du aktivera det här beteendet\?
+\n
+\nDet kan ändras när som helst i appens inställningar.</string>
+    <string name="pref_browse_showactionbar_summary">Välj detta för att visa titelraden med navigeringsknappar medan du bläddrar innehåll.</string>
+    <string name="pref_autolaunch_squeezeplayer_summary">Vid anslutning till en server, starta SqueezePlayer automatiskt och anslut den också till servern.</string>
+    <string name="pref_theme_title">Tema</string>
 </resources>
