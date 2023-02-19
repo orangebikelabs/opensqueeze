@@ -263,7 +263,7 @@
     <string name="pref_browse_albumsort_summary">Välj hur album sorteras. Notera att den här inställningen sparas på servern och kan bara ändras när det finns en anslutning till servern.</string>
     <string name="pref_browse_showactionbar_title">Visa titelraden</string>
     <string name="pref_browse_shownowplaying_title">Visa Nu spelas-rad</string>
-    <string name="pref_browse_shownowplaying_summary">Om valt, visar den nedre raden informationen som spelas nu och ger snabb åtkomst till skärmen som spelas nu.</string>
+    <string name="pref_browse_shownowplaying_summary">Välj detta för att visa Nu spelas-raden längst ner som ger snabb åtkomst till Nu spelas-vyn medan du bläddrar innehåll.</string>
     <string name="pref_browse_disableartistartwork_title">Inaktivera artist-posters</string>
     <string name="pref_browse_disableartistartwork_summary">Stänger av visning av artist-posters på enheter där den här funktionen inte fungerar korrekt eller inte är önskvärd.</string>
     <string name="pref_browse_gridcellcount_title">Antal kolumner vid bläddring</string>
@@ -291,28 +291,28 @@
 \n %1$s</string>
     <string name="pref_trackdownload_category">Hämta spår</string>
     <string name="pref_trackdownload_transcodeenabled_off">Spår hämtas i originalformatet, som de lagras på din server.</string>
-    <string name="pref_trackdownload_transcodeenabled_on">Spår konverteras till ett annat format när de hämtas till din enhet.</string>
-    <string name="pref_trackdownload_transcodeenabled_title">Konvertering</string>
-    <string name="pref_trackdownload_transcodeformat_summary">Om konvertering är aktiverat hämtas spår i formatet %1$s.</string>
-    <string name="pref_trackdownload_transcodeformat_title">Format vid konvertering</string>
-    <string name="pref_trackdownload_transcodeoptions_summary">Kommaseparerad lista av konverteringsinställningar.
+    <string name="pref_trackdownload_transcodeenabled_on">Spår omkodas till ett annat format när de hämtas till din enhet.</string>
+    <string name="pref_trackdownload_transcodeenabled_title">Omkodning</string>
+    <string name="pref_trackdownload_transcodeformat_summary">Om omkodning är aktiverat hämtas spår i formatet %1$s.</string>
+    <string name="pref_trackdownload_transcodeformat_title">Format vid omkodning</string>
+    <string name="pref_trackdownload_transcodeoptions_summary">Kommaseparerad lista av omkodningsalternativ.
 \n
 \nAktuellt värde: %1$s</string>
     <string name="pref_trackdownload_transcodeoptions_title">Omkodningsalternativ</string>
     <string name="pref_browse_gridcellcount_uselist">Använd alltid listor vid bläddring</string>
     <string name="pref_shownowplayingnotification_title">Visa Nu spelas-avisering</string>
-    <string name="pref_shownowplayingnotification_summaryOn">När du lämnar appen med en spelare som spelar, kommer ett meddelande att visas som kan användas för att styra den spelaren.</string>
+    <string name="pref_shownowplayingnotification_summaryOn">Om appen lämnas medan en spelare spelar aktiveras en avisering som kan användas för att styra spelaren.</string>
     <string name="pref_shownowplayingnotification_summaryOff">Ingen avisering kommer visas.</string>
     <string name="pref_autosizetext_title">Automatisk textstorlek</string>
     <string name="pref_autosizetext_summaryOn">Textstorleken minskas vid behov för att få plats med mer text</string>
     <string name="pref_autosizetext_summaryOff">Lång text klipps av vid behov</string>
-    <string name="exception_connection_timeout">Timeout väntar på att serveranslutningen ska slutföras</string>
+    <string name="exception_connection_timeout">Anslutningen till servern tog för lång tid att slutföras</string>
     <string name="exception_connection_error">Anslutningsfel</string>
     <string name="pref_pauseonheadphonedisconnect_summaryOn">Den aktuella spelaren pausar uppspelning när hörlurar (blåtand eller trådanslutna) kopplas ur (kräver att Spela tystnad är aktiverat).</string>
     <string name="pref_volumecontrol_notification">Appen kan använda din enhets volymkontroller för att styra Squeezebox-enhetens volym. Vill du aktivera det här beteendet\?
 \n
 \nDet kan ändras när som helst i appens inställningar.</string>
-    <string name="pref_browse_showactionbar_summary">Om det är valt har titelraden brödsmulor under bläddring för att navigera i bläddringshistoriken.</string>
+    <string name="pref_browse_showactionbar_summary">Välj detta för att visa titelraden med navigeringsknappar medan du bläddrar innehåll.</string>
     <string name="pref_autolaunch_squeezeplayer_summary">Vid anslutning till en server, starta SqueezePlayer automatiskt och anslut den också till servern.</string>
     <string name="pref_theme_title">Tema</string>
 </resources>
