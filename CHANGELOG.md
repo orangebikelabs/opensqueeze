@@ -1,3 +1,14 @@
+## [2.7.0-alpha.2](https://github.com/orangebikelabs/opensqueeze/compare/v2.7.0-alpha.1...v2.7.0-alpha.2) (2023-02-20)
+
+
+### Bug Fixes
+
+* bump androidx.appcompat:appcompat from 1.6.0-rc01 to 1.6.1 ([5b66833](https://github.com/orangebikelabs/opensqueeze/commit/5b66833e3a04e69c62245a5d9601fac9c20f16cf))
+* bump com.google.android.material:material from 1.7.0 to 1.8.0 ([76ffe12](https://github.com/orangebikelabs/opensqueeze/commit/76ffe12d0b2004f7e91177e553d24b26f6b60f9a))
+* bump io.mockk:mockk-android from 1.13.3 to 1.13.4 ([ba5b8db](https://github.com/orangebikelabs/opensqueeze/commit/ba5b8db96c71131d41812ee4075edb1a30fba1b8))
+* bump io.reactivex.rxjava3:rxjava from 3.1.5 to 3.1.6 ([023898e](https://github.com/orangebikelabs/opensqueeze/commit/023898ec86b4a95a7fe03a1f6ebbda981b8c5570))
+* bump sqldelight_version from 1.5.4 to 1.5.5 ([cc27e9c](https://github.com/orangebikelabs/opensqueeze/commit/cc27e9ca31d41aa3be129b620023765df20710ed))
+
 ## [2.7.0-alpha.1](https://github.com/orangebikelabs/opensqueeze/compare/v2.6.3-alpha.4...v2.7.0-alpha.1) (2023-02-17)
 
 
