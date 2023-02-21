@@ -18,8 +18,8 @@
     <string name="section_album">Album</string>
     <string name="section_track">Spår</string>
     <string name="menu_remove_server">Glöm server</string>
-    <string name="menu_pin_server">Fäst server</string>
-    <string name="menu_unpin_server">Frigör server</string>
+    <string name="menu_pin_server">Nåla fast servern</string>
+    <string name="menu_unpin_server">Nåla inte fast servern</string>
     <string name="menu_remove_server_credentials">Glöm inloggning för server</string>
     <string name="volume_locked_label">(Låst)</string>
     <string name="about_app">Om</string>
@@ -78,7 +78,7 @@
     <string name="action_renameplayer">Döp om spelare</string>
     <string name="action_moreplayermenu">Mer</string>
     <string name="rename_player_title">Döp om spelare</string>
-    <string name="action_sleepplayer">Spelare sover</string>
+    <string name="action_sleepplayer">Låt spelaren sova</string>
     <string name="player_settings_title">%1$s inställningar</string>
     <string name="unsynchronized_player_separator">Osynkroniserade spelare</string>
     <string name="synchronized_player_separator">Synkroniseringsgrupp %1$d</string>
@@ -91,8 +91,8 @@
     <string name="renameplayer_duplicate_message">Det här spelarnamnet används redan</string>
     <string name="randomplay_genreselect_loading">Aktiva genrer</string>
     <string name="randomplay_genreselect">%1$d aktiva genrer</string>
-    <string name="cachelocation_internal">Intern lagring</string>
-    <string name="cachelocation_external">Extern lagring (SD-kort t.ex.)</string>
+    <string name="cachelocation_internal">Internt minne</string>
+    <string name="cachelocation_external">Externt minne (SD-kort t.ex.)</string>
     <string name="confirmation_title">Är du säker\?</string>
     <string name="nextbutton_label">Nästa</string>
     <string name="extras_node_text">Extra</string>
@@ -116,9 +116,9 @@
     <string name="widget_noplayers_text">Inga spelare</string>
     <string name="maintenance_title">Underhåll</string>
     <string name="maintenance_server_rescan_playlists">Sök igenom spellistor igen</string>
-    <string name="maintenance_server_rescan_playlists_desc">Startar en genomsökning av spellistorna på servern.</string>
+    <string name="maintenance_server_rescan_playlists_desc">Söker igenom spellistorna på servern.</string>
     <string name="maintenance_server_rescan">Sök efter nytt och förändringar</string>
-    <string name="maintenance_server_rescan_desc">Startar en sökning på servern efter ny eller förändrad media.</string>
+    <string name="maintenance_server_rescan_desc">Söker igenom servern efter ny eller förändrad media.</string>
     <string name="maintenance_server_rescan_clear">Töm och sök igen</string>
     <string name="maintenance_local_cleardevicecache">Rensa enhetens cache</string>
     <string name="menu_volume_slider_label">Volym: %1$d</string>
@@ -160,7 +160,7 @@
     <string name="permission_read_phone_state_denied">Telefonbehörigheten nekades. Den här funktionen kommer inte fungera.</string>
     <string name="permission_read_phone_state_rationale_title">Telefonbehörighet</string>
     <string name="permission_write_external_storage_denied">Lagringsbehörigheten nekades.</string>
-    <string name="permission_write_external_storage_neverask">Lagringsbehörigheten kommer aldrig begäras igen.</string>
+    <string name="permission_write_external_storage_neverask">Lagringsbehörigheten kommer aldrig efterfrågas igen.</string>
     <string name="ok">OK</string>
     <string name="cancel">Avbryt</string>
     <string name="custom_path">Anpassad sökväg</string>
@@ -219,8 +219,8 @@
     <string name="permission_read_phone_state_rationale_content">Telefonbehörigheten krävs för att automatiskt slå på/av ljudet beroende på hur telefonen används. Om du nekar denna behörighet kommer funktionen inte fungera.</string>
     <string name="track_progress_seek_desc">Sök inom aktuellt spår</string>
     <string name="permission_read_phone_state_neverask">Telefonbehörigheten kommer aldrig begäras igen.</string>
-    <string name="permission_write_external_storage_rationale_content">Lagringsbehörigheten krävs för att hämta filer till extern lagring. Om du nekar denna behörighet kan du begränsas i var du kan lagra hämtade filer.</string>
-    <string name="maintenance_local_cleardevicecache_desc">Rensa posters och andra cachade objekt på enheten. Cachen kommer byggas upp igen efter behov.</string>
+    <string name="permission_write_external_storage_rationale_content">Lagringsbehörigheten krävs för att hämta filer till externt minne. Om du nekar denna behörighet kan du begränsas i var du kan lagra hämtade filer.</string>
+    <string name="maintenance_local_cleardevicecache_desc">Rensar posters och andra cachade objekt på enheten. Cachen kommer byggas upp igen efter behov.</string>
     <string name="artwork_missing_desc">Poster saknas</string>
     <string name="player_artwork_desc">Poster för den aktiva spelaren</string>
     <string name="artwork_loading_desc">Poster laddas</string>
@@ -229,10 +229,10 @@
     <string name="nowplaying_shortcut_long_label">Starta direkt i vyn \"Nu spelas\"</string>
     <string name="snap_to_current_item">Hoppa till aktuellt spår</string>
     <string name="cancel_notification_desc">Avbryt avisering, koppla från</string>
-    <string name="pref_cachelocation_title">Cache-plats</string>
-    <string name="pref_cachelocation_summary">Posters-cache kommer lagras i %1$s</string>
+    <string name="pref_cachelocation_title">Cachens lagringsplats</string>
+    <string name="pref_cachelocation_summary">Posters-cachen kommer lagras i %1$s</string>
     <string name="pref_cache_storagesize_title">Cachens lagringsutrymme</string>
-    <string name="pref_cache_storagesize_summary">Maximala lagringsutrymmet som posters-cachen använder på enheten.
+    <string name="pref_cache_storagesize_summary">Maximalt lagringsutrymme som posters-cachen använder på enheten.
 \n
 \nAktuellt max-värde är %1$s MB.</string>
     <string name="pref_artwork_category">Posters</string>
@@ -258,7 +258,7 @@
     <string name="pref_use24hourtimeformat_title">Tidsformat</string>
     <string name="pref_use24hourtimeformat_summaryOn">Använd 24-timmarsklocka.</string>
     <string name="pref_use24hourtimeformat_summaryOff">Använd 12-timmarsklocka.</string>
-    <string name="pref_browse_category">Inställningar vid bläddring</string>
+    <string name="pref_browse_category">Inställningar för bläddring</string>
     <string name="pref_browse_albumsort_title">Albumsortering</string>
     <string name="pref_browse_albumsort_summary">Välj hur album sorteras. Notera att den här inställningen sparas på servern och kan bara ändras när det finns en anslutning till servern.</string>
     <string name="pref_browse_showactionbar_title">Visa titelraden</string>
@@ -269,8 +269,8 @@
     <string name="pref_browse_gridcellcount_title">Antal kolumner vid bläddring</string>
     <string name="pref_browse_gridcellcount_summary">Ställ in antalet kolumner som används (i porträttläge) vid bläddring av innehåll i rutnätsvyer.</string>
     <string name="pref_general_category_title">Allmänt</string>
-    <string name="pref_keepscreenon_summary">Håll skärmen påslagen när den här appen körs i förgrunden.</string>
-    <string name="pref_keepscreenon_title">Håll skärmen påslagen</string>
+    <string name="pref_keepscreenon_summary">Håll skärmen aktiv när den här appen körs i förgrunden.</string>
+    <string name="pref_keepscreenon_title">Håll skärmen aktiv</string>
     <string name="pref_autolaunch_squeezeplayer_title">Starta SqueezePlayer</string>
     <string name="pref_trackselect_playmode_title">Förvalt spelläge</string>
     <string name="pref_trackselect_playmode_summary">Välj hur spår ska spelas när de väljs</string>
