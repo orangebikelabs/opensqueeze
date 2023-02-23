@@ -1,9 +1,8 @@
-<?xml version="1.0" encoding="utf-8"?><!--
+<?xml version="1.0" encoding="utf-8"?>
+<!--
   ~ Copyright (c) 2020-2022 The OpenSqueeze Authors. All Rights Reserved.
   ~ Use of this source code is governed by the license that can be found in the LICENSE file.
-  -->
-
-<resources>
+  --><resources>
     <string name="add_server_button_text">Specific Server</string>
     <string name="connect_hostname">Hostname or IP address</string>
     <string name="connect_port">Port</string>
@@ -20,13 +19,13 @@
     <string name="menu_browse_refresh">Refresh</string>
     <string name="menu_maintenance">Maintenance</string>
     <string name="connection_error_title">Connection Error</string>
-    <string name="error_cannot_resolve_hostname">Cannot resolve hostname &#8220;%1$s&#8221;</string>
-    <string name="hostname_already_exists">Server with hostname &#8220;%1$s&#8221; already exists.</string>
+    <string name="error_cannot_resolve_hostname">Cannot resolve hostname “%1$s”</string>
+    <string name="hostname_already_exists">Server with hostname “%1$s” already exists.</string>
     <string name="invalid_hostname_port">Invalid hostname and/or port.</string>
     <string name="awaitingnetwork_title">Waiting for Network</string>
     <string name="awaitingnetwork_message">Waiting for network connectivity to be restored. Check airplane mode or other network settings.</string>
     <string name="connecting_title">Connecting</string>
-    <string name="connecting_message_html">Connecting to &lt;b>%1$s&lt;/b></string>
+    <string name="connecting_message_html">Connecting to &lt;b&gt;%1$s&lt;/b&gt;</string>
     <string name="connecting_message_noserver">Connecting to server</string>
     <string name="section_artist">Artists</string>
     <string name="section_track">Tracks</string>
@@ -43,18 +42,17 @@
     <string name="username_label">Username</string>
     <string name="password_label">Password</string>
     <string name="login_title">Login to %1$s</string>
-    <string name="no_player_available_label_html">No players connected to &lt;b>%1$s&lt;/b>.</string>
+    <string name="no_player_available_label_html">No players connected to &lt;b&gt;%1$s&lt;/b&gt;.</string>
     <string name="main_preference_activity_name">Open Squeeze Preferences</string>
     <string name="advanced_preference_activity_name">Advanced Preferences</string>
     <string name="trackdownload_preference_activity_name">Download Preferences</string>
     <string name="error_invalid_credentials">Invalid username and/or password</string>
-    <string name="loading_text">Loading&#8230;</string>
-    <string name="loading_menus_text">Loading Menus&#8230;</string>
+    <string name="loading_text">Loading…</string>
+    <string name="loading_menus_text">Loading Menus…</string>
     <string name="randomplay_artist">Random Artist</string>
     <string name="randomplay_track">Random Track</string>
     <string name="randomplay_album">Random Album</string>
     <string name="randomplay_year">Random Year</string>
-
     <string-array name="repeat_strings">
         <item>Repeat Off</item>
         <item>Repeat Song</item>
@@ -65,17 +63,16 @@
         <item>Shuffle Tracks</item>
         <item>Shuffle Albums</item>
     </string-array>
-
     <string name="play_desc">Play</string>
     <string name="playnext_desc">Play Next</string>
     <string name="playadd_desc">Add to Playlist</string>
     <string name="download_desc">Download to Device</string>
-    <string name="actionmenu_title_html">On &lt;b>%1$s&lt;/b>:</string>
-    <string name="nowplaying_activity_title_playing_html">&lt;b>%1$s&lt;/b> &#8226; %2$d of %3$d</string>
-    <string name="nowplaying_activity_title_paused_html">&lt;b>%1$s&lt;/b> &#8226; Paused</string>
-    <string name="nowplaying_activity_title_stopped_html">&lt;b>%1$s&lt;/b> &#8226; Stopped</string>
-    <string name="nowplaying_activity_title_disconnected_html">&lt;b>%1$s&lt;/b> &#8226; Disconnected</string>
-    <string name="nowplaying_activity_title_off_html">&lt;b>%1$s&lt;/b> &#8226; Off</string>
+    <string name="actionmenu_title_html">On &lt;b&gt;%1$s&lt;/b&gt;:</string>
+    <string name="nowplaying_activity_title_playing_html">&lt;b&gt;%1$s&lt;/b&gt; • %2$d of %3$d</string>
+    <string name="nowplaying_activity_title_paused_html">&lt;b&gt;%1$s&lt;/b&gt; • Paused</string>
+    <string name="nowplaying_activity_title_stopped_html">&lt;b&gt;%1$s&lt;/b&gt; • Stopped</string>
+    <string name="nowplaying_activity_title_disconnected_html">&lt;b&gt;%1$s&lt;/b&gt; • Disconnected</string>
+    <string name="nowplaying_activity_title_off_html">&lt;b&gt;%1$s&lt;/b&gt; • Off</string>
     <string name="nowplaying_activity_title_noplayers_html">No Players</string>
     <string name="powermanager_service_label" translatable="false">Power Monitor Service</string>
     <string name="connection_service_label" translatable="false">Squeezebox Server Connection Service</string>
@@ -86,7 +83,7 @@
     <string name="empty_downloads_text">No active or completed downloads</string>
     <string name="empty_text">No Items</string>
     <string name="select_player_prompt">Select player:</string>
-    <string name="change_player_snackbar">&lt;b>%1$s&lt;/b> is now the active player</string>
+    <string name="change_player_snackbar">&lt;b&gt;%1$s&lt;/b&gt; is now the active player</string>
     <!-- 
     <string name="compilation_options">Compilation Options</string>
     <string name="shown">Shown</string>
@@ -95,17 +92,17 @@
     <string name="serverdiscovery_label">Server Discovery</string>
     <string name="squeezenetwork_button_text" translatable="false">mysqueezebox.com</string>
     <string name="network_error">Network Error</string>
-    <string name="addtoplaylist_action_snackbar_html">Added &lt;b>%1$s&lt;/b> to the current playlist
+    <string name="addtoplaylist_action_snackbar_html">Added &lt;b&gt;%1$s&lt;/b&gt; to the current playlist
     </string>
-    <string name="playnext_action_snackbar_html">Added &lt;b>%1$s&lt;/b> next in the current playlist
+    <string name="playnext_action_snackbar_html">Added &lt;b&gt;%1$s&lt;/b&gt; next in the current playlist
     </string>
-    <string name="playnow_action_snackbar_html">Playing &lt;b>%1$s&lt;/b></string>
-    <string name="addtofavorites_action_snackbar_html">Added &lt;b>%1$s&lt;/b> to favorites</string>
+    <string name="playnow_action_snackbar_html">Playing &lt;b&gt;%1$s&lt;/b&gt;</string>
+    <string name="addtofavorites_action_snackbar_html">Added &lt;b&gt;%1$s&lt;/b&gt; to favorites</string>
     <string name="action_addfavorite">Add to Favorites</string>
     <string name="action_removefavorite">Remove Favorite</string>
-    <string name="removefavorite_action_snackbar_html">Removed &lt;b>%1$s&lt;/b> from favorites
+    <string name="removefavorite_action_snackbar_html">Removed &lt;b&gt;%1$s&lt;/b&gt; from favorites
     </string>
-    <string name="removefavorite_action_confirmation_html">Are you sure you want to remove &lt;b>%1$s&lt;/b>
+    <string name="removefavorite_action_confirmation_html">Are you sure you want to remove &lt;b&gt;%1$s&lt;/b&gt;
         from favorites?
     </string>
     <string name="clearplaylist_action_confirmation">Are you sure you want to clear the current playlist?</string>
@@ -117,7 +114,7 @@
     <string name="nowplaying_saveplaylist_title">Save Playlist</string>
     <string name="nowplaying_saveplaylist_message">Enter the new playlist name:</string>
     <string name="nowplaying_saveplaylist_hint">New playlist name</string>
-    <string name="saved_playlist_html">Saved Playlist &lt;b>%1$s&lt;/b></string>
+    <string name="saved_playlist_html">Saved Playlist &lt;b&gt;%1$s&lt;/b&gt;</string>
     <string name="playmode_stopped">Stopped</string>
     <string name="playmode_playing">Playing</string>
     <string name="playmode_paused">Paused</string>
@@ -127,9 +124,9 @@
     <string name="squeezeplayer_start_item">Start SqueezePlayer</string>
     <string name="action_squeezeplayer_stop">Stop Service</string>
     <string name="action_synchronization">Synchronization</string>
-    <string name="synchronization_title_html">Synchronize &lt;b>%1$s&lt;/b> with:</string>
+    <string name="synchronization_title_html">Synchronize &lt;b&gt;%1$s&lt;/b&gt; with:</string>
     <string name="action_squeezenetwork_connect_player">Connect to mysqueezebox.com</string>
-    <string name="player_connect_server_confirmation_message">Connect %1$s to the server &#8220;%2$s&#8221;?
+    <string name="player_connect_server_confirmation_message">Connect %1$s to the server “%2$s”?
         Note that it can take some time for the player to become visible after the switch.
     </string>
     <string name="player_connect_server_confirmation_title">Confirm server selection</string>
@@ -172,11 +169,11 @@
     <string name="globalsearch_expand_nodeinline_on">Expand Item Inline</string>
     <string name="globalsearch_expand_nodeinline_off">Don\'t Expand Item Inline</string>
     <string name="globalsearch_moreitem">%1$d more item(s)</string>
-    <string name="player_sleep_text">Sleep &#8220;%1$s&#8221; in %2$d minutes</string>
-    <string name="player_sleep_endoftrack">Sleep &#8220;%1$s&#8221; when track ends in %2$d
+    <string name="player_sleep_text">Sleep “%1$s” in %2$d minutes</string>
+    <string name="player_sleep_endoftrack">Sleep “%1$s” when track ends in %2$d
         minutes
     </string>
-    <string name="player_sleep_never">Do not sleep &#8220;%1$s&#8221;</string>
+    <string name="player_sleep_never">Do not sleep “%1$s”</string>
     <string name="error_download_title">Error downloading files</string>
     <string name="download_started">Download Started</string>
     <string name="widget_small_label">Open Squeeze (small)</string>
@@ -184,7 +181,6 @@
     <string name="widget_playername_text">Player: %1$s</string>
     <string name="disconnected">Disconnected</string>
     <string name="widget_noplayers_text">No Players</string>
-
     <string name="maintenance_title">Maintenance</string>
     <string name="maintenance_server_rescan_playlists">Rescan Playlists</string>
     <string name="maintenance_server_rescan_playlists_desc">Triggers a server-side rescan of the
@@ -200,10 +196,8 @@
     </string>
     <string name="maintenance_local_cleardevicecache">Wipe Device Cache</string>
     <string name="maintenance_local_cleardevicecache_desc">Wipe the local device cache of artwork and other cached items. The cache will be repopulated on demand.</string>
-
     <string name="menu_volume_slider_label">Volume: %1$d</string>
     <string name="menu_generic_slider_label">Slide to select your value: %1$d</string>
-
     <string name="navigation_browse">Browse</string>
     <string name="navigation_downloads">Downloads</string>
     <string name="navigation_players">Players</string>
@@ -214,19 +208,14 @@
     <string name="menu_startdownload">Download</string>
     <string name="download_activity_title">Download: %1$s</string>
     <string name="download_service_label" translatable="false">Track Download Service</string>
-
     <string name="customize_menu_title">Customize</string>
-
     <string name="notification_downloads_title">Downloads</string>
     <string name="notification_downloads_text">%1$d of %2$d</string>
-
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
     <string name="left_drawer_title">Browse</string>
-
     <string name="wipingcache_notification_text">Wiping cached media server data.</string>
     <string name="feedback_collecting_logs">Collecting Logs</string>
-
     <string name="previous_track_desc">Previous Track</string>
     <string name="pause_desc">Pause Playback</string>
     <string name="next_track_desc">Next Track</string>
@@ -258,12 +247,10 @@
     <string name="permission_read_phone_state_denied">The phone permission was denied. This feature will not function.</string>
     <string name="permission_read_phone_state_neverask">The phone permission will never be requested again.</string>
     <string name="permission_read_phone_state_rationale_title">Phone Permission</string>
-
     <string name="permission_write_external_storage_rationale_content">The storage permission is required in order to download files to external locations.  If you deny this permission then you may be limited in where you can download files.</string>
     <string name="permission_write_external_storage_denied">The storage permission was denied.</string>
     <string name="permission_write_external_storage_neverask">The storage permission will never be requested again.</string>
     <string name="permission_write_external_storage_rationale_title">Storage Permission</string>
-
     <string name="cancel_notification_desc">Cancel notification, disconnect</string>
     <string name="reset">Reset</string>
     <string name="ok">OK</string>
@@ -276,8 +263,6 @@
     <string name="dismiss_dialog">Close</string>
     <string name="snap_to_current_item">Snap to Current Track</string>
     <string name="forgot_password">Forgot your password?</string>
-
-
     <string name="pref_autoconnect_summary">Automatically connect to the last connected server</string>
     <string name="pref_autoconnect_title">Automatic Connect</string>
     <string name="pref_autodiscovery_summary">Periodically send discovery broadcast requests to
@@ -289,17 +274,14 @@
     <string name="pref_downloadprefs_summary">Shows download preferences</string>
     <string name="pref_cachelocation_title">Cache Location</string>
     <string name="pref_cachelocation_summary">Artwork cache will be stored on %1$s</string>
-
     <!-- update corresponding entries in prefs_nls.xml -->
     <string-array name="pref_cachelocation_entries">
         <item>Use Internal Storage</item>
         <item>Use External Storage (SD card, etc)</item>
     </string-array>
-
     <string name="pref_cache_storagesize_title">Storage Cache Size</string>
     <string name="pref_cache_storagesize_summary">The maximum amount of space that the artwork cache will
 		use on device storage.\n\nThe current maximum value is %1$s MB.</string>
-
     <!-- update corresponding entries in prefs_nls.xml -->
     <string-array name="pref_cache_storagesize_entries">
         <item>Automatic</item>
@@ -309,7 +291,6 @@
         <item>500 MB</item>
         <item>1000 MB</item>
     </string-array>
-
     <string name="pref_artwork_category">Artwork</string>
     <string name="pref_cache_category">Caching</string>
     <string name="pref_wipeartwork_summary">Removes all cache data from storage</string>
@@ -320,7 +301,6 @@
     <string name="pref_automaticmute_category_title">On-Call Behavior</string>
     <string name="pref_automaticmute_title">On Call Received</string>
     <string name="pref_automaticmute_summary">What to do when a call is made or received and connected players are playing.\n\nCurrent value: \"%1$s\"</string>
-
     <string-array name="pref_automaticmute_entries">
         <item>Nothing</item>
         <item>Mute All Players</item>
@@ -328,10 +308,8 @@
         <item>Pause All Players</item>
         <item>Pause Current Player</item>
     </string-array>
-
     <string name="pref_automaticunmute_title">Resume Playback</string>
     <string name="pref_automaticunmute_summary">For paused and muted players, playback continues automatically if the call ends within the configured time.</string>
-
     <string-array name="pref_automaticunmute_entries">
         <item>Never</item>
         <item>1 minute</item>
@@ -341,19 +319,15 @@
         <item>60 minutes</item>
         <item>Forever</item>
     </string-array>
-
     <string name="pref_systemvolumecontrol_title">Integrate with System Volume Control</string>
     <string name="pref_systemvolumecontrol_summaryOn">The app will integrate into the system volume.</string>
     <string name="pref_systemvolumecontrol_summaryOff">The app\'s volume control will operate independent of the system volume control.</string>
-
     <string name="pref_silentaudiohack_title">Play Silent Audio</string>
     <string name="pref_silentaudiohack_summaryOn">The app will play silent audio in the background to help manage audio focus on newer Android versions.</string>
     <string name="pref_silentaudiohack_summaryOff">The app will not play silent audio.</string>
-
     <string name="pref_pauseonheadphonedisconnect_title">Pause when Headphones Disconnect</string>
-    <string name="pref_pauseonheadphonedisconnect_summaryOn">The current player will pause whenever bluetooth or wired headphones disconnect when audio is playing (requires that "Play Silent Audio" be enabled).</string>
-    <string name="pref_pauseonheadphonedisconnect_summaryOff">Playback continues unaffected by headphones status.</string>
-
+    <string name="pref_pauseonheadphonedisconnect_summaryOn">The current player will pause whenever Bluetooth or wired headphones disconnect when audio is playing (requires that Play Silent Audio be enabled).</string>
+    <string name="pref_pauseonheadphonedisconnect_summaryOff">Playback continues unaffected by headphone status.</string>
     <string name="pref_use24hourtimeformat_title">Time Format</string>
     <string name="pref_use24hourtimeformat_summaryOn">Use 24 hour time format.</string>
     <string name="pref_use24hourtimeformat_summaryOff">Use 12 hour time format.</string>
@@ -380,34 +354,29 @@
     <string name="pref_autolaunch_squeezeplayer_message">Great, you\'ve got SqueezePlayer installed!  Would you like to automatically start SqueezePlayer whenever this app connects to a server?</string>
     <string name="pref_trackselect_playmode_title">Default Play Mode</string>
     <string name="pref_trackselect_playmode_summary">Choose the play mode to use when selecting tracks directly</string>
-
     <string-array name="pref_trackselect_playmode_entries">
         <item>Prompt</item>
         <item>Play Now</item>
         <item>Play Next</item>
         <item>Add to Playlist</item>
     </string-array>
-
     <string name="pref_other_category">Other</string>
     <string name="pref_volume_category">Volume</string>
-    <string name="pref_verboselogging_summary">Temporarily enable this, then perform a troublesome operation. Then return and use the &#8220;Send Feedback&#8221; option.</string>
+    <string name="pref_verboselogging_summary">Temporarily enable this, then perform a troublesome operation. Then return and use the “Send Feedback” option.</string>
     <string name="pref_verboselogging_title">Verbose Logging</string>
     <string name="pref_showreleasenotes_summary">Disable this if you don\'t want to read the release notes whenever the app is upgraded.</string>
     <string name="pref_showreleasenotes_title">Show Release Notes</string>
     <string name="pref_theme_title">Theme</string>
     <string name="pref_theme_summary">Choose a visual style for the app.</string>
-
     <!-- make sure to change corresponding entry in prefs_nls.xml -->
     <string-array name="pref_theme_entries" translatable="false">
         <item>Light</item>
         <item>Dark</item>
         <item>Set by Battery Saver</item>
     </string-array>
-
     <string name="pref_compactmode_title">Compact Mode</string>
     <string name="pref_compactmode_summaryOn">Use a compact visual style</string>
     <string name="pref_compactmode_summaryOff">Use a normal visual style</string>
-
     <string name="pref_language_title">Language</string>
     <string name="pref_language_summary">Choose the language for text within this app</string>
     <string-array name="pref_language_entries" translatable="false">
@@ -416,7 +385,6 @@
         <item>Deutsch</item>
         <item>Svenska</item>
     </string-array>
-
     <string name="pref_trackdownload_location_title">Download location</string>
     <string name="pref_trackdownload_location_summary">The location on your device to which downloads will be stored.\n\nCurrent value:\n  %1$s</string>
     <string name="pref_trackdownload_category">Track download</string>
@@ -427,20 +395,15 @@
     <string name="pref_trackdownload_transcodeformat_title">Transcode Format</string>
     <string name="pref_trackdownload_transcodeoptions_summary">Comma-delimited list of transcoding options.\n\nCurrent value: %1$s</string>
     <string name="pref_trackdownload_transcodeoptions_title">Transcode Options</string>
-
     <string name="pref_browse_gridcellcount_uselist">Always use lists for browsing</string>
-
     <string name="pref_shownowplayingnotification_title">Show Now Playing Notification</string>
     <string name="pref_shownowplayingnotification_summaryOn">When leaving the app with a player playing, a notification will be presented that can be used to control that player.</string>
     <string name="pref_shownowplayingnotification_summaryOff">No notification will be shown.</string>
-
     <string name="pref_autosizetext_title">Automatic Text Size</string>
     <string name="pref_autosizetext_summaryOn">The text size will dynamically shrink to fit more when necessary</string>
     <string name="pref_autosizetext_summaryOff">Longer text will be truncated when necessary</string>
-
     <string name="about_title">About %1$s</string>
     <string name="about_message">Version %1$s</string>
-
     <string name="exception_connection_timeout">Timeout waiting for server connection to complete</string>
     <string name="exception_no_network_available">No Network Available</string>
     <string name="exception_connection_error">Connection error</string>
