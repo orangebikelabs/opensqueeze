@@ -1,3 +1,12 @@
+## [2.7.0-alpha.3](https://github.com/orangebikelabs/opensqueeze/compare/v2.7.0-alpha.2...v2.7.0-alpha.3) (2023-02-27)
+
+
+### Bug Fixes
+
+* bump androidx.test.ext:junit from 1.1.4 to 1.1.5 ([6da885f](https://github.com/orangebikelabs/opensqueeze/commit/6da885f2e94b35f538815ea9be0f54256363900b))
+* bump com.squareup.okio:okio from 3.2.0 to 3.3.0 ([8696aff](https://github.com/orangebikelabs/opensqueeze/commit/8696affd7f570e7d6f2af280983c3d4f319d249b))
+* bump io.arrow-kt:arrow-core from 1.1.3 to 1.1.5 ([cb28331](https://github.com/orangebikelabs/opensqueeze/commit/cb28331619a760915838a6f0e4183b842e4371e5))
+
 ## [2.7.0-alpha.2](https://github.com/orangebikelabs/opensqueeze/compare/v2.7.0-alpha.1...v2.7.0-alpha.2) (2023-02-20)
 
 
