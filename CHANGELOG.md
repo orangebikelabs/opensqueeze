@@ -1,3 +1,10 @@
+## [2.7.0-alpha.5](https://github.com/orangebikelabs/opensqueeze/compare/v2.7.0-alpha.4...v2.7.0-alpha.5) (2023-03-13)
+
+
+### Bug Fixes
+
+* bump androidx.lifecycle:lifecycle-viewmodel-ktx from 2.5.1 to 2.6.0 ([aa0c402](https://github.com/orangebikelabs/opensqueeze/commit/aa0c40241de35bc291fab14da4d511fe50829f4d))
+
 ## [2.7.0-alpha.4](https://github.com/orangebikelabs/opensqueeze/compare/v2.7.0-alpha.3...v2.7.0-alpha.4) (2023-03-13)
 
 
