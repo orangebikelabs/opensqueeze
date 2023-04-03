@@ -1,3 +1,10 @@
+## [2.7.0-alpha.7](https://github.com/orangebikelabs/opensqueeze/compare/v2.7.0-alpha.6...v2.7.0-alpha.7) (2023-04-03)
+
+
+### Bug Fixes
+
+* bump kotlin_version from 1.8.10 to 1.8.20 ([cd6f1d3](https://github.com/orangebikelabs/opensqueeze/commit/cd6f1d3b1d5a769a9d53a22065cef5aa286af854))
+
 ## [2.7.0-alpha.6](https://github.com/orangebikelabs/opensqueeze/compare/v2.7.0-alpha.5...v2.7.0-alpha.6) (2023-03-29)
 
 
