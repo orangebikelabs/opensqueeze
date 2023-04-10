@@ -1,3 +1,10 @@
+## [2.7.0-alpha.8](https://github.com/orangebikelabs/opensqueeze/compare/v2.7.0-alpha.7...v2.7.0-alpha.8) (2023-04-10)
+
+
+### Bug Fixes
+
+* bump androidx.core:core-ktx from 1.9.0 to 1.10.0 ([314c1c2](https://github.com/orangebikelabs/opensqueeze/commit/314c1c24c4462421e1fef7681302cfb4df3f7180))
+
 ## [2.7.0-alpha.7](https://github.com/orangebikelabs/opensqueeze/compare/v2.7.0-alpha.6...v2.7.0-alpha.7) (2023-04-03)
 
 
