@@ -50,12 +50,15 @@ public class Drawables {
 
     @Nonnull
     static public Drawable getTintedDrawable(Context context, Drawable drawable) {
-        TypedArray a = context.obtainStyledAttributes(new int[]{R.attr.colorControlNormal});
-        final int color = a.getColor(0, 0);
-        a.recycle();
-        Drawable newDrawable = DrawableCompat.wrap(drawable);
-        DrawableCompat.setTint(newDrawable.mutate(), color);
-        return drawable;
+        TypedArray a = context.obtainStyledAttributes(new int[]{androidx.appcompat.R.attr.colorControlNormal});
+        try {
+            final int color = a.getColor(0, 0);
+            Drawable newDrawable = DrawableCompat.wrap(drawable);
+            DrawableCompat.setTint(newDrawable.mutate(), color);
+            return drawable;
+        } finally {
+            a.recycle();
+        }
     }
 
     private Drawables() {

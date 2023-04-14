@@ -63,12 +63,12 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_11
-        targetCompatibility JavaVersion.VERSION_11
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
     }
 
     kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_11
+        jvmTarget = JavaVersion.VERSION_17
     }
 
 
@@ -221,8 +221,8 @@ dependencies {
 
 tasks.withType(JavaCompile) {
     // uncomment this for more detailed deprecation warnings
-    options.compilerArgs << "-Xlint:deprecation"
-    options.compilerArgs << "-Xlint:unchecked"
+    //options.compilerArgs << "-Xlint:deprecation"
+    //options.compilerArgs << "-Xlint:unchecked"
 }
 
 task archiveApks {
