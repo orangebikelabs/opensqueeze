@@ -1,3 +1,10 @@
+## [2.7.0-alpha.9](https://github.com/orangebikelabs/opensqueeze/compare/v2.7.0-alpha.8...v2.7.0-alpha.9) (2023-04-15)
+
+
+### Bug Fixes
+
+* build and test requires jdk 17 now ([beaa5f9](https://github.com/orangebikelabs/opensqueeze/commit/beaa5f9fb3fe81fe49d5bb5d237fd2b47eb52a72))
+
 ## [2.7.0-alpha.8](https://github.com/orangebikelabs/opensqueeze/compare/v2.7.0-alpha.7...v2.7.0-alpha.8) (2023-04-10)
 
 
