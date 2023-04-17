@@ -203,7 +203,7 @@ dependencies {
     implementation fileTree(dir: 'lib', include: ['*.jar'])
 
     testImplementation 'junit:junit:4.13.2'
-    testImplementation "io.mockk:mockk-android:1.13.4"
+    testImplementation "io.mockk:mockk-android:1.13.5"
     testImplementation "com.google.truth:truth:1.1.3"
 
     androidTestImplementation "androidx.test:runner:1.5.2"
@@ -215,7 +215,7 @@ dependencies {
     androidTestImplementation "androidx.test.ext:junit:1.1.5"
     androidTestImplementation "androidx.test.ext:junit-ktx:1.1.5"
     androidTestImplementation "androidx.test.ext:truth:1.5.0"
-    androidTestImplementation "io.mockk:mockk-android:1.13.4"
+    androidTestImplementation "io.mockk:mockk-android:1.13.5"
     androidTestUtil "androidx.test:orchestrator:1.4.2"
 }
 
