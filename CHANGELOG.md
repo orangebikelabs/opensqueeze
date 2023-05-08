@@ -1,3 +1,10 @@
+## [2.7.0-alpha.14](https://github.com/orangebikelabs/opensqueeze/compare/v2.7.0-alpha.13...v2.7.0-alpha.14) (2023-05-08)
+
+
+### Bug Fixes
+
+* bump org.jetbrains.kotlinx:kotlinx-coroutines-core ([cd1f94a](https://github.com/orangebikelabs/opensqueeze/commit/cd1f94a9b3ee4c574fb209d2f21772f19acdaf70))
+
 ## [2.7.0-alpha.13](https://github.com/orangebikelabs/opensqueeze/compare/v2.7.0-alpha.12...v2.7.0-alpha.13) (2023-05-08)
 
 
