@@ -1,2 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="menu_downloadclearall">全部清除</string>
+    <string name="awaitingnetwork_title">等待网络</string>
+    <string name="hostname_already_exists">主机名为”%1$s“已存在。</string>
+    <string name="menu_search">搜索</string>
+    <string name="menu_players">播放器</string>
+    <string name="error_cannot_resolve_hostname">无法解析主机名”%1$s\"</string>
+    <string name="awaitingnetwork_message">等待网络连接恢复。请检查飞行模式或其他网络设置。</string>
+    <string name="connect_hostname">主机名或 IP 地址</string>
+    <string name="connect_port">端口</string>
+    <string name="menu_switchserver">服务器开关</string>
+    <string name="search_hint">搜索</string>
+    <string name="menu_browse_refresh">刷新</string>
+    <string name="menu_maintenance">维护</string>
+    <string name="connection_error_title">连接错误</string>
+    <string name="invalid_hostname_port">主机名和/或端口无效。</string>
+    <string name="connecting_title">连接</string>
+    <string name="connecting_message_html">正在连接到<b>%1$s</b></string>
+    <string name="connecting_message_noserver">连接到服务器</string>
+    <string name="section_artist">艺术家</string>
+    <string name="section_track">曲目</string>
+    <string name="section_album">专辑</string>
+    <string name="search_item_name">搜索：%1$s</string>
+    <string name="menu_remove_server">忘记服务器</string>
+    <string name="menu_pin_server">固定服务器</string>
+    <string name="menu_unpin_server">取消固定服务器</string>
+    <string name="menu_remove_server_credentials">忘记服务器登录</string>
+    <string name="volume_locked_label">（已锁定）</string>
+    <string name="about_app">关于</string>
+    <string name="username_label">用户名</string>
+    <string name="password_label">密码</string>
+    <string name="connectserver_title">连接到媒体服务器</string>
+    <string name="add_server_button_text">特定服务器</string>
+    <string name="select_player_title">选择播放器</string>
+    <string name="connect_button">连接</string>
+    <string name="menu_preferences">首选项</string>
+    <string name="menu_downloadpreferences">下载首选项</string>
+</resources>
