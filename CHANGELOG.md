@@ -1,3 +1,12 @@
+## [2.7.0-alpha.15](https://github.com/orangebikelabs/opensqueeze/compare/v2.7.0-alpha.14...v2.7.0-alpha.15) (2023-05-15)
+
+
+### Bug Fixes
+
+* bump androidx.core:core-ktx from 1.10.0 to 1.10.1 ([172df7e](https://github.com/orangebikelabs/opensqueeze/commit/172df7ed200b15079997f801debc1602f0556463))
+* bump com.google.errorprone:error_prone_annotations ([47ce3d8](https://github.com/orangebikelabs/opensqueeze/commit/47ce3d8fb9c3e27e3bd942de818ba7a102eaf362))
+* bump org.jetbrains.kotlinx:kotlinx-coroutines-core ([d5dda25](https://github.com/orangebikelabs/opensqueeze/commit/d5dda2592b0d3c1197a4c1afb4b1823368f714e0))
+
 ## [2.7.0-alpha.14](https://github.com/orangebikelabs/opensqueeze/compare/v2.7.0-alpha.13...v2.7.0-alpha.14) (2023-05-08)
 
 
