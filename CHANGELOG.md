@@ -1,3 +1,10 @@
+## [2.7.0-alpha.16](https://github.com/orangebikelabs/opensqueeze/compare/v2.7.0-alpha.15...v2.7.0-alpha.16) (2023-05-22)
+
+
+### Bug Fixes
+
+* bump com.squareup.leakcanary:leakcanary-android from 2.10 to 2.11 ([8aa279f](https://github.com/orangebikelabs/opensqueeze/commit/8aa279f6637a57fa85c411723449a9460e81a1a5))
+
 ## [2.7.0-alpha.15](https://github.com/orangebikelabs/opensqueeze/compare/v2.7.0-alpha.14...v2.7.0-alpha.15) (2023-05-15)
 
 
