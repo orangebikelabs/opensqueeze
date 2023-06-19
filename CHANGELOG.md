@@ -1,3 +1,11 @@
+## [2.7.0-alpha.20](https://github.com/orangebikelabs/opensqueeze/compare/v2.7.0-alpha.19...v2.7.0-alpha.20) (2023-06-19)
+
+
+### Bug Fixes
+
+* bump com.google.errorprone:error_prone_annotations ([a6ee6fa](https://github.com/orangebikelabs/opensqueeze/commit/a6ee6fa365c691c134b46989cffba0840e05ebc3))
+* bump com.google.truth:truth from 1.1.4 to 1.1.5 ([692d6c8](https://github.com/orangebikelabs/opensqueeze/commit/692d6c873bfa86bc17f0ddadb630b892ca170a9f))
+
 ## [2.7.0-alpha.19](https://github.com/orangebikelabs/opensqueeze/compare/v2.7.0-alpha.18...v2.7.0-alpha.19) (2023-06-12)
 
 
