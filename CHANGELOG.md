@@ -1,3 +1,11 @@
+## [2.7.0-alpha.21](https://github.com/orangebikelabs/opensqueeze/compare/v2.7.0-alpha.20...v2.7.0-alpha.21) (2023-07-03)
+
+
+### Bug Fixes
+
+* bump com.squareup.leakcanary:leakcanary-android from 2.11 to 2.12 ([1b080e8](https://github.com/orangebikelabs/opensqueeze/commit/1b080e8be608090d4fb152dacde1de109b08a895))
+* bump org.jetbrains.kotlinx:kotlinx-coroutines-core ([734c5a3](https://github.com/orangebikelabs/opensqueeze/commit/734c5a3ab206b98a53e59e2d16a6815b48a8c33a))
+
 ## [2.7.0-alpha.20](https://github.com/orangebikelabs/opensqueeze/compare/v2.7.0-alpha.19...v2.7.0-alpha.20) (2023-06-19)
 
 
