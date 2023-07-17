@@ -123,6 +123,8 @@ class SBPreferences private constructor(private val context: Context) {
     }
 
     private val preferenceListener = OnSharedPreferenceChangeListener { _, key ->
+        if(key == null) return@OnSharedPreferenceChangeListener
+
         val browseKey = context.getString(R.string.pref_browse_gridcellcount_key)
         val autoSizeTextKey = context.getString(R.string.pref_autosizetext_key)
         val b = BackupManager(context)
@@ -137,7 +139,6 @@ class SBPreferences private constructor(private val context: Context) {
             needRestart = true
         } else if (isOnCallBehaviorKey(key)) {
             updateComponentEnabled(context, this@SBPreferences)
-        } else if (key == SELECTED_LANGUAGE_KEY) {
             needRestart = true
         }
         BusProvider.getInstance().post(AppPreferenceChangeEvent(key, needRestart))

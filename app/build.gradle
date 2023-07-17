@@ -13,8 +13,7 @@ apply plugin: 'com.squareup.sqldelight'
 android {
     namespace 'com.orangebikelabs.orangesqueeze'
 
-    // use most recent so we can use most recent support library
-    compileSdk 33
+    compileSdk 34
 
     sourceSets {
         main {
@@ -38,7 +37,7 @@ android {
 
         // android >= 5.0
         minSdkVersion 21
-        targetSdkVersion 33
+        targetSdkVersion 34
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }

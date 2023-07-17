@@ -5,6 +5,7 @@
 
 package com.orangebikelabs.orangesqueeze.app;
 
+import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.IntentFilter;
@@ -34,7 +35,10 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.concurrent.GuardedBy;
 
+import androidx.core.content.ContextCompat;
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+
+import static androidx.core.content.ContextCompat.RECEIVER_NOT_EXPORTED;
 
 /**
  * @author tsandee
@@ -90,11 +94,11 @@ public class ContextLifecycleState {
         }
     };
 
+    @SuppressLint("CheckResult")
     ContextLifecycleState(Context applicationContext, ContextImpl masterContext) {
         mMasterContext = masterContext;
         mDeviceConnectivity = DeviceConnectivity.Companion.getInstance();
 
-        //noinspection ResultOfMethodCallIgnored
         mDeviceConnectivity.observeDeviceConnectivity()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(this::setDeviceConnectivity);
@@ -271,7 +275,8 @@ public class ContextLifecycleState {
 
             // receive broadcasts from other instances (preview vs release)
             IntentFilter filter = new IntentFilter(DiscoveryService.ACTION_NOTIFY_DISCOVERED_SERVER);
-            mMasterContext.getApplicationContext().registerReceiver(mOnServerDiscoveredReceiver, filter);
+
+            ContextCompat.registerReceiver(mMasterContext.getApplicationContext(), mOnServerDiscoveredReceiver, filter, RECEIVER_NOT_EXPORTED);
         }
     }
 

@@ -185,7 +185,7 @@ class ServerConnectionService : Service() {
         }
         broadcastReceiver = RemoteBroadcastReceiver()
 
-        registerReceiver(broadcastReceiver, filter)
+        registerReceiver(broadcastReceiver, filter);
 
         // allow service to time out automatically if nothing intervenes
         eligibleForShutdown = EligibleForShutdown.IFSTOPPED
