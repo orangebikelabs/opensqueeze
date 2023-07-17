@@ -479,7 +479,7 @@ abstract class AbsBrowseFragment<T : BrowseItemBaseAdapter, L> : AbsMenuFragment
         } else if (menuElement.isRadio) {
             handleRadio(item, menuElement)
         } else if (item is SimpleImageItem) {
-            val image = item.imageUrl.orNull()
+            val image = item.imageUrl.getOrNull()
             if (image != null) {
                 executeShowBigArtwork(item.itemTitle, image)
             }

@@ -21,7 +21,7 @@ class MoreOption {
         /** return option value or throw assertion */
         @JvmStatic
         fun <T> get(o1: Option<T>): T {
-            return requireNotNull(o1.orNull())
+            return requireNotNull(o1.getOrNull())
         }
     }
 }

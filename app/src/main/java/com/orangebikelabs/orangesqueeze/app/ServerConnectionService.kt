@@ -50,12 +50,10 @@ class ServerConnectionService : Service() {
         private const val SERVICE_TIMEOUT_IN_MILLIS = 120_000L
 
         // accessed from main thread only
-        @Suppress("ObjectPropertyName")
         private var _serviceMayBeStarted = false
 
         // written from main thread, read from anywhere
         @Volatile
-        @Suppress("ObjectPropertyName")
         private var _serviceWasStopped = false
 
         /**
@@ -209,7 +207,7 @@ class ServerConnectionService : Service() {
                 .observeOn(OSExecutors.singleThreadScheduler())
                 .onBackpressureLatest()
                 .subscribe { status ->
-                    WidgetCommon.updateWidgetsWithPlayerStatus(this@ServerConnectionService, status.orNull())
+                    WidgetCommon.updateWidgetsWithPlayerStatus(this@ServerConnectionService, status.getOrNull())
                 }
 
         // handle notification updates
@@ -354,7 +352,7 @@ class ServerConnectionService : Service() {
                 runnable = ConnectionAwareRunnable(location = "THUMBSUP") { context ->
                     try {
                         val status = context.checkedPlayerStatus
-                        val buttonStatus = status.getButtonStatus(PlayerButton.THUMBSUP).orNull()
+                        val buttonStatus = status.getButtonStatus(PlayerButton.THUMBSUP).getOrNull()
                         if (buttonStatus != null && buttonStatus.commands.isNotEmpty()) {
                             context.sendPlayerCommand(buttonStatus.commands)
                             buttonStatus.markPressed(status)
@@ -369,7 +367,7 @@ class ServerConnectionService : Service() {
                 runnable = ConnectionAwareRunnable(location = "THUMBSDOWN") { context ->
                     try {
                         val status = context.checkedPlayerStatus
-                        val buttonStatus = status.getButtonStatus(PlayerButton.THUMBSDOWN).orNull()
+                        val buttonStatus = status.getButtonStatus(PlayerButton.THUMBSDOWN).getOrNull()
                         if (buttonStatus != null && buttonStatus.commands.isNotEmpty()) {
                             context.sendPlayerCommand(buttonStatus.commands)
                             buttonStatus.markPressed(status)
