@@ -1,3 +1,10 @@
+## [2.7.0-alpha.25](https://github.com/orangebikelabs/opensqueeze/compare/v2.7.0-alpha.24...v2.7.0-alpha.25) (2023-07-17)
+
+
+### Bug Fixes
+
+* update to target sdk 34 and make some of the necessary compatibility changes ([3f27628](https://github.com/orangebikelabs/opensqueeze/commit/3f276289820ad6658d730aa7d4a440ead1045e1f))
+
 ## [2.7.0-alpha.24](https://github.com/orangebikelabs/opensqueeze/compare/v2.7.0-alpha.23...v2.7.0-alpha.24) (2023-07-17)
 
 
