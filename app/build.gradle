@@ -160,7 +160,7 @@ dependencies {
     //noinspection GradleDependency
     implementation "com.fasterxml.jackson.dataformat:jackson-dataformat-smile:${obl_jacksonVersion}"
 
-    implementation "com.google.guava:guava:${obl_guavaVersion}"
+    implementation "com.google.guava:guava:${obl_guavaVersion}-android"
 
     // required for Guava
     implementation 'javax.inject:javax.inject:1'
@@ -217,6 +217,13 @@ dependencies {
     androidTestImplementation "androidx.test.ext:truth:1.5.0"
     androidTestImplementation "io.mockk:mockk-android:1.13.5"
     androidTestUtil "androidx.test:orchestrator:1.4.2"
+
+    // workaround for gradle bug https://github.com/gradle/gradle/issues/22326, keep until fixed
+    modules {
+        module("com.google.guava:listenablefuture") {
+            replacedBy("com.google.guava:guava", "listenablefuture is part of guava")
+        }
+    }
 }
 
 tasks.withType(JavaCompile).configureEach {
