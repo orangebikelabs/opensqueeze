@@ -1,3 +1,11 @@
+## [2.7.0-alpha.24](https://github.com/orangebikelabs/opensqueeze/compare/v2.7.0-alpha.23...v2.7.0-alpha.24) (2023-07-17)
+
+
+### Bug Fixes
+
+* avoid use of deprecated syntax for launching lifecycle methods ([4ea2aa4](https://github.com/orangebikelabs/opensqueeze/commit/4ea2aa4d37c9337e52f31b9ffc1c83a2e4b74357))
+* issue with jdk 8 method overloading and compatibility with forEach ([28292d4](https://github.com/orangebikelabs/opensqueeze/commit/28292d4e697a659a8324f4046cc96f922affb725))
+
 ## [2.7.0-alpha.23](https://github.com/orangebikelabs/opensqueeze/compare/v2.7.0-alpha.22...v2.7.0-alpha.23) (2023-07-17)
 
 
