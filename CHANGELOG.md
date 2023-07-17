@@ -1,3 +1,12 @@
+## [2.7.0-alpha.23](https://github.com/orangebikelabs/opensqueeze/compare/v2.7.0-alpha.22...v2.7.0-alpha.23) (2023-07-17)
+
+
+### Bug Fixes
+
+* Arrow orNull() method deprecated in favor of getOrNull() ([7c56a8e](https://github.com/orangebikelabs/opensqueeze/commit/7c56a8e074bd71025cb42a46bdf6907bd6059c89))
+* gradle warnings/suggestions ([819b748](https://github.com/orangebikelabs/opensqueeze/commit/819b7482586f54c66767b2e970ef9ba3c2433dd1))
+* update guava to 32.1.1 ([9ed735c](https://github.com/orangebikelabs/opensqueeze/commit/9ed735cc65b7fe8f5c58a57b06a3775b9985eb42))
+
 ## [2.7.0-alpha.22](https://github.com/orangebikelabs/opensqueeze/compare/v2.7.0-alpha.21...v2.7.0-alpha.22) (2023-07-17)
 
 
