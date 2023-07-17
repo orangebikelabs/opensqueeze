@@ -22,9 +22,12 @@ import androidx.appcompat.app.AlertDialog
 import androidx.core.os.bundleOf
 import androidx.fragment.app.setFragmentResult
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import com.orangebikelabs.orangesqueeze.compat.getParcelableCompat
 import com.orangebikelabs.orangesqueeze.databinding.LoginBinding
+import kotlinx.coroutines.launch
 import kotlinx.parcelize.Parcelize
 
 /**
@@ -92,6 +95,26 @@ class LoginFragment : SBDialogFragment() {
                 }
             }
         }
+
+        // access the database and populates the username/password fields properly in the background
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                val result = viewModel.loadServerData(serverId)
+                checkNotNull(result) {
+                    "missing server record"
+                }
+                binding.username.setText(result.username)
+                binding.password.setText(result.password)
+                serverType = result.serverType
+
+                // the DialogFragment has .show() called in onStart(), and we need to override the listener at that time
+                val dialog = requireDialog() as AlertDialog
+
+                // override the connect button
+                connectButton = dialog.getButton(DialogInterface.BUTTON_POSITIVE)
+                connectButton?.setOnClickListener(connectListener)
+            }
+        }
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
@@ -117,28 +140,6 @@ class LoginFragment : SBDialogFragment() {
         builder.setPositiveButton(R.string.connect_button, null)
         builder.setNegativeButton(R.string.cancel) { _, _ -> }
         return builder.create()
-    }
-
-    override fun onStart() {
-        super.onStart()
-
-        // the DialogFragment has .show() called in onStart(), and we need to override the listener at that time
-        val dialog = requireDialog() as AlertDialog
-
-        // override the connect button
-        connectButton = dialog.getButton(DialogInterface.BUTTON_POSITIVE)
-        connectButton?.setOnClickListener(connectListener)
-
-        // access the database and populates the username/password fields properly in the background
-        lifecycleScope.launchWhenStarted {
-            val result = viewModel.loadServerData(serverId)
-            checkNotNull(result) {
-                "missing server record"
-            }
-            binding.username.setText(result.username)
-            binding.password.setText(result.password)
-            serverType = result.serverType
-        }
     }
 
     private fun goForgotPassword() {
