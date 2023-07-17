@@ -90,7 +90,7 @@ class ViewDownloadsFragment : SBFragment() {
                 viewModel.downloads.collectLatest { downloads ->
                     binding.empty.setText(R.string.empty_downloads_text)
                     adapter.startUpdate()
-                    downloads.forEach {
+                    downloads.toList().forEach {
                         adapter.updateDownloadElement(it.downloadbatch, it._id, it.downloadtitle, it.downloadstatus)
                     }
                     adapter.finalizeUpdate()
