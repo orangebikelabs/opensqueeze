@@ -14,7 +14,7 @@ android {
     namespace 'com.orangebikelabs.orangesqueeze'
 
     // use most recent so we can use most recent support library
-    compileSdkVersion 33
+    compileSdk 33
 
     sourceSets {
         main {
@@ -219,13 +219,13 @@ dependencies {
     androidTestUtil "androidx.test:orchestrator:1.4.2"
 }
 
-tasks.withType(JavaCompile) {
+tasks.withType(JavaCompile).configureEach {
     // uncomment this for more detailed deprecation warnings
     //options.compilerArgs << "-Xlint:deprecation"
     //options.compilerArgs << "-Xlint:unchecked"
 }
 
-task archiveApks {
+tasks.register('archiveApks') {
     description = "Copies APKs and mapping files to the archive directory"
     doLast {
         def appName = "${rootProject.name}"
@@ -247,7 +247,7 @@ task archiveApks {
 archiveApks.mustRunAfter assemble
 
 // Test Logging
-tasks.withType(Test) {
+tasks.withType(Test).configureEach {
     testLogging {
         events "started", "passed", "skipped", "failed"
     }
