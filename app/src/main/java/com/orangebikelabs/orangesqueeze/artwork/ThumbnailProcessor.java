@@ -46,8 +46,7 @@ import java.util.concurrent.TimeoutException;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-import arrow.core.Option;
-import arrow.core.OptionKt;
+import java.util.Optional;
 
 /**
  * @author tbsandee@orangebikelabs.com
@@ -166,7 +165,7 @@ public class ThumbnailProcessor extends ListJobProcessor<View> {
             boolean artworkSet = false;
             // load not already in progress for this cache entry...
             try {
-                ArtworkCacheData cacheData = mCacheService.peek(request).orNull();
+                ArtworkCacheData cacheData = mCacheService.peek(request).orElse(null);
                 if (cacheData == null) {
                     setLoadingArtwork(iv, newCacheEntry);
                     addJob(iv, new LoadArtworkJob(iv, newCacheEntry, scaleType, request));
@@ -376,8 +375,8 @@ public class ThumbnailProcessor extends ListJobProcessor<View> {
         }
 
         @Nonnull
-        protected Option<Animation> getAnimation() {
-            return OptionKt.some(AnimationUtils.loadAnimation(mContext, R.anim.thumbnail_fadein));
+        protected Optional<Animation> getAnimation() {
+            return Optional.of(AnimationUtils.loadAnimation(mContext, R.anim.thumbnail_fadein));
         }
 
         @Nonnull
@@ -421,7 +420,7 @@ public class ThumbnailProcessor extends ListJobProcessor<View> {
             }
 
             if (d != null) {
-                mBitmapJobs.put(mImageView, new BitmapJob(d, getAnimation().orNull(), recyclableBitmap, mCacheEntry));
+                mBitmapJobs.put(mImageView, new BitmapJob(d, getAnimation().orElse(null), recyclableBitmap, mCacheEntry));
                 sHandler.postDelayed(mProcessBitmapJobsRunnable, LOAD_IMAGE_POST_DELAY);
             }
         }
@@ -485,7 +484,7 @@ public class ThumbnailProcessor extends ListJobProcessor<View> {
 
         @Nonnull
         @Override
-        protected ArtworkCacheData getArtworkCacheData() throws InterruptedException, SBCacheException, TimeoutException {
+        protected ArtworkCacheData getArtworkCacheData() {
             return mCacheData;
         }
     }

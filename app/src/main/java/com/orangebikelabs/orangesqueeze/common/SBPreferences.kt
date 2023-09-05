@@ -398,14 +398,17 @@ class SBPreferences private constructor(private val context: Context) {
             val value = getString(R.string.pref_automaticunmute_key, R.string.default_pref_automaticunmute)
 
             // use seconds because TimeUnit.MINUTES is missing on some earlier platforms
-            val valInMinutes = value.toLong()
-            if (valInMinutes == -1L) {
-                // absent
-            } else if (valInMinutes == -2L) {
-                retval = units.convert(24 * 60 * 60.toLong(), TimeUnit.SECONDS)
-            } else {
-                val valInSeconds = valInMinutes * 60
-                retval = units.convert(valInSeconds, TimeUnit.SECONDS)
+            when (val valInMinutes = value.toLong()) {
+                -1L -> {
+                    // absent
+                }
+                -2L -> {
+                    retval = units.convert(24 * 60 * 60.toLong(), TimeUnit.SECONDS)
+                }
+                else -> {
+                    val valInSeconds = valInMinutes * 60
+                    retval = units.convert(valInSeconds, TimeUnit.SECONDS)
+                }
             }
         } catch (e: NumberFormatException) {
             Reporting.report(e)

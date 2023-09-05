@@ -99,13 +99,12 @@ public class GlobalSearchRequest extends BrowseRequest {
         // iterate through the expansion candidates iterate through each one and expand them, if necessary
         Item item;
         while ((item = mExpansionCandidates.poll()) != null) {
-            if (!(item instanceof ExpandableSearchHeaderItem)) {
+            if (!(item instanceof ExpandableSearchHeaderItem sep)) {
                 // not expandable
                 continue;
             }
 
             // now try to expand the item
-            ExpandableSearchHeaderItem sep = (ExpandableSearchHeaderItem) item;
             if (sep.isExpanded() || !sep.shouldAutoExpand()) {
                 // nope
                 continue;
@@ -118,10 +117,9 @@ public class GlobalSearchRequest extends BrowseRequest {
         // determine if we need to add the "other" menu
         for (int i = 0; i < mItemList.size(); i++) {
             item = mItemList.get(i);
-            if (!(item instanceof ExpandableSearchHeaderItem)) {
+            if (!(item instanceof ExpandableSearchHeaderItem eshItem)) {
                 continue;
             }
-            ExpandableSearchHeaderItem eshItem = (ExpandableSearchHeaderItem) item;
             if (eshItem.getParent() == null && !eshItem.isExpanded()) {
                 // Don't put this at the top, it's inferred
                 if (i > 0) {
@@ -256,8 +254,7 @@ public class GlobalSearchRequest extends BrowseRequest {
 
         for (Item item : items) {
             boolean expandable = false;
-            if (item instanceof ExpandableSearchHeaderItem) {
-                ExpandableSearchHeaderItem ei = (ExpandableSearchHeaderItem) item;
+            if (item instanceof ExpandableSearchHeaderItem ei) {
                 expandable = ei.shouldAutoExpand();
             }
 

@@ -342,7 +342,6 @@ abstract class DrawerActivity : SBActivity() {
 
     @Deprecated("Deprecated in Java")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        @Suppress("DEPRECATION")
         super.onActivityResult(requestCode, resultCode, data)
 
         if (requestCode != NavigationManager.ACTIVITY_REQUESTCODE || data == null) {

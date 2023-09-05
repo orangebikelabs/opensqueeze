@@ -63,16 +63,16 @@ class MainActivity : DrawerActivity() {
 
         mBus.register(eventReceiver)
 
-        if (savedInstanceState == null) {
+        title = if (savedInstanceState == null) {
             supportFragmentManager.commitNow {
                 add(R.id.tinynowplaying_frame, TinyNowPlayingFragment.newInstance())
             }
 
-            title = getString(R.string.loading_menus_text)
+            getString(R.string.loading_menus_text)
         } else {
             // we're restoring from a previous state, restore the original title
             // fragments and other things will be restored automatically
-            title = checkNotNull(savedInstanceState.getString(STATE_TITLE)) { "title should have been preserved" }
+            checkNotNull(savedInstanceState.getString(STATE_TITLE)) { "title should have been preserved" }
         }
 
         supportActionBar.apply {
@@ -172,10 +172,10 @@ class MainActivity : DrawerActivity() {
                             currentLoadedBrowseNodeId = itemNodeId
                             title = item.itemTitle
 
-                            if (newNavigationItem.type === NavigationItem.Type.BROWSENODE) {
-                                newFragment = BrowseNodeFragment.newInstance(newNavigationItem)
+                            newFragment = if (newNavigationItem.type === NavigationItem.Type.BROWSENODE) {
+                                BrowseNodeFragment.newInstance(newNavigationItem)
                             } else {
-                                newFragment = BrowseRequestFragment.newInstance(newNavigationItem)
+                                BrowseRequestFragment.newInstance(newNavigationItem)
                             }
                             break
                         }

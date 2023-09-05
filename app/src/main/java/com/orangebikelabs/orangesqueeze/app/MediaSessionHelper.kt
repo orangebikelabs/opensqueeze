@@ -186,12 +186,12 @@ class MediaSessionHelper private constructor(private val context: Context) {
         val duration = (status.totalTime * 1000).toLong()
         metadataBuilder.putLong(MediaMetadataCompat.METADATA_KEY_DURATION, duration)
 
-        val trackNumber = status.trackNumber.getOrNull()?.toLongOrNull()
+        val trackNumber = status.trackNumber.orElse(null)?.toLongOrNull()
         if (trackNumber != null) {
             metadataBuilder.putLong(MediaMetadataCompat.METADATA_KEY_TRACK_NUMBER, trackNumber)
         }
 
-        val year = status.year.getOrNull()?.toLongOrNull()
+        val year = status.year.orElse(null)?.toLongOrNull()
         if (year != null) {
             metadataBuilder.putLong(MediaMetadataCompat.METADATA_KEY_YEAR, year)
         }

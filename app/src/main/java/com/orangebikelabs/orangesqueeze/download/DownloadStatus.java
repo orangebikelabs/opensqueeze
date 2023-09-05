@@ -26,7 +26,7 @@ import javax.annotation.Nullable;
 import javax.annotation.concurrent.GuardedBy;
 import javax.annotation.concurrent.ThreadSafe;
 
-import arrow.core.Option;
+import java.util.Optional;
 
 /**
  * Class that represents the current serialized download status.
@@ -123,8 +123,8 @@ public class DownloadStatus {
     }
 
     @Nonnull
-    public synchronized Option<Long> getContentLength() {
-        return Option.fromNullable(mContentLength);
+    public synchronized Optional<Long> getContentLength() {
+        return Optional.ofNullable(mContentLength);
     }
 
     public synchronized void setContentLength(long contentLength) {

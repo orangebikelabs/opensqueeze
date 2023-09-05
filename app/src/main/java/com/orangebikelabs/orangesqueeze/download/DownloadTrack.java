@@ -108,7 +108,7 @@ public class DownloadTrack implements Comparable<DownloadTrack> {
         mCachedDestinationExists = destinationFile.exists();
         mSelected = !mCachedDestinationExists;
 
-        String trackNum = mTrackInfo.getTrackNumber().orNull();
+        String trackNum = mTrackInfo.getTrackNumber().orElse(null);
         StringBuilder buffer = new StringBuilder();
         if (trackNum != null) {
             buffer.append(trackNum);
@@ -225,7 +225,7 @@ public class DownloadTrack implements Comparable<DownloadTrack> {
                 format = "flac";
             }
 
-            String trackNumber = mTrackInfo.getTrackNumber().orNull();
+            String trackNumber = mTrackInfo.getTrackNumber().orElse(null);
             if (trackNumber != null) {
                 retval = trackNumber + ". " + mTrackInfo.getTrackName() + "." + format;
             } else {
@@ -286,11 +286,10 @@ public class DownloadTrack implements Comparable<DownloadTrack> {
 
     @Override
     public boolean equals(Object o) {
-        if (!(o instanceof DownloadTrack)) {
+        if (!(o instanceof DownloadTrack another)) {
             return false;
         }
 
-        DownloadTrack another = (DownloadTrack) o;
         return Objects.equal(another.mId, mId);
     }
 

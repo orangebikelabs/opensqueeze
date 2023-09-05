@@ -7,10 +7,13 @@ package com.orangebikelabs.orangesqueeze.net;
 
 import com.orangebikelabs.orangesqueeze.common.SBRequestException;
 
+import java.io.Serial;
+
 /**
  * @author tbsandee@orangebikelabs.com
  */
 public class JsonRpcException extends SBRequestException {
+    @Serial
     private static final long serialVersionUID = 6939787029537175891L;
 
     final private int mResponseCode;

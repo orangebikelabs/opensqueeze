@@ -145,6 +145,7 @@ abstract public class AbsNowPlayingFragment extends AbsMenuFragment {
 
         mFullSizeArtworkWidth = Artwork.getFullSizeArtworkWidth(requireContext());
 
+        //noinspection resource
         TypedArray ta = requireContext().obtainStyledAttributes(new int[]{R.attr.tinyNowPlayingArtworkSize});
         mTinyArtworkWidth = ta.getDimensionPixelSize(0, -1);
         ta.recycle();
@@ -211,8 +212,7 @@ abstract public class AbsNowPlayingFragment extends AbsMenuFragment {
     // iterate through nested viewgroups to find all buttons, imageviews and set
     // the click listeners for them all
     protected void processControls(@Nullable View parent, View control) {
-        if (control instanceof ViewGroup) {
-            ViewGroup group = (ViewGroup) control;
+        if (control instanceof ViewGroup group) {
             for (int i = 0; i < group.getChildCount(); i++) {
                 processControls(control, group.getChildAt(i));
             }
@@ -280,11 +280,10 @@ abstract public class AbsNowPlayingFragment extends AbsMenuFragment {
 
     protected String getTrackText(PlayerStatus status) {
         mMainThreadStringBuilder.setLength(0);
-        String trackNumber = status.getTrackNumber().orNull();
-        if (trackNumber != null) {
+        status.getTrackNumber().ifPresent( trackNumber -> {
             mMainThreadStringBuilder.append(trackNumber);
             mMainThreadStringBuilder.append(". ");
-        }
+        });
         mMainThreadStringBuilder.append(status.getTrack());
         return mMainThreadStringBuilder.toString();
     }
@@ -329,7 +328,7 @@ abstract public class AbsNowPlayingFragment extends AbsMenuFragment {
     protected String getAlbumText(PlayerStatus status) {
         mMainThreadStringBuilder.setLength(0);
         mMainThreadStringBuilder.append(status.getAlbum());
-        String year = status.getYear().orNull();
+        String year = status.getYear().orElse(null);
         if (year != null) {
             mMainThreadStringBuilder.append(" (");
             mMainThreadStringBuilder.append(year);
@@ -447,9 +446,9 @@ abstract public class AbsNowPlayingFragment extends AbsMenuFragment {
                 PlayerStatus status = mSbContext.getCheckedPlayerStatus();
                 ButtonStatus buttonStatus;
                 if (id == R.id.thumbsup_button) {
-                    buttonStatus = status.getButtonStatus(PlayerButton.THUMBSUP).orNull();
+                    buttonStatus = status.getButtonStatus(PlayerButton.THUMBSUP).orElse(null);
                 } else {
-                    buttonStatus = status.getButtonStatus(PlayerButton.THUMBSDOWN).orNull();
+                    buttonStatus = status.getButtonStatus(PlayerButton.THUMBSDOWN).orElse(null);
                 }
                 if (buttonStatus != null && !buttonStatus.getCommands().isEmpty()) {
                     buttonStatus.markPressed(status);
@@ -498,11 +497,9 @@ abstract public class AbsNowPlayingFragment extends AbsMenuFragment {
     }
 
     private void notifyNewArtwork(@Nullable Bitmap bmp, boolean loading) {
-        if (!(getActivity() instanceof ArtworkChangeCallback)) {
+        if (!(getActivity() instanceof ArtworkChangeCallback cb)) {
             return;
         }
-
-        ArtworkChangeCallback cb = (ArtworkChangeCallback) getActivity();
         cb.notifyNewArtwork(bmp, loading);
     }
 

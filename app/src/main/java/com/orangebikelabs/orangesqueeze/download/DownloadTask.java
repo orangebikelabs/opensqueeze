@@ -24,7 +24,6 @@ import com.orangebikelabs.orangesqueeze.artwork.ArtworkType;
 import com.orangebikelabs.orangesqueeze.artwork.StandardArtworkCacheRequest;
 import com.orangebikelabs.orangesqueeze.cache.CacheFuture;
 import com.orangebikelabs.orangesqueeze.common.FileUtils;
-import com.orangebikelabs.orangesqueeze.common.MoreOption;
 import com.orangebikelabs.orangesqueeze.common.OSExecutors;
 import com.orangebikelabs.orangesqueeze.common.OSLog;
 import com.orangebikelabs.orangesqueeze.common.Reporting;
@@ -119,7 +118,7 @@ class DownloadTask implements Callable<Boolean> {
             MP3 mp3 = new MP3(file);
 
             if (mp3.getPictures().isEmpty()) {
-                String coverId = ti.getCoverId().orNull();
+                String coverId = ti.getCoverId().orElse(null);
                 if (coverId != null) {
                     try {
                         DisplayMetrics dm = getContext().getResources().getDisplayMetrics();
@@ -148,12 +147,12 @@ class DownloadTask implements Callable<Boolean> {
             mp3.setAlbum(ti.getTrackAlbum());
             mp3.setTitle(ti.getTrackName());
 
-            double duration = MoreOption.getOrElse(ti.getDuration(), 0.0f);
+            double duration = ti.getDuration().orElse(0.0f);
             if (duration >= 0.0f && duration < 10000.0f) {
                 mp3.setAudioDuration((int) duration);
             }
 
-            String trackNumber = ti.getTrackNumber().orNull();
+            String trackNumber = ti.getTrackNumber().orElse(null);
             if (trackNumber != null) {
                 try {
                     mp3.setTrack(Integer.parseInt(trackNumber));
@@ -163,9 +162,9 @@ class DownloadTask implements Callable<Boolean> {
             }
 
             // write part of set (disc/count) tag to mp3
-            String discNumber = ti.getDiscNumber().orNull();
+            String discNumber = ti.getDiscNumber().orElse(null);
             if (discNumber != null) {
-                String discCount = ti.getDiscCount().orNull();
+                String discCount = ti.getDiscCount().orElse(null);
 
                 // if total disc count is known, include it
                 String partOfSet;
@@ -180,7 +179,7 @@ class DownloadTask implements Callable<Boolean> {
                 body.setText(partOfSet);
                 body.setEncoding(Encoding.UTF_16);
             }
-            String trackYear = ti.getYear().orNull();
+            String trackYear = ti.getYear().orElse(null);
             if (trackYear != null) {
                 try {
                     mp3.setYear(Integer.parseInt(trackYear));
@@ -200,15 +199,8 @@ class DownloadTask implements Callable<Boolean> {
                 body.setEncoding(Encoding.UTF_16);
             }
 
-            String genre = ti.getGenre().orNull();
-            if (genre != null) {
-                mp3.setMusicType(genre);
-            }
-
-            String comments = ti.getComments().orNull();
-            if (comments != null) {
-                mp3.setComments(comments);
-            }
+            ti.getGenre().ifPresent(mp3::setMusicType);
+            ti.getComments().ifPresent(mp3::setComments);
             mp3.save();
 
             // try to make folder.jpg
@@ -293,7 +285,7 @@ class DownloadTask implements Callable<Boolean> {
                 if (e instanceof SocketTimeoutException) {
                     message = "Server timed out";
                 } else {
-                    message = "Unspecified error: " + e.toString();
+                    message = "Unspecified error: " + e;
                 }
             }
             status.markFailed(message, true);

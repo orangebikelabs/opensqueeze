@@ -19,7 +19,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.util.concurrent.Semaphore;
 
-import javax.annotation.Nullable;
+import javax.annotation.Nonnull;
 
 /**
  * @author tsandee
@@ -62,13 +62,13 @@ public class BitmapTools {
     /**
      * Perform bitmap scaling, try to use best quality scaling possible.
      */
-    @Nullable
+    @Nonnull
     static public Bitmap createScaledBitmap(Bitmap bmp, int desiredWidth, int desiredHeight) {
         int width = bmp.getWidth();
         int height = bmp.getHeight();
         Config config = bmp.getConfig();
 
-        if (width <= 0 || height <= 0 || config == null) {
+        if (width <= 0 || height <= 0) {
             // if bmp width is odd, fallback
             return Bitmap.createScaledBitmap(bmp, desiredWidth, desiredHeight, true);
         } else {

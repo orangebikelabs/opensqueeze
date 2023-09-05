@@ -104,7 +104,7 @@ class WakeOnLanDialog private constructor(private val lifecycleOwner: LifecycleO
                     var broadcast = settings.broadcastAddress
                     if (broadcast == null || settings.autodetectMacAddress) {
                         try {
-                            val addy = Compat.getBroadcastAddress(context).getOrNull()
+                            val addy = Compat.getBroadcastAddress(context).orElse(null)
                             if (addy != null) {
                                 broadcast = addy.hostAddress
                             }

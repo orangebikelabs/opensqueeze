@@ -15,7 +15,7 @@ import com.orangebikelabs.orangesqueeze.browse.common.StandardIconRetriever;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-import arrow.core.Option;
+import java.util.Optional;
 
 /**
  * Image item from slideshows.
@@ -84,19 +84,19 @@ public class SimpleImageItem extends StandardMenuItem {
 
     @Nonnull
     @Override
-    public Option<String> getText2() {
-        return Option.fromNullable(mOwner);
+    public Optional<String> getText2() {
+        return Optional.ofNullable(mOwner);
     }
 
     @Nonnull
     @Override
-    public Option<String> getText3() {
-        return Option.fromNullable(mDate);
+    public Optional<String> getText3() {
+        return Optional.ofNullable(mDate);
     }
 
     @Nonnull
-    public Option<String> getImageUrl() {
-        return Option.fromNullable(mImage);
+    public Optional<String> getImageUrl() {
+        return Optional.ofNullable(mImage);
     }
 
     @Override

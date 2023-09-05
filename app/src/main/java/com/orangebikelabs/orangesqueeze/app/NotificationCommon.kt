@@ -169,13 +169,11 @@ object NotificationCommon {
         }
         if (visibilities.get(R.id.thumbsup_button) == View.VISIBLE) {
             compactActionIndexList.add(compactActionIndex)
-            @Suppress("UNUSED_CHANGED_VALUE")
             compactActionIndex++
             builder.addAction(R.drawable.ic_thumb_up_white, "Thumbs Up",
                     buildThumbsUpButtonIntent(context, status.id))
         } else if (visibilities.get(R.id.next_button) == View.VISIBLE) {
             compactActionIndexList.add(compactActionIndex)
-            @Suppress("UNUSED_CHANGED_VALUE")
             compactActionIndex++
             builder.addAction(R.drawable.ic_skip_next_white, "Next",
                     buildCommandPendingIntent(context, R.id.next_button, status.id,

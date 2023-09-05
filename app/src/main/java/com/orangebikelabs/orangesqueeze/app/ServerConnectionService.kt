@@ -14,9 +14,6 @@ import android.media.AudioManager
 import android.os.*
 import android.support.v4.media.session.MediaSessionCompat
 import androidx.core.content.ContextCompat
-import arrow.core.None
-import arrow.core.Option
-import arrow.core.Some
 import com.google.common.base.MoreObjects
 import com.orangebikelabs.orangesqueeze.BuildConfig
 import com.orangebikelabs.orangesqueeze.appwidget.WidgetCommon
@@ -30,6 +27,7 @@ import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.disposables.Disposable
 import io.reactivex.rxjava3.processors.PublishProcessor
 import io.reactivex.rxjava3.kotlin.plusAssign
+import java.util.Optional
 import java.util.concurrent.TimeUnit
 
 
@@ -152,7 +150,7 @@ class ServerConnectionService : Service() {
 
     private var pendingShutdownDisposable: Disposable? = null
 
-    private val playerStatusProcessor: PublishProcessor<Option<PlayerStatus>> = PublishProcessor.create()
+    private val playerStatusProcessor: PublishProcessor<Optional<PlayerStatus>> = PublishProcessor.create()
 
     private val compositeDisposable = CompositeDisposable()
 
@@ -185,7 +183,7 @@ class ServerConnectionService : Service() {
         }
         broadcastReceiver = RemoteBroadcastReceiver()
 
-        registerReceiver(broadcastReceiver, filter);
+        registerReceiver(broadcastReceiver, filter)
 
         // allow service to time out automatically if nothing intervenes
         eligibleForShutdown = EligibleForShutdown.IFSTOPPED
@@ -207,7 +205,7 @@ class ServerConnectionService : Service() {
                 .observeOn(OSExecutors.singleThreadScheduler())
                 .onBackpressureLatest()
                 .subscribe { status ->
-                    WidgetCommon.updateWidgetsWithPlayerStatus(this@ServerConnectionService, status.getOrNull())
+                    WidgetCommon.updateWidgetsWithPlayerStatus(this@ServerConnectionService, status.orElse(null))
                 }
 
         // handle notification updates
@@ -225,9 +223,9 @@ class ServerConnectionService : Service() {
                     lastWasPausedWithUi = false
 
                     val showNotificationStatus: PlayerStatus?
-                    when (status) {
-                        is Some -> {
-                            val playerMode = status.value.mode
+                    when {
+                        status.isPresent -> {
+                            val playerMode = status.get().mode
                             if (uiGone) {
                                 // only show notifications if the app is not in the foreground and player paused or playing
                                 if (playerMode == PlayerStatus.Mode.PAUSED && savedLastWasPausedWithUi) {
@@ -236,7 +234,7 @@ class ServerConnectionService : Service() {
                                     showNotificationStatus = null
                                 } else if (playerMode == PlayerStatus.Mode.PLAYING || (playerMode == PlayerStatus.Mode.PAUSED && eligibleForShutdown != EligibleForShutdown.IFPAUSED)) {
                                     eligibleForShutdown = EligibleForShutdown.IFSTOPPED
-                                    showNotificationStatus = status.value
+                                    showNotificationStatus = status.get()
                                 } else {
                                     showNotificationStatus = null
                                 }
@@ -248,7 +246,7 @@ class ServerConnectionService : Service() {
                                 showNotificationStatus = null
                             }
                         }
-                        is None -> {
+                        else -> {
                             showNotificationStatus = null
                         }
                     }
@@ -352,7 +350,7 @@ class ServerConnectionService : Service() {
                 runnable = ConnectionAwareRunnable(location = "THUMBSUP") { context ->
                     try {
                         val status = context.checkedPlayerStatus
-                        val buttonStatus = status.getButtonStatus(PlayerButton.THUMBSUP).getOrNull()
+                        val buttonStatus = status.getButtonStatus(PlayerButton.THUMBSUP).orElse(null)
                         if (buttonStatus != null && buttonStatus.commands.isNotEmpty()) {
                             context.sendPlayerCommand(buttonStatus.commands)
                             buttonStatus.markPressed(status)
@@ -367,7 +365,7 @@ class ServerConnectionService : Service() {
                 runnable = ConnectionAwareRunnable(location = "THUMBSDOWN") { context ->
                     try {
                         val status = context.checkedPlayerStatus
-                        val buttonStatus = status.getButtonStatus(PlayerButton.THUMBSDOWN).getOrNull()
+                        val buttonStatus = status.getButtonStatus(PlayerButton.THUMBSDOWN).orElse(null)
                         if (buttonStatus != null && buttonStatus.commands.isNotEmpty()) {
                             context.sendPlayerCommand(buttonStatus.commands)
                             buttonStatus.markPressed(status)
@@ -411,7 +409,7 @@ class ServerConnectionService : Service() {
 
     private fun fireCurrentPlayerStatus() {
         val status = SBContextProvider.get().playerStatus
-        playerStatusProcessor.onNext(Option.fromNullable(status))
+        playerStatusProcessor.onNext(Optional.ofNullable(status))
     }
 
     private fun shouldAllowServiceTimeout(isPlayerStatusUpdate: Boolean): Boolean {
@@ -463,7 +461,7 @@ class ServerConnectionService : Service() {
 
     @Subscribe
     fun whenCurrentPlayerStatusChanges(event: CurrentPlayerState) {
-        playerStatusProcessor.onNext(Option.fromNullable(event.playerStatus))
+        playerStatusProcessor.onNext(Optional.ofNullable(event.playerStatus))
     }
 
     private fun onDeviceStatusChange() {
@@ -554,7 +552,7 @@ class ServerConnectionService : Service() {
                 BroadcastServiceActions.UPDATE_WIDGETS.intentAction -> {
                     OSExecutors.getUnboundedPool().execute(ConnectionAwareRunnable(location = "UPDATE_WIDGETS") {
                         AndroidSchedulers.mainThread().scheduleDirect {
-                            playerStatusProcessor.onNext(Option.fromNullable(it.playerStatus))
+                            playerStatusProcessor.onNext(Optional.ofNullable(it.playerStatus))
                         }
                     })
                 }

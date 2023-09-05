@@ -170,8 +170,7 @@ public class ContextMenuAction extends AbsItemAction {
 
     @Override
     public int compareTo(AbsAction<Item> another) {
-        if (another instanceof ContextMenuAction) {
-            ContextMenuAction anotherAction = (ContextMenuAction) another;
+        if (another instanceof ContextMenuAction anotherAction) {
             return Longs.compare(mOrder, anotherAction.mOrder);
         } else {
             return super.compareTo(another);

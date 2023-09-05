@@ -359,7 +359,7 @@ public class ManagePlayersFragment extends SBFragment implements LoaderCallbacks
 
             Map<Integer, ArrayList<PlayerStatus>> groups = new TreeMap<>();
             for (PlayerStatus s : mSbContext.getServerStatus().getAvailablePlayers()) {
-                Integer groupNumber = syncStatus.getSyncGroup(s.getId()).orNull();
+                Integer groupNumber = syncStatus.getSyncGroup(s.getId()).orElse(null);
                 if (groupNumber == null) {
                     // don't add current player
                     if (s == opStatus) {
@@ -390,7 +390,7 @@ public class ManagePlayersFragment extends SBFragment implements LoaderCallbacks
                 ArrayList<PlayerStatus> list = entry.getValue();
 
                 SyncChoice newChoice = new SyncChoice(requireContext(), list.toArray(new PlayerStatus[0]));
-                Integer opGroup = syncStatus.getSyncGroup(opStatus.getId()).orNull();
+                Integer opGroup = syncStatus.getSyncGroup(opStatus.getId()).orElse(null);
                 if (opGroup != null && opGroup == group) {
                     selectedChoice = newChoice;
                 }

@@ -6,7 +6,7 @@
 package com.orangebikelabs.orangesqueeze.menu;
 
 import androidx.annotation.Keep;
-import arrow.core.Option;
+import java.util.Optional;
 
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonGetter;
@@ -330,8 +330,8 @@ public class MenuElement implements Serializable {
 
     @JsonIgnore
     @Nonnull
-    public Option<Integer> getSelectedIndex() {
-        return Option.fromNullable(mSelectedIndex);
+    public Optional<Integer> getSelectedIndex() {
+        return Optional.ofNullable(mSelectedIndex);
     }
 
     @JsonGetter("selectedIndex")

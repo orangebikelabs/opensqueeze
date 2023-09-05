@@ -105,7 +105,6 @@ class TrackDownloadPreferenceActivity : AbsPreferenceActivity() {
 
             val selectedIndex = items.indexOfFirst { it.absolutePath == currentDownloadLocation.absolutePath }
 
-            @Suppress("DEPRECATION")
             val dialog = MaterialDialog(requireContext())
                     .lifecycleOwner(this@TrackDownloadPreferenceFragment)
                     .title(res = R.string.pref_trackdownload_location_title)
@@ -118,7 +117,7 @@ class TrackDownloadPreferenceActivity : AbsPreferenceActivity() {
                     .negativeButton(res = R.string.cancel)
 
             // custom path cannot work on Android higher than 13
-            if (VERSION.SDK_INT < VERSION_CODES.TIRAMISU) {
+            if (VERSION.SDK_INT < 33) {
                 // also requires that READ_EXTERNAL_STORAGE was granted
                 if (storagePermissionHelper.hasReadExternalStoragePermssion(requireContext())) {
                     @Suppress("DEPRECATION")

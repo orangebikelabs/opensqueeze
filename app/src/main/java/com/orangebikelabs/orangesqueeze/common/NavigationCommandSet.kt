@@ -59,12 +59,12 @@ data class NavigationCommandSet constructor(val commands: List<String>, val para
                     retval = actionParams
                     retval.putAll(iParams)
                 } else {
-                    if (element.actions.containsValue(action) && paramName == "params") {
+                    retval = if (element.actions.containsValue(action) && paramName == "params") {
                         // just the params from the action is okay
-                        retval = actionParams
+                        actionParams
                     } else {
                         // missing the params object, invalid item
-                        retval = null
+                        null
                     }
                 }
             } else {

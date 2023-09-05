@@ -60,7 +60,7 @@ public class NetworkTools {
 
                     // this isn't really autodetecting the mac address, we changed the checkbox name but keep using the old property
                     if (ci.getWakeOnLanSettings().getAutodetectMacAddress()) {
-                        broadcast = Compat.getBroadcastAddress(context).orNull();
+                        broadcast = Compat.getBroadcastAddress(context).orElse(null);
                     } else {
                         broadcast = InetAddress.getByName(ci.getWakeOnLanSettings().getBroadcastAddress());
                     }
@@ -132,7 +132,7 @@ public class NetworkTools {
 
     /**
      * This code is based on code from here:
-     * http://www.flattermann.net/2011/02/android-howto-find-the-hardware-mac-address-of-a-remote-host/
+     * <a href="http://www.flattermann.net/2011/02/android-howto-find-the-hardware-mac-address-of-a-remote-host/">...</a>
      * <p/>
      * Try to extract a hardware MAC address from a given IP address using the ARP cache (/proc/net/arp).<br>
      * <br>

@@ -7,8 +7,6 @@ package com.orangebikelabs.orangesqueeze.players;
 
 import android.content.Context;
 
-import arrow.core.Option;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -27,7 +25,6 @@ import com.google.common.collect.Ordering;
 import com.orangebikelabs.orangesqueeze.R;
 import com.orangebikelabs.orangesqueeze.common.FutureResult;
 import com.orangebikelabs.orangesqueeze.common.MoreMath;
-import com.orangebikelabs.orangesqueeze.common.MoreOption;
 import com.orangebikelabs.orangesqueeze.common.OSAssert;
 import com.orangebikelabs.orangesqueeze.common.OtherPlayerInfo;
 import com.orangebikelabs.orangesqueeze.common.PlayerId;
@@ -45,6 +42,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
@@ -96,7 +94,9 @@ public class ManagePlayersAdapter extends ArrayAdapter<AbsPlayerItem> {
     @Nonnull
     @Override
     public AbsPlayerItem getItem(int position) {
-        return super.getItem(position);
+        AbsPlayerItem item = super.getItem(position);
+        OSAssert.assertNotNull(item, "item should never be null");
+        return item;
     }
 
     final public void setDrawerMode(boolean drawerMode) {
@@ -129,7 +129,7 @@ public class ManagePlayersAdapter extends ArrayAdapter<AbsPlayerItem> {
                 groups.add(s);
                 continue;
             }
-            int syncGroup = MoreOption.getOrElse(mSyncStatus.getSyncGroup(s.getId()), 0);
+            int syncGroup = mSyncStatus.getSyncGroup(s.getId()).orElse(0);
             if (lastSyncGroup != syncGroup) {
                 if (syncGroup == 0) {
                     add(new SeparatorItem(getContext().getString(R.string.unsynchronized_player_separator)));
@@ -219,11 +219,10 @@ public class ManagePlayersAdapter extends ArrayAdapter<AbsPlayerItem> {
         // iterate through each item
         for (int i = 0; i < getCount(); i++) {
             AbsPlayerItem item = getItem(i);
-            if (!(item instanceof PlayerItem)) {
+            if (!(item instanceof PlayerItem pi)) {
                 continue;
             }
 
-            PlayerItem pi = (PlayerItem) item;
             if (!pi.getPlayerId().equals(playerId)) {
                 continue;
             }
@@ -406,7 +405,7 @@ public class ManagePlayersAdapter extends ArrayAdapter<AbsPlayerItem> {
         }
 
         @Nonnull
-        public Option<Integer> getSyncGroup() {
+        public Optional<Integer> getSyncGroup() {
             return mSyncStatus.getSyncGroup(mPlayerStatus.getId());
         }
 
@@ -659,9 +658,9 @@ public class ManagePlayersAdapter extends ArrayAdapter<AbsPlayerItem> {
 
         @Override
         public int compare(PlayerStatus lhs, PlayerStatus rhs) {
-            int lhsSyncGroup = MoreOption.getOrElse(mSyncStatus.getSyncGroup(lhs.getId()), 0);
+            int lhsSyncGroup = mSyncStatus.getSyncGroup(lhs.getId()).orElse(0);
 
-            int rhsSyncGroup = MoreOption.getOrElse(mSyncStatus.getSyncGroup(rhs.getId()), 0);
+            int rhsSyncGroup = mSyncStatus.getSyncGroup(rhs.getId()).orElse(0);
             return ComparisonChain.start().
                     // all players in sync group first
                             compareTrueFirst(lhsSyncGroup != 0, rhsSyncGroup != 0).

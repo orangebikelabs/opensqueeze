@@ -22,7 +22,6 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import arrow.core.Either
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.orangebikelabs.orangesqueeze.R
 import com.orangebikelabs.orangesqueeze.app.SBFragment
@@ -102,11 +101,11 @@ class ConnectFragment : SBFragment() {
         binding.addButton.setOnClickListener {
             viewLifecycleOwner.lifecycleScope.launch {
                 when (val result = AddNewServerDialog.create(this@ConnectFragment, viewModel).show()) {
-                    is Either.Left -> {
+                    is AddNewServerDialog.Failure -> {
                         // nah, do nothing
                     }
-                    is Either.Right -> {
-                        mSbContext.startPendingConnection(result.value, "dumb")
+                    is AddNewServerDialog.Success -> {
+                        mSbContext.startPendingConnection(result.id, "dumb")
                     }
                 }
 

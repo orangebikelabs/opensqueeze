@@ -282,7 +282,7 @@ public class CurrentPlaylistFragment extends AbsMenuFragment {
             }
 
             boolean restartLoader = false;
-            String adapterTimestamp = mAdapter.getPlaylistTimestamp().orNull();
+            String adapterTimestamp = mAdapter.getPlaylistTimestamp().orElse(null);
 
             if (adapterTimestamp != null) {
                 // we're viewing a playlist....

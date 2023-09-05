@@ -41,7 +41,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.concurrent.GuardedBy;
 
-import arrow.core.Option;
+import java.util.Optional;
 
 /**
  * Implementation of most common type of request. Uses Comet protocol to send response and asynchronously receive a response.
@@ -61,7 +61,7 @@ public class CometRequest extends AbsRequest {
 
     @GuardedBy("this")
     @Nullable
-    private Option<CacheEntry> mCacheEntry;
+    private Optional<CacheEntry> mCacheEntry;
 
     CometRequest(Context context, ContextImpl masterContext, List<?> commands) {
         super(commands);
@@ -117,11 +117,11 @@ public class CometRequest extends AbsRequest {
 
     @Nullable
     synchronized protected CacheEntry getCacheEntry() {
-        Option<CacheEntry> retval = mCacheEntry;
+        Optional<CacheEntry> retval = mCacheEntry;
         if (retval == null) {
             CacheEntry newVal = null;
             if (isCacheable()) {
-                CacheEntry.Type cacheType = checkServerCacheWhitelist(mCommands).orNull();
+                CacheEntry.Type cacheType = checkServerCacheWhitelist(mCommands).orElse(null);
                 if (cacheType != null) {
                     String cacheKey = getCacheKey(cacheType);
                     if (cacheKey != null) {
@@ -129,10 +129,10 @@ public class CometRequest extends AbsRequest {
                     }
                 }
             }
-            retval = Option.fromNullable(newVal);
+            retval = Optional.ofNullable(newVal);
             mCacheEntry = retval;
         }
-        return retval.orNull();
+        return retval.orElse(null);
     }
 
     @Nullable
@@ -267,7 +267,7 @@ public class CometRequest extends AbsRequest {
             "jiveupdatealarm;", "favorites;items;");
 
     @Nonnull
-    static private Option<CacheEntry.Type> checkServerCacheWhitelist(List<Object> commands) {
+    static private Optional<CacheEntry.Type> checkServerCacheWhitelist(List<Object> commands) {
         CacheEntry.Type retval = null;
         if (OSLog.isLoggable(Tag.CACHE, OSLog.VERBOSE)) {
             OSLog.v(Tag.CACHE, "cache whitelist check " + commands);
@@ -308,7 +308,7 @@ public class CometRequest extends AbsRequest {
                 OSLog.d(Tag.CACHE, "Unhandled uncached/nocachelist command string: " + commands);
             }
         }
-        return Option.fromNullable(retval);
+        return Optional.ofNullable(retval);
     }
 
     static class InvalidDataException extends SBRequestException {

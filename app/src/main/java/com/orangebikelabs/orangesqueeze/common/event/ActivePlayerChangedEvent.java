@@ -6,7 +6,7 @@
 package com.orangebikelabs.orangesqueeze.common.event;
 
 import androidx.annotation.Keep;
-import arrow.core.Option;
+import java.util.Optional;
 
 import com.google.common.base.MoreObjects;
 import com.orangebikelabs.orangesqueeze.common.PlayerId;
@@ -28,17 +28,17 @@ public class ActivePlayerChangedEvent {
     }
 
     @Nonnull
-    public Option<PlayerStatus> getPlayerStatus() {
-        return Option.fromNullable(mPlayerStatus);
+    public Optional<PlayerStatus> getPlayerStatus() {
+        return Optional.ofNullable(mPlayerStatus);
     }
 
     @Nonnull
-    public Option<PlayerId> getPlayerId() {
+    public Optional<PlayerId> getPlayerId() {
         PlayerId retval = null;
         if (mPlayerStatus != null) {
             retval = mPlayerStatus.getId();
         }
-        return Option.fromNullable(retval);
+        return Optional.ofNullable(retval);
     }
 
     @Override

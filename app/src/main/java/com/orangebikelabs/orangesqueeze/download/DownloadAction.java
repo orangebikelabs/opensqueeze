@@ -42,8 +42,7 @@ public class DownloadAction extends AbsItemAction {
         boolean retval = false;
         if (mIsSqueezeNetwork) {
             // disable download when we're connected to SN
-        } else if (item instanceof StandardMenuItem) {
-            StandardMenuItem smi = (StandardMenuItem) item;
+        } else if (item instanceof StandardMenuItem smi) {
             MenuAction goAction = MenuHelpers.getAction(smi.getMenuElement(), ActionNames.GO);
             if (goAction != null) {
                 mDownloadTitle = smi.getItemTitle();

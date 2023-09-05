@@ -62,6 +62,8 @@ android {
     }
 
     compileOptions {
+        coreLibraryDesugaringEnabled true
+
         sourceCompatibility JavaVersion.VERSION_17
         targetCompatibility JavaVersion.VERSION_17
     }
@@ -111,6 +113,9 @@ sqldelight {
 }
 
 dependencies {
+    // java8 desugaring
+    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:2.0.3'
+
     // PhotoView
     implementation 'com.github.chrisbanes:PhotoView:2.3.0'
 
@@ -144,9 +149,6 @@ dependencies {
     implementation 'androidx.preference:preference-ktx:1.2.1'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'androidx.media:media:1.6.0'
-
-    // functional programming in kotlin
-    implementation 'io.arrow-kt:arrow-core:1.2.0'
 
     implementation 'com.google.android.material:material:1.9.0'
 

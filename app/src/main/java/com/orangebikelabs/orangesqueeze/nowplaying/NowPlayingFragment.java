@@ -293,7 +293,7 @@ public class NowPlayingFragment extends AbsNowPlayingFragment {
         try {
             PlayerStatus status = mSbContext.getCheckedPlayerStatus();
 
-            String artistId = status.getArtistId().orNull();
+            String artistId = status.getArtistId().orElse(null);
             String artist = status.getDisplayArtist();
 
             if (artistId != null) {
@@ -309,7 +309,7 @@ public class NowPlayingFragment extends AbsNowPlayingFragment {
     final private OnClickListener mAlbumClickedListener = v -> {
         try {
             PlayerStatus status = mSbContext.getCheckedPlayerStatus();
-            String albumId = status.getAlbumId().orNull();
+            String albumId = status.getAlbumId().orElse(null);
             String album = status.getAlbum();
 
             if (albumId != null) {

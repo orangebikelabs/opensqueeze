@@ -6,7 +6,6 @@
 package com.orangebikelabs.orangesqueeze.common;
 
 import androidx.annotation.Keep;
-import arrow.core.Option;
 
 import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
@@ -18,6 +17,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -52,8 +52,8 @@ public class SyncStatus {
     }
 
     @Nonnull
-    synchronized public Option<Integer> getSyncGroup(PlayerId playerId) {
-        return Option.fromNullable(mPlayers.get(playerId));
+    synchronized public Optional<Integer> getSyncGroup(PlayerId playerId) {
+        return Optional.ofNullable(mPlayers.get(playerId));
     }
 
     @Nonnull
@@ -76,7 +76,7 @@ public class SyncStatus {
             // first, for this changeset do we need to update the sync groups at all?
             boolean changed;
 
-            Integer currentSyncGroup = getSyncGroup(group.get(0)).orNull();
+            Integer currentSyncGroup = getSyncGroup(group.get(0)).orElse(null);
             if (currentSyncGroup == null && group.size() == 1) {
                 changed = false;
             } else if (currentSyncGroup == null) {

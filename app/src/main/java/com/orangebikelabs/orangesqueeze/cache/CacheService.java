@@ -13,8 +13,7 @@ import android.content.pm.PackageManager;
 import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
-import arrow.core.Option;
-import arrow.core.OptionKt;
+import java.util.Optional;
 
 import com.google.common.base.MoreObjects;
 import com.google.common.base.Throwables;
@@ -293,9 +292,9 @@ public class CacheService {
         return found;
     }
 
-    public <T, C> Option<T> peek(final CacheRequestCallback<T, C> request) throws CachedItemInvalidException, CachedItemNotFoundException {
+    public <T, C> Optional<T> peek(final CacheRequestCallback<T, C> request) throws CachedItemInvalidException, CachedItemNotFoundException {
         if (!isRunning()) {
-            return OptionKt.none();
+            return Optional.empty();
         }
 
         final CacheEntry entry = request.getEntry();
@@ -308,12 +307,12 @@ public class CacheService {
                 // trigger row renewal
                 renew(request, entry, false);
             }
-            return Option.fromNullable(retval);
+            return Optional.ofNullable(retval);
         } catch (Exception e) {
             Throwables.propagateIfPossible(e, CachedItemInvalidException.class, CachedItemNotFoundException.class);
 
             OSLog.w(Tag.CACHE, "CacheService.peek(): " + e.getMessage(), e);
-            return OptionKt.none();
+            return Optional.empty();
         }
     }
 
@@ -363,14 +362,10 @@ public class CacheService {
                 // if the request wants us to do it, mark the item as invalid in case of failure
                 if (request.shouldMarkFailedRequests()) {
                     switch (e.getItemStatus()) {
-                        case INVALID:
-                            getMemoryCache().markInvalid(entry);
-                            break;
-                        case NOTFOUND:
-                            getMemoryCache().markMissing(entry);
-                            break;
-                        default:
-                            throw new IllegalStateException("Cannot set entry status to " + e.getItemStatus());
+                        case INVALID -> getMemoryCache().markInvalid(entry);
+                        case NOTFOUND -> getMemoryCache().markMissing(entry);
+                        default ->
+                                throw new IllegalStateException("Cannot set entry status to " + e.getItemStatus());
                     }
                     getDatabase().markEntry(entry, e.getItemStatus());
                 }
@@ -498,7 +493,7 @@ public class CacheService {
         String extraArg;
 
         switch (entry.getCacheType()) {
-            case SERVERSCAN: {
+            case SERVERSCAN -> {
                 Long lastScan = SBContextProvider.get().getServerStatus().getLastScanTime();
                 if (lastScan == null) {
                     // mid-scan, won't find it
@@ -506,14 +501,12 @@ public class CacheService {
                 }
                 extraSelection = COLUMN_CACHE_SERVERSCAN_TIMESTAMP + " = ?";
                 extraArg = lastScan.toString();
-                break;
             }
-            case TIMEOUT:
+            case TIMEOUT -> {
                 extraSelection = COLUMN_CACHE_EXPIRES_TIMESTAMP + " > ?";
                 extraArg = Long.toString(System.currentTimeMillis());
-                break;
-            default:
-                throw new IllegalStateException();
+            }
+            default -> throw new IllegalStateException();
         }
 
         try {
@@ -636,7 +629,7 @@ public class CacheService {
 
     @Nullable
     private <T, C> T internalLoadFromDatabase(CacheRequestCallback<T, C> request, CacheEntry entry, String extraSelection, String extraArg) throws IOException, SBCacheException {
-        ByteSource byteSource = getDatabase().loadEntry(entry, extraSelection, extraArg).orNull();
+        ByteSource byteSource = getDatabase().loadEntry(entry, extraSelection, extraArg).orElse(null);
 
         T retval = null;
         if (byteSource != null) {

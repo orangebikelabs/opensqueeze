@@ -86,7 +86,7 @@ public class ViewDownloadsAdapter extends BaseExpandableListAdapter {
             for (DownloadChild child : mChildren.get(batch)) {
                 childCount++;
                 long current = child.getStatus().getBytesRead();
-                Long length = child.getStatus().getContentLength().orNull();
+                Long length = child.getStatus().getContentLength().orElse(null);
 
                 if (current == 0) {
                     unstartedCount++;
@@ -150,7 +150,7 @@ public class ViewDownloadsAdapter extends BaseExpandableListAdapter {
             child.setProgressMax(1);
             child.setProgress(0);
         } else {
-            Long length = child.getStatus().getContentLength().orNull();
+            Long length = child.getStatus().getContentLength().orElse(null);
             if (length == null) {
                 child.setProgressIndeterminate(status.isActive());
                 child.setProgress(0);

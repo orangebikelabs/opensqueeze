@@ -34,7 +34,7 @@ import java.util.List;
 
 import javax.annotation.Nonnull;
 
-import arrow.core.Option;
+import java.util.Optional;
 
 /**
  * Various helper functions that provide access to, to some extent, various APIs that are not universally available
@@ -76,7 +76,7 @@ public class Compat {
     /**
      * retrieve the InetAddress broadcast address
      */
-    public static Option<InetAddress> getBroadcastAddress(Context context) throws SocketException, UnknownHostException {
+    public static Optional<InetAddress> getBroadcastAddress(Context context) throws SocketException, UnknownHostException {
         InetAddress retval = internalGetBroadcastAdddress(context);
         if (retval == null) {
             WifiManager wifiManager = (WifiManager) context.getApplicationContext().getSystemService(Context.WIFI_SERVICE);
@@ -92,7 +92,7 @@ public class Compat {
                 retval = InetAddress.getByAddress(quads);
             }
         }
-        return Option.fromNullable(retval);
+        return Optional.ofNullable(retval);
     }
 
     @Nonnull

@@ -641,10 +641,7 @@ abstract public class SBActivity extends AppCompatActivity {
 
         @Subscribe
         public void whenActivePlayerChanges(ActivePlayerChangedEvent event) {
-            PlayerStatus status = event.getPlayerStatus().orNull();
-            if (status != null) {
-                showPlayerSnackbar(status);
-            }
+            event.getPlayerStatus().ifPresent(status -> showPlayerSnackbar(status));
         }
 
         @Subscribe

@@ -59,9 +59,6 @@ public class JsonHelper {
     public static JsonParser createParserForData(ByteSource byteSource) throws IOException {
         DataFormatDetector detector = new DataFormatDetector(Arrays.asList(sSmileFactory, sJsonFactory));
         InputStream unbufferedStream = byteSource.openStream();
-        if (unbufferedStream == null) {
-            throw new IOException("null input stream for json parser");
-        }
         DataFormatMatcher matcher = detector.findFormat(new BufferedInputStream(unbufferedStream));
         JsonParser parser = matcher.createParserWithMatch();
         if (parser == null) {

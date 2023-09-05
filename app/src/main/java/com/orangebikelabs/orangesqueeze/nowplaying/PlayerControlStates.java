@@ -22,18 +22,18 @@ public class PlayerControlStates {
         setVisibleOrGone(destination, R.id.play_button, status.getMode() != PlayerStatus.Mode.PLAYING);
         setVisibleOrGone(destination, R.id.pause_button, status.getMode() == PlayerStatus.Mode.PLAYING);
 
-        ButtonStatus backButtonStatus = status.getButtonStatus(PlayerButton.BACK).orNull();
+        ButtonStatus backButtonStatus = status.getButtonStatus(PlayerButton.BACK).orElse(null);
 
         setVisibleOrGone(destination, R.id.previous_button, backButtonStatus != null && backButtonStatus.isEnabled());
 
-        ButtonStatus nextButtonStatus = status.getButtonStatus(PlayerButton.FORWARD).orNull();
+        ButtonStatus nextButtonStatus = status.getButtonStatus(PlayerButton.FORWARD).orElse(null);
         setVisibleOrGone(destination, R.id.next_button, nextButtonStatus != null && nextButtonStatus.isEnabled());
 
-        ButtonStatus shuffleButtonStatus = status.getButtonStatus(PlayerButton.SHUFFLE).orNull();
+        ButtonStatus shuffleButtonStatus = status.getButtonStatus(PlayerButton.SHUFFLE).orElse(null);
         boolean thumbsDownEnabled = shuffleButtonStatus != null && shuffleButtonStatus.isThumbsDown();
         setVisibleOrGone(destination, R.id.thumbsdown_button, thumbsDownEnabled);
 
-        ButtonStatus repeatButtonStatus = status.getButtonStatus(PlayerButton.REPEAT).orNull();
+        ButtonStatus repeatButtonStatus = status.getButtonStatus(PlayerButton.REPEAT).orElse(null);
         boolean thumbsUpEnabled = repeatButtonStatus != null && repeatButtonStatus.isThumbsUp();
         setVisibleOrGone(destination, R.id.thumbsup_button, thumbsUpEnabled);
 
