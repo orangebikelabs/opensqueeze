@@ -115,6 +115,7 @@
         <item>fr</item>
         <item>de</item>
         <item>sv</item>
+        <item>zh-rCN</item>
     </string-array>
 
     <string name="pref_silentaudiohack_key" translatable="false">SilentAudioHack</string>
