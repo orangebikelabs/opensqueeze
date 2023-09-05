@@ -13,7 +13,6 @@ import android.database.sqlite.SQLiteDoneException;
 import android.database.sqlite.SQLiteException;
 
 import com.google.common.io.ByteSource;
-import com.google.common.io.Closer;
 import com.google.common.io.Files;
 import com.orangebikelabs.orangesqueeze.database.OSDatabase;
 import com.orangebikelabs.orangesqueeze.common.OSAssert;
@@ -203,34 +202,20 @@ public class CacheDatabase {
         }
         externalWhere += COLUMN_CACHE_VALUE + " IS NULL";
 
-        try {
-            Closer closer = Closer.create();
-            try {
-                EntryDeleter deleter = new EntryDeleter();
-                SupportSQLiteQuery query = SupportSQLiteQueryBuilder.builder(TABLE_CACHE)
-                        .columns(new String[]{COLUMN_CACHE_ID})
-                        .selection(externalWhere, args.toArray(new String[0]))
-                        .create();
-                Cursor cursor = mDatabase.query(query);
-                if (cursor != null) {
-                    closer.register(cursor);
-                    if (cursor.moveToFirst()) {
-                        do {
-                            long id = cursor.getLong(0);
-                            deleter.delete(id);
-                        } while (cursor.moveToNext());
-                    }
-                }
-                return deleter.getCount() + updateCount;
-            } catch (Throwable t) {
-                throw closer.rethrow(t);
-            } finally {
-                closer.close();
+        EntryDeleter deleter = new EntryDeleter();
+        SupportSQLiteQuery query = SupportSQLiteQueryBuilder.builder(TABLE_CACHE)
+                .columns(new String[]{COLUMN_CACHE_ID})
+                .selection(externalWhere, args.toArray(new String[0]))
+                .create();
+        try(Cursor cursor = mDatabase.query(query)) {
+            if (cursor.moveToFirst()) {
+                do {
+                    long id = cursor.getLong(0);
+                    deleter.delete(id);
+                } while (cursor.moveToNext());
             }
-        } catch (IOException e) {
-            // should never be thrown
-            throw new RuntimeException(e);
         }
+        return deleter.getCount() + updateCount;
     }
 
     /**
@@ -330,11 +315,8 @@ public class CacheDatabase {
         final long desiredSize = (long) (CACHE_SHRINK_THRESHOLD_FACTOR * mConfiguration.getMaxExternalSize());
 
         try {
-            Closer closer = Closer.create();
-            try {
-                SqlCursor cursor = mNewDatabase.getCacheQueries().lookupExternalEntriesSortedByDisuse().execute();
+            try(SqlCursor cursor = mNewDatabase.getCacheQueries().lookupExternalEntriesSortedByDisuse().execute()) {
                 EntryDeleter deleter = new EntryDeleter();
-                closer.register(cursor);
                 while (externalSize > desiredSize && cursor.next()) {
                     long id = cursor.getLong(0);
                     long rowSize = cursor.getLong(1);
@@ -344,10 +326,6 @@ public class CacheDatabase {
                     externalSize -= rowSize;
                 }
                 OSLog.d(OSLog.Tag.CACHE, deleter.getCount() + " item(s) were shrunk from external storage");
-            } catch (Throwable t) {
-                throw closer.rethrow(t);
-            } finally {
-                closer.close();
             }
         } catch (IOException e) {
             // this shouldn't really happen
@@ -366,11 +344,8 @@ public class CacheDatabase {
 
         final long desiredSize = (long) (CACHE_SHRINK_THRESHOLD_FACTOR * mConfiguration.getMaxSqliteSize());
         try {
-            Closer closer = Closer.create();
-            try {
-                SqlCursor cursor = mNewDatabase.getCacheQueries().lookupInternalEntriesSortedByDisuse().execute();
+            try(SqlCursor cursor = mNewDatabase.getCacheQueries().lookupInternalEntriesSortedByDisuse().execute()) {
                 EntryDeleter deleter = new EntryDeleter();
-                closer.register(cursor);
                 while (internalSize > desiredSize && cursor.next()) {
                     long id = cursor.getLong(0);
                     long rowSize = cursor.getLong(1);
@@ -380,10 +355,6 @@ public class CacheDatabase {
                     internalSize -= rowSize;
                 }
                 OSLog.d(OSLog.Tag.CACHE, deleter.getCount() + " item(s) were shrunk from sqlite storage");
-            } catch (Throwable t) {
-                throw closer.rethrow(t);
-            } finally {
-                closer.close();
             }
         } catch (IOException e) {
             // shouldn't happen

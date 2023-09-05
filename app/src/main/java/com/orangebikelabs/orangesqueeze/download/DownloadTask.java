@@ -19,7 +19,6 @@ import com.beaglebuddy.mp3.id3v23.ID3v23Frame;
 import com.beaglebuddy.mp3.id3v23.frame_body.ID3v23FrameBodyTextInformation;
 import com.google.common.base.Strings;
 import com.google.common.io.ByteSink;
-import com.google.common.io.Closer;
 import com.google.common.io.Files;
 import com.orangebikelabs.orangesqueeze.artwork.ArtworkType;
 import com.orangebikelabs.orangesqueeze.artwork.StandardArtworkCacheRequest;
@@ -129,21 +128,15 @@ class DownloadTask implements Callable<Boolean> {
                         StandardArtworkCacheRequest request = new StandardArtworkCacheRequest(getContext(), coverId, ArtworkType.ALBUM_THUMBNAIL, screenWidth);
                         URL url = request.getUrl();
 
-                        Closer closer = Closer.create();
 
                         temporaryArtworkFile = File.createTempFile("download_artwork", ".jpg", getContext().getFilesDir());
-                        try {
-                            HttpURLConnection conn = HttpUtils.open(url, true);
-                            if (mCredentials != null) {
-                                mCredentials.apply(conn);
-                            }
+                        HttpURLConnection conn = HttpUtils.open(url, true);
+                        if (mCredentials != null) {
+                            mCredentials.apply(conn);
+                        }
 
-                            InputStream is = closer.register(conn.getInputStream());
+                        try(InputStream is = conn.getInputStream()) {
                             Files.asByteSink(temporaryArtworkFile).writeFrom(is);
-                        } catch (Throwable t) {
-                            throw closer.rethrow(t);
-                        } finally {
-                            closer.close();
                         }
                         mp3.setPicture(PictureType.FRONT_COVER, temporaryArtworkFile);
                     } catch (IOException e) {
@@ -256,18 +249,16 @@ class DownloadTask implements Callable<Boolean> {
                 return false;
             }
 
-            Closer closer = Closer.create();
             try {
                 // download data to a temporary file first to prevent partial files from appearing in public directories
                 ByteSink output = Files.asByteSink(temporaryDownloadLocation);
-                InputStream is = closer.register(connection.getInputStream());
-                InputStream trackingStream = closer.register(status.newTrackingInputStream(mId, is));
-                output.writeFrom(trackingStream);
+                try(InputStream is = connection.getInputStream()) {
+                    try(InputStream trackingStream = status.newTrackingInputStream(mId, is)) {
+                        output.writeFrom(trackingStream);
+                    }
+                }
             } catch (Throwable t) {
                 connection.disconnect();
-                throw closer.rethrow(t);
-            } finally {
-                closer.close();
             }
 
             // make sure directory exists, don't worry too much

@@ -5,7 +5,6 @@
 
 package com.orangebikelabs.orangesqueeze.common;
 
-import com.google.common.io.Closer;
 import com.orangebikelabs.orangesqueeze.compat.Compat;
 
 import java.io.File;
@@ -63,15 +62,10 @@ public class FileUtils {
      * copy routine that uses Okio for efficient buffering
      */
     static public void copy(File srcFile, File destFile) throws IOException {
-        Closer closer = Closer.create();
-        try {
-            BufferedSource src = closer.register(Okio.buffer(Okio.source(srcFile)));
-            BufferedSink sink = closer.register(Okio.buffer(Okio.sink(destFile)));
-            sink.writeAll(src);
-        } catch (Throwable e) {
-            throw closer.rethrow(e);
-        } finally {
-            closer.close();
+        try(BufferedSource src = Okio.buffer(Okio.source(srcFile))) {
+            try(BufferedSink sink = Okio.buffer(Okio.sink(destFile))) {
+                sink.writeAll(src);
+            }
         }
     }
 

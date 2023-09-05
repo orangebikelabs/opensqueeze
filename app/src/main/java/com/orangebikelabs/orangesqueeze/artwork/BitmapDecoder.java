@@ -12,7 +12,6 @@ import android.graphics.BitmapFactory;
 import android.util.DisplayMetrics;
 
 import com.google.common.io.ByteSource;
-import com.google.common.io.Closer;
 import com.orangebikelabs.orangesqueeze.artwork.BitmapRecycler.Criteria;
 import com.orangebikelabs.orangesqueeze.common.OSAssert;
 import com.orangebikelabs.orangesqueeze.common.OSLog;
@@ -159,23 +158,12 @@ public class BitmapDecoder {
      */
     @Nonnull
     public BitmapFactory.Options decodeHeader(ByteSource byteSource) throws IOException {
-
-        BitmapFactoryOptionsManager retval;
-
-
-        Closer closer = Closer.create();
-        try {
-            retval = closer.register(newBitmapFactoryOptions(mDisplayMetrics, Config.ARGB_8888));
+        try(BitmapFactoryOptionsManager retval = newBitmapFactoryOptions(mDisplayMetrics, Config.ARGB_8888)) {
             retval.get().inJustDecodeBounds = true;
-
-            InputStream is = closer.register(getInputStream(byteSource));
-            BitmapFactory.decodeStream(is, null, retval.get());
-
+            try(InputStream is = getInputStream(byteSource)) {
+                BitmapFactory.decodeStream(is, null, retval.get());
+            }
             return retval.get();
-        } catch (Throwable e) {
-            throw closer.rethrow(e);
-        } finally {
-            closer.close();
         }
     }
 
@@ -235,9 +223,7 @@ public class BitmapDecoder {
 
     @Nonnull
     private RecyclableBitmap internalDecodeBitmap2(ByteSource byteSource, int sampleSize, Bitmap.Config bitmapConfiguration, @Nullable Criteria recycleCriteria) throws IOException {
-        Closer closer = Closer.create();
-        try {
-            BitmapFactoryOptionsManager options = closer.register(newBitmapFactoryOptions(mDisplayMetrics, bitmapConfiguration));
+        try(BitmapFactoryOptionsManager options = newBitmapFactoryOptions(mDisplayMetrics, bitmapConfiguration)) {
             options.get().inSampleSize = sampleSize;
 
             boolean setPreferredConfig = true;
@@ -255,43 +241,40 @@ public class BitmapDecoder {
                 options.get().inPreferredConfig = bitmapConfiguration;
             }
 
-            InputStream is = closer.register(getInputStream(byteSource));
+            try(InputStream is = getInputStream(byteSource)) {
 
-            Bitmap readyBitmap = BitmapFactory.decodeStream(is, null, options.get());
-            checkBitmapReturn(readyBitmap);
+                Bitmap readyBitmap = BitmapFactory.decodeStream(is, null, options.get());
+                checkBitmapReturn(readyBitmap);
 
-            if (retval != null) {
-                if (readyBitmap != retval.get()) {
-                    // recycling didn't work, put this back in the pool immediately
-                    OSLog.v(Tag.ARTWORK, "failed to use recycled bitmap");
-                    retval.recycle();
-                    retval = null;
-                } else {
-                    OSLog.v(Tag.ARTWORK, "reused recycled bitmap");
+                if (retval != null) {
+                    if (readyBitmap != retval.get()) {
+                        // recycling didn't work, put this back in the pool immediately
+                        OSLog.v(Tag.ARTWORK, "failed to use recycled bitmap");
+                        retval.recycle();
+                        retval = null;
+                    } else {
+                        OSLog.v(Tag.ARTWORK, "reused recycled bitmap");
+                    }
                 }
-            }
-            // now, if retval is null...
-            if (retval == null) {
-                if (recycleCriteria != null) {
-                    // add this new bitmap to the pool when it is recycled
-                    retval = mRecycler.newRecyclableBitmap(readyBitmap);
-                } else {
-                    // don't make this bitmap poolable
-                    retval = RecyclableBitmap.newSimpleRecyclableInstance(readyBitmap);
+                // now, if retval is null...
+                if (retval == null) {
+                    if (recycleCriteria != null) {
+                        // add this new bitmap to the pool when it is recycled
+                        retval = mRecycler.newRecyclableBitmap(readyBitmap);
+                    } else {
+                        // don't make this bitmap poolable
+                        retval = RecyclableBitmap.newSimpleRecyclableInstance(readyBitmap);
+                    }
                 }
+                return retval;
             }
-            return retval;
-        } catch (Throwable t) {
-            throw closer.rethrow(t);
-        } finally {
-            closer.close();
         }
     }
 
     @Nonnull
     private RecyclableBitmap internalDecodeBitmap2(byte[] bytes, int sampleSize, Bitmap.Config bitmapConfiguration, @Nullable Criteria recycleCriteria) throws IOException {
-        BitmapFactoryOptionsManager options = newBitmapFactoryOptions(mDisplayMetrics, bitmapConfiguration);
-        try {
+
+        try(BitmapFactoryOptionsManager options = newBitmapFactoryOptions(mDisplayMetrics, bitmapConfiguration)) {
             options.get().inSampleSize = sampleSize;
 
             boolean setPreferredConfig = true;
@@ -333,8 +316,6 @@ public class BitmapDecoder {
                 }
             }
             return retval;
-        } finally {
-            options.close();
         }
     }
 
