@@ -24,7 +24,6 @@ import com.orangebikelabs.orangesqueeze.common.OSLog;
 import com.orangebikelabs.orangesqueeze.common.Reporting;
 import com.orangebikelabs.orangesqueeze.common.SBContextProvider;
 import com.orangebikelabs.orangesqueeze.common.ServerContent;
-import com.orangebikelabs.orangesqueeze.common.ThreadLocalStringBuilder;
 import com.orangebikelabs.orangesqueeze.common.event.TriggerMenuLoad;
 import com.orangebikelabs.orangesqueeze.database.DatabaseAccess;
 import com.orangebikelabs.orangesqueeze.database.DatabaseAccessKt;
@@ -74,11 +73,6 @@ public class CacheDatabase {
 
     // after 4K, use a separate file
     final private static long CACHE_EXPANSION_THRESHOLD = 4096;
-
-    /**
-     * because cache requests are so common, avoid creating a new stringbuilder on every request
-     */
-    final private static ThreadLocalStringBuilder sCacheSelectionBuilder = ThreadLocalStringBuilder.newInstance();
 
     /**
      * reference to the database object
@@ -147,7 +141,7 @@ public class CacheDatabase {
     @Nonnull
     public String getCacheSelectionClause(String... extras) {
         // WARNING: if this changes, also need to change cleanup() method implementation to match
-        StringBuilder selection = sCacheSelectionBuilder.get();
+        StringBuilder selection = new StringBuilder();
         OSAssert.assertEquals(selection.length(), 0, "length should be zero leaving the get()");
 
         selection.append(ServerContent.COLUMN_FK_SERVER_ID);

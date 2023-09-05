@@ -29,7 +29,6 @@ import com.orangebikelabs.orangesqueeze.common.ConnectionInfo;
 import com.orangebikelabs.orangesqueeze.common.OSLog;
 import com.orangebikelabs.orangesqueeze.common.OSLog.Tag;
 import com.orangebikelabs.orangesqueeze.common.SBContextProvider;
-import com.orangebikelabs.orangesqueeze.common.ThreadLocalStringBuilder;
 import com.orangebikelabs.orangesqueeze.net.HttpUtils;
 import com.orangebikelabs.orangesqueeze.net.SBCredentials;
 
@@ -50,9 +49,6 @@ import javax.annotation.Nullable;
  * @author tsandee
  */
 public class StandardArtworkCacheRequest implements ArtworkCacheRequestCallback {
-
-    final static private ThreadLocalStringBuilder sThreadLocalStringBuilder = ThreadLocalStringBuilder.newInstance();
-
     @Nonnull
     final protected Context mContext;
 
@@ -83,7 +79,7 @@ public class StandardArtworkCacheRequest implements ArtworkCacheRequestCallback 
         mWidthPixels = widthPixels;
         mCompressFormat = BitmapTools.getStoredCompressFormat(mType, mWidthPixels);
 
-        StringBuilder cacheKey = sThreadLocalStringBuilder.get();
+        StringBuilder cacheKey = new StringBuilder();
         OSAssert.assertEquals(cacheKey.length(), 0, "length should be zero leaving the get()");
         cacheKey.append("Artwork{id=");
         cacheKey.append(id);
@@ -100,19 +96,12 @@ public class StandardArtworkCacheRequest implements ArtworkCacheRequestCallback 
         cacheKey.append(quality);
         cacheKey.append("}");
 
-        CacheEntry.Type cacheType;
+        CacheEntry.Type cacheType = switch (type) {
+            case ALBUM_FULL, ALBUM_THUMBNAIL, ARTIST_THUMBNAIL, LEGACY_ALBUM_THUMBNAIL ->
+                    Type.SERVERSCAN;
+            default -> Type.TIMEOUT;
+        };
 
-        switch (type) {
-            case ALBUM_FULL:
-            case ALBUM_THUMBNAIL:
-            case ARTIST_THUMBNAIL:
-            case LEGACY_ALBUM_THUMBNAIL:
-                cacheType = Type.SERVERSCAN;
-                break;
-            default:
-                cacheType = Type.TIMEOUT;
-                break;
-        }
         // don't use memory cache for thumbnails
         mEntry = new CacheEntry(cacheType, SBContextProvider.get().getServerId(), cacheKey.toString());
     }
@@ -131,16 +120,10 @@ public class StandardArtworkCacheRequest implements ArtworkCacheRequestCallback 
 
     @Nonnull
     public URL getUrl() throws IOException {
-        URL retval;
-        switch (mType) {
-            case SERVER_RESOURCE_FULL:
-            case SERVER_RESOURCE_THUMBNAIL:
-                retval = getServerResourceUrl(mId);
-                break;
-            default:
-                retval = getCoverArtUrl(mId);
-                break;
-        }
+        URL retval = switch (mType) {
+            case SERVER_RESOURCE_FULL, SERVER_RESOURCE_THUMBNAIL -> getServerResourceUrl(mId);
+            default -> getCoverArtUrl(mId);
+        };
         return retval;
     }
 
@@ -226,16 +209,16 @@ public class StandardArtworkCacheRequest implements ArtworkCacheRequestCallback 
             int statusCode = connection.getResponseCode();
             if (statusCode != HttpURLConnection.HTTP_OK) {
                 switch (statusCode) {
-                    case HttpURLConnection.HTTP_NOT_FOUND:
+                    case HttpURLConnection.HTTP_NOT_FOUND -> {
                         itemNotFoundMessage = "Remote artwork missing, marking as such in cache";
                         if (OSLog.isLoggable(Tag.ARTWORK, OSLog.VERBOSE)) {
                             OSLog.v(Tag.ARTWORK, itemNotFoundMessage);
                         }
-                        break;
-                    default:
+                    }
+                    default -> {
                         itemNotFoundMessage = "Remote artwork missing (reason=" + connection.getResponseMessage() + ")";
                         OSLog.w(Tag.ARTWORK, itemNotFoundMessage);
-                        break;
+                    }
                 }
             } else {
                 InputStream is = closer.register(connection.getInputStream());
@@ -402,7 +385,7 @@ public class StandardArtworkCacheRequest implements ArtworkCacheRequestCallback 
 
         @Nonnull
         @Override
-        public InCacheArtworkData adaptForMemoryCache() throws IOException {
+        public InCacheArtworkData adaptForMemoryCache() {
             return InCacheArtworkData.newInstance(mApplicationContext, mArtworkKey, mType, mDecodedBitmap);
         }
 
