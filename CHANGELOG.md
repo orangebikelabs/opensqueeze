@@ -9,15 +9,9 @@
 * update authors credit to include nemooon for Simplified Chinese ([0d50126](https://github.com/orangebikelabs/opensqueeze/commit/0d50126cdd27b8d921436b2fbf78d2bd7c59a875))
 * update to target sdk 34 and make some of the necessary compatibility changes ([3f27628](https://github.com/orangebikelabs/opensqueeze/commit/3f276289820ad6658d730aa7d4a440ead1045e1f))
 
-
 ### Features
 
 * add initial support for Swedish (Svenska) language ([5ed3a2f](https://github.com/orangebikelabs/opensqueeze/commit/5ed3a2f7b3f1612cf4b9ef0c2fbb1af30fd3cab7))
-
-
-### Reverts
-
-* Revert "Auxiliary commit to revert individual files from 85c2d7b633bf5374e6841b19a91bdcab3d7b1be8" ([68b9bab](https://github.com/orangebikelabs/opensqueeze/commit/68b9bab707d60d372d9cef0338685a67e60da5ae))
 
 ## [2.6.2](https://github.com/orangebikelabs/opensqueeze/compare/v2.6.1...v2.6.2) (2022-11-28)
 
