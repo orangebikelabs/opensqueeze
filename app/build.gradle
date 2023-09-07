@@ -39,6 +39,8 @@ android {
         minSdkVersion 21
         targetSdkVersion 34
 
+        resConfigs "en", "de", "fr", "sv", "zh"
+
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
