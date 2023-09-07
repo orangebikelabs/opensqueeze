@@ -1,3 +1,18 @@
+# [2.7.0-alpha.26](https://github.com/orangebikelabs/opensqueeze/compare/v2.7.0-alpha.25...v2.7.0-alpha.26) (2023-09-07)
+
+
+### Bug Fixes
+
+* bump androidx.fragment:fragment-ktx from 1.6.0 to 1.6.1 ([f8e3b5c](https://github.com/orangebikelabs/opensqueeze/commit/f8e3b5c2af7482a6d05ef6c1dc35e9449d97d450))
+* bump androidx.recyclerview:recyclerview from 1.3.0 to 1.3.1 ([8df709f](https://github.com/orangebikelabs/opensqueeze/commit/8df709f2b1a09bc7e593818bd0650618ab29d1ef))
+* bump org.jetbrains.kotlinx:kotlinx-coroutines-core ([71e944c](https://github.com/orangebikelabs/opensqueeze/commit/71e944cca1912a50808aead487b634c957cafe2a))
+* enable simplified chinese translations ([f20b2fe](https://github.com/orangebikelabs/opensqueeze/commit/f20b2fef19f883db812510ffaa5a3c310b1bcad0))
+* fix language selection for simplified chinese ([09b3a5c](https://github.com/orangebikelabs/opensqueeze/commit/09b3a5c0d366659355b80c2cd48ed4d00e162709))
+* flip-flop back to Java 8 optional instead of arrowkt ([bc373d8](https://github.com/orangebikelabs/opensqueeze/commit/bc373d8e9e5c856267278047ba55f9cb550d000a))
+* force new build ([d84031c](https://github.com/orangebikelabs/opensqueeze/commit/d84031c5741e34312a978e4805f497dcad3702c4))
+* Properly detect SqueezePlayer on Android 11 and higher ([7633ecf](https://github.com/orangebikelabs/opensqueeze/commit/7633ecff1e88b4cb73f577eb2442daeda6f8bb47))
+* update authors credit to include nemooon for Simplified Chinese ([0d50126](https://github.com/orangebikelabs/opensqueeze/commit/0d50126cdd27b8d921436b2fbf78d2bd7c59a875))
+
 ## [2.7.0-alpha.25](https://github.com/orangebikelabs/opensqueeze/compare/v2.7.0-alpha.24...v2.7.0-alpha.25) (2023-07-17)
 
 
