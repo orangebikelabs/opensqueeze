@@ -11,7 +11,7 @@ on:
 
 env:
   # this is the command needed to bootstrap the tooling for semantic-release based on our release configuration
-  semrel_package_bootstrap: "npm i semantic-release@19 @semantic-release/changelog @semantic-release/git semantic-release-export-data conventional-changelog-conventionalcommits -D"
+  semrel_package_bootstrap: "npm i semantic-release @semantic-release/changelog @semantic-release/git conventional-changelog-conventionalcommits -D"
 
 jobs:
   get-next-version:
@@ -27,17 +27,19 @@ jobs:
           node-version: lts/*
 
       - run: ${{ env.semrel_package_bootstrap }}
-      - run: npx semantic-release --dry-run
+
+      - name: Semantic Release Dry Run
+        uses: cycjimmy/semantic-release-action@v4
         id: get-next-version
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}     # use limited token for readonly version probing
 
-      - run: "echo Detected next version: ${{ steps.get-next-version.outputs.new-release-version }}"
-      - run: "echo Release will be published: ${{ steps.get-next-version.outputs.new-release-published }}"
+      - run: "echo Detected next version: ${{ steps.get-next-version.outputs.new_release_version }}"
+      - run: "echo Release will be published: ${{ steps.get-next-version.outputs.new_release_published }}"
 
     outputs:
-      new-release-published: ${{ steps.get-next-version.outputs.new-release-published }}
-      new-release-version: ${{ steps.get-next-version.outputs.new-release-version }}
+      new-release-published: ${{ steps.get-next-version.outputs.new_release_published }}
+      new-release-version: ${{ steps.get-next-version.outputs.new_release_version }}
 
   build:
     env:
@@ -121,10 +123,11 @@ jobs:
       - name: Bootstrap npm Semantic Release packages
         run: ${{ env.semrel_package_bootstrap }}
 
-      - name: Release
+      - name: Semantic Release
+        uses:
+          cycjimmy/semantic-release-action@v4
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }} # use supplied semantic release gh-token with extra permissions
-        run: npx semantic-release
 
   cleanup:
     name: Cleanup old builds
