@@ -196,11 +196,11 @@
 
         <service
             android:name=".app.ServerConnectionService"
+            android:foregroundServiceType="mediaPlayback"
             android:enabled="true"
-            android:exported="true"
+            android:exported="false"
             android:label="@string/connection_service_label"
-            android:stopWithTask="true"
-            tools:ignore="ExportedService">
+            android:stopWithTask="true">
 
             <intent-filter>
                 <action android:name="android.intent.action.MEDIA_BUTTON" />
