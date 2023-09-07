@@ -11,7 +11,7 @@ on:
 
 env:
   # this is the command needed to bootstrap the tooling for semantic-release based on our release configuration
-  semrel_package_bootstrap: "npm i semantic-release @semantic-release/changelog @semantic-release/git conventional-changelog-conventionalcommits -D"
+  semrel_package_bootstrap: "npm i semantic-release@20 @semantic-release/changelog @semantic-release/git conventional-changelog-conventionalcommits -D"
 
 jobs:
   get-next-version:
