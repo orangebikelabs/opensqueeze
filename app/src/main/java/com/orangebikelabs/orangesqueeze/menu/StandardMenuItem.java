@@ -40,8 +40,7 @@ import javax.annotation.Nullable;
 import javax.annotation.concurrent.GuardedBy;
 
 import androidx.core.text.HtmlCompat;
-import arrow.core.Option;
-import arrow.core.OptionKt;
+import java.util.Optional;
 
 /**
  * @author tbsandee@orangebikelabs.com
@@ -213,13 +212,13 @@ public class StandardMenuItem extends Item {
     }
 
     @Nonnull
-    public Option<String> getText2() {
-        return Option.fromNullable(mMenuElement.getText2());
+    public Optional<String> getText2() {
+        return Optional.ofNullable(mMenuElement.getText2());
     }
 
     @Nonnull
-    public Option<String> getText3() {
-        return OptionKt.none();
+    public Optional<String> getText3() {
+        return Optional.empty();
     }
 
     @Override
@@ -341,6 +340,7 @@ public class StandardMenuItem extends Item {
 
         String nodeId = getMenuElement().getId();
         if (isNode()) {
+            OSAssert.assertNotNull(nodeId, "node id must not be null");
             retval = NavigationItem.Companion.newBrowseNodeItem(getItemTitle(), nodeId, mForHome, null);
         } else {
             MenuAction action = getMenuElement().getActions().get(ActionNames.DO);

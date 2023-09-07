@@ -176,14 +176,9 @@ public class StreamingReader extends AbsInterruptibleThreadService {
                 }
 
                 switch (mState) {
-                    case READING_HEADERS:
-                        readHeaders();
-                        break;
-                    case READING_CHUNKED_HEADERS:
-                    case READING_CHUNKED_CRLF:
-                        nextChunk();
-                        break;
-                    case IN_CHUNKED_CONTENT:
+                    case READING_HEADERS -> readHeaders();
+                    case READING_CHUNKED_HEADERS, READING_CHUNKED_CRLF -> nextChunk();
+                    case IN_CHUNKED_CONTENT -> {
                         if (mContentPos < mContentLength) {
                             retval = mInputStream.read();
                             if (retval != -1) {
@@ -193,8 +188,8 @@ public class StreamingReader extends AbsInterruptibleThreadService {
                         } else {
                             mState = State.READING_CHUNKED_CRLF;
                         }
-                        break;
-                    case IN_FIXED_CONTENT:
+                    }
+                    case IN_FIXED_CONTENT -> {
                         if (mContentPos < mContentLength) {
                             retval = mInputStream.read();
                             if (retval != -1) {
@@ -204,11 +199,11 @@ public class StreamingReader extends AbsInterruptibleThreadService {
                         } else {
                             mState = State.READING_HEADERS;
                         }
-                        break;
-                    case DISCONNECTED:
+                    }
+                    case DISCONNECTED -> {
                         retval = -1;
                         done = true;
-                        break;
+                    }
                 }
             }
             return retval;
@@ -274,17 +269,16 @@ public class StreamingReader extends AbsInterruptibleThreadService {
                             throw new InterruptedIOException();
                         }
                         switch (c) {
-                            case HttpUtils.LF:
-                            case HttpUtils.CR:
+                            case HttpUtils.LF, HttpUtils.CR -> {
                                 if (header.length() > 0) {
                                     processHeader(headers, header);
                                 }
                                 consecutiveCrLf++;
-                                break;
-                            default:
+                            }
+                            default -> {
                                 consecutiveCrLf = 0;
                                 header.append((char) c);
-                                break;
+                            }
                         }
                     }
                 }

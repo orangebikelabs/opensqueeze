@@ -5,13 +5,15 @@
 
 package com.orangebikelabs.orangesqueeze.cache;
 
+import android.Manifest;
 import android.app.PendingIntent;
 import android.content.Context;
+import android.content.pm.PackageManager;
 
+import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
-import arrow.core.Option;
-import arrow.core.OptionKt;
+import java.util.Optional;
 
 import com.google.common.base.MoreObjects;
 import com.google.common.base.Throwables;
@@ -255,17 +257,18 @@ public class CacheService {
             return;
         }
         try {
-            NotificationCompat.Builder builder = new NotificationCompat.Builder(mApplicationContext, NotificationCommon.CACHE_NOTIFICATION_CHANNEL_ID);
-            builder.setOngoing(true);
-            builder.setPriority(NotificationCompat.PRIORITY_DEFAULT);
-            builder.setContentTitle(mApplicationContext.getString(R.string.app_name));
-            builder.setContentText(mApplicationContext.getString(R.string.wipingcache_notification_text));
-            builder.setSmallIcon(R.drawable.ic_notification);
-            builder.setContentIntent(PendingIntent.getActivity(mApplicationContext, 0,
-                    MainActivity.Companion.newIntent(mApplicationContext),
-                    Compat.getDefaultPendingIntentFlags() | PendingIntent.FLAG_UPDATE_CURRENT));
-
-            notificationManager.notify(Constants.NOTIFICATIONID_CACHEWIPE, builder.build());
+            if (ActivityCompat.checkSelfPermission(mApplicationContext, Manifest.permission.POST_NOTIFICATIONS) == PackageManager.PERMISSION_GRANTED) {
+                NotificationCompat.Builder builder = new NotificationCompat.Builder(mApplicationContext, NotificationCommon.CACHE_NOTIFICATION_CHANNEL_ID);
+                builder.setOngoing(true);
+                builder.setPriority(NotificationCompat.PRIORITY_DEFAULT);
+                builder.setContentTitle(mApplicationContext.getString(R.string.app_name));
+                builder.setContentText(mApplicationContext.getString(R.string.wipingcache_notification_text));
+                builder.setSmallIcon(R.drawable.ic_notification);
+                builder.setContentIntent(PendingIntent.getActivity(mApplicationContext, 0,
+                        MainActivity.Companion.newIntent(mApplicationContext),
+                        Compat.getDefaultPendingIntentFlags() | PendingIntent.FLAG_UPDATE_CURRENT));
+                notificationManager.notify(Constants.NOTIFICATIONID_CACHEWIPE, builder.build());
+            }
 
             // not required that the service be running for this method to execute
             getMemoryCache().clear();
@@ -289,9 +292,9 @@ public class CacheService {
         return found;
     }
 
-    public <T, C> Option<T> peek(final CacheRequestCallback<T, C> request) throws CachedItemInvalidException, CachedItemNotFoundException {
+    public <T, C> Optional<T> peek(final CacheRequestCallback<T, C> request) throws CachedItemInvalidException, CachedItemNotFoundException {
         if (!isRunning()) {
-            return OptionKt.none();
+            return Optional.empty();
         }
 
         final CacheEntry entry = request.getEntry();
@@ -304,12 +307,12 @@ public class CacheService {
                 // trigger row renewal
                 renew(request, entry, false);
             }
-            return Option.fromNullable(retval);
+            return Optional.ofNullable(retval);
         } catch (Exception e) {
             Throwables.propagateIfPossible(e, CachedItemInvalidException.class, CachedItemNotFoundException.class);
 
             OSLog.w(Tag.CACHE, "CacheService.peek(): " + e.getMessage(), e);
-            return OptionKt.none();
+            return Optional.empty();
         }
     }
 
@@ -359,14 +362,10 @@ public class CacheService {
                 // if the request wants us to do it, mark the item as invalid in case of failure
                 if (request.shouldMarkFailedRequests()) {
                     switch (e.getItemStatus()) {
-                        case INVALID:
-                            getMemoryCache().markInvalid(entry);
-                            break;
-                        case NOTFOUND:
-                            getMemoryCache().markMissing(entry);
-                            break;
-                        default:
-                            throw new IllegalStateException("Cannot set entry status to " + e.getItemStatus());
+                        case INVALID -> getMemoryCache().markInvalid(entry);
+                        case NOTFOUND -> getMemoryCache().markMissing(entry);
+                        default ->
+                                throw new IllegalStateException("Cannot set entry status to " + e.getItemStatus());
                     }
                     getDatabase().markEntry(entry, e.getItemStatus());
                 }
@@ -494,7 +493,7 @@ public class CacheService {
         String extraArg;
 
         switch (entry.getCacheType()) {
-            case SERVERSCAN: {
+            case SERVERSCAN -> {
                 Long lastScan = SBContextProvider.get().getServerStatus().getLastScanTime();
                 if (lastScan == null) {
                     // mid-scan, won't find it
@@ -502,14 +501,12 @@ public class CacheService {
                 }
                 extraSelection = COLUMN_CACHE_SERVERSCAN_TIMESTAMP + " = ?";
                 extraArg = lastScan.toString();
-                break;
             }
-            case TIMEOUT:
+            case TIMEOUT -> {
                 extraSelection = COLUMN_CACHE_EXPIRES_TIMESTAMP + " > ?";
                 extraArg = Long.toString(System.currentTimeMillis());
-                break;
-            default:
-                throw new IllegalStateException();
+            }
+            default -> throw new IllegalStateException();
         }
 
         try {
@@ -632,7 +629,7 @@ public class CacheService {
 
     @Nullable
     private <T, C> T internalLoadFromDatabase(CacheRequestCallback<T, C> request, CacheEntry entry, String extraSelection, String extraArg) throws IOException, SBCacheException {
-        ByteSource byteSource = getDatabase().loadEntry(entry, extraSelection, extraArg).orNull();
+        ByteSource byteSource = getDatabase().loadEntry(entry, extraSelection, extraArg).orElse(null);
 
         T retval = null;
         if (byteSource != null) {

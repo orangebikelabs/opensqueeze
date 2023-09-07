@@ -65,3 +65,7 @@ Open Source projects. Thank you to them for providing this service!
 
 The license for the code is [Apache License, Version 2.0](https://www.apache.org/licenses/LICENSE-2.0).
 
+## Contributors
+
+See the [AUTHORS.md](AUTHORS.md) file for a list of major contributors. If you have contributed and you don't
+see yourself on this list, please [contact me](mailto:tbsandee@orangebikelabs.com) or open a PR.

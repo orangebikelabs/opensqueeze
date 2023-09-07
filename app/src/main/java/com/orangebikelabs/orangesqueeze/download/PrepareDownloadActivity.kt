@@ -5,21 +5,20 @@
 package com.orangebikelabs.orangesqueeze.download
 
 import android.content.Context
-import com.orangebikelabs.orangesqueeze.app.SBActivity
-import android.os.Bundle
-import com.orangebikelabs.orangesqueeze.R
 import android.content.Intent
-import com.orangebikelabs.orangesqueeze.ui.MainActivity
-import androidx.core.app.NavUtils
+import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
-import android.widget.FrameLayout
+import androidx.core.app.NavUtils
 import androidx.core.app.TaskStackBuilder
 import androidx.fragment.app.commitNow
+import com.orangebikelabs.orangesqueeze.R
+import com.orangebikelabs.orangesqueeze.app.SBActivity
 import com.orangebikelabs.orangesqueeze.common.NavigationCommandSet
 import com.orangebikelabs.orangesqueeze.common.NavigationItem
 import com.orangebikelabs.orangesqueeze.databinding.ToolbarActivityBinding
 import com.orangebikelabs.orangesqueeze.databinding.ToolbarBinding
+import com.orangebikelabs.orangesqueeze.ui.MainActivity
 
 /**
  * @author tsandee

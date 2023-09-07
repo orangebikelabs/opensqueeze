@@ -64,27 +64,28 @@ class MainPreferenceActivity : AbsPreferenceActivity() {
         override fun updatePreferences() {
             val cache = CacheServiceProvider.get()
 
-            val themePref = findPreference<ListPreference>(SBPreferences.get().themeIdKey)
-            themePref?.setOnPreferenceChangeListener { _, newValue ->
-                val theme = SBPreferences.ThemePreference.lookup(newValue)
-                AppCompatDelegate.setDefaultNightMode(theme.nightMode)
-                true
+            findPreference<ListPreference>(SBPreferences.get().themeIdKey)?.let {
+                it.setOnPreferenceChangeListener { _, newValue ->
+                    val theme = SBPreferences.ThemePreference.lookup(newValue)
+                    AppCompatDelegate.setDefaultNightMode(theme.nightMode)
+                    true
+                }
             }
 
-            val storageCachePref = findPreference<Preference>(getString(R.string.pref_cache_storagesize_key))
-            storageCachePref?.summary = getString(R.string.pref_cache_storagesize_summary, (cache.configuration.maxExternalSize / Constants.MB).toString())
+            findPreference<Preference>(getString(R.string.pref_cache_storagesize_key))?.let {
+                it.summary = getString(R.string.pref_cache_storagesize_summary, (cache.configuration.maxExternalSize / Constants.MB).toString())
+            }
 
-            val languagePref = findPreference<ListPreference>(getString(R.string.pref_language_key))
-            if (languagePref != null) {
+            findPreference<ListPreference>(getString(R.string.pref_language_key))?.let { languagePref ->
                 languagePref.onPreferenceChangeListener = null
-
                 val savedLanguage = Locale(SBPreferences.get().selectedLanguage).language
-                if (savedLanguage == Locale("fr").language) {
-                    languagePref.value = "fr"
-                } else if (savedLanguage == Locale("de").language) {
-                    languagePref.value = "de"
-                } else {
-                    languagePref.value = "en"
+                val languageKeyArray = resources.getStringArray(R.array.pref_language_values)
+                languagePref.value = languageKeyArray[0]
+                for(languageKey in languageKeyArray) {
+                    if(savedLanguage == Locale(languageKey).language) {
+                        languagePref.value = languageKey
+                        break
+                    }
                 }
                 languagePref.setOnPreferenceChangeListener { _, newValue ->
                     SBPreferences.get().selectedLanguage = newValue as String
@@ -94,10 +95,8 @@ class MainPreferenceActivity : AbsPreferenceActivity() {
             }
 
             // if SqueezePlayer isn't installed, don't show preference
-            val generalCat = findPreference<PreferenceCategory>(getString(R.string.pref_general_category_key))
-            if (generalCat != null) {
-                val squeezePlayerPref = findPreference<Preference>(getString(R.string.pref_autolaunch_squeezeplayer_key))
-                if (squeezePlayerPref != null) {
+            findPreference<PreferenceCategory>(getString(R.string.pref_general_category_key))?.let { generalCat ->
+                findPreference<Preference>(getString(R.string.pref_autolaunch_squeezeplayer_key))?.let { squeezePlayerPref ->
                     if (!SqueezePlayerHelper.isAvailable(requireContext())) {
                         generalCat.removePreference(squeezePlayerPref)
                     }
@@ -105,31 +104,29 @@ class MainPreferenceActivity : AbsPreferenceActivity() {
             }
 
             // initialize this from pref
-            val use24HourTimeFormat = findPreference<Preference>(getString(R.string.pref_use24hourtimeformat_key))
-            use24HourTimeFormat?.setDefaultValue(SBPreferences.get().shouldUse24HourTimeFormat())
+            findPreference<Preference>(getString(R.string.pref_use24hourtimeformat_key))
+                    ?.setDefaultValue(SBPreferences.get().shouldUse24HourTimeFormat())
 
-            val pref = findPreference<Preference>(getString(R.string.pref_automaticmute_key))
-            pref?.setOnPreferenceClickListener {
-                onAutomaticMutePreferenceSelected()
-                true
+            findPreference<Preference>(getString(R.string.pref_automaticmute_key))?.let { pref ->
+                pref.setOnPreferenceClickListener {
+                    onAutomaticMutePreferenceSelected()
+                    true
+                }
+                val currentOrdinal = SBPreferences.get().onCallBehavior.ordinal
+                val value = resources.getStringArray(R.array.pref_automaticmute_entries)[currentOrdinal]
+                pref.summary = getString(R.string.pref_automaticmute_summary, value)
             }
-            val currentOrdinal = SBPreferences.get().onCallBehavior.ordinal
-            val value = resources.getStringArray(R.array.pref_automaticmute_entries)[currentOrdinal]
-            pref?.summary = getString(R.string.pref_automaticmute_summary, value)
 
-            val cacheLocationPref = findPreference<Preference>(getString(R.string.pref_cachelocation_key))
-            if (cacheLocationPref != null) {
+            findPreference<Preference>(getString(R.string.pref_cachelocation_key))?.let {
                 val loc = getString(SBPreferences.get().cacheLocation.rid)
-                cacheLocationPref.summary = getString(R.string.pref_cachelocation_summary, loc)
+                it.summary = getString(R.string.pref_cachelocation_summary, loc)
             }
 
-            val albumSortPref = findPreference<Preference>(getString(R.string.pref_browse_albumsort_key))
-            if (albumSortPref != null) {
-                albumSortPref.isEnabled = SBContextProvider.get().isConnected
+            findPreference<Preference>(getString(R.string.pref_browse_albumsort_key))?.let {
+                it.isEnabled = SBContextProvider.get().isConnected
             }
 
-            val cellCountPref: ListPreference? = findPreference(getString(R.string.pref_browse_gridcellcount_key))
-            if (cellCountPref != null) {
+            findPreference<ListPreference>(getString(R.string.pref_browse_gridcellcount_key))?.let { cellCountPref ->
                 val dm = resources.displayMetrics
                 val dpWidth = (min(dm.widthPixels, dm.heightPixels) / dm.density).toInt()
 

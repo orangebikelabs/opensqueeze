@@ -239,7 +239,7 @@ public class PrepareDownloadFragment extends SBFragment {
 
 //	private void prepareDownloads() {
 //		try {
-//			SBCredentials creds = mSbContext.getConnectionCredentials().orNull();
+//			SBCredentials creds = mSbContext.getConnectionCredentials().orElse(null);
 //
 //			DownloadManager downloadManager = (DownloadManager) getActivity().getSystemService(Context.DOWNLOAD_SERVICE);
 //			for (int i = 0; i < mAdapter.getCount(); i++) {
@@ -256,7 +256,7 @@ public class PrepareDownloadFragment extends SBFragment {
 //				}
 //				if (creds != null) {
 //					URI uri = URI.create(sourceUri.toString());
-//					Header authHeader = creds.getHeader(uri).orNull();
+//					Header authHeader = creds.getHeader(uri).orElse(null);
 //					if (authHeader != null) {
 //						request.addRequestHeader(authHeader.getName(), authHeader.getValue());
 //					}

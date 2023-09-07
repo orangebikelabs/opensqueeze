@@ -10,7 +10,6 @@ import android.view.View;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.orangebikelabs.orangesqueeze.browse.common.BrowseRequest;
-import com.orangebikelabs.orangesqueeze.common.MoreOption;
 import com.orangebikelabs.orangesqueeze.common.NavigationItem;
 import com.orangebikelabs.orangesqueeze.common.OSAssert;
 import com.orangebikelabs.orangesqueeze.common.SBContextProvider;
@@ -40,7 +39,7 @@ public class LegacySearchResultsFragment extends GlobalSearchResultsFragment {
     @Override
     @Nonnull
     protected BrowseRequest newRequest(@Nullable Bundle args) {
-        String query = MoreOption.getOrElse(getQuery(), "");
+        String query = getQuery().orElse("");
 
         return new LegacySearchRequest(SBContextProvider.get().getPlayerId(), query);
     }

@@ -141,7 +141,7 @@ class CustomizeRootMenuActivity : DrawerActivity() {
             val checkedItems = mutableSetOf<MenuElement>()
             val accessibleItems = mutableSetOf<MenuElement>()
 
-            NodeItem.getRootMenu(playerId).forEach {
+            NodeItem.getRootMenu(playerId).toList().forEach {
                 val elem = it.menuElement
 
                 val id = checkNotNull(elem.id) { "id shouldn't be null, we removed the null ones" }

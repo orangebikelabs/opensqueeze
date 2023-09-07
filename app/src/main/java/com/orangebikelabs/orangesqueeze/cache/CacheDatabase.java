@@ -13,7 +13,6 @@ import android.database.sqlite.SQLiteDoneException;
 import android.database.sqlite.SQLiteException;
 
 import com.google.common.io.ByteSource;
-import com.google.common.io.Closer;
 import com.google.common.io.Files;
 import com.orangebikelabs.orangesqueeze.database.OSDatabase;
 import com.orangebikelabs.orangesqueeze.common.OSAssert;
@@ -24,7 +23,6 @@ import com.orangebikelabs.orangesqueeze.common.OSLog;
 import com.orangebikelabs.orangesqueeze.common.Reporting;
 import com.orangebikelabs.orangesqueeze.common.SBContextProvider;
 import com.orangebikelabs.orangesqueeze.common.ServerContent;
-import com.orangebikelabs.orangesqueeze.common.ThreadLocalStringBuilder;
 import com.orangebikelabs.orangesqueeze.common.event.TriggerMenuLoad;
 import com.orangebikelabs.orangesqueeze.database.DatabaseAccess;
 import com.orangebikelabs.orangesqueeze.database.DatabaseAccessKt;
@@ -48,8 +46,7 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 import androidx.sqlite.db.SupportSQLiteQuery;
 import androidx.sqlite.db.SupportSQLiteQueryBuilder;
 import androidx.sqlite.db.SupportSQLiteStatement;
-import arrow.core.Option;
-import arrow.core.OptionKt;
+import java.util.Optional;
 
 import static com.orangebikelabs.orangesqueeze.common.CacheContent.COLUMN_CACHE_EXPIRES_TIMESTAMP;
 import static com.orangebikelabs.orangesqueeze.common.CacheContent.COLUMN_CACHE_ID;
@@ -74,11 +71,6 @@ public class CacheDatabase {
 
     // after 4K, use a separate file
     final private static long CACHE_EXPANSION_THRESHOLD = 4096;
-
-    /**
-     * because cache requests are so common, avoid creating a new stringbuilder on every request
-     */
-    final private static ThreadLocalStringBuilder sCacheSelectionBuilder = ThreadLocalStringBuilder.newInstance();
 
     /**
      * reference to the database object
@@ -147,7 +139,7 @@ public class CacheDatabase {
     @Nonnull
     public String getCacheSelectionClause(String... extras) {
         // WARNING: if this changes, also need to change cleanup() method implementation to match
-        StringBuilder selection = sCacheSelectionBuilder.get();
+        StringBuilder selection = new StringBuilder();
         OSAssert.assertEquals(selection.length(), 0, "length should be zero leaving the get()");
 
         selection.append(ServerContent.COLUMN_FK_SERVER_ID);
@@ -209,34 +201,20 @@ public class CacheDatabase {
         }
         externalWhere += COLUMN_CACHE_VALUE + " IS NULL";
 
-        try {
-            Closer closer = Closer.create();
-            try {
-                EntryDeleter deleter = new EntryDeleter();
-                SupportSQLiteQuery query = SupportSQLiteQueryBuilder.builder(TABLE_CACHE)
-                        .columns(new String[]{COLUMN_CACHE_ID})
-                        .selection(externalWhere, args.toArray(new String[0]))
-                        .create();
-                Cursor cursor = mDatabase.query(query);
-                if (cursor != null) {
-                    closer.register(cursor);
-                    if (cursor.moveToFirst()) {
-                        do {
-                            long id = cursor.getLong(0);
-                            deleter.delete(id);
-                        } while (cursor.moveToNext());
-                    }
-                }
-                return deleter.getCount() + updateCount;
-            } catch (Throwable t) {
-                throw closer.rethrow(t);
-            } finally {
-                closer.close();
+        EntryDeleter deleter = new EntryDeleter();
+        SupportSQLiteQuery query = SupportSQLiteQueryBuilder.builder(TABLE_CACHE)
+                .columns(new String[]{COLUMN_CACHE_ID})
+                .selection(externalWhere, args.toArray(new String[0]))
+                .create();
+        try(Cursor cursor = mDatabase.query(query)) {
+            if (cursor.moveToFirst()) {
+                do {
+                    long id = cursor.getLong(0);
+                    deleter.delete(id);
+                } while (cursor.moveToNext());
             }
-        } catch (IOException e) {
-            // should never be thrown
-            throw new RuntimeException(e);
         }
+        return deleter.getCount() + updateCount;
     }
 
     /**
@@ -278,7 +256,7 @@ public class CacheDatabase {
     }
 
     @Nonnull
-    public Option<ByteSource> loadEntry(CacheEntry entry, String extraSelection, String extraArg) throws CachedItemNotFoundException {
+    public Optional<ByteSource> loadEntry(CacheEntry entry, String extraSelection, String extraArg) throws CachedItemNotFoundException {
         String selection = getCacheSelectionClause(extraSelection);
         String[] args = getCacheSelectionArguments(entry, extraArg);
         SupportSQLiteQuery query = SupportSQLiteQueryBuilder.builder(TABLE_CACHE)
@@ -289,7 +267,7 @@ public class CacheDatabase {
         if (cursor == null) {
             Reporting.report("expected non-null cursor");
             // problem with query
-            return OptionKt.none();
+            return Optional.empty();
         }
 
         ByteSource retval = null;
@@ -321,7 +299,7 @@ public class CacheDatabase {
             cursor.close();
         }
 
-        return Option.fromNullable(retval);
+        return Optional.ofNullable(retval);
     }
 
     public void cleanupShrinkExternalCache() {
@@ -336,11 +314,8 @@ public class CacheDatabase {
         final long desiredSize = (long) (CACHE_SHRINK_THRESHOLD_FACTOR * mConfiguration.getMaxExternalSize());
 
         try {
-            Closer closer = Closer.create();
-            try {
-                SqlCursor cursor = mNewDatabase.getCacheQueries().lookupExternalEntriesSortedByDisuse().execute();
+            try(SqlCursor cursor = mNewDatabase.getCacheQueries().lookupExternalEntriesSortedByDisuse().execute()) {
                 EntryDeleter deleter = new EntryDeleter();
-                closer.register(cursor);
                 while (externalSize > desiredSize && cursor.next()) {
                     long id = cursor.getLong(0);
                     long rowSize = cursor.getLong(1);
@@ -350,10 +325,6 @@ public class CacheDatabase {
                     externalSize -= rowSize;
                 }
                 OSLog.d(OSLog.Tag.CACHE, deleter.getCount() + " item(s) were shrunk from external storage");
-            } catch (Throwable t) {
-                throw closer.rethrow(t);
-            } finally {
-                closer.close();
             }
         } catch (IOException e) {
             // this shouldn't really happen
@@ -372,11 +343,8 @@ public class CacheDatabase {
 
         final long desiredSize = (long) (CACHE_SHRINK_THRESHOLD_FACTOR * mConfiguration.getMaxSqliteSize());
         try {
-            Closer closer = Closer.create();
-            try {
-                SqlCursor cursor = mNewDatabase.getCacheQueries().lookupInternalEntriesSortedByDisuse().execute();
+            try(SqlCursor cursor = mNewDatabase.getCacheQueries().lookupInternalEntriesSortedByDisuse().execute()) {
                 EntryDeleter deleter = new EntryDeleter();
-                closer.register(cursor);
                 while (internalSize > desiredSize && cursor.next()) {
                     long id = cursor.getLong(0);
                     long rowSize = cursor.getLong(1);
@@ -386,10 +354,6 @@ public class CacheDatabase {
                     internalSize -= rowSize;
                 }
                 OSLog.d(OSLog.Tag.CACHE, deleter.getCount() + " item(s) were shrunk from sqlite storage");
-            } catch (Throwable t) {
-                throw closer.rethrow(t);
-            } finally {
-                closer.close();
             }
         } catch (IOException e) {
             // shouldn't happen

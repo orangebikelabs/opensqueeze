@@ -281,10 +281,9 @@ abstract public class BitmapRecycler {
             if (o == this) {
                 return true;
             }
-            if (!(o instanceof CriteriaImpl)) {
+            if (!(o instanceof CriteriaImpl other)) {
                 return false;
             }
-            CriteriaImpl other = (CriteriaImpl) o;
             return other.mHeight == mHeight && other.mWidth == mWidth;
         }
     }

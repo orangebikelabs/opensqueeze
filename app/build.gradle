@@ -13,8 +13,7 @@ apply plugin: 'com.squareup.sqldelight'
 android {
     namespace 'com.orangebikelabs.orangesqueeze'
 
-    // use most recent so we can use most recent support library
-    compileSdkVersion 33
+    compileSdk 34
 
     sourceSets {
         main {
@@ -23,16 +22,12 @@ android {
             }
         }
     }
-
     packagingOptions {
-        // work around duplicate license files in jackson JARs
-        exclude 'META-INF/LICENSE'
-        exclude 'META-INF/NOTICE'
-        exclude 'META-INF/services/com.fasterxml.jackson.core.JsonFactory'
-        exclude 'META-INF/MANIFEST.MF'
-        exclude 'META-INF/LICENSE.md'
-        exclude 'META-INF/LICENSE-notice.md'
+        resources {
+            excludes += ['META-INF/LICENSE', 'META-INF/NOTICE', 'META-INF/services/com.fasterxml.jackson.core.JsonFactory', 'META-INF/MANIFEST.MF', 'META-INF/LICENSE.md', 'META-INF/LICENSE-notice.md']
+        }
     }
+
 
     defaultConfig {
         applicationId 'org.opensqueeze'
@@ -42,7 +37,7 @@ android {
 
         // android >= 5.0
         minSdkVersion 21
-        targetSdkVersion 33
+        targetSdkVersion 34
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -67,24 +62,25 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_11
-        targetCompatibility JavaVersion.VERSION_11
+        coreLibraryDesugaringEnabled true
+
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
     }
 
     kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_11
+        jvmTarget = JavaVersion.VERSION_17
     }
 
-    lintOptions {
-        // if true, stop the gradle build if errors are found
-        abortOnError true
-    }
 
     signingConfigs {
         release {
             storeFile file('release_keystore.jks')
             keyAlias 'signing'
         }
+    }
+    lint {
+        abortOnError true
     }
 
     // enable release signing if we have password
@@ -117,18 +113,21 @@ sqldelight {
 }
 
 dependencies {
+    // java8 desugaring
+    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:2.0.3'
+
     // PhotoView
     implementation 'com.github.chrisbanes:PhotoView:2.3.0'
 
     // coroutines
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3'
 
     // lifecycle
-    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1'
-    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.5.1'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1'
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.6.1'
 
     // recyclerview
-    implementation 'androidx.recyclerview:recyclerview:1.2.1'
+    implementation 'androidx.recyclerview:recyclerview:1.3.1'
 
     // ListViewAnimations
     implementation 'com.nhaarman.listviewanimations:lib-core:3.1.0@aar'
@@ -144,17 +143,14 @@ dependencies {
     // NineOldAndroids for ListViewAnimations
     implementation 'com.nineoldandroids:library:2.4.0'
 
-    implementation 'androidx.core:core-ktx:1.9.0'
-    implementation 'androidx.appcompat:appcompat:1.6.0-rc01'
-    implementation 'androidx.fragment:fragment-ktx:1.5.4'
-    implementation 'androidx.preference:preference-ktx:1.2.0'
+    implementation 'androidx.core:core-ktx:1.10.1'
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'androidx.fragment:fragment-ktx:1.6.1'
+    implementation 'androidx.preference:preference-ktx:1.2.1'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'androidx.media:media:1.6.0'
 
-    // functional programming in kotlin
-    implementation 'io.arrow-kt:arrow-core:1.1.3'
-
-    implementation 'com.google.android.material:material:1.7.0'
+    implementation 'com.google.android.material:material:1.9.0'
 
     //noinspection GradleDependency
     implementation "com.fasterxml.jackson.core:jackson-core:${obl_jacksonVersion}"
@@ -165,7 +161,7 @@ dependencies {
     //noinspection GradleDependency
     implementation "com.fasterxml.jackson.dataformat:jackson-dataformat-smile:${obl_jacksonVersion}"
 
-    implementation "com.google.guava:guava:${obl_guavaVersion}"
+    implementation "com.google.guava:guava:${obl_guavaVersion}-android"
 
     // required for Guava
     implementation 'javax.inject:javax.inject:1'
@@ -178,7 +174,7 @@ dependencies {
     implementation "com.squareup.okhttp3:logging-interceptor:${obl_okhttpVersion}"
     //noinspection GradleDependency
     implementation "com.squareup.okhttp3:okhttp-urlconnection:${obl_okhttpVersion}"
-    implementation 'com.squareup.okio:okio:3.2.0'
+    implementation 'com.squareup.okio:okio:3.4.0'
 
     // permissions
     implementation 'com.github.fondesa:kpermissions:3.4.0'
@@ -191,14 +187,14 @@ dependencies {
 
     // ReactiveX
     implementation "io.reactivex.rxjava3:rxandroid:3.0.2"
-    implementation "io.reactivex.rxjava3:rxjava:3.1.5"
+    implementation "io.reactivex.rxjava3:rxjava:3.1.6"
     implementation "io.reactivex.rxjava3:rxkotlin:3.0.1"
 
     // sqldelight
     implementation "com.squareup.sqldelight:android-driver:${sqldelight_version}"
     implementation "com.squareup.sqldelight:coroutines-extensions:${sqldelight_version}"
 
-    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.10'
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.12'
 
     implementation 'androidx.multidex:multidex:2.0.1'
 
@@ -208,29 +204,36 @@ dependencies {
     implementation fileTree(dir: 'lib', include: ['*.jar'])
 
     testImplementation 'junit:junit:4.13.2'
-    testImplementation "io.mockk:mockk-android:1.13.2"
-    testImplementation "com.google.truth:truth:1.1.3"
+    testImplementation "io.mockk:mockk-android:1.13.5"
+    testImplementation "com.google.truth:truth:1.1.5"
 
-    androidTestImplementation "androidx.test:runner:1.5.1"
+    androidTestImplementation "androidx.test:runner:1.5.2"
     androidTestImplementation "androidx.test:rules:1.5.0"
     androidTestImplementation "androidx.test:core:1.5.0"
     androidTestImplementation "androidx.test:core-ktx:1.5.0"
-    androidTestImplementation "androidx.test.espresso:espresso-core:3.5.0"
-    androidTestImplementation "androidx.test.espresso:espresso-intents:3.5.0"
-    androidTestImplementation "androidx.test.ext:junit:1.1.4"
-    androidTestImplementation "androidx.test.ext:junit-ktx:1.1.4"
+    androidTestImplementation "androidx.test.espresso:espresso-core:3.5.1"
+    androidTestImplementation "androidx.test.espresso:espresso-intents:3.5.1"
+    androidTestImplementation "androidx.test.ext:junit:1.1.5"
+    androidTestImplementation "androidx.test.ext:junit-ktx:1.1.5"
     androidTestImplementation "androidx.test.ext:truth:1.5.0"
-    androidTestImplementation "io.mockk:mockk-android:1.13.2"
+    androidTestImplementation "io.mockk:mockk-android:1.13.5"
     androidTestUtil "androidx.test:orchestrator:1.4.2"
+
+    // workaround for gradle bug https://github.com/gradle/gradle/issues/22326, keep until fixed
+    modules {
+        module("com.google.guava:listenablefuture") {
+            replacedBy("com.google.guava:guava", "listenablefuture is part of guava")
+        }
+    }
 }
 
-tasks.withType(JavaCompile) {
+tasks.withType(JavaCompile).configureEach {
     // uncomment this for more detailed deprecation warnings
-    options.compilerArgs << "-Xlint:deprecation"
-    options.compilerArgs << "-Xlint:unchecked"
+    //options.compilerArgs << "-Xlint:deprecation"
+    //options.compilerArgs << "-Xlint:unchecked"
 }
 
-task archiveApks {
+tasks.register('archiveApks') {
     description = "Copies APKs and mapping files to the archive directory"
     doLast {
         def appName = "${rootProject.name}"
@@ -252,7 +255,7 @@ task archiveApks {
 archiveApks.mustRunAfter assemble
 
 // Test Logging
-tasks.withType(Test) {
+tasks.withType(Test).configureEach {
     testLogging {
         events "started", "passed", "skipped", "failed"
     }

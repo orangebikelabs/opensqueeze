@@ -9,7 +9,7 @@ import android.content.Context;
 import android.os.SystemClock;
 
 import androidx.annotation.Keep;
-import arrow.core.Option;
+import java.util.Optional;
 
 import android.util.SparseArray;
 
@@ -156,7 +156,7 @@ public class PlayerStatus {
     }
 
     public boolean isThumbsUpEnabled() {
-        ButtonStatus status = getButtonStatus(PlayerButton.THUMBSUP).orNull();
+        ButtonStatus status = getButtonStatus(PlayerButton.THUMBSUP).orElse(null);
         return status != null && status.isThumbsUp();
     }
 
@@ -165,7 +165,7 @@ public class PlayerStatus {
     }
 
     public boolean isThumbsDownEnabled() {
-        ButtonStatus status = getButtonStatus(PlayerButton.THUMBSDOWN).orNull();
+        ButtonStatus status = getButtonStatus(PlayerButton.THUMBSDOWN).orElse(null);
         return status != null && status.isThumbsDown();
     }
 
@@ -189,9 +189,9 @@ public class PlayerStatus {
     }
 
     @Nonnull
-    public Option<ButtonStatus> getButtonStatus(PlayerButton button) {
+    public Optional<ButtonStatus> getButtonStatus(PlayerButton button) {
         Map<PlayerButton, ButtonStatus> status = get(Attributes.BUTTONSTATUS_MAP, Collections.emptyMap());
-        return Option.fromNullable(status.get(button));
+        return Optional.ofNullable(status.get(button));
     }
 
     @Nonnull
@@ -227,13 +227,13 @@ public class PlayerStatus {
     }
 
     @Nonnull
-    public Option<String> getArtistId() {
-        return Option.fromNullable(get(Attributes.ARTISTID, null));
+    public Optional<String> getArtistId() {
+        return Optional.ofNullable(get(Attributes.ARTISTID, null));
     }
 
     @Nonnull
-    public Option<String> getAlbumId() {
-        return Option.fromNullable(get(Attributes.ALBUMID, null));
+    public Optional<String> getAlbumId() {
+        return Optional.ofNullable(get(Attributes.ALBUMID, null));
     }
 
     @Nonnull
@@ -247,14 +247,14 @@ public class PlayerStatus {
     }
 
     @Nonnull
-    public Option<String> getTrackId() {
-        return Option.fromNullable(get(Attributes.TRACKID, null));
+    public Optional<String> getTrackId() {
+        return Optional.ofNullable(get(Attributes.TRACKID, null));
     }
 
     @Nonnull
-    public Option<String> getYear() {
+    public Optional<String> getYear() {
         String year = (String) get(Attributes.YEAR);
-        return Option.fromNullable(year);
+        return Optional.ofNullable(year);
     }
 
     @Nonnull
@@ -298,9 +298,9 @@ public class PlayerStatus {
     }
 
     @Nonnull
-    public Option<String> getTrackNumber() {
+    public Optional<String> getTrackNumber() {
         String trackNumber = (String) mAttributes.get(Attributes.TRACKNUMBER.ordinal());
-        return Option.fromNullable(trackNumber);
+        return Optional.ofNullable(trackNumber);
     }
 
     public boolean isConnected() {
@@ -698,16 +698,13 @@ public class PlayerStatus {
             put(override, Attributes.TRACKHASH, newTrackHash);
         }
 
-        String oldTrackId = getTrackId().orNull();
+        String oldTrackId = getTrackId().orElse(null);
         if (!Objects.equal(oldTrackId, loadTrackId)) {
             clearTrackInfo(override, newTrackHash);
             if (loadTrackId != null) {
                 put(override, Attributes.TRACKID, loadTrackId);
 
-                TrackInfo ti = TrackInfo.peek(serverId, loadTrackId).orNull();
-                if (ti != null) {
-                    applyTrackInfo(override, ti);
-                }
+                TrackInfo.peek(serverId, loadTrackId).ifPresent(trackInfo -> applyTrackInfo(override, trackInfo));
             }
 
         }
@@ -748,31 +745,16 @@ public class PlayerStatus {
     }
 
     public boolean needsTrackLookup() {
-        return get(Attributes.TRACKINFO) == null && getTrackId().isDefined();
+        return get(Attributes.TRACKINFO) == null && getTrackId().isPresent();
     }
 
     protected void applyTrackInfo(SparseArray<Object> override, TrackInfo trackInfo) {
         put(override, Attributes.TRACKINFO, trackInfo);
 
-        String trackNum = trackInfo.getTrackNumber().orNull();
-        if (trackNum != null) {
-            put(override, Attributes.TRACKNUMBER, trackNum);
-        }
-
-        String artistId = trackInfo.getArtistId().orNull();
-        if (artistId != null) {
-            put(override, Attributes.ARTISTID, artistId);
-        }
-
-        String albumId = trackInfo.getAlbumId().orNull();
-        if (albumId != null) {
-            put(override, Attributes.ALBUMID, albumId);
-        }
-
-        String year = trackInfo.getYear().orNull();
-        if (year != null) {
-            put(override, Attributes.YEAR, year);
-        }
+        trackInfo.getTrackNumber().ifPresent(trackNum -> put(override, Attributes.TRACKNUMBER, trackNum));
+        trackInfo.getArtistId().ifPresent(artistId -> put(override, Attributes.ARTISTID, artistId));
+        trackInfo.getAlbumId().ifPresent(albumId -> put(override, Attributes.ALBUMID, albumId));
+        trackInfo.getYear().ifPresent(year -> put(override, Attributes.YEAR, year));
     }
 
     @Nonnull
@@ -820,9 +802,9 @@ public class PlayerStatus {
     private String calculateTrackHash(SparseArray<Object> override) {
         PlayerStatus temp = withAttributes(override);
 
-        String trackId = temp.getTrackId().orNull();
+        String trackId = temp.getTrackId().orElse(null);
         if (trackId == null) {
-            trackId = temp.getTrack() + temp.getDisplayArtist() + MoreOption.getOrElse(temp.getTrackNumber(), "-");
+            trackId = temp.getTrack() + temp.getDisplayArtist() + temp.getTrackNumber().orElse("-");
         }
         String retval = trackId + temp.getPlaylistIndex() + temp.getPlaylistTimestamp();
 

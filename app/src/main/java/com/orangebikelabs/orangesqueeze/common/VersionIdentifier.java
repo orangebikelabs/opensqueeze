@@ -71,10 +71,9 @@ public class VersionIdentifier implements Comparable<VersionIdentifier> {
         if (this == obj) {
             return true;
         }
-        if (!(obj instanceof VersionIdentifier)) {
+        if (!(obj instanceof VersionIdentifier other)) {
             return false;
         }
-        VersionIdentifier other = (VersionIdentifier) obj;
         return Arrays.equals(mComponents, other.mComponents) && Objects.equal(mStringValue, other.mStringValue);
     }
 

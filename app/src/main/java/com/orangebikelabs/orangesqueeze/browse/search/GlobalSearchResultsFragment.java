@@ -14,7 +14,7 @@ import androidx.lifecycle.Lifecycle;
 import androidx.loader.app.LoaderManager.LoaderCallbacks;
 import androidx.loader.content.Loader;
 import androidx.appcompat.widget.SearchView;
-import arrow.core.Option;
+import java.util.Optional;
 
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -28,7 +28,6 @@ import com.orangebikelabs.orangesqueeze.browse.BrowseRequestFragment;
 import com.orangebikelabs.orangesqueeze.browse.OSBrowseAdapter;
 import com.orangebikelabs.orangesqueeze.browse.common.BrowseRequest;
 import com.orangebikelabs.orangesqueeze.browse.common.BrowseRequestData;
-import com.orangebikelabs.orangesqueeze.common.MoreOption;
 import com.orangebikelabs.orangesqueeze.common.OSAssert;
 import com.orangebikelabs.orangesqueeze.common.LoopingRequestLoader;
 import com.orangebikelabs.orangesqueeze.common.SBContextProvider;
@@ -81,7 +80,7 @@ public class GlobalSearchResultsFragment extends BrowseRequestFragment {
     @Override
     @Nonnull
     protected BrowseRequest newRequest(@Nullable Bundle args) {
-        String query = MoreOption.getOrElse(getQuery(), "");
+        String query = getQuery().orElse("");
         BrowseRequest retval = new GlobalSearchRequest(SBContextProvider.get().getPlayerId(), query);
         return retval;
     }
@@ -101,17 +100,13 @@ public class GlobalSearchResultsFragment extends BrowseRequestFragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-        Option<String> query = getQuery();
-        if (query.isDefined()) {
-            requery(null);
-        }
+        getQuery().ifPresent(val -> requery(null));
     }
 
     @Nonnull
-    protected Option<String> getQuery() {
+    protected Optional<String> getQuery() {
         Bundle args = getMutableArguments();
-        return Option.fromNullable(args.getString(ARG_QUERY));
+        return Optional.ofNullable(args.getString(ARG_QUERY));
     }
 
     protected boolean showExpandableSearchHeaderMenu(View v, ExpandableSearchHeaderItem item) {
@@ -148,6 +143,7 @@ public class GlobalSearchResultsFragment extends BrowseRequestFragment {
             MenuItem searchItem = menu.findItem(R.id.menu_search);
             if (searchItem != null) {
                 SearchView searchView = (SearchView) searchItem.getActionView();
+                OSAssert.assertNotNull(searchView, "searchView should not be null");
 
                 searchView.setSubmitButtonEnabled(true);
                 searchView.setQueryHint(getString(R.string.search_hint));
@@ -168,10 +164,7 @@ public class GlobalSearchResultsFragment extends BrowseRequestFragment {
                     }
                 });
 
-                String query = getQuery().orNull();
-                if (query != null) {
-                    searchView.setQuery(query, false);
-                }
+                getQuery().ifPresent(query -> searchView.setQuery(query, false));
             }
         }
 
@@ -186,11 +179,11 @@ public class GlobalSearchResultsFragment extends BrowseRequestFragment {
         @Nonnull
         public Loader<BrowseRequestData> onCreateLoader(int id, @Nullable Bundle args) {
             switch (id) {
-                case BROWSE_LOADER_ID:
+                case BROWSE_LOADER_ID -> {
                     BrowseRequest request = newRequest(args);
                     return new LoopingRequestLoader<>(request);
-                default:
-                    throw new IllegalArgumentException();
+                }
+                default -> throw new IllegalArgumentException();
             }
         }
 

@@ -58,7 +58,7 @@ public class MenuListAdapter extends BrowseItemBaseAdapter {
         if (getItemType(item) == ItemType.IVT_SLIDER) {
             text2.setText(String.format(Locale.getDefault(), "%d", item.getMenuElement().getSliderMinValue()));
         } else {
-            String text = item.getText2().orNull();
+            String text = item.getText2().orElse(null);
             if (text == null) {
                 text2.setVisibility(View.GONE);
             } else {
@@ -73,7 +73,7 @@ public class MenuListAdapter extends BrowseItemBaseAdapter {
         if (getItemType(item) == ItemType.IVT_SLIDER) {
             text3.setText(String.format(Locale.getDefault(), "%d", item.getMenuElement().getSliderMaxValue()));
         } else {
-            String text = item.getText3().orNull();
+            String text = item.getText3().orElse(null);
             if (text == null) {
                 text3.setVisibility(View.GONE);
             } else {

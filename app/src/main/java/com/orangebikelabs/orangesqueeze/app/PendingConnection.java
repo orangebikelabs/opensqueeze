@@ -7,7 +7,7 @@ package com.orangebikelabs.orangesqueeze.app;
 import android.content.Context;
 
 import androidx.annotation.Keep;
-import arrow.core.Option;
+import java.util.Optional;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.google.common.base.Charsets;
@@ -155,8 +155,8 @@ public class PendingConnection {
     }
 
     @Nonnull
-    synchronized public Option<String> getFailureReason() {
-        return Option.fromNullable(mFailureReason);
+    synchronized public Optional<String> getFailureReason() {
+        return Optional.ofNullable(mFailureReason);
     }
 
     synchronized protected void setFailureReason(@Nullable String failureReason) {

@@ -4,8 +4,8 @@
  */
 
 buildscript {
-    ext.kotlin_version = '1.7.22'
-    ext.sqldelight_version = '1.5.4'
+    ext.kotlin_version = '1.9.0'
+    ext.sqldelight_version = '1.5.5'
 
     repositories {
         google()
@@ -13,7 +13,7 @@ buildscript {
     }
     dependencies {
         //noinspection GradleDependency
-        classpath 'com.android.tools.build:gradle:7.3.1'
+        classpath 'com.android.tools.build:gradle:8.1.1'
 
         // kotlin
         //noinspection DifferentKotlinGradleVersion
@@ -28,8 +28,8 @@ allprojects {
     ext.obl_android_app_buildNumber = buildNumber
     ext.obl_android_app_versionCode = obl_android_app_buildNumber.toInteger()
 
-    ext.obl_guavaVersion = '31.1-android'
-    ext.obl_errorProneVersion = '2.16'
+    ext.obl_guavaVersion = '32.1.1'
+    ext.obl_errorProneVersion = '2.20.0'
 
     // must stay at 3.12.x until minsdk >= 25
     ext.obl_okhttpVersion = '3.12.13'
@@ -46,6 +46,6 @@ allprojects {
     }
 }
 
-task clean(type: Delete) {
-    delete rootProject.buildDir
+tasks.register('clean', Delete) {
+    delete rootProject.layout.buildDirectory
 }

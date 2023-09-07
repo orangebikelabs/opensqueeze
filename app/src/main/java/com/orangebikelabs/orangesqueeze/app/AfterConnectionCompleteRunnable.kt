@@ -20,7 +20,7 @@ class AfterConnectionCompleteRunnable(private val context: Context, private val 
             val ci = connection.connectedInfo
 
             // reset autoconnect for all servers except for current one to false
-            serverQueries.lookupAll().executeAsList().forEach {
+            serverQueries.lookupAll().executeAsList().iterator().forEach {
                 serverQueries.updateAutoconnect(serverautoconnect = serverId == it._id, findserverid = it._id)
             }
             if (!ci.isSqueezeNetwork) {

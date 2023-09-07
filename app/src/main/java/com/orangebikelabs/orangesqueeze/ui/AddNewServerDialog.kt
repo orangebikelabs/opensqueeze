@@ -9,7 +9,6 @@ import android.view.KeyEvent
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.lifecycleScope
-import arrow.core.Either
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.bottomsheets.BottomSheet
 import com.afollestad.materialdialogs.callbacks.onDismiss
@@ -28,9 +27,11 @@ import kotlinx.coroutines.*
  * @author tbsandee@orangebikelabs.com
  */
 
-typealias Result = Either<String, Long>
-
 class AddNewServerDialog private constructor(private val context: Context, private val lifecycleOwner: LifecycleOwner, private val viewModel: ConnectViewModel) {
+    sealed class Result
+    data class Success(val id: Long) : Result()
+    data class Failure(val message: String): Result()
+
     companion object {
         fun create(fragment: Fragment, viewModel: ConnectViewModel): AddNewServerDialog {
             val container = AddNewServerDialog(fragment.requireContext(), fragment.viewLifecycleOwner, viewModel)
@@ -64,7 +65,7 @@ class AddNewServerDialog private constructor(private val context: Context, priva
                 }
                 .onDismiss {
                     if (!deferredResult.isCompleted) {
-                        deferredResult.complete(Either.Left("cancelled"))
+                        deferredResult.complete(Failure("cancelled"))
                     }
                 }
         bindings = AddNewServerBinding.bind(dialog.getCustomView())
@@ -85,12 +86,12 @@ class AddNewServerDialog private constructor(private val context: Context, priva
     }
 
     private fun onConnectButtonClicked() {
-        when (val hostAndPort = viewModel.parseHostAndPort(bindings.hostname.text.toString(), bindings.port.text.toString())) {
-            is Either.Right -> {
-                createNewServer(hostAndPort.value)
-            }
-            else -> {
+        when(val result = viewModel.parseHostAndPort(bindings.hostname.text.toString(), bindings.port.text.toString())) {
+            is ConnectViewModel.ParseHostAndPortResult.Failure -> {
                 showInvalidHostnameOrPortDialog()
+            }
+            is ConnectViewModel.ParseHostAndPortResult.Success -> {
+                createNewServer(result.hostAndPort)
             }
         }
     }
@@ -102,25 +103,25 @@ class AddNewServerDialog private constructor(private val context: Context, priva
                 showConnectionErrorDialog(hostAndPort.host)
                 return@launch
             }
-            when (val result = viewModel.createNewServer(hostAndPort)) {
-                is Either.Right -> {
+            when(val result = viewModel.createNewServer(hostAndPort)) {
+                is ConnectViewModel.CreateNewServerResult.Success -> {
                     // success!
-                    deferredResult.complete(Either.Right(result.value))
+                    deferredResult.complete(Success(result.serverId))
                     dialog.dismiss()
                 }
-                is Either.Left -> {
-                    showExceptionDialog(result.value)
+                is ConnectViewModel.CreateNewServerResult.Failure -> {
+                    showExceptionDialog(result.message)
                 }
             }
         }
     }
 
-    private fun showExceptionDialog(error: Exception) {
+    private fun showExceptionDialog(error: String) {
         MaterialDialog(context).show {
             lifecycleOwner(lifecycleOwner)
             icon(res = android.R.drawable.ic_dialog_alert)
             title(res = R.string.connection_error_title)
-            message(text = error.message)
+            message(text = error)
         }
     }
 

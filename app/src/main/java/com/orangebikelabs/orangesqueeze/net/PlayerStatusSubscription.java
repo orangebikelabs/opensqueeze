@@ -69,7 +69,7 @@ public class PlayerStatusSubscription extends Subscription {
             transaction.add(newStatus);
 
             if (newStatus.needsTrackLookup()) {
-                String trackId = newStatus.getTrackId().orNull();
+                String trackId = newStatus.getTrackId().orElse(null);
                 if (trackId != null) {
                     // if server connection isn't fully activated, defer the track lookup so that cache can function
                     if (SBContextProvider.get().getServerId() == ConnectionInfo.INVALID_SERVER_ID) {

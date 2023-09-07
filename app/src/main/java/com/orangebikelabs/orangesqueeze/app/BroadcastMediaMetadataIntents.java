@@ -68,10 +68,7 @@ public class BroadcastMediaMetadataIntents {
     private Intent populateIntent(String prefix, String action, PlayerStatus status) {
         Intent retval = new Intent(prefix + "." + action);
         retval.putExtra("track", status.getTrack());
-        String trackNumber = status.getTrackNumber().orNull();
-        if (trackNumber != null) {
-            retval.putExtra("tracknumber", trackNumber);
-        }
+        status.getTrackNumber().ifPresent(trackNumber -> retval.putExtra("tracknumber", trackNumber));
         retval.putExtra("album", status.getAlbum());
         retval.putExtra("playerid", status.getId().toString());
         retval.putExtra("playername", status.getName());

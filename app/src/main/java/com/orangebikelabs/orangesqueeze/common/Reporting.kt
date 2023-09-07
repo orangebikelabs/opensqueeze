@@ -43,8 +43,7 @@ object Reporting {
 
     @JvmStatic
     fun report(e: Throwable?, message: String?, extraInfo: Any?) {
-        val effectiveThrowable: Throwable?
-        effectiveThrowable = if (message != null) {
+        val effectiveThrowable: Throwable? = if (message != null) {
             if (e == null) {
                 Exception(message)
             } else {

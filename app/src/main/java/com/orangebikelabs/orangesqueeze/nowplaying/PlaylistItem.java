@@ -26,8 +26,7 @@ import com.orangebikelabs.orangesqueeze.menu.StandardMenuItem;
 
 import javax.annotation.Nonnull;
 
-import arrow.core.Option;
-import arrow.core.OptionKt;
+import java.util.Optional;
 
 /**
  * @author tbsandee@orangebikelabs.com
@@ -85,7 +84,7 @@ public class PlaylistItem extends StandardMenuItem {
 
     @Nonnull
     @Override
-    public Option<String> getText2() {
+    public Optional<String> getText2() {
 
         StringBuilder builder = new StringBuilder(100);
 
@@ -106,20 +105,20 @@ public class PlaylistItem extends StandardMenuItem {
             builder.append(")");
         }
         if (builder.length() > 0) {
-            return OptionKt.some(builder.toString());
+            return Optional.of(builder.toString());
         } else {
-            return OptionKt.none();
+            return Optional.empty();
         }
     }
 
     @Nonnull
     @Override
-    public Option<String> getText3() {
+    public Optional<String> getText3() {
         int duration = mJson.path("duration").asInt();
         if (duration > 0) {
-            return OptionKt.some(DateUtils.formatElapsedTime(duration));
+            return Optional.of(DateUtils.formatElapsedTime(duration));
         } else {
-            return OptionKt.none();
+            return Optional.empty();
         }
     }
 

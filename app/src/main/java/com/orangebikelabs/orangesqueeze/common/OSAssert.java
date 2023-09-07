@@ -40,9 +40,7 @@ public class OSAssert {
         if ((context instanceof Activity) || (context instanceof Service)) {
             throw new IllegalStateException("context must not be activity or service context");
         }
-        if (context instanceof ContextWrapper) {
-            ContextWrapper wrapper = (ContextWrapper) context;
-
+        if (context instanceof ContextWrapper wrapper) {
             assertApplicationContext(wrapper.getBaseContext());
         }
 

@@ -51,20 +51,14 @@ public class BasicHttpServerCredentials extends SBCredentials {
         // test the connection
         mFakeContext = Reflection.newProxy(SBContext.class, (proxy, method, args) -> {
             String methodName = method.getName();
-            switch (methodName) {
-                case "getConnectionInfo":
-                    return connecting;
-                case "getPlayerId":
-                    return null;
-                case "isConnecting":
-                    return Boolean.FALSE;
-                case "getConnectionCredentials":
-                    return BasicHttpServerCredentials.this;
-                case "awaitConnection":
-                    return Boolean.TRUE;
-                default:
-                    return method.invoke(actualContext, args);
-            }
+            return switch (methodName) {
+                case "getConnectionInfo" -> connecting;
+                case "getPlayerId" -> null;
+                case "isConnecting" -> Boolean.FALSE;
+                case "getConnectionCredentials" -> BasicHttpServerCredentials.this;
+                case "awaitConnection" -> Boolean.TRUE;
+                default -> method.invoke(actualContext, args);
+            };
         });
     }
 

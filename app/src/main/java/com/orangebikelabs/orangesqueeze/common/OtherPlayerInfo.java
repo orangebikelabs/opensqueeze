@@ -149,10 +149,9 @@ public class OtherPlayerInfo implements Serializable, Comparable<OtherPlayerInfo
         if (o == this) {
             return true;
         }
-        if (!(o instanceof OtherPlayerInfo)) {
+        if (!(o instanceof OtherPlayerInfo another)) {
             return false;
         }
-        OtherPlayerInfo another = (OtherPlayerInfo) o;
 
         // @formatter:off
         return

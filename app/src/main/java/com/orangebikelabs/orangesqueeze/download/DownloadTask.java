@@ -19,13 +19,11 @@ import com.beaglebuddy.mp3.id3v23.ID3v23Frame;
 import com.beaglebuddy.mp3.id3v23.frame_body.ID3v23FrameBodyTextInformation;
 import com.google.common.base.Strings;
 import com.google.common.io.ByteSink;
-import com.google.common.io.Closer;
 import com.google.common.io.Files;
 import com.orangebikelabs.orangesqueeze.artwork.ArtworkType;
 import com.orangebikelabs.orangesqueeze.artwork.StandardArtworkCacheRequest;
 import com.orangebikelabs.orangesqueeze.cache.CacheFuture;
 import com.orangebikelabs.orangesqueeze.common.FileUtils;
-import com.orangebikelabs.orangesqueeze.common.MoreOption;
 import com.orangebikelabs.orangesqueeze.common.OSExecutors;
 import com.orangebikelabs.orangesqueeze.common.OSLog;
 import com.orangebikelabs.orangesqueeze.common.Reporting;
@@ -120,7 +118,7 @@ class DownloadTask implements Callable<Boolean> {
             MP3 mp3 = new MP3(file);
 
             if (mp3.getPictures().isEmpty()) {
-                String coverId = ti.getCoverId().orNull();
+                String coverId = ti.getCoverId().orElse(null);
                 if (coverId != null) {
                     try {
                         DisplayMetrics dm = getContext().getResources().getDisplayMetrics();
@@ -129,21 +127,15 @@ class DownloadTask implements Callable<Boolean> {
                         StandardArtworkCacheRequest request = new StandardArtworkCacheRequest(getContext(), coverId, ArtworkType.ALBUM_THUMBNAIL, screenWidth);
                         URL url = request.getUrl();
 
-                        Closer closer = Closer.create();
 
                         temporaryArtworkFile = File.createTempFile("download_artwork", ".jpg", getContext().getFilesDir());
-                        try {
-                            HttpURLConnection conn = HttpUtils.open(url, true);
-                            if (mCredentials != null) {
-                                mCredentials.apply(conn);
-                            }
+                        HttpURLConnection conn = HttpUtils.open(url, true);
+                        if (mCredentials != null) {
+                            mCredentials.apply(conn);
+                        }
 
-                            InputStream is = closer.register(conn.getInputStream());
+                        try(InputStream is = conn.getInputStream()) {
                             Files.asByteSink(temporaryArtworkFile).writeFrom(is);
-                        } catch (Throwable t) {
-                            throw closer.rethrow(t);
-                        } finally {
-                            closer.close();
                         }
                         mp3.setPicture(PictureType.FRONT_COVER, temporaryArtworkFile);
                     } catch (IOException e) {
@@ -155,12 +147,12 @@ class DownloadTask implements Callable<Boolean> {
             mp3.setAlbum(ti.getTrackAlbum());
             mp3.setTitle(ti.getTrackName());
 
-            double duration = MoreOption.getOrElse(ti.getDuration(), 0.0f);
+            double duration = ti.getDuration().orElse(0.0f);
             if (duration >= 0.0f && duration < 10000.0f) {
                 mp3.setAudioDuration((int) duration);
             }
 
-            String trackNumber = ti.getTrackNumber().orNull();
+            String trackNumber = ti.getTrackNumber().orElse(null);
             if (trackNumber != null) {
                 try {
                     mp3.setTrack(Integer.parseInt(trackNumber));
@@ -170,9 +162,9 @@ class DownloadTask implements Callable<Boolean> {
             }
 
             // write part of set (disc/count) tag to mp3
-            String discNumber = ti.getDiscNumber().orNull();
+            String discNumber = ti.getDiscNumber().orElse(null);
             if (discNumber != null) {
-                String discCount = ti.getDiscCount().orNull();
+                String discCount = ti.getDiscCount().orElse(null);
 
                 // if total disc count is known, include it
                 String partOfSet;
@@ -187,7 +179,7 @@ class DownloadTask implements Callable<Boolean> {
                 body.setText(partOfSet);
                 body.setEncoding(Encoding.UTF_16);
             }
-            String trackYear = ti.getYear().orNull();
+            String trackYear = ti.getYear().orElse(null);
             if (trackYear != null) {
                 try {
                     mp3.setYear(Integer.parseInt(trackYear));
@@ -207,15 +199,8 @@ class DownloadTask implements Callable<Boolean> {
                 body.setEncoding(Encoding.UTF_16);
             }
 
-            String genre = ti.getGenre().orNull();
-            if (genre != null) {
-                mp3.setMusicType(genre);
-            }
-
-            String comments = ti.getComments().orNull();
-            if (comments != null) {
-                mp3.setComments(comments);
-            }
+            ti.getGenre().ifPresent(mp3::setMusicType);
+            ti.getComments().ifPresent(mp3::setComments);
             mp3.save();
 
             // try to make folder.jpg
@@ -256,18 +241,16 @@ class DownloadTask implements Callable<Boolean> {
                 return false;
             }
 
-            Closer closer = Closer.create();
             try {
                 // download data to a temporary file first to prevent partial files from appearing in public directories
                 ByteSink output = Files.asByteSink(temporaryDownloadLocation);
-                InputStream is = closer.register(connection.getInputStream());
-                InputStream trackingStream = closer.register(status.newTrackingInputStream(mId, is));
-                output.writeFrom(trackingStream);
+                try(InputStream is = connection.getInputStream()) {
+                    try(InputStream trackingStream = status.newTrackingInputStream(mId, is)) {
+                        output.writeFrom(trackingStream);
+                    }
+                }
             } catch (Throwable t) {
                 connection.disconnect();
-                throw closer.rethrow(t);
-            } finally {
-                closer.close();
             }
 
             // make sure directory exists, don't worry too much
@@ -302,7 +285,7 @@ class DownloadTask implements Callable<Boolean> {
                 if (e instanceof SocketTimeoutException) {
                     message = "Server timed out";
                 } else {
-                    message = "Unspecified error: " + e.toString();
+                    message = "Unspecified error: " + e;
                 }
             }
             status.markFailed(message, true);

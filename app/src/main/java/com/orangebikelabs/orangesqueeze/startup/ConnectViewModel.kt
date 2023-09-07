@@ -8,8 +8,6 @@ package com.orangebikelabs.orangesqueeze.startup
 import android.app.Application
 import androidx.annotation.StringRes
 import androidx.lifecycle.*
-import arrow.core.Either
-import arrow.core.getOrElse
 import com.google.common.net.HostAndPort
 import com.orangebikelabs.orangesqueeze.R
 import com.orangebikelabs.orangesqueeze.app.PendingConnection
@@ -158,18 +156,23 @@ class ConnectViewModel
         }
     }
 
-    fun parseHostAndPort(hostname: String, port: String): Either<String, HostAndPort> {
+    sealed class ParseHostAndPortResult {
+        data class Success(val hostAndPort: HostAndPort) : ParseHostAndPortResult()
+        data class Failure(val errorMessage: String) : ParseHostAndPortResult()
+    }
+
+    fun parseHostAndPort(hostname: String, port: String): ParseHostAndPortResult {
         val checkHostname = hostname.trim()
         val checkPort = port.trim()
         if (checkHostname.isNotEmpty()) {
             return try {
-                Either.Right(HostAndPort.fromParts(checkHostname, checkPort.toIntOrNull() ?: 0))
+                ParseHostAndPortResult.Success(HostAndPort.fromParts(checkHostname, checkPort.toIntOrNull() ?: 0))
             } catch (e: IllegalArgumentException) {
                 // invalid hostname format
-                Either.Left(e.message.orEmpty())
+                ParseHostAndPortResult.Failure(e.message ?: "invalid hostname")
             }
         }
-        return Either.Left("blank host")
+        return ParseHostAndPortResult.Failure("blank host")
     }
 
     suspend fun validateHost(host: String): Boolean {
@@ -185,7 +188,11 @@ class ConnectViewModel
         }
     }
 
-    suspend fun createNewServer(hostAndPort: HostAndPort): Either<Exception, Long> {
+    sealed class CreateNewServerResult {
+        data class Success(val serverId: Long) : CreateNewServerResult()
+        data class Failure(val message: String) : CreateNewServerResult()
+    }
+    suspend fun createNewServer(hostAndPort: HostAndPort): CreateNewServerResult {
         return withContext(ioDispatcher) {
             database.transactionWithResult {
                 val host = hostAndPort.host
@@ -199,9 +206,9 @@ class ConnectViewModel
                     val serverId = database.globalQueries
                             .last_insert_rowid()
                             .executeAsOne()
-                    Either.Right(serverId)
+                    CreateNewServerResult.Success(serverId)
                 } else {
-                    Either.Left(Exception(context.applicationContext.getString(R.string.hostname_already_exists, host)))
+                    CreateNewServerResult.Failure(context.applicationContext.getString(R.string.hostname_already_exists, host))
                 }
             }
         }
@@ -240,7 +247,7 @@ class ConnectViewModel
         val pendingConnection = event.pendingConnection ?: return
 
         val state = pendingConnection.state
-        val reason = pendingConnection.failureReason.getOrElse { "Error" }
+        val reason = pendingConnection.failureReason.orElseGet { "Error" }
         OSLog.v("ConnectFragment::whenPendingConnectionChanged $state, reason=$reason")
         when (state) {
             PendingConnection.PendingState.SUCCESS -> context.finalizePendingConnection()

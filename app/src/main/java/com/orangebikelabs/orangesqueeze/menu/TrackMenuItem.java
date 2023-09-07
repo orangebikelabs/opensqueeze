@@ -36,8 +36,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.concurrent.GuardedBy;
 
-import arrow.core.Option;
-import arrow.core.OptionKt;
+import java.util.Optional;
 
 /**
  * @author tbsandee@orangebikelabs.com
@@ -56,13 +55,13 @@ public class TrackMenuItem extends StandardMenuItem {
         @Override
         public boolean applies(Item item) {
             TrackMenuItem tmi = (TrackMenuItem) item;
-            return tmi.getCoverId().isDefined();
+            return tmi.getCoverId().isPresent();
         }
 
         @Override
         public boolean load(ThumbnailProcessor processor, Item item, AbsListView parent, @Nullable ImageView iv) {
             TrackMenuItem tmi = (TrackMenuItem) item;
-            String coverId = tmi.getCoverId().orNull();
+            String coverId = tmi.getCoverId().orElse(null);
             if (coverId == null) {
                 return false;
             }
@@ -119,20 +118,20 @@ public class TrackMenuItem extends StandardMenuItem {
 
     @Nonnull
     @Override
-    synchronized public Option<String> getText2() {
-        return Option.fromNullable(mText2);
+    synchronized public Optional<String> getText2() {
+        return Optional.ofNullable(mText2);
     }
 
     @Nonnull
     @Override
-    synchronized public Option<String> getText3() {
-        return Option.fromNullable(mText3);
+    synchronized public Optional<String> getText3() {
+        return Optional.ofNullable(mText3);
     }
 
     @Nonnull
-    synchronized public Option<String> getCoverId() {
+    synchronized public Optional<String> getCoverId() {
         if (mTrackInfo == null) {
-            return OptionKt.none();
+            return Optional.empty();
         }
         return mTrackInfo.getCoverId();
     }
@@ -155,7 +154,7 @@ public class TrackMenuItem extends StandardMenuItem {
 
         TrackInfo trackInfo = getTrackInfo();
         if (trackInfo == null) {
-            trackInfo = TrackInfo.peek(SBContextProvider.get().getServerId(), trackId).orNull();
+            trackInfo = TrackInfo.peek(SBContextProvider.get().getServerId(), trackId).orElse(null);
             if (trackInfo != null) {
                 setTrackInfo(trackInfo);
             }
@@ -195,12 +194,12 @@ public class TrackMenuItem extends StandardMenuItem {
                         text1.setVisibility(View.VISIBLE);
                         text1.setText(getText1());
 
-                        String text2 = getText2().orNull();
+                        String text2 = getText2().orElse(null);
                         if (holder.text2 != null) {
                             holder.text2.setVisibility(text2 == null ? View.GONE : View.VISIBLE);
                             holder.text2.setText(Strings.nullToEmpty(text2));
                         }
-                        String text3 = getText3().orNull();
+                        String text3 = getText3().orElse(null);
                         if (holder.text3 != null) {
                             holder.text3.setVisibility(text3 == null ? View.GONE : View.VISIBLE);
                             holder.text3.setText(Strings.nullToEmpty(text3));
@@ -242,8 +241,8 @@ public class TrackMenuItem extends StandardMenuItem {
         if (mTrackInfo == null) {
             mTrackInfo = trackInfo;
             mText1 = mTrackInfo.getText1();
-            mText2 = mTrackInfo.getText2().orNull();
-            mText3 = mTrackInfo.getText3().orNull();
+            mText2 = mTrackInfo.getText2().orElse(null);
+            mText3 = mTrackInfo.getText3().orElse(null);
         }
     }
 }

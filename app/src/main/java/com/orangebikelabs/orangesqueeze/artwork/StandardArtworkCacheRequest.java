@@ -15,7 +15,6 @@ import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.io.ByteSource;
-import com.google.common.io.Closer;
 import com.orangebikelabs.orangesqueeze.artwork.ArtworkCacheData.ImageTarget;
 import com.orangebikelabs.orangesqueeze.cache.CacheEntry;
 import com.orangebikelabs.orangesqueeze.cache.CacheEntry.Type;
@@ -29,7 +28,6 @@ import com.orangebikelabs.orangesqueeze.common.ConnectionInfo;
 import com.orangebikelabs.orangesqueeze.common.OSLog;
 import com.orangebikelabs.orangesqueeze.common.OSLog.Tag;
 import com.orangebikelabs.orangesqueeze.common.SBContextProvider;
-import com.orangebikelabs.orangesqueeze.common.ThreadLocalStringBuilder;
 import com.orangebikelabs.orangesqueeze.net.HttpUtils;
 import com.orangebikelabs.orangesqueeze.net.SBCredentials;
 
@@ -50,9 +48,6 @@ import javax.annotation.Nullable;
  * @author tsandee
  */
 public class StandardArtworkCacheRequest implements ArtworkCacheRequestCallback {
-
-    final static private ThreadLocalStringBuilder sThreadLocalStringBuilder = ThreadLocalStringBuilder.newInstance();
-
     @Nonnull
     final protected Context mContext;
 
@@ -83,7 +78,7 @@ public class StandardArtworkCacheRequest implements ArtworkCacheRequestCallback 
         mWidthPixels = widthPixels;
         mCompressFormat = BitmapTools.getStoredCompressFormat(mType, mWidthPixels);
 
-        StringBuilder cacheKey = sThreadLocalStringBuilder.get();
+        StringBuilder cacheKey = new StringBuilder();
         OSAssert.assertEquals(cacheKey.length(), 0, "length should be zero leaving the get()");
         cacheKey.append("Artwork{id=");
         cacheKey.append(id);
@@ -100,19 +95,12 @@ public class StandardArtworkCacheRequest implements ArtworkCacheRequestCallback 
         cacheKey.append(quality);
         cacheKey.append("}");
 
-        CacheEntry.Type cacheType;
+        CacheEntry.Type cacheType = switch (type) {
+            case ALBUM_FULL, ALBUM_THUMBNAIL, ARTIST_THUMBNAIL, LEGACY_ALBUM_THUMBNAIL ->
+                    Type.SERVERSCAN;
+            default -> Type.TIMEOUT;
+        };
 
-        switch (type) {
-            case ALBUM_FULL:
-            case ALBUM_THUMBNAIL:
-            case ARTIST_THUMBNAIL:
-            case LEGACY_ALBUM_THUMBNAIL:
-                cacheType = Type.SERVERSCAN;
-                break;
-            default:
-                cacheType = Type.TIMEOUT;
-                break;
-        }
         // don't use memory cache for thumbnails
         mEntry = new CacheEntry(cacheType, SBContextProvider.get().getServerId(), cacheKey.toString());
     }
@@ -131,16 +119,10 @@ public class StandardArtworkCacheRequest implements ArtworkCacheRequestCallback 
 
     @Nonnull
     public URL getUrl() throws IOException {
-        URL retval;
-        switch (mType) {
-            case SERVER_RESOURCE_FULL:
-            case SERVER_RESOURCE_THUMBNAIL:
-                retval = getServerResourceUrl(mId);
-                break;
-            default:
-                retval = getCoverArtUrl(mId);
-                break;
-        }
+        URL retval = switch (mType) {
+            case SERVER_RESOURCE_FULL, SERVER_RESOURCE_THUMBNAIL -> getServerResourceUrl(mId);
+            default -> getCoverArtUrl(mId);
+        };
         return retval;
     }
 
@@ -166,7 +148,7 @@ public class StandardArtworkCacheRequest implements ArtworkCacheRequestCallback 
     @Nonnull
     private ArtworkCacheData loadUrl(CacheService service, URL url) throws IOException, CachedItemNotFoundException, CachedItemInvalidException {
         OSLog.TimingLoggerCompat logger = Tag.ARTWORK.newTimingLogger("Standard artwork load (request " + ArtworkRequestId.next() + ")");
-        ManagedTemporary managedTemporary = null;
+        ManagedTemporary cleanupManagedTemporary = null;
         try {
             logger.addSplit("load url: " + url);
             HttpURLConnection connection = HttpUtils.open(url, true);
@@ -175,50 +157,49 @@ public class StandardArtworkCacheRequest implements ArtworkCacheRequestCallback 
                 creds.apply(connection);
             }
             logger.addSplit("handling response");
-            managedTemporary = processResponse(service, connection);
+            cleanupManagedTemporary = processResponse(service, connection);
 
-            long length = managedTemporary.size();
+            long length = cleanupManagedTemporary.size();
             if (length < 20) {
                 throw new CachedItemNotFoundException("length was only " + length + " bytes, not a valid image");
             }
-            logger.addSplit("wrote " + length + " bytes to " + managedTemporary);
+            logger.addSplit("wrote " + length + " bytes to " + cleanupManagedTemporary);
             logger.close();
 
             ArtworkCacheData retval = null;
             if (mImageNeedsRescaling) {
-                retval = new ScalingArtworkData(mContext, mEntry.getKey(), mType, mWidthPixels, managedTemporary);
+                retval = new ScalingArtworkData(mContext, mEntry.getKey(), mType, mWidthPixels, cleanupManagedTemporary);
             } else if (mCompressFormat == CompressFormat.JPEG) {
                 // if we downloaded a PNG image but we want to store a JPEG, return artworkdata that will convert it
                 BitmapDecoder decoder = BitmapDecoder.getInstance(mContext, mType);
 
-                BitmapFactory.Options header = decoder.decodeHeader(managedTemporary.asByteSource());
+                BitmapFactory.Options header = decoder.decodeHeader(cleanupManagedTemporary.asByteSource());
                 if (header.outMimeType == null || header.outMimeType.equals("image/png")) {
-                    retval = new RecompressArtworkData(mContext, mEntry.getKey(), mType, managedTemporary);
+                    retval = new RecompressArtworkData(mContext, mEntry.getKey(), mType, cleanupManagedTemporary);
                 }
             }
             if (retval == null) {
-                retval = new StandardArtworkCacheData(mContext, mEntry.getKey(), mType, managedTemporary);
+                retval = new StandardArtworkCacheData(mContext, mEntry.getKey(), mType, cleanupManagedTemporary);
             }
 
-            // don't remove close managed temporary
-            managedTemporary = null;
+            // don't cleanup managed temporary, we've handed it into the cache request
+            cleanupManagedTemporary = null;
 
             return retval;
         } finally {
             // release managed temporary we're holding on failure
-            if (managedTemporary != null) {
-                managedTemporary.close();
+            if (cleanupManagedTemporary != null) {
+                cleanupManagedTemporary.close();
             }
         }
     }
 
     @Nonnull
-    private ManagedTemporary processResponse(CacheService service, HttpURLConnection connection) throws CachedItemNotFoundException, IOException {
+    private ManagedTemporary processResponse(CacheService service, HttpURLConnection connection) throws CachedItemNotFoundException {
         // defer creation of managed temporary until it's needed
         ManagedTemporary retval = null;
         String itemNotFoundMessage = null;
 
-        Closer closer = Closer.create();
         try {
             // this can throw an IOException because it submits the initial request
             connection.connect();
@@ -226,40 +207,32 @@ public class StandardArtworkCacheRequest implements ArtworkCacheRequestCallback 
             int statusCode = connection.getResponseCode();
             if (statusCode != HttpURLConnection.HTTP_OK) {
                 switch (statusCode) {
-                    case HttpURLConnection.HTTP_NOT_FOUND:
+                    case HttpURLConnection.HTTP_NOT_FOUND -> {
                         itemNotFoundMessage = "Remote artwork missing, marking as such in cache";
                         if (OSLog.isLoggable(Tag.ARTWORK, OSLog.VERBOSE)) {
                             OSLog.v(Tag.ARTWORK, itemNotFoundMessage);
                         }
-                        break;
-                    default:
+                    }
+                    default -> {
                         itemNotFoundMessage = "Remote artwork missing (reason=" + connection.getResponseMessage() + ")";
                         OSLog.w(Tag.ARTWORK, itemNotFoundMessage);
-                        break;
+                    }
                 }
             } else {
-                InputStream is = closer.register(connection.getInputStream());
-
-                retval = service.createManagedTemporary();
-                retval.asByteSink().writeFrom(is);
+                try(InputStream is = connection.getInputStream()) {
+                    retval = service.createManagedTemporary();
+                    retval.asByteSink().writeFrom(is);
+                }
             }
-        } catch (Throwable t) {
-            if (t instanceof IOException) {
-                // invalidate connection
-                connection.disconnect();
-            }
-
-            if (retval != null) {
-                // close managed temporary too
-                closer.register(retval);
-            }
-
-            throw closer.rethrow(t);
-        } finally {
-            closer.close();
+        } catch (IOException e) {
+            // invalidate connection
+            connection.disconnect();
         }
 
         if (retval == null) {
+            if(itemNotFoundMessage == null) {
+                itemNotFoundMessage = "Remote artwork missing, unknown reason";
+            }
             throw new CachedItemNotFoundException(itemNotFoundMessage);
         }
         return retval;
@@ -402,7 +375,7 @@ public class StandardArtworkCacheRequest implements ArtworkCacheRequestCallback 
 
         @Nonnull
         @Override
-        public InCacheArtworkData adaptForMemoryCache() throws IOException {
+        public InCacheArtworkData adaptForMemoryCache() {
             return InCacheArtworkData.newInstance(mApplicationContext, mArtworkKey, mType, mDecodedBitmap);
         }
 

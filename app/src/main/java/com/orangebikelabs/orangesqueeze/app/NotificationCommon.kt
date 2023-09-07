@@ -5,12 +5,14 @@
 
 package com.orangebikelabs.orangesqueeze.app
 
+import android.Manifest
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
 import android.app.Service
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Build
@@ -21,6 +23,7 @@ import androidx.media.app.NotificationCompat.MediaStyle
 import android.support.v4.media.session.MediaSessionCompat
 import android.util.SparseIntArray
 import android.view.View
+import androidx.core.app.ActivityCompat
 import com.google.common.util.concurrent.FutureCallback
 import com.google.common.util.concurrent.Futures
 import com.orangebikelabs.orangesqueeze.R
@@ -73,6 +76,9 @@ object NotificationCommon {
     }
 
     fun showEmptyNotification(service: Service) {
+        if (ActivityCompat.checkSelfPermission(service, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+            return
+        }
         val context = service.applicationContext
 
         val notificationManager = NotificationManagerCompat.from(context)
@@ -98,6 +104,9 @@ object NotificationCommon {
     }
 
     fun showNowPlayingNotification(service: Service, status: PlayerStatus, sessionToken: MediaSessionCompat.Token?) {
+        if (ActivityCompat.checkSelfPermission(service, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+            return
+        }
         val context = service.applicationContext
 
         createNotificationChannels(context)
@@ -160,13 +169,11 @@ object NotificationCommon {
         }
         if (visibilities.get(R.id.thumbsup_button) == View.VISIBLE) {
             compactActionIndexList.add(compactActionIndex)
-            @Suppress("UNUSED_CHANGED_VALUE")
             compactActionIndex++
             builder.addAction(R.drawable.ic_thumb_up_white, "Thumbs Up",
                     buildThumbsUpButtonIntent(context, status.id))
         } else if (visibilities.get(R.id.next_button) == View.VISIBLE) {
             compactActionIndexList.add(compactActionIndex)
-            @Suppress("UNUSED_CHANGED_VALUE")
             compactActionIndex++
             builder.addAction(R.drawable.ic_skip_next_white, "Next",
                     buildCommandPendingIntent(context, R.id.next_button, status.id,

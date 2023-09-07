@@ -27,9 +27,7 @@ import javax.annotation.Nullable;
 import javax.annotation.concurrent.GuardedBy;
 import javax.annotation.concurrent.ThreadSafe;
 
-import arrow.core.None;
-import arrow.core.Option;
-import arrow.core.OptionKt;
+import java.util.Optional;
 
 /**
  * This class houses all mutable connection information. It's completely threadsafe and minimizes locking/blocking to prevent deadlocks,
@@ -205,32 +203,32 @@ public class ConnectionState {
         PlayerId oldPlayerId = mCurrentPlayerId;
 
         if (!Objects.equal(newPlayerId, oldPlayerId)) {
-            Option<PlayerStatus> newPlayerStatus = null;
-            if (newPlayerId == null) {
-                newPlayerStatus = OptionKt.none();
-            } else {
+            boolean invalidPlayerId = false;
+            Optional<PlayerStatus> newPlayerStatus = Optional.empty();
+            if (newPlayerId != null) {
                 PlayerStatus temp = mServerStatus.getPlayerStatus(newPlayerId);
                 if (temp == null) {
                     // invalid player id, just log a message
                     OSLog.i("Invalid player ID " + newPlayerId);
+                    invalidPlayerId = true;
                 } else {
-                    newPlayerStatus = OptionKt.some(temp);
+                    newPlayerStatus = Optional.of(temp);
                 }
             }
-            if (newPlayerStatus != null) {
+            if(!invalidPlayerId) {
                 retval = true;
                 // update player id
                 mCurrentPlayerId = newPlayerId;
-                PlayerStatus nps = newPlayerStatus.orNull();
+                PlayerStatus nps = newPlayerStatus.orElse(null);
                 if (nps != null && nps.isLocalSqueezePlayer()) {
                     SBPreferences.get().setLastConnectedSqueezePlayerId(newPlayerId);
                 }
 
                 // post event
-                BusProvider.getInstance().post(new ActivePlayerChangedEvent(newPlayerStatus.orNull()));
+                BusProvider.getInstance().post(new ActivePlayerChangedEvent(newPlayerStatus.orElse(null)));
 
                 // also, this event fires any time the current player status is updated, which by definition occurs when the player changes
-                BusProvider.getInstance().post(new CurrentPlayerState(newPlayerStatus.orNull(), null));
+                BusProvider.getInstance().post(new CurrentPlayerState(newPlayerStatus.orElse(null), null));
             }
         }
         return retval;

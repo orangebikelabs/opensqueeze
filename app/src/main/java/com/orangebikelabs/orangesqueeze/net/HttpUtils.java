@@ -23,7 +23,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-import arrow.core.Option;
+import java.util.Optional;
 import okhttp3.CacheControl;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -77,7 +77,7 @@ public class HttpUtils {
         connection.setRequestProperty("User-Agent", getUserAgent());
         connection.setRequestProperty("Cache-Control", sCacheControl.toString());
         if (useGlobalCookies) {
-            Header cookie = getCookieHeader(url).orNull();
+            Header cookie = getCookieHeader(url).orElse(null);
             if (cookie != null) {
                 OSLog.v(OSLog.Tag.NETWORK, "Setting cookie: " + cookie.getValue());
                 connection.setRequestProperty(cookie.getName(), cookie.getValue());
@@ -113,7 +113,7 @@ public class HttpUtils {
         Request.Builder retval = new Request.Builder();
         retval.url(url);
         if (useGlobalCookies) {
-            Header cookie = getCookieHeader(url).orNull();
+            Header cookie = getCookieHeader(url).orElse(null);
             if (cookie != null) {
                 OSLog.v(OSLog.Tag.NETWORK, "Setting cookie: " + cookie.getValue());
                 retval.header(cookie.getName(), cookie.getValue());
@@ -179,13 +179,13 @@ public class HttpUtils {
     }
 
     @Nonnull
-    static public Option<Header> getCookieHeader(URL url) {
+    static public Optional<Header> getCookieHeader(URL url) {
         Header retval = null;
         String cookieValue = getCookieValue(url);
         if (cookieValue != null) {
             retval = new Header("Cookie", cookieValue);
         }
-        return Option.fromNullable(retval);
+        return Optional.ofNullable(retval);
     }
 
     @Nullable
