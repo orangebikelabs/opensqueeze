@@ -124,7 +124,7 @@ jobs:
       - name: Bootstrap Semantic Release packages
         run: ${{ env.semrel_package_bootstrap }}
 
-      - name: Semantic Release Dry Run
+      - name: Semantic Release
         run: npx semantic-release
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }} # use supplied semantic release gh-token with extra permissions
