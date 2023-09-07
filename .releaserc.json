@@ -19,6 +19,7 @@
         "preset": "conventionalcommits"
       }
     ],
+    "semantic-release-export-data",
     [
       "@semantic-release/changelog",
       {

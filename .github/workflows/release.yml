@@ -11,7 +11,7 @@ on:
 
 env:
   # this is the command needed to bootstrap the tooling for semantic-release based on our release configuration
-  semrel_package_bootstrap: "npm i semantic-release @semantic-release/changelog @semantic-release/git conventional-changelog-conventionalcommits -D"
+  semrel_package_bootstrap: "npm i semantic-release @semantic-release/changelog @semantic-release/git semantic-release-export-data conventional-changelog-conventionalcommits -D"
 
 jobs:
   get-next-version:
@@ -29,7 +29,7 @@ jobs:
       - run: ${{ env.semrel_package_bootstrap }}
 
       - name: Semantic Release Dry Run
-        uses: cycjimmy/semantic-release-action@v4
+        run: npx semantic-release --dry-run
         id: semantic
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}     # use limited token for readonly version probing
