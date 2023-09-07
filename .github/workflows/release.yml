@@ -30,16 +30,16 @@ jobs:
 
       - name: Semantic Release Dry Run
         uses: cycjimmy/semantic-release-action@v4
-        id: get-next-version
+        id: semantic
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}     # use limited token for readonly version probing
 
-      - run: "echo Detected next version: ${{ steps.get-next-version.outputs.new_release_version }}"
-      - run: "echo Release will be published: ${{ steps.get-next-version.outputs.new_release_published }}"
+      - run: "echo Detected next version: ${{ steps.semantic.outputs.new_release_version }}"
+      - run: "echo Release will be published: ${{ steps.semantic.outputs.new_release_published }}"
 
     outputs:
-      new-release-published: ${{ steps.get-next-version.outputs.new_release_published }}
-      new-release-version: ${{ steps.get-next-version.outputs.new_release_version }}
+      new-release-published: ${{ steps.semantic.outputs.new_release_published }}
+      new-release-version: ${{ steps.semantic.outputs.new_release_version }}
 
   build:
     env:
