@@ -12,12 +12,7 @@
   ],
   "repositoryUrl": "https://github.com/orangebikelabs/opensqueeze.git",
   "plugins": [
-    [
-      "@semantic-release/commit-analyzer",
-      {
-        "preset": "conventionalcommits"
-      }
-    ],
+    "@semantic-release/commit-analyzer",
     [
       "@semantic-release/release-notes-generator",
       {

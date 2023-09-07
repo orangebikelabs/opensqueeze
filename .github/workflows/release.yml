@@ -26,7 +26,7 @@ jobs:
         with:
           node-version: lts/*
 
-      - run: ${{ env.semrel_package_bootstrap }}
+#      - run: ${{ env.semrel_package_bootstrap }}
 
       - name: Semantic Release Dry Run
         uses: cycjimmy/semantic-release-action@v4
