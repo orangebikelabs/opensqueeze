@@ -1,3 +1,10 @@
+# [2.7.0-alpha.27](https://github.com/orangebikelabs/opensqueeze/compare/v2.7.0-alpha.26...v2.7.0-alpha.27) (2023-09-07)
+
+
+### Bug Fixes
+
+* explicitly declare resConfig for supported languages to minimize app size ([cf71985](https://github.com/orangebikelabs/opensqueeze/commit/cf7198527a575098a4b49d86d9a6f58feb1bd0be))
+
 # [2.7.0-alpha.26](https://github.com/orangebikelabs/opensqueeze/compare/v2.7.0-alpha.25...v2.7.0-alpha.26) (2023-09-07)
 
 
