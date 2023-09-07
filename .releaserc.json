@@ -12,7 +12,12 @@
   ],
   "repositoryUrl": "https://github.com/orangebikelabs/opensqueeze.git",
   "plugins": [
-    "@semantic-release/commit-analyzer",
+    [
+      "@semantic-release/commit-analyzer",
+      {
+        "preset": "conventionalcommits"
+      }
+    ],
     [
       "@semantic-release/release-notes-generator",
       {
@@ -34,7 +39,6 @@
         "message": "chore(release): OpenSqueeze ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
       }
     ],
-    "semantic-release-export-data",
     [
       "@semantic-release/github",
       {
