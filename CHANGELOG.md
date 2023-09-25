@@ -1,3 +1,13 @@
+# [2.7.0-alpha.28](https://github.com/orangebikelabs/opensqueeze/compare/v2.7.0-alpha.27...v2.7.0-alpha.28) (2023-09-25)
+
+
+### Bug Fixes
+
+* bump com.squareup.okio:okio from 3.4.0 to 3.5.0 ([fe0953b](https://github.com/orangebikelabs/opensqueeze/commit/fe0953bcf08b7e194c3d0f0d04c49c19fb3af853))
+* bump io.mockk:mockk-android from 1.13.5 to 1.13.8 ([f8288d9](https://github.com/orangebikelabs/opensqueeze/commit/f8288d91b251825f78d22208d24417ee4772ca2f))
+* bump io.reactivex.rxjava3:rxjava from 3.1.6 to 3.1.7 ([00d8bff](https://github.com/orangebikelabs/opensqueeze/commit/00d8bff9584054f1114b61f106dfe032fbee308e))
+* bump kotlin_version from 1.9.0 to 1.9.10 ([8898dbb](https://github.com/orangebikelabs/opensqueeze/commit/8898dbb4ce15f65359439553d5f57d23820119cb))
+
 # [2.7.0-alpha.27](https://github.com/orangebikelabs/opensqueeze/compare/v2.7.0-alpha.26...v2.7.0-alpha.27) (2023-09-07)
 
 
