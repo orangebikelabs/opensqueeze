@@ -1,3 +1,10 @@
+# [2.7.0-alpha.29](https://github.com/orangebikelabs/opensqueeze/compare/v2.7.0-alpha.28...v2.7.0-alpha.29) (2023-09-30)
+
+
+### Bug Fixes
+
+* bump agp plugin to 8.1.2 and address deprecations ([80de312](https://github.com/orangebikelabs/opensqueeze/commit/80de3123ad1a33be269dafc68f8eed656263b439))
+
 # [2.7.0-alpha.28](https://github.com/orangebikelabs/opensqueeze/compare/v2.7.0-alpha.27...v2.7.0-alpha.28) (2023-09-25)
 
 
