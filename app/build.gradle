@@ -165,10 +165,6 @@ dependencies {
 
     implementation "com.google.guava:guava:${obl_guavaVersion}-android"
 
-    // required for Guava
-    implementation 'javax.inject:javax.inject:1'
-    implementation "com.google.errorprone:error_prone_annotations:${obl_errorProneVersion}"
-
     // HTTP client
     //noinspection GradleDependency
     implementation "com.squareup.okhttp3:okhttp:${obl_okhttpVersion}"
