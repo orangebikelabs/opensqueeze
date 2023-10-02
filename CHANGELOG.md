@@ -1,3 +1,11 @@
+# [2.7.0-alpha.30](https://github.com/orangebikelabs/opensqueeze/compare/v2.7.0-alpha.29...v2.7.0-alpha.30) (2023-10-02)
+
+
+### Bug Fixes
+
+* bump com.squareup.okio:okio from 3.5.0 to 3.6.0 ([fb4e98e](https://github.com/orangebikelabs/opensqueeze/commit/fb4e98e9216e0a68f892eefb0bf8d70f6f3c93c4))
+* bump io.reactivex.rxjava3:rxjava from 3.1.7 to 3.1.8 ([1f46933](https://github.com/orangebikelabs/opensqueeze/commit/1f469333031ce49553d7d7c66805c9aa14d4ea8b))
+
 # [2.7.0-alpha.29](https://github.com/orangebikelabs/opensqueeze/compare/v2.7.0-alpha.28...v2.7.0-alpha.29) (2023-09-30)
 
 
