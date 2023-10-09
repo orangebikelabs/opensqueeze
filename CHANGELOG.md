@@ -1,3 +1,12 @@
+# [2.7.0-alpha.32](https://github.com/orangebikelabs/opensqueeze/compare/v2.7.0-alpha.31...v2.7.0-alpha.32) (2023-10-09)
+
+
+### Bug Fixes
+
+* a few lint style fixes ([3440f95](https://github.com/orangebikelabs/opensqueeze/commit/3440f9559283ca325f9c07f550000d8b0118560d))
+* move dependency versions closer to their usage when possible ([70b1ebe](https://github.com/orangebikelabs/opensqueeze/commit/70b1ebeda6a500b2aff34cb6bdd9b73fbbe41bf9))
+* properly handle foreground service promotion in Android 14 ([d1875f6](https://github.com/orangebikelabs/opensqueeze/commit/d1875f6939823ae1c495af26396755861988c25c))
+
 # [2.7.0-alpha.31](https://github.com/orangebikelabs/opensqueeze/compare/v2.7.0-alpha.30...v2.7.0-alpha.31) (2023-10-09)
 
 
