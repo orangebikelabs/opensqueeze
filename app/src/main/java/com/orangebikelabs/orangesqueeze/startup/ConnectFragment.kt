@@ -172,7 +172,7 @@ class ConnectFragment : SBFragment() {
         popup.setOnItemClickListener { _, _, _, id ->
             popup.dismiss()
 
-            when (val operation = ConnectViewModel.ServerOperation.values()[id.toInt()]) {
+            when (val operation = ConnectViewModel.ServerOperation.entries[id.toInt()]) {
                 ConnectViewModel.ServerOperation.WAKEONLANSETTINGS ->
                     WakeOnLanDialog.newInstance(this, server._id, server.servername)
                             .show()

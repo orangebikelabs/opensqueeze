@@ -172,7 +172,7 @@ class MainPreferenceActivity : AbsPreferenceActivity() {
                     .lifecycleOwner(this@MainPreferenceFragment)
                     .title(res = R.string.pref_automaticmute_title)
                     .listItemsSingleChoice(res = R.array.pref_automaticmute_entries, initialSelection = initialIndex) { _, ndx, _ ->
-                        val behavior = OnCallMuteBehavior.values()[ndx]
+                        val behavior = OnCallMuteBehavior.entries[ndx]
                         SBPreferences.get().onCallBehavior = behavior
                     }
                     .positiveButton(res = R.string.ok)

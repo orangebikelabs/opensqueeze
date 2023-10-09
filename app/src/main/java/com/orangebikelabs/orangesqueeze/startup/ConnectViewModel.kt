@@ -30,8 +30,7 @@ import java.net.InetAddress
 import java.net.UnknownHostException
 import java.util.concurrent.TimeUnit
 
-class ConnectViewModel
-    constructor(application: Application, private val ioDispatcher: CoroutineDispatcher): AndroidViewModel(application) {
+class ConnectViewModel(application: Application, private val ioDispatcher: CoroutineDispatcher): AndroidViewModel(application) {
 
     // required for all viewmodels
     @Suppress("unused")
@@ -97,7 +96,7 @@ class ConnectViewModel
     fun getAvailableServerOperations(server: Server): List<ServerOperation> {
         val hasCredentials = server.serverkey != null
         val retval = mutableListOf<ServerOperation>()
-        ServerOperation.values().forEach {
+        ServerOperation.entries.forEach {
             val available = when (it) {
                 ServerOperation.REMOVE -> true
                 ServerOperation.REMOVE_CREDENTIALS -> hasCredentials

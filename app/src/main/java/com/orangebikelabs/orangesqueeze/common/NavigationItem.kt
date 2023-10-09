@@ -29,7 +29,7 @@ data class NavigationItem(
         val playerId: PlayerId? = null
 ) : Parcelable {
 
-    enum class Type constructor(val titleRid: Int, val iconRid: Int, val clearBackstack: Boolean) {
+    enum class Type(val titleRid: Int, val iconRid: Int, val clearBackstack: Boolean) {
         DOWNLOADS(R.string.navigation_downloads, R.drawable.ic_download, true),
         PLAYERS(R.string.navigation_players, R.drawable.ic_boombox, true),
         NOWPLAYING(R.string.navigation_nowplaying, 0, false),

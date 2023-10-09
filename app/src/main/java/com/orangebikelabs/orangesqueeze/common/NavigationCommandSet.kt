@@ -16,7 +16,7 @@ import java.util.LinkedHashMap
  * play, add events.
  */
 @Parcelize
-data class NavigationCommandSet constructor(val commands: List<String>, val parameters: List<String>) : Parcelable {
+data class NavigationCommandSet(val commands: List<String>, val parameters: List<String>) : Parcelable {
     constructor(command: String, vararg params: String) : this(listOf(command), params.toList())
     constructor(commands: List<String>, vararg params: String) : this(commands, params.toList())
 

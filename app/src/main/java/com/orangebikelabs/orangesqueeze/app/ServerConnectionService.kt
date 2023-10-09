@@ -107,7 +107,7 @@ class ServerConnectionService : Service() {
                     return null
                 }
                 val trimmedActionString = action.substring(base.length + 1)
-                return values().firstOrNull { it.name == trimmedActionString }
+                return entries.firstOrNull { it.name == trimmedActionString }
             }
         }
 
@@ -178,7 +178,7 @@ class ServerConnectionService : Service() {
         if (Build.VERSION.SDK_INT >= 23) {
             filter.addAction(PowerManager.ACTION_DEVICE_IDLE_MODE_CHANGED)
         }
-        BroadcastServiceActions.values().forEach {
+        BroadcastServiceActions.entries.forEach {
             filter.addAction(it.intentAction)
         }
         broadcastReceiver = RemoteBroadcastReceiver()

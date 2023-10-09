@@ -138,10 +138,10 @@ class WakeOnLanDialog private constructor(private val lifecycleOwner: LifecycleO
             settings.broadcastAddress = bindings.broadcast.text.toString()
         }
         val ndx = bindings.policy.selectedItemPosition
-        if (ndx < 0 || ndx >= WakeOnLanSettings.Mode.values().size) { // default value
+        if (ndx < 0 || ndx >= WakeOnLanSettings.Mode.entries.size) { // default value
             settings.mode = WakeOnLanSettings.Mode.CONNECTION
         } else {
-            settings.mode = WakeOnLanSettings.Mode.values()[bindings.policy.selectedItemPosition]
+            settings.mode = WakeOnLanSettings.Mode.entries.toTypedArray()[bindings.policy.selectedItemPosition]
         }
         settings.ports = bindings.ports.text
                 .split(",", " ", ";")

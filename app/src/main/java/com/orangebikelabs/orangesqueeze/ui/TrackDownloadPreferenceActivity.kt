@@ -6,7 +6,6 @@
 package com.orangebikelabs.orangesqueeze.ui
 
 import android.os.Build.VERSION
-import android.os.Build.VERSION_CODES
 import android.os.Bundle
 import androidx.fragment.app.commitNow
 import androidx.preference.Preference
