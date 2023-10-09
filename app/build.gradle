@@ -115,6 +115,16 @@ sqldelight {
 }
 
 dependencies {
+
+    // must stay at 3.12.x until minsdk >= 25
+    def okhttpVersion = '3.12.13'
+    def jsr305Version = '3.0.2'
+
+    // must stay at 2.12.7 for sdk 21
+    def jacksonVersion = '2.12.7'
+    def materialdialogsVersion = '3.3.0'
+
+
     // java8 desugaring
     coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:2.0.3'
 
@@ -135,12 +145,12 @@ dependencies {
     implementation 'com.nhaarman.listviewanimations:lib-core:3.1.0@aar'
     implementation 'com.nhaarman.listviewanimations:lib-manipulation:3.1.0@aar'
 
-    implementation "com.afollestad.material-dialogs:core:${obl_materialdialogsVersion}"
-    implementation "com.afollestad.material-dialogs:input:${obl_materialdialogsVersion}"
-    implementation "com.afollestad.material-dialogs:datetime:${obl_materialdialogsVersion}"
-    implementation "com.afollestad.material-dialogs:files:${obl_materialdialogsVersion}"
-    implementation "com.afollestad.material-dialogs:lifecycle:${obl_materialdialogsVersion}"
-    implementation "com.afollestad.material-dialogs:bottomsheets:${obl_materialdialogsVersion}"
+    implementation "com.afollestad.material-dialogs:core:${materialdialogsVersion}"
+    implementation "com.afollestad.material-dialogs:input:${materialdialogsVersion}"
+    implementation "com.afollestad.material-dialogs:datetime:${materialdialogsVersion}"
+    implementation "com.afollestad.material-dialogs:files:${materialdialogsVersion}"
+    implementation "com.afollestad.material-dialogs:lifecycle:${materialdialogsVersion}"
+    implementation "com.afollestad.material-dialogs:bottomsheets:${materialdialogsVersion}"
 
     // NineOldAndroids for ListViewAnimations
     implementation 'com.nineoldandroids:library:2.4.0'
@@ -155,23 +165,23 @@ dependencies {
     implementation 'com.google.android.material:material:1.10.0'
 
     //noinspection GradleDependency
-    implementation "com.fasterxml.jackson.core:jackson-core:${obl_jacksonVersion}"
+    implementation "com.fasterxml.jackson.core:jackson-core:${jacksonVersion}"
     //noinspection GradleDependency
-    implementation "com.fasterxml.jackson.core:jackson-annotations:${obl_jacksonVersion}"
+    implementation "com.fasterxml.jackson.core:jackson-annotations:${jacksonVersion}"
     //noinspection GradleDependency
-    implementation "com.fasterxml.jackson.core:jackson-databind:${obl_jacksonVersion}"
+    implementation "com.fasterxml.jackson.core:jackson-databind:${jacksonVersion}"
     //noinspection GradleDependency
-    implementation "com.fasterxml.jackson.dataformat:jackson-dataformat-smile:${obl_jacksonVersion}"
+    implementation "com.fasterxml.jackson.dataformat:jackson-dataformat-smile:${jacksonVersion}"
 
-    implementation "com.google.guava:guava:${obl_guavaVersion}-android"
+    implementation "com.google.guava:guava:32.1.2-android"
 
     // HTTP client
     //noinspection GradleDependency
-    implementation "com.squareup.okhttp3:okhttp:${obl_okhttpVersion}"
+    implementation "com.squareup.okhttp3:okhttp:${okhttpVersion}"
     //noinspection GradleDependency
-    implementation "com.squareup.okhttp3:logging-interceptor:${obl_okhttpVersion}"
+    implementation "com.squareup.okhttp3:logging-interceptor:${okhttpVersion}"
     //noinspection GradleDependency
-    implementation "com.squareup.okhttp3:okhttp-urlconnection:${obl_okhttpVersion}"
+    implementation "com.squareup.okhttp3:okhttp-urlconnection:${okhttpVersion}"
     implementation 'com.squareup.okio:okio:3.6.0'
 
     // permissions
@@ -181,7 +191,7 @@ dependencies {
     implementation 'com.squareup:otto:1.3.8'
 
     // annotations
-    implementation "com.google.code.findbugs:jsr305:${obl_jsr305Version}"
+    implementation "com.google.code.findbugs:jsr305:${jsr305Version}"
 
     // ReactiveX
     implementation "io.reactivex.rxjava3:rxandroid:3.0.2"
