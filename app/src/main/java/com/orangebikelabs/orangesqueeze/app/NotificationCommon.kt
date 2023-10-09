@@ -13,9 +13,12 @@ import android.app.Service
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.content.pm.ServiceInfo
 import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Build
+import android.os.Build.VERSION
+import android.os.Build.VERSION_CODES
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.ContextCompat
@@ -30,6 +33,7 @@ import com.orangebikelabs.orangesqueeze.R
 import com.orangebikelabs.orangesqueeze.common.*
 import com.orangebikelabs.orangesqueeze.compat.Compat
 import com.orangebikelabs.orangesqueeze.compat.CompatKt
+import com.orangebikelabs.orangesqueeze.compat.startForegroundForMediaPlaybackCompat
 import com.orangebikelabs.orangesqueeze.compat.stopForegroundCompat
 import com.orangebikelabs.orangesqueeze.nowplaying.PlayerControlStates
 import com.orangebikelabs.orangesqueeze.startup.StartupActivity
@@ -100,7 +104,7 @@ object NotificationCommon {
         val notification = builder.build()
 
         notificationManager.notify(null, NOWPLAYING_NOTIFICATION_ID, notification)
-        service.startForeground(NOWPLAYING_NOTIFICATION_ID, notification)
+        service.startForegroundForMediaPlaybackCompat(NOWPLAYING_NOTIFICATION_ID, notification)
     }
 
     fun showNowPlayingNotification(service: Service, status: PlayerStatus, sessionToken: MediaSessionCompat.Token?) {
@@ -204,7 +208,7 @@ object NotificationCommon {
         val notification = builder.build()
 
         notificationManager.notify(null, NOWPLAYING_NOTIFICATION_ID, notification)
-        service.startForeground(NOWPLAYING_NOTIFICATION_ID, notification)
+        service.startForegroundForMediaPlaybackCompat(NOWPLAYING_NOTIFICATION_ID, notification)
     }
 
     fun cancelNowPlayingNotification(service: Service) {

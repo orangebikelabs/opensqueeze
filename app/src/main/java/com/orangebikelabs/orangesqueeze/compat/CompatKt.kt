@@ -6,8 +6,10 @@
 package com.orangebikelabs.orangesqueeze.compat
 
 import android.annotation.SuppressLint
+import android.app.Notification
 import android.app.Service
 import android.content.Intent
+import android.content.pm.ServiceInfo
 import android.os.Build.VERSION
 import android.os.Bundle
 import android.os.Parcelable
@@ -62,5 +64,13 @@ fun Service.stopForegroundCompat(flags: Int) {
             }
             else -> throw IllegalStateException()
         }
+    }
+}
+
+fun Service.startForegroundForMediaPlaybackCompat(id: Int, notification: Notification) {
+    if(VERSION.SDK_INT >= 29) {
+        this.startForeground(id, notification, ServiceInfo.FOREGROUND_SERVICE_TYPE_MEDIA_PLAYBACK)
+    } else {
+        this.startForeground(id, notification)
     }
 }

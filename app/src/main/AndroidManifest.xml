@@ -37,8 +37,11 @@
 
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
-    <!-- require foreground service capability on sdk28 -->
+    <!-- require foreground service capability on sdk 28 -->
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+
+    <!-- require media playback on sdk 34 -->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK" />
 
     <queries>
         <intent>
