@@ -1,3 +1,10 @@
+# [2.7.0-alpha.33](https://github.com/orangebikelabs/opensqueeze/compare/v2.7.0-alpha.32...v2.7.0-alpha.33) (2023-10-16)
+
+
+### Bug Fixes
+
+* bump com.google.guava:guava from 32.1.2-android to 32.1.3-android ([0d6d63a](https://github.com/orangebikelabs/opensqueeze/commit/0d6d63af182fa7eea53a35233a06b76589e83a0e))
+
 # [2.7.0-alpha.32](https://github.com/orangebikelabs/opensqueeze/compare/v2.7.0-alpha.31...v2.7.0-alpha.32) (2023-10-09)
 
 
