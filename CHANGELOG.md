@@ -1,3 +1,10 @@
+# [2.7.0-alpha.34](https://github.com/orangebikelabs/opensqueeze/compare/v2.7.0-alpha.33...v2.7.0-alpha.34) (2023-10-23)
+
+
+### Bug Fixes
+
+* bump androidx.recyclerview:recyclerview from 1.3.1 to 1.3.2 ([b0e5029](https://github.com/orangebikelabs/opensqueeze/commit/b0e50294b226c8afa52ca4a0591cc5fc43b5d6aa))
+
 # [2.7.0-alpha.33](https://github.com/orangebikelabs/opensqueeze/compare/v2.7.0-alpha.32...v2.7.0-alpha.33) (2023-10-16)
 
 
