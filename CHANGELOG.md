@@ -1,3 +1,11 @@
+# [2.7.0-alpha.36](https://github.com/orangebikelabs/opensqueeze/compare/v2.7.0-alpha.35...v2.7.0-alpha.36) (2023-11-06)
+
+
+### Bug Fixes
+
+* bump androidx.fragment:fragment-ktx from 1.6.1 to 1.6.2 ([d741f6e](https://github.com/orangebikelabs/opensqueeze/commit/d741f6ec2a8a8666a1e5c60f19dbca7b537de625))
+* bump com.android.tools:desugar_jdk_libs from 2.0.3 to 2.0.4 ([a69083d](https://github.com/orangebikelabs/opensqueeze/commit/a69083d8e8b432d110a9677e01a63680cf0b81f9))
+
 # [2.7.0-alpha.35](https://github.com/orangebikelabs/opensqueeze/compare/v2.7.0-alpha.34...v2.7.0-alpha.35) (2023-11-06)
 
 
