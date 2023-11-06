@@ -126,7 +126,7 @@ dependencies {
 
 
     // java8 desugaring
-    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:2.0.3'
+    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:2.0.4'
 
     // PhotoView
     implementation 'com.github.chrisbanes:PhotoView:2.3.0'
