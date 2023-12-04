@@ -1,3 +1,11 @@
+# [2.7.0-alpha.40](https://github.com/orangebikelabs/opensqueeze/compare/v2.7.0-alpha.39...v2.7.0-alpha.40) (2023-12-04)
+
+
+### Bug Fixes
+
+* bump androidx.media:media from 1.6.0 to 1.7.0 ([db9a1a4](https://github.com/orangebikelabs/opensqueeze/commit/db9a1a4a452401f0169257351e5a2d2c23cca352))
+* bump com.android.tools.build:gradle from 8.1.4 to 8.2.0 ([315b503](https://github.com/orangebikelabs/opensqueeze/commit/315b50361dee7b15075da1ea8a7a09dd2e16c0fe))
+
 # [2.7.0-alpha.39](https://github.com/orangebikelabs/opensqueeze/compare/v2.7.0-alpha.38...v2.7.0-alpha.39) (2023-11-27)
 
 
