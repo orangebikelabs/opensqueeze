@@ -13,7 +13,7 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: set up JDK 17
-        uses: actions/setup-java@v3
+        uses: actions/setup-java@v4
         with:
           java-version: '17'
           distribution: 'temurin'
@@ -29,7 +29,7 @@ jobs:
       - name: Build with Gradle
         run: ./gradlew build test
 
-      - uses: actions/upload-artifact@v3  # upload test results
+      - uses: actions/upload-artifact@v4  # upload test results
         if: success() || failure()        # run this step even if previous step failed
         with:
           name: unittest-results
@@ -43,7 +43,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Set up JDK 17
-        uses: actions/setup-java@v3
+        uses: actions/setup-java@v4
         with:
           java-version: '17'
           distribution: 'temurin'
@@ -63,7 +63,7 @@ jobs:
           api-level: 30
           script: ./gradlew connectedAndroidTest
 
-      - uses: actions/upload-artifact@v3  # upload test results
+      - uses: actions/upload-artifact@v4  # upload test results
         if: success() || failure()        # run this step even if previous step failed
         with:
           name: instrumentationtest-results
