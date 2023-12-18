@@ -1,3 +1,10 @@
+# [2.7.0-alpha.42](https://github.com/orangebikelabs/opensqueeze/compare/v2.7.0-alpha.41...v2.7.0-alpha.42) (2023-12-18)
+
+
+### Bug Fixes
+
+* bump com.google.android.material:material from 1.10.0 to 1.11.0 ([d99e137](https://github.com/orangebikelabs/opensqueeze/commit/d99e13793659a3f1261eda19daf4e3c297266fed))
+
 # [2.7.0-alpha.41](https://github.com/orangebikelabs/opensqueeze/compare/v2.7.0-alpha.40...v2.7.0-alpha.41) (2023-12-18)
 
 
