@@ -10,19 +10,37 @@ jobs:
   unittest-report:
     runs-on: ubuntu-latest
     steps:
-      - uses: dorny/test-reporter@v1
+      - name: Download test artifacts
+        uses: action/download-artifact@v4
         with:
-          artifact: unittest-results        # artifact name
+          name: unittest-results
+          path: results
+
+      - name: Display structure of downloaded files
+        run: ls -R results
+
+      - name: Report
+        uses: dorny/test-reporter@v1
+        with:
           name: Unit Tests                  # Name of the check run which will be created
-          path: '**/*.xml'                  # Path to test results (inside artifact .zip)
+          path: 'results/**/*.xml'                  # Path to test results (inside artifact .zip)
           reporter: java-junit              # Format of test results
 
   instrumentationtest-report:
     runs-on: ubuntu-latest
     steps:
-      - uses: dorny/test-reporter@v1
+      - name: Download test artifacts
+        uses: action/download-artifact@v4
         with:
-          artifact: instrumentationtest-results            # artifact name
+          name: instrumentationtest-results
+          path: results
+
+      - name: Display structure of downloaded files
+        run: ls -R results
+
+      - name: Report
+        uses: dorny/test-reporter@v1
+        with:
           name: Instrumentation Tests       # Name of the check run which will be created
-          path: '**/*.xml'                  # Path to test results (inside artifact .zip)
+          path: 'results/**/*.xml'                  # Path to test results (inside artifact .zip)
           reporter: java-junit              # Format of test results
