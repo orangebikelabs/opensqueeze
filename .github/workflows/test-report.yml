@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Download test artifacts
-        uses: action/download-artifact@v4
+        uses: action/download-artifact@v3
         with:
           name: unittest-results
           path: results
@@ -30,7 +30,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Download test artifacts
-        uses: action/download-artifact@v4
+        uses: action/download-artifact@v3
         with:
           name: instrumentationtest-results
           path: results
