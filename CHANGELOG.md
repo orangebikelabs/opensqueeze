@@ -1,3 +1,13 @@
+# [2.7.0-alpha.44](https://github.com/orangebikelabs/opensqueeze/compare/v2.7.0-alpha.43...v2.7.0-alpha.44) (2024-01-09)
+
+
+### Bug Fixes
+
+* bump com.google.guava:guava from 32.1.3-android to 33.0.0-android ([8f88293](https://github.com/orangebikelabs/opensqueeze/commit/8f882934c618ffec8fa61bf8c6a397466d7c5ac1))
+* bump com.google.truth:truth from 1.1.5 to 1.2.0 ([cfd5bd9](https://github.com/orangebikelabs/opensqueeze/commit/cfd5bd92531cbd9bb958ac90e0cede06d28b6022))
+* bump com.squareup.leakcanary:leakcanary-android from 2.12 to 2.13 ([3f46bf5](https://github.com/orangebikelabs/opensqueeze/commit/3f46bf55c77f31c8148d7c96566d8940e756b418))
+* bump kotlin_version from 1.9.21 to 1.9.22 ([12ea5c9](https://github.com/orangebikelabs/opensqueeze/commit/12ea5c92344ca36647d67a4ff8eb137784960174))
+
 # [2.7.0-alpha.43](https://github.com/orangebikelabs/opensqueeze/compare/v2.7.0-alpha.42...v2.7.0-alpha.43) (2024-01-09)
 
 
