@@ -1,3 +1,10 @@
+# [2.7.0-alpha.43](https://github.com/orangebikelabs/opensqueeze/compare/v2.7.0-alpha.42...v2.7.0-alpha.43) (2024-01-09)
+
+
+### Bug Fixes
+
+* bump com.android.tools.build:gradle from 8.2.0 to 8.2.1 ([3b5fb95](https://github.com/orangebikelabs/opensqueeze/commit/3b5fb952d267b883b5dc440b6e4b04fba2274897))
+
 # [2.7.0-alpha.42](https://github.com/orangebikelabs/opensqueeze/compare/v2.7.0-alpha.41...v2.7.0-alpha.42) (2023-12-18)
 
 
