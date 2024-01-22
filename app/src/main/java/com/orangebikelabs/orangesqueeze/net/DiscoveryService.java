@@ -41,8 +41,6 @@ import javax.annotation.concurrent.GuardedBy;
 
 import androidx.core.content.ContextCompat;
 
-import static androidx.core.content.ContextCompat.RECEIVER_NOT_EXPORTED;
-
 
 /**
  * class is final to satisfy our strict bus registrant checks.
@@ -110,7 +108,7 @@ final public class DiscoveryService extends AbstractExecutionThreadService {
     @Override
     protected void startUp() {
         IntentFilter filter = new IntentFilter(ACTION_TRIGGER_DISCOVERY);
-        ContextCompat.registerReceiver(mContext.getApplicationContext(), mTriggerDiscoveryReceiver, filter, RECEIVER_NOT_EXPORTED);
+        ContextCompat.registerReceiver(mContext.getApplicationContext(), mTriggerDiscoveryReceiver, filter, ContextCompat.RECEIVER_NOT_EXPORTED);
 
         mScheduledDiscoveryTask = OSExecutors.getSingleThreadScheduledExecutor().scheduleAtFixedRate(() -> triggerDiscovery(mContext), 5, Constants.DISCOVERY_PACKET_INTERVAL, Constants.TIME_UNITS);
     }

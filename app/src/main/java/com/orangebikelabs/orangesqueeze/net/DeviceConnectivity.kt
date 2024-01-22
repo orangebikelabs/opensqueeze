@@ -11,7 +11,6 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.net.ConnectivityManager
 import androidx.core.content.ContextCompat
-import androidx.core.content.ContextCompat.RECEIVER_EXPORTED
 import com.orangebikelabs.orangesqueeze.common.OSAssert
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.subjects.BehaviorSubject
@@ -30,7 +29,7 @@ class DeviceConnectivity private constructor(context: Context) {
             val filter = IntentFilter()
             @Suppress("DEPRECATION")
             filter.addAction(ConnectivityManager.CONNECTIVITY_ACTION)
-            ContextCompat.registerReceiver(context, ConnectivityBroadcastReceiver, filter, RECEIVER_EXPORTED)
+            ContextCompat.registerReceiver(context, ConnectivityBroadcastReceiver, filter, ContextCompat.RECEIVER_NOT_EXPORTED)
         }
     }
 

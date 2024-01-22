@@ -183,7 +183,7 @@ class ServerConnectionService : Service() {
         }
         broadcastReceiver = RemoteBroadcastReceiver()
 
-        registerReceiver(broadcastReceiver, filter)
+        ContextCompat.registerReceiver(this, broadcastReceiver, filter, ContextCompat.RECEIVER_EXPORTED)
 
         // allow service to time out automatically if nothing intervenes
         eligibleForShutdown = EligibleForShutdown.IFSTOPPED
@@ -498,7 +498,7 @@ class ServerConnectionService : Service() {
 
     private fun updateChargingStatus() {
         val ifilter = IntentFilter(Intent.ACTION_BATTERY_CHANGED)
-        val batteryStatus = registerReceiver(null, ifilter)
+        val batteryStatus = ContextCompat.registerReceiver(this, null, ifilter, ContextCompat.RECEIVER_NOT_EXPORTED)
         if (batteryStatus != null) {
             val status = batteryStatus.getIntExtra(BatteryManager.EXTRA_STATUS, -1)
             isCharging = status == BatteryManager.BATTERY_STATUS_CHARGING || status == BatteryManager.BATTERY_STATUS_FULL
