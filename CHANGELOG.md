@@ -1,3 +1,10 @@
+# [2.7.0-alpha.47](https://github.com/orangebikelabs/opensqueeze/compare/v2.7.0-alpha.46...v2.7.0-alpha.47) (2024-01-22)
+
+
+### Bug Fixes
+
+* startup error due to missing paramter to registerReceiver ([1424c38](https://github.com/orangebikelabs/opensqueeze/commit/1424c388facefdd14eb18e24c22f1840f2765bc8))
+
 # [2.7.0-alpha.46](https://github.com/orangebikelabs/opensqueeze/compare/v2.7.0-alpha.45...v2.7.0-alpha.46) (2024-01-22)
 
 
