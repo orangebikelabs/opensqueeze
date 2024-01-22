@@ -205,18 +205,12 @@ final public class DiscoveryService extends AbstractExecutionThreadService {
                 i += length;
 
                 switch (tag) {
-                    case "IPAD":
-                        ipaddress = value;
-                        break;
-                    case "NAME":
-                        servername = value;
-                        break;
-                    case "JSON":
-                        jsonport = parsePort(value, jsonport);
-                        break;
-                    default:
-                        // ignore;
-                        break;
+                    case "IPAD" -> ipaddress = value;
+                    case "NAME" -> servername = value;
+                    case "JSON" -> jsonport = parsePort(value, jsonport);
+                    default -> {
+                        // ignore
+                    }
                 }
             }
             if (servername != null) {
