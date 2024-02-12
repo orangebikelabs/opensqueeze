@@ -1,3 +1,10 @@
+# [2.7.0-alpha.50](https://github.com/orangebikelabs/opensqueeze/compare/v2.7.0-alpha.49...v2.7.0-alpha.50) (2024-02-12)
+
+
+### Bug Fixes
+
+* bump com.squareup.okio:okio from 3.7.0 to 3.8.0 ([ea56c2b](https://github.com/orangebikelabs/opensqueeze/commit/ea56c2b1c58ad0f9b2056c8078f46218a7d216b2))
+
 # [2.7.0-alpha.49](https://github.com/orangebikelabs/opensqueeze/compare/v2.7.0-alpha.48...v2.7.0-alpha.49) (2024-02-05)
 
 
