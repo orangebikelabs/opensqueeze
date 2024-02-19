@@ -1,3 +1,11 @@
+# [2.7.0-alpha.51](https://github.com/orangebikelabs/opensqueeze/compare/v2.7.0-alpha.50...v2.7.0-alpha.51) (2024-02-19)
+
+
+### Bug Fixes
+
+* bump com.google.truth:truth from 1.4.0 to 1.4.1 ([db6196b](https://github.com/orangebikelabs/opensqueeze/commit/db6196bf52c1eda9b3b256ada64a6ab8091f642c))
+* bump org.jetbrains.kotlinx:kotlinx-coroutines-core ([84800d0](https://github.com/orangebikelabs/opensqueeze/commit/84800d0accc7b9da14eb4f6bb6d072d82af238b0))
+
 # [2.7.0-alpha.50](https://github.com/orangebikelabs/opensqueeze/compare/v2.7.0-alpha.49...v2.7.0-alpha.50) (2024-02-12)
 
 
