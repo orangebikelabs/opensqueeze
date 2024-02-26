@@ -1,3 +1,10 @@
+# [2.7.0-alpha.52](https://github.com/orangebikelabs/opensqueeze/compare/v2.7.0-alpha.51...v2.7.0-alpha.52) (2024-02-26)
+
+
+### Bug Fixes
+
+* bump com.github.fondesa:kpermissions from 3.4.0 to 3.5.0 ([283f194](https://github.com/orangebikelabs/opensqueeze/commit/283f194dcd4aede0c9a0a9cd815a0557670f54e4))
+
 # [2.7.0-alpha.51](https://github.com/orangebikelabs/opensqueeze/compare/v2.7.0-alpha.50...v2.7.0-alpha.51) (2024-02-19)
 
 
