@@ -334,7 +334,7 @@ final public class DiscoveryService extends AbstractExecutionThreadService {
                 if (existingServer == null) {
                     sq.insertDiscovered(ipaddress, jsonport, System.currentTimeMillis(), name, ServerType.DISCOVERED);
                 } else {
-                    // don't touch pinned servers or mysqueezebox.com
+                    // don't touch pinned servers
                     if (ServerType.DISCOVERED.equals(existingServer.getServertype())) {
                         sq.updateDiscovered(ipaddress, jsonport, System.currentTimeMillis(), existingServer.get_id());
                     }
