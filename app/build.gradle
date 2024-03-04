@@ -213,7 +213,7 @@ dependencies {
     implementation fileTree(dir: 'lib', include: ['*.jar'])
 
     testImplementation 'junit:junit:4.13.2'
-    testImplementation "io.mockk:mockk-android:1.13.9"
+    testImplementation "io.mockk:mockk-android:1.13.10"
     testImplementation "com.google.truth:truth:1.4.2"
 
     androidTestImplementation "androidx.test:runner:1.5.2"
@@ -225,7 +225,7 @@ dependencies {
     androidTestImplementation "androidx.test.ext:junit:1.1.5"
     androidTestImplementation "androidx.test.ext:junit-ktx:1.1.5"
     androidTestImplementation "androidx.test.ext:truth:1.5.0"
-    androidTestImplementation "io.mockk:mockk-android:1.13.9"
+    androidTestImplementation "io.mockk:mockk-android:1.13.10"
     androidTestUtil "androidx.test:orchestrator:1.4.2"
 
     // workaround for gradle bug https://github.com/gradle/gradle/issues/22326, keep until fixed
