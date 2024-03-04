@@ -14,6 +14,8 @@ import android.database.sqlite.SQLiteException;
 
 import com.google.common.io.ByteSource;
 import com.google.common.io.Files;
+import com.orangebikelabs.orangesqueeze.database.LookupExternalEntriesSortedByDisuse;
+import com.orangebikelabs.orangesqueeze.database.LookupInternalEntriesSortedByDisuse;
 import com.orangebikelabs.orangesqueeze.database.OSDatabase;
 import com.orangebikelabs.orangesqueeze.common.OSAssert;
 import com.orangebikelabs.orangesqueeze.common.BusProvider;
@@ -26,7 +28,6 @@ import com.orangebikelabs.orangesqueeze.common.ServerContent;
 import com.orangebikelabs.orangesqueeze.common.event.TriggerMenuLoad;
 import com.orangebikelabs.orangesqueeze.database.DatabaseAccess;
 import com.orangebikelabs.orangesqueeze.database.DatabaseAccessKt;
-import com.squareup.sqldelight.db.SqlCursor;
 
 import java.io.Closeable;
 import java.io.File;
@@ -312,24 +313,18 @@ public class CacheDatabase {
         }
 
         final long desiredSize = (long) (CACHE_SHRINK_THRESHOLD_FACTOR * mConfiguration.getMaxExternalSize());
-
-        try {
-            try(SqlCursor cursor = mNewDatabase.getCacheQueries().lookupExternalEntriesSortedByDisuse().execute()) {
-                EntryDeleter deleter = new EntryDeleter();
-                while (externalSize > desiredSize && cursor.next()) {
-                    long id = cursor.getLong(0);
-                    long rowSize = cursor.getLong(1);
-                    deleter.delete(id);
-
-                    // remove the size of the file, as it stands in our records. It's possible it was already gone, but we don't care about that.
-                    externalSize -= rowSize;
-                }
-                OSLog.d(OSLog.Tag.CACHE, deleter.getCount() + " item(s) were shrunk from external storage");
+        List<LookupExternalEntriesSortedByDisuse> list = mNewDatabase.getCacheQueries().lookupExternalEntriesSortedByDisuse().executeAsList();
+        EntryDeleter deleter = new EntryDeleter();
+        for(LookupExternalEntriesSortedByDisuse item : list) {
+            if(externalSize < desiredSize) {
+                break;
             }
-        } catch (IOException e) {
-            // this shouldn't really happen
-            OSLog.w(e.getMessage(), e);
+            deleter.delete(item.get_id());
+
+            // remove the size of the file, as it stands in our records. It's possible it was already gone, but we don't care about that.
+            externalSize -= item.getCachevaluesize();
         }
+        OSLog.d(OSLog.Tag.CACHE, deleter.getCount() + " item(s) were shrunk from external storage");
     }
 
     public void cleanupShrinkSqliteCache() {
@@ -342,23 +337,18 @@ public class CacheDatabase {
         }
 
         final long desiredSize = (long) (CACHE_SHRINK_THRESHOLD_FACTOR * mConfiguration.getMaxSqliteSize());
-        try {
-            try(SqlCursor cursor = mNewDatabase.getCacheQueries().lookupInternalEntriesSortedByDisuse().execute()) {
-                EntryDeleter deleter = new EntryDeleter();
-                while (internalSize > desiredSize && cursor.next()) {
-                    long id = cursor.getLong(0);
-                    long rowSize = cursor.getLong(1);
-                    deleter.delete(id);
-
-                    // remove the size of the file, as it stands in our records. It's possible it was already gone, but we don't care about that.
-                    internalSize -= rowSize;
-                }
-                OSLog.d(OSLog.Tag.CACHE, deleter.getCount() + " item(s) were shrunk from sqlite storage");
+        List<LookupInternalEntriesSortedByDisuse> list = mNewDatabase.getCacheQueries().lookupInternalEntriesSortedByDisuse().executeAsList();
+        EntryDeleter deleter = new EntryDeleter();
+        for(LookupInternalEntriesSortedByDisuse item : list) {
+            if(internalSize < desiredSize) {
+                break;
             }
-        } catch (IOException e) {
-            // shouldn't happen
-            OSLog.w(e.getMessage(), e);
+            deleter.delete(item.get_id());
+
+            // remove the size of the file, as it stands in our records. It's possible it was already gone, but we don't care about that.
+            internalSize -= item.getCachevaluesize();
         }
+        OSLog.d(OSLog.Tag.CACHE, deleter.getCount() + " item(s) were shrunk from sqlite storage");
     }
 
     public void markEntry(CacheEntry entry, CacheContent.ItemStatus newStatus) {

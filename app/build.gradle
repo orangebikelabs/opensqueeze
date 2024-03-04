@@ -7,8 +7,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-parcelize'
-apply plugin: 'com.squareup.sqldelight'
-
+apply plugin: 'app.cash.sqldelight'
 
 android {
     namespace 'com.orangebikelabs.orangesqueeze'
@@ -102,16 +101,18 @@ android {
 }
 
 sqldelight {
-    // Database name
-    OSDatabase {
-        // generated package for main database
-        packageName = "com.orangebikelabs.orangesqueeze.database"
+    databases {
+        // Database name
+        OSDatabase {
+            // generated package for main database
+            packageName = "com.orangebikelabs.orangesqueeze.database"
 
-        // The directory where to store '.db' schema files relative to the root
-        // of the project. These files are used to verify that migrations yield
-        // a database with the latest schema. Defaults to null so the verification
-        // tasks will not be created.
-        schemaOutputDirectory = file("src/main/databases")
+            // The directory where to store '.db' schema files relative to the root
+            // of the project. These files are used to verify that migrations yield
+            // a database with the latest schema. Defaults to null so the verification
+            // tasks will not be created.
+            schemaOutputDirectory = file("src/main/databases")
+        }
     }
 }
 
@@ -200,8 +201,9 @@ dependencies {
     implementation "io.reactivex.rxjava3:rxkotlin:3.0.1"
 
     // sqldelight
-    implementation "com.squareup.sqldelight:android-driver:${sqldelight_version}"
-    implementation "com.squareup.sqldelight:coroutines-extensions:${sqldelight_version}"
+    implementation "app.cash.sqldelight:android-driver:${sqldelight_version}"
+    implementation "app.cash.sqldelight:coroutines-extensions:${sqldelight_version}"
+    implementation "app.cash.sqldelight:primitive-adapters:${sqldelight_version}"
 
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.13'
 

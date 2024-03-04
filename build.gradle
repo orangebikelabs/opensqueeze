@@ -5,7 +5,7 @@
 
 buildscript {
     ext.kotlin_version = '1.9.22'
-    ext.sqldelight_version = '1.5.5'
+    ext.sqldelight_version = '2.0.1'
 
     repositories {
         google()
@@ -19,7 +19,7 @@ buildscript {
         //noinspection DifferentKotlinGradleVersion
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
 
-        classpath "com.squareup.sqldelight:gradle-plugin:$sqldelight_version"
+        classpath "app.cash.sqldelight:gradle-plugin:$sqldelight_version"
     }
 }
 

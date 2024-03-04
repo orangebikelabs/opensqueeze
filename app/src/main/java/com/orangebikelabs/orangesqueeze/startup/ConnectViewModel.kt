@@ -8,6 +8,8 @@ package com.orangebikelabs.orangesqueeze.startup
 import android.app.Application
 import androidx.annotation.StringRes
 import androidx.lifecycle.*
+import app.cash.sqldelight.coroutines.asFlow
+import app.cash.sqldelight.coroutines.mapToList
 import com.google.common.net.HostAndPort
 import com.orangebikelabs.orangesqueeze.R
 import com.orangebikelabs.orangesqueeze.app.PendingConnection
@@ -18,8 +20,6 @@ import com.orangebikelabs.orangesqueeze.database.deleteServer
 import com.orangebikelabs.orangesqueeze.database.Server
 import com.orangebikelabs.orangesqueeze.net.SendDiscoveryPacketService
 import com.squareup.otto.Subscribe
-import com.squareup.sqldelight.runtime.coroutines.asFlow
-import com.squareup.sqldelight.runtime.coroutines.mapToList
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -66,7 +66,7 @@ class ConnectViewModel(application: Application, private val ioDispatcher: Corou
                             discoveredservertype = ServerType.DISCOVERED
                     )
                     .asFlow()
-                    .mapToList()
+                    .mapToList(Dispatchers.IO)
 
     init {
         ignorePendingConnectionEvent = true

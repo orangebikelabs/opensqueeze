@@ -7,14 +7,16 @@ package com.orangebikelabs.orangesqueeze.database
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
+import app.cash.sqldelight.ColumnAdapter
+import app.cash.sqldelight.EnumColumnAdapter
+import app.cash.sqldelight.adapter.primitive.IntColumnAdapter
+import app.cash.sqldelight.db.QueryResult
+import app.cash.sqldelight.db.SqlSchema
+import app.cash.sqldelight.driver.android.AndroidSqliteDriver
 import com.orangebikelabs.orangesqueeze.R
 import com.orangebikelabs.orangesqueeze.app.PlayerMenuHelper
 import com.orangebikelabs.orangesqueeze.common.*
 import com.orangebikelabs.orangesqueeze.download.DownloadStatus
-import com.squareup.sqldelight.ColumnAdapter
-import com.squareup.sqldelight.EnumColumnAdapter
-import com.squareup.sqldelight.android.AndroidSqliteDriver
-import com.squareup.sqldelight.db.SqlDriver
 import java.util.concurrent.atomic.AtomicReference
 
 /**
@@ -41,7 +43,8 @@ class DatabaseAccess {
                                     servertypeAdapter = EnumColumnAdapter(),
                                     serverlastplayerAdapter = PlayerIdAdapter(),
                                     servermenunodesAdapter = RootMenuNodesAdapter(),
-                                    serverplayermenusAdapter = PlayerMenusAdapter()
+                                    serverplayermenusAdapter = PlayerMenusAdapter(),
+                                    serverportAdapter = IntColumnAdapter,
                             ),
                             downloadAdapter = Download.Adapter(
                                     DownloadStatusAdapter()
@@ -113,7 +116,7 @@ class DatabaseAccess {
         }
     }
 
-    private class Callback(schema: SqlDriver.Schema) : AndroidSqliteDriver.Callback(schema) {
+    private class Callback(schema: SqlSchema<QueryResult.Value<Unit>>) : AndroidSqliteDriver.Callback(schema) {
         val database = AtomicReference<SupportSQLiteDatabase>()
 
         override fun onOpen(db: SupportSQLiteDatabase) {

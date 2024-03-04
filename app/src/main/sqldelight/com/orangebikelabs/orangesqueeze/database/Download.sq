@@ -1,4 +1,5 @@
 import com.orangebikelabs.orangesqueeze.download.DownloadStatus;
+import kotlin.Boolean;
 
 CREATE TABLE download (
     _id INTEGER PRIMARY KEY AUTOINCREMENT,

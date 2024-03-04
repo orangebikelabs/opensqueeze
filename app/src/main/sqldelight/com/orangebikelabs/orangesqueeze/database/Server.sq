@@ -2,7 +2,9 @@ import com.orangebikelabs.orangesqueeze.app.PlayerMenuHelper.PlayerMenuSet;
 import com.orangebikelabs.orangesqueeze.common.PlayerId;
 import com.orangebikelabs.orangesqueeze.common.ServerType;
 import com.orangebikelabs.orangesqueeze.common.WakeOnLanSettings;
-import java.lang.Integer;
+import kotlin.Boolean;
+import kotlin.Int;
+import kotlin.String;
 import kotlin.collections.List;
 import kotlin.collections.Map;
 
@@ -11,7 +13,7 @@ CREATE TABLE server (
     servername TEXT NOT NULL,
     serverhost TEXT NOT NULL,
     serverwakeonlan TEXT AS WakeOnLanSettings,
-    serverport INTEGER AS Integer NOT NULL,
+    serverport INTEGER AS Int NOT NULL,
     servertype TEXT AS ServerType NOT NULL,
     serverplayermenus BLOB AS Map<PlayerId, PlayerMenuSet>,
     servermenunodes BLOB AS List<String>,
