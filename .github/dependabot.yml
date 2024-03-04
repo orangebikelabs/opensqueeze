@@ -12,6 +12,6 @@ updates:
     directory: "/"
     schedule:
       interval: "weekly"
-    target-branch: "main"
+    target-branch: "alpha"
     commit-message:
       prefix: "ci"
