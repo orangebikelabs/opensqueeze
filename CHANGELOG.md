@@ -1,3 +1,11 @@
+# [2.7.0-alpha.56](https://github.com/orangebikelabs/opensqueeze/compare/v2.7.0-alpha.55...v2.7.0-alpha.56) (2024-03-04)
+
+
+### Bug Fixes
+
+* use BundleCompat to load parcelable array lists ([d4d064b](https://github.com/orangebikelabs/opensqueeze/commit/d4d064b61fa11788060e86a6c734d159814269eb))
+* use compat for loading bundle parcelables ([9d02042](https://github.com/orangebikelabs/opensqueeze/commit/9d020427a87760911aa85dda8a5617cdf2d915e4))
+
 # [2.7.0-alpha.55](https://github.com/orangebikelabs/opensqueeze/compare/v2.7.0-alpha.54...v2.7.0-alpha.55) (2024-03-04)
 
 
