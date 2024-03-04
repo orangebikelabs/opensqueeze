@@ -1,3 +1,10 @@
+# [2.7.0-alpha.55](https://github.com/orangebikelabs/opensqueeze/compare/v2.7.0-alpha.54...v2.7.0-alpha.55) (2024-03-04)
+
+
+### Bug Fixes
+
+* remove support for mysqueezebox.com since it's gone ([cacd5ab](https://github.com/orangebikelabs/opensqueeze/commit/cacd5abc9377d9a60b59de046ab6a40c144ed60b))
+
 # [2.7.0-alpha.54](https://github.com/orangebikelabs/opensqueeze/compare/v2.7.0-alpha.53...v2.7.0-alpha.54) (2024-03-04)
 
 
