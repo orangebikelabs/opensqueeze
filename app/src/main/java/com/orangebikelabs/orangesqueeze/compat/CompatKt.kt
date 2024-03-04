@@ -13,6 +13,7 @@ import android.content.pm.ServiceInfo
 import android.os.Build.VERSION
 import android.os.Bundle
 import android.os.Parcelable
+import androidx.core.os.BundleCompat
 
 class CompatKt {
     companion object {
@@ -33,22 +34,15 @@ fun <T> Bundle.getParcelableCompat(key: String?, clz: Class<T>): T? {
 }
 
 fun <T : Parcelable> Bundle.getParcelableArrayListCompat(key: String?, clz: Class<T>): ArrayList<T>? {
-    return if(VERSION.SDK_INT >= 33) {
-        this.getParcelableArrayList(key, clz)
-    } else {
-        @Suppress("DEPRECATION")
-        this.getParcelableArrayList(key)
-    }
+    return BundleCompat.getParcelableArrayList(this, key, clz)
 }
 
 fun <T : Parcelable> Intent.getParcelableArrayListExtraCompat(key: String?, clz: Class<T>): ArrayList<T>? {
-    return if(VERSION.SDK_INT >= 33) {
-        this.getParcelableArrayListExtra(key, clz)
-    } else {
-        @Suppress("DEPRECATION")
-        this.getParcelableArrayListExtra(key)
-    }
+    val extras = this.extras ?: return null
+
+    return BundleCompat.getParcelableArrayList(extras, key, clz)
 }
+
 @Suppress("DEPRECATION")
 fun Service.stopForegroundCompat(flags: Int) {
     if (VERSION.SDK_INT >= 24) {
