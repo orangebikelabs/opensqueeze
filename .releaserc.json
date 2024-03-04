@@ -43,6 +43,11 @@
             "path": "app/build/outputs/apk/debug/app-debug.apk",
             "name": "OpenSqueeze-${nextRelease.gitTag}-debug.apk",
             "label": "Debug APK file"
+          },
+          {
+            "path": "app/build/outputs/mapping/release/mapping.txt",
+            "name": "OpenSqueeze-${nextRelease.gitTag}-mapping.txt",
+            "label": "Minify mapping file for release apk"
           }
         ]
       }
