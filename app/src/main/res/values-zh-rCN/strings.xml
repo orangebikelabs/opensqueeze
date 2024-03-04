@@ -103,7 +103,6 @@
     <string name="action_squeezeplayer_stop">停止服务</string>
     <string name="action_synchronization">同步</string>
     <string name="synchronization_title_html">同步<b>%1$s</b>与：</string>
-    <string name="action_squeezenetwork_connect_player">连接到 mysqueezebox.com</string>
     <string name="player_connect_server_confirmation_message">连接%1$s到服务器”%2$s\"\?请注意，切换播放器后可能需要一些时间才能可见。</string>
     <string name="player_connect_server_confirmation_title">确认选择服务器</string>
     <string name="players_none">无</string>

@@ -440,31 +440,6 @@ public class ManagePlayersFragment extends SBFragment implements LoaderCallbacks
         mLastSyncRequest = mSbContext.unsynchronize(playerId);
     }
 
-    public void control_connectToSqueezeNetwork(PlayerId playerId) {
-        if (!isAdded()) {
-            return;
-        }
-
-        try {
-            PlayerStatus status = mSbContext.getServerStatus().getCheckedPlayerStatus(playerId);
-            String message = getString(R.string.player_connect_server_confirmation_message, status.getName(), Constants.SQUEEZENETWORK_SERVERNAME);
-
-            MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(requireContext());
-            builder.setTitle(R.string.player_connect_server_confirmation_title)
-                    .setMessage(message)
-                    .setPositiveButton(R.string.ok, (dlg, which) -> {
-                        SBRequest request = mSbContext.newRequest(Type.COMET, "connect", Constants.SQUEEZENETWORK_CONNECT_COMMAND_HOSTNAME);
-                        request.setPlayerId(playerId);
-                        request.submit(OSExecutors.getUnboundedPool());
-                    })
-                    .setNegativeButton(R.string.cancel, (dlg, which) -> {
-                    })
-                    .show();
-        } catch (PlayerNotFoundException e) {
-            // ignore
-        }
-    }
-
     public void control_performOtherPlayerConnect(PlayerId playerId, String serverHost) {
         if (!isAdded()) {
             return;

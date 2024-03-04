@@ -53,7 +53,6 @@ public class ConnectionInfo implements Parcelable {
 
     @Nullable
     final protected String mServerName;
-    final protected boolean mSqueezeNetwork;
 
     @Nullable
     final protected String mUsername;
@@ -77,17 +76,6 @@ public class ConnectionInfo implements Parcelable {
         mPassword = password;
         mConnected = connected;
         mWolSettings = wolSettings;
-
-        boolean squeezeNetwork = false;
-        if (serverHost != null) {
-            for (String d : Constants.SQUEEZENETWORK_DOMAINS) {
-                if (serverHost.endsWith(d)) {
-                    squeezeNetwork = true;
-                    break;
-                }
-            }
-        }
-        mSqueezeNetwork = squeezeNetwork;
     }
 
     @Nonnull
@@ -101,10 +89,6 @@ public class ConnectionInfo implements Parcelable {
 
     synchronized public boolean isConnected() {
         return mConnected;
-    }
-
-    public boolean isSqueezeNetwork() {
-        return mSqueezeNetwork;
     }
 
     public long getServerId() {
@@ -157,7 +141,6 @@ public class ConnectionInfo implements Parcelable {
                 add("serverId", mServerId).
                 add("serverHost", mServerHost).
                 add("serverPort", mServerPort).
-                add("isSqueezeNetwork", mSqueezeNetwork).
                 add("usernameSupplied", mUsername != null).
                 add("passwordSupplied", mPassword != null).
                 add("connected", isConnected()).
@@ -167,7 +150,7 @@ public class ConnectionInfo implements Parcelable {
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(mPassword, mServerHost, mServerId, mServerName, mServerPort, mSqueezeNetwork, mUsername, mWolSettings);
+        return Objects.hashCode(mPassword, mServerHost, mServerId, mServerName, mServerPort, mUsername, mWolSettings);
     }
 
     @Override
@@ -188,7 +171,6 @@ public class ConnectionInfo implements Parcelable {
                 && Objects.equal(mServerId, other.mServerId)
                 && Objects.equal(mServerName, other.mServerName)
                 && Objects.equal(mServerPort, other.mServerPort)
-                && Objects.equal(mSqueezeNetwork, other.mSqueezeNetwork)
                 && Objects.equal(mUsername, other.mUsername)
                 && Objects.equal(isConnected(), other.isConnected())
                 && Objects.equal(mWolSettings, other.mWolSettings);

@@ -35,9 +35,6 @@ abstract public class AbsPlayerAction extends AbsAction<AbsPlayerItem> {
         list.add(new RenamePlayerAction(context));
         list.add(new VolumeAction(context));
         list.add(new StopSqueezePlayerAction(context));
-        if (!sbContext.getConnectionInfo().isSqueezeNetwork()) {
-            list.add(new ConnectToSNAction(context));
-        }
         list.add(new SleepAction(context));
         list.add(new MoreAction(context));
 

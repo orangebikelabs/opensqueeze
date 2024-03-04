@@ -5,10 +5,8 @@
 
 package com.orangebikelabs.orangesqueeze.common;
 
-import com.google.common.collect.ImmutableList;
 import com.orangebikelabs.orangesqueeze.BuildConfig;
 
-import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -17,13 +15,8 @@ import java.util.concurrent.TimeUnit;
  * @author tbsandee@orangebikelabs.com
  */
 public class Constants {
-    final public static String SQUEEZENETWORK_HOSTNAME = "www.squeezenetwork.com";
-    final public static String SQUEEZENETWORK_CONNECT_COMMAND_HOSTNAME = "jive.squeezenetwork.com";
-    final public static String SQUEEZENETWORK_SERVERNAME = "mysqueezebox.com";
-    final public static List<String> SQUEEZENETWORK_DOMAINS = ImmutableList.of("squeezenetwork.com", "mysqueezebox.com");
 
     final public static int DEFAULT_SERVER_PORT = 9000;
-    final public static int SQUEEZENETWORK_PORT = 80;
 
     final public static TimeUnit TIME_UNITS = TimeUnit.SECONDS;
 

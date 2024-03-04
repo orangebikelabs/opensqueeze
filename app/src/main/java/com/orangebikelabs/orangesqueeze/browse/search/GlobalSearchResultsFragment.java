@@ -51,8 +51,7 @@ public class GlobalSearchResultsFragment extends BrowseRequestFragment {
     @Nonnull
     public static GlobalSearchResultsFragment newInstance(String query) {
 
-        boolean useLegacySearch = !SBContextProvider.get().getConnectionInfo().isSqueezeNetwork()
-                && SBContextProvider.get().getServerStatus().getVersion().compareTo(new VersionIdentifier("7.5.0")) < 0;
+        boolean useLegacySearch = SBContextProvider.get().getServerStatus().getVersion().compareTo(new VersionIdentifier("7.5.0")) < 0;
         if (useLegacySearch) {
             return LegacySearchResultsFragment.newInstance(query);
         }

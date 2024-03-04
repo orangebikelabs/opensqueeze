@@ -111,7 +111,6 @@ class ConnectFragment : SBFragment() {
 
             }
         }
-        binding.squeezenetworkButton.setOnClickListener { viewModel.createNewSqueezenetwork() }
         binding.discoveryToggle.isChecked = SBPreferences.get().isAutoDiscoverEnabled
         binding.discoveryToggle.setOnClickListener {
             SBPreferences.get().setAutoDiscover(binding.discoveryToggle.isChecked)
@@ -236,7 +235,6 @@ class ConnectFragment : SBFragment() {
             val typeResource = when (server.servertype) {
                 ServerType.DISCOVERED -> if (hasCredentials) R.drawable.ic_unlocked else R.drawable.ic_locked
                 ServerType.PINNED -> R.drawable.ic_pin_outline
-                ServerType.SQUEEZENETWORK -> R.drawable.ic_cloud
             }
             holder.binding.typeIcon.setImageResource(typeResource)
             holder.binding.connectedIcon.visibility = if (server._id == SBContextProvider.get().serverId) {

@@ -71,7 +71,6 @@
     <string name="squeezeplayer_start_item">Starta SqueezePlayer</string>
     <string name="action_squeezeplayer_stop">Stoppa tjänst</string>
     <string name="synchronization_title_html">Synkronisera <b>%1$s</b> med:</string>
-    <string name="action_squeezenetwork_connect_player">Anslut till mysqueezebox.com</string>
     <string name="player_connect_server_confirmation_message">Anslut %1$s till server \"%2$s\"\? Obs: Det kan ta lite tid innan spelaren blir synlig efter bytet.</string>
     <string name="player_connect_server_confirmation_title">Bekräfta serverval</string>
     <string name="players_none">Ingen</string>

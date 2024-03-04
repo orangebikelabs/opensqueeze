@@ -90,7 +90,6 @@
     <string name="hidden">Hidden</string>
     -->
     <string name="serverdiscovery_label">Server Discovery</string>
-    <string name="squeezenetwork_button_text" translatable="false">mysqueezebox.com</string>
     <string name="network_error">Network Error</string>
     <string name="addtoplaylist_action_snackbar_html">Added &lt;b&gt;%1$s&lt;/b&gt; to the current playlist
     </string>
@@ -125,7 +124,6 @@
     <string name="action_squeezeplayer_stop">Stop Service</string>
     <string name="action_synchronization">Synchronization</string>
     <string name="synchronization_title_html">Synchronize &lt;b&gt;%1$s&lt;/b&gt; with:</string>
-    <string name="action_squeezenetwork_connect_player">Connect to mysqueezebox.com</string>
     <string name="player_connect_server_confirmation_message">Connect %1$s to the server “%2$s”?
         Note that it can take some time for the player to become visible after the switch.
     </string>

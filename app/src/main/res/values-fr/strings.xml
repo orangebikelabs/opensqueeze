@@ -116,7 +116,6 @@
     <string name="squeezeplayer_start_item">Démarrer SqueezePlayer</string>
     <string name="action_squeezeplayer_stop">Aire d\'autoroute</string>
     <string name="action_synchronization">Synchronisation</string>
-    <string name="action_squeezenetwork_connect_player">Connectez-vous à mysqueezebox.com</string>
     <string name="player_connect_server_confirmation_title">Confirmer la sélection du serveur</string>
     <string name="action_sleepplayer">Sommeil platine</string>
     <string name="unsynchronized_player_separator">Platines non synchronisés</string>

@@ -64,13 +64,6 @@ public class OtherPlayerInfo implements Serializable, Comparable<OtherPlayerInfo
         return mSnId;
     }
 
-    @JsonIgnore
-    public void markSqueezeNetwork() {
-        // this triggers the SN info
-        mServerUrl = "http://" + Constants.SQUEEZENETWORK_HOSTNAME + ":" + Constants.SQUEEZENETWORK_PORT;
-        mServer = Constants.SQUEEZENETWORK_SERVERNAME;
-    }
-
     @JsonSetter("id")
     public void setSNId(String id) {
         mSnId = id;

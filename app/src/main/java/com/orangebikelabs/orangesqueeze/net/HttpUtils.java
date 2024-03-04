@@ -24,6 +24,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import java.util.Optional;
+
 import okhttp3.CacheControl;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -142,11 +143,7 @@ public class HttpUtils {
 
     @Nonnull
     static public URL getCometUrl(ConnectionInfo ci) throws MalformedURLException {
-        if (ci.isSqueezeNetwork()) {
-            return new URL("http://jive.squeezenetwork.com:9000/cometd");
-        } else {
-            return new URL("http://" + ci.getServerHost() + ":" + ci.getServerPort() + "/cometd");
-        }
+        return new URL("http://" + ci.getServerHost() + ":" + ci.getServerPort() + "/cometd");
     }
 
     final static private ConcurrentHashMap<String, ConcurrentHashMap<String, CookieValue>> sCookies = new ConcurrentHashMap<>();

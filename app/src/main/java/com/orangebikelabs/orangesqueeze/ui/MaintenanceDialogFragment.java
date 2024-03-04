@@ -75,7 +75,6 @@ public class MaintenanceDialogFragment extends SBDialogFragment {
         MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(requireContext())
                 .setTitle(R.string.maintenance_title)
                 .setCancelable(true);
-        boolean squeezeNetwork = mContext.getConnectionInfo().isSqueezeNetwork();
         ArrayAdapter<MaintenanceOperations> adapter = new ArrayAdapter<>(requireContext(), R.layout.maintenance_item, R.id.text1) {
             @Override
             @Nonnull
@@ -95,7 +94,7 @@ public class MaintenanceDialogFragment extends SBDialogFragment {
             }
         };
         for (MaintenanceOperations op : MaintenanceOperations.values()) {
-            if (!squeezeNetwork || op.isSqueezeNetworkCapable()) {
+            if (op.isSqueezeNetworkCapable()) {
                 adapter.add(op);
             }
         }

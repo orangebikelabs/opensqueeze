@@ -217,7 +217,6 @@
     <string name="saved_playlist_html"><![CDATA[Gespeicherte Playliste <b>%1$s</b>]]></string>
     <string name="player_sleep_text">Schlaf \'%1$s\' in %2$d Minuten</string>
     <string name="player_sleep_endoftrack">Schlafe \'%1$s\', wenn der Titel in %2$d Minuten endet</string>
-    <string name="action_squeezenetwork_connect_player">Verbinden mit mysqueezebox.com</string>
     <string name="synchronization_title_html">Synchronisieren mit <b>%1$s</b>:</string>
     <string name="player_sleep_never">Schlaf nicht \'%1$s\'</string>
     <string-array name="repeat_strings">

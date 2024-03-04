@@ -53,7 +53,7 @@ public class NetworkTools {
             // only send wol if we have a mac address and !squeezenetwork
             String macAddress = ci.getWakeOnLanSettings().getMacAddress();
 
-            if (!ci.isSqueezeNetwork() && macAddress != null && !macAddress.equals("")) {
+            if (macAddress != null && !macAddress.equals("")) {
                 try {
 
                     InetAddress broadcast;

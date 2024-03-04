@@ -320,7 +320,6 @@ public class ServerStatus {
             OSLog.jsonTrace("New server status", o);
 
             processOtherPlayers(o);
-            processSqueezeNetworkPlayers(o);
 
             // parse player loop, changes to the players happens immediately but player additions/removals are added at the end of the block
             JsonNode players = o.get("players_loop");
@@ -356,26 +355,6 @@ public class ServerStatus {
                 }
             }
             return null;
-        }
-
-        private void processSqueezeNetworkPlayers(JsonNode o) {
-            JsonNode snPlayersNode = o.get("sn_players_loop");
-            try {
-                if (snPlayersNode != null) {
-                    ObjectReader or = JsonHelper.getJsonObjectReader().forType(new TypeReference<List<OtherPlayerInfo>>() {/* no overrides */
-                    });
-                    List<OtherPlayerInfo> playerList = or.readValue(snPlayersNode.traverse());
-
-                    // ensure they are marked as being from SqueezeNetwork
-                    for (OtherPlayerInfo opi : playerList) {
-                        opi.markSqueezeNetwork();
-                    }
-
-                    mOtherPlayers.addAll(playerList);
-                }
-            } catch (IOException e) {
-                Reporting.report(e, "Error deserializing SN players node", snPlayersNode);
-            }
         }
 
         private void processOtherPlayers(JsonNode o) {

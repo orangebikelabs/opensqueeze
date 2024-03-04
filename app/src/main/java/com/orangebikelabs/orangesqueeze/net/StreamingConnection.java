@@ -935,12 +935,6 @@ public class StreamingConnection extends AbstractExecutionThreadService {
 
                 sendConnectMessage(newRequests);
 
-                if (mConnectionInfo.isSqueezeNetwork()) {
-                    if (clientId.startsWith("1X")) {
-                        addSNRegisterMessage();
-                    }
-                }
-
                 addServerStatusSubscribeMessage();
             }
         }

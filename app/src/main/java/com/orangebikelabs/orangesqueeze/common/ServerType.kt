@@ -9,5 +9,5 @@ import androidx.annotation.Keep
 
 @Keep
 enum class ServerType {
-    DISCOVERED, PINNED, SQUEEZENETWORK
+    DISCOVERED, PINNED
 }

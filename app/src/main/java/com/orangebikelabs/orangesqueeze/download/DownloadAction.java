@@ -25,24 +25,18 @@ import java.util.List;
  * @author tbsandee@orangebikelabs.com
  */
 public class DownloadAction extends AbsItemAction {
-    final private boolean mIsSqueezeNetwork;
-
     private List<String> mCommandList;
     private List<String> mParamList;
     private String mDownloadTitle;
 
     public DownloadAction(Context context) {
         super(context, R.string.download_desc, R.drawable.ic_download);
-
-        mIsSqueezeNetwork = SBContextProvider.get().getConnectionInfo().isSqueezeNetwork();
     }
 
     @Override
     public boolean initialize(Item item) {
         boolean retval = false;
-        if (mIsSqueezeNetwork) {
-            // disable download when we're connected to SN
-        } else if (item instanceof StandardMenuItem smi) {
+        if (item instanceof StandardMenuItem smi) {
             MenuAction goAction = MenuHelpers.getAction(smi.getMenuElement(), ActionNames.GO);
             if (goAction != null) {
                 mDownloadTitle = smi.getItemTitle();

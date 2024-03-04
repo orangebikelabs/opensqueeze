@@ -102,7 +102,7 @@ class ConnectViewModel(application: Application, private val ioDispatcher: Corou
                 ServerOperation.REMOVE_CREDENTIALS -> hasCredentials
                 ServerOperation.PIN -> server.servertype == ServerType.DISCOVERED
                 ServerOperation.UNPIN -> server.servertype == ServerType.PINNED
-                ServerOperation.WAKEONLANSETTINGS -> server.servertype != ServerType.SQUEEZENETWORK
+                ServerOperation.WAKEONLANSETTINGS -> true
             }
             if (available) {
                 retval += it
@@ -113,13 +113,6 @@ class ConnectViewModel(application: Application, private val ioDispatcher: Corou
 
     fun getCurrentIpAddress(): String {
         return DeviceInterfaceInfo.getInstance().mIpAddress ?: "<unknown>"
-    }
-
-    fun createNewSqueezenetwork() {
-        viewModelScope.launch {
-            val rowId = createNewSqueezenetworkRow()
-            context.startPendingConnection(rowId, Constants.SQUEEZENETWORK_SERVERNAME)
-        }
     }
 
     /**
@@ -211,32 +204,6 @@ class ConnectViewModel(application: Application, private val ioDispatcher: Corou
                 }
             }
         }
-    }
-
-    private suspend fun createNewSqueezenetworkRow(): Long {
-        var serverId = 0L
-        var serverName: String
-
-        withContext(ioDispatcher) {
-            database.transaction {
-                val servers = database.serverQueries
-                        .lookupAll()
-                        .executeAsList()
-                        .map { it.servername }
-                var index = 1
-                serverName = Constants.SQUEEZENETWORK_SERVERNAME
-                while (servers.contains(serverName)) {
-                    index++
-                    serverName = Constants.SQUEEZENETWORK_SERVERNAME + " " + index
-                }
-                database.serverQueries
-                        .insertSimple(Constants.SQUEEZENETWORK_HOSTNAME, Constants.SQUEEZENETWORK_PORT, serverName, ServerType.SQUEEZENETWORK)
-                serverId = database.globalQueries
-                        .last_insert_rowid()
-                        .executeAsOne()
-            }
-        }
-        return serverId
     }
 
     @Subscribe

@@ -4,9 +4,11 @@
  */
 
 package com.orangebikelabs.orangesqueeze.app;
+
 import android.content.Context;
 
 import androidx.annotation.Keep;
+
 import java.util.Optional;
 
 import com.fasterxml.jackson.databind.JsonNode;
@@ -45,7 +47,6 @@ import com.orangebikelabs.orangesqueeze.net.DeviceConnectivity;
 import com.orangebikelabs.orangesqueeze.net.JsonRpcException;
 import com.orangebikelabs.orangesqueeze.net.NetworkTools;
 import com.orangebikelabs.orangesqueeze.net.SBCredentials;
-import com.orangebikelabs.orangesqueeze.net.SqueezeNetworkCredentials;
 import com.orangebikelabs.orangesqueeze.net.StreamingConnection;
 
 import java.io.UnsupportedEncodingException;
@@ -249,15 +250,6 @@ public class PendingConnection {
                     credentials.set(username, password.toCharArray());
 
                     retval = credentials.checkCredentials(Constants.CONNECTION_TIMEOUT, Constants.TIME_UNITS);
-                    break;
-                }
-                case SQUEEZENETWORK: {
-                    SqueezeNetworkCredentials sn = new SqueezeNetworkCredentials(mContext, hostname, server.getServerport());
-                    sn.set(username, password.toCharArray());
-                    retval = sn.checkCredentials(Constants.CONNECTION_TIMEOUT, Constants.TIME_UNITS);
-                    if (retval) {
-                        sid = sn.getSid();
-                    }
                     break;
                 }
             }
@@ -513,15 +505,13 @@ public class PendingConnection {
         ConnectionInfo ci = getConnectedInfo();
 
         String newMacAddress = null;
-        if (!ci.isSqueezeNetwork()) {
-            try {
-                // get the server mac address from the ARP cache, if we have
-                // it and update the stored mac address
-                String ip = InetAddress.getByName(ci.getServerHost()).getHostAddress();
-                newMacAddress = NetworkTools.getMacFromArpCache(ip);
-            } catch (UnknownHostException e) {
-                OSLog.i(Tag.DEFAULT, "saving mac address: " + e.getMessage(), e);
-            }
+        try {
+            // get the server mac address from the ARP cache, if we have
+            // it and update the stored mac address
+            String ip = InetAddress.getByName(ci.getServerHost()).getHostAddress();
+            newMacAddress = NetworkTools.getMacFromArpCache(ip);
+        } catch (UnknownHostException e) {
+            OSLog.i(Tag.DEFAULT, "saving mac address: " + e.getMessage(), e);
         }
         if (newMacAddress != null) {
             ci.getWakeOnLanSettings().setMacAddress(newMacAddress);
@@ -565,88 +555,54 @@ public class PendingConnection {
         String username = ci.getUsername();
         String password = ci.getPassword();
 
-        if (ci.isSqueezeNetwork()) {
-            String sid = null;
-            SqueezeNetworkCredentials sn = new SqueezeNetworkCredentials(mContext, ci.getServerHost(), ci.getServerPort());
+        // try five times with increasing timeout to make sure woken servers are available
+        final int maxRetryCount = 5;
+        int currentRetryCount = maxRetryCount;
+        Throwable lastException = null;
+        while (version == null && currentRetryCount > 0) {
+            checkAborted();
             if (username != null && password != null) {
-                sn.set(username, password.toCharArray());
-                if (sn.checkCredentials(Constants.CONNECTION_TIMEOUT, Constants.TIME_UNITS)) {
-                    sid = sn.getSid();
-                }
+                BasicHttpServerCredentials credentials = new BasicHttpServerCredentials(mContext, ci.getServerHost(), ci.getServerPort());
+                credentials.set(username, password.toCharArray());
+
+                // we will find out with the 401 code below if the
+                // credentials are valid
+                mSbContext.setConnectionCredentials(credentials);
             }
-            if (sid == null) {
-                throw new AuthenticationException();
-            }
-            mSbContext.setConnectionCredentials(sn);
 
             try {
-                SBRequest request = mSbContext.newRequest(SBRequest.Type.JSONRPC, "serverstatus", "0", "1");
+                JsonRpcRequest request = (JsonRpcRequest) mSbContext.newRequest(SBRequest.Type.JSONRPC, "version", "?");
+                // use reduced timeouts
+                request.setTimeout((maxRetryCount - currentRetryCount) * 2L + 4, TimeUnit.SECONDS);
+
                 FutureResult futureResult = request.submit(MoreExecutors.newDirectExecutorService());
                 SBResult result = futureResult.checkedGet();
-                if (result.getJsonResult().get("player count") == null) {
-                    throw new ConnectionException("Unexpected results from SqueezeNetwork");
+                JsonNode node = result.getJsonResult().get("_version");
+                if (node != null && node.isTextual()) {
+                    version = node.asText();
                 }
             } catch (JsonRpcException e) {
                 if (e.getResponseCode() == HttpURLConnection.HTTP_UNAUTHORIZED) {
                     throw new AuthenticationException();
-                } else {
-                    throw new ConnectionException(mContext.getString(R.string.exception_connection_error), e);
                 }
+                OSLog.w(e.getMessage(), e);
+                lastException = e;
             } catch (SBRequestException e) {
                 checkAborted();
                 OSLog.w(e.getMessage(), e);
+                lastException = e;
             }
-            version = "7.7.0-SN";
-        } else {
-            // try five times with increasing timeout to make sure woken servers are available
-            final int maxRetryCount = 5;
-            int currentRetryCount = maxRetryCount;
-            Throwable lastException = null;
-            while (version == null && currentRetryCount > 0) {
-                checkAborted();
-                if (username != null && password != null) {
-                    BasicHttpServerCredentials credentials = new BasicHttpServerCredentials(mContext, ci.getServerHost(), ci.getServerPort());
-                    credentials.set(username, password.toCharArray());
-
-                    // we will find out with the 401 code below if the
-                    // credentials are valid
-                    mSbContext.setConnectionCredentials(credentials);
-                }
-
-                try {
-                    JsonRpcRequest request = (JsonRpcRequest) mSbContext.newRequest(SBRequest.Type.JSONRPC, "version", "?");
-                    // use reduced timeouts
-                    request.setTimeout((maxRetryCount - currentRetryCount) * 2L + 4, TimeUnit.SECONDS);
-
-                    FutureResult futureResult = request.submit(MoreExecutors.newDirectExecutorService());
-                    SBResult result = futureResult.checkedGet();
-                    JsonNode node = result.getJsonResult().get("_version");
-                    if (node != null && node.isTextual()) {
-                        version = node.asText();
-                    }
-                } catch (JsonRpcException e) {
-                    if (e.getResponseCode() == HttpURLConnection.HTTP_UNAUTHORIZED) {
-                        throw new AuthenticationException();
-                    }
-                    OSLog.w(e.getMessage(), e);
-                    lastException = e;
-                } catch (SBRequestException e) {
-                    checkAborted();
-                    OSLog.w(e.getMessage(), e);
-                    lastException = e;
-                }
-                currentRetryCount--;
+            currentRetryCount--;
+        }
+        checkAborted();
+        if (version == null) {
+            if (lastException != null) {
+                Throwables.propagateIfPossible(lastException, SBException.class);
             }
-            checkAborted();
-            if (version == null) {
-                if (lastException != null) {
-                    Throwables.propagateIfPossible(lastException, SBException.class);
-                }
-                if (lastException == null) {
-                    throw new ConnectionException(mContext.getString(R.string.exception_connection_error));
-                } else {
-                    throw new ConnectionException(mContext.getString(R.string.exception_connection_error), lastException);
-                }
+            if (lastException == null) {
+                throw new ConnectionException(mContext.getString(R.string.exception_connection_error));
+            } else {
+                throw new ConnectionException(mContext.getString(R.string.exception_connection_error), lastException);
             }
         }
         return new VersionIdentifier(version);

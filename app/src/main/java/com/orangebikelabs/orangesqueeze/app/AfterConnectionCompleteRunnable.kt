@@ -23,13 +23,11 @@ class AfterConnectionCompleteRunnable(private val context: Context, private val 
             serverQueries.lookupAll().executeAsList().iterator().forEach {
                 serverQueries.updateAutoconnect(serverautoconnect = serverId == it._id, findserverid = it._id)
             }
-            if (!ci.isSqueezeNetwork) {
-                // get the server mac address from the ARP cache, if we have it
-                // and update the stored mac address
-                serverQueries.updateWakeOnLan(serverwakeonlan = ci.wakeOnLanSettings, findserverid = serverId)
-                connection.actualPlayerId?.let {
-                    serverQueries.updateLastPlayer(it, serverId)
-                }
+            // get the server mac address from the ARP cache, if we have it
+            // and update the stored mac address
+            serverQueries.updateWakeOnLan(serverwakeonlan = ci.wakeOnLanSettings, findserverid = serverId)
+            connection.actualPlayerId?.let {
+                serverQueries.updateLastPlayer(it, serverId)
             }
         }
         try {

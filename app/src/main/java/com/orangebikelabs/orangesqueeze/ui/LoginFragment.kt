@@ -143,11 +143,7 @@ class LoginFragment : SBDialogFragment() {
     }
 
     private fun goForgotPassword() {
-        val url = if (serverType === ServerType.SQUEEZENETWORK) {
-            "https://mysqueezebox.com/user/login"
-        } else {
-            "http://$serverHost:$serverPort/settings/index.html"
-        }
+        val url = "http://$serverHost:$serverPort/settings/index.html"
         val i = Intent(Intent.ACTION_VIEW, Uri.parse(url))
         if(i.resolveActivity(requireContext().packageManager) != null) {
             startActivity(i)
