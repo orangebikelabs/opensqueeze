@@ -1,3 +1,10 @@
+# [2.7.0-alpha.57](https://github.com/orangebikelabs/opensqueeze/compare/v2.7.0-alpha.56...v2.7.0-alpha.57) (2024-03-05)
+
+
+### Bug Fixes
+
+* if servertype is still squeezenetwork, fall back to type PINNED ([3150222](https://github.com/orangebikelabs/opensqueeze/commit/31502225a2f02604fe84f2068568d6e46d60d7c5))
+
 # [2.7.0-alpha.56](https://github.com/orangebikelabs/opensqueeze/compare/v2.7.0-alpha.55...v2.7.0-alpha.56) (2024-03-04)
 
 
