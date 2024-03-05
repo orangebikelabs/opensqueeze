@@ -8,7 +8,6 @@ import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
 import app.cash.sqldelight.ColumnAdapter
-import app.cash.sqldelight.EnumColumnAdapter
 import app.cash.sqldelight.adapter.primitive.IntColumnAdapter
 import app.cash.sqldelight.db.QueryResult
 import app.cash.sqldelight.db.SqlSchema
@@ -40,7 +39,7 @@ class DatabaseAccess {
                     retval = OSDatabase(driver,
                             serverAdapter = Server.Adapter(
                                     serverwakeonlanAdapter = WakeOnLanAdapter(),
-                                    servertypeAdapter = EnumColumnAdapter(),
+                                    servertypeAdapter = ServerTypeAdapter(),
                                     serverlastplayerAdapter = PlayerIdAdapter(),
                                     servermenunodesAdapter = RootMenuNodesAdapter(),
                                     serverplayermenusAdapter = PlayerMenusAdapter(),
@@ -104,6 +103,18 @@ class DatabaseAccess {
         override fun encode(value: Map<PlayerId, PlayerMenuHelper.PlayerMenuSet>): ByteArray {
             return JsonHelper.getSmileObjectWriter().writeValueAsBytes(value)
         }
+    }
+
+    // this is slightly different than EnumColumnAdapter because it has a fallback to ServerType.PINNED
+    private class ServerTypeAdapter : ColumnAdapter<ServerType, String> {
+        override fun decode(databaseValue: String): ServerType {
+            return ServerType.entries.firstOrNull { it.name == databaseValue } ?: ServerType.PINNED
+        }
+
+        override fun encode(value: ServerType): String {
+            return value.name
+        }
+
     }
 
     private class RootMenuNodesAdapter : ColumnAdapter<List<String>, ByteArray> {
