@@ -46,6 +46,7 @@ android {
     buildTypes {
         release {
             minifyEnabled true
+
             proguardFile getDefaultProguardFile('proguard-android-optimize.txt')
             proguardFile 'proguard-project.pro'
             proguardFile 'proguard-guava.pro'
@@ -74,11 +75,13 @@ android {
         jvmTarget = JavaVersion.VERSION_17
     }
 
-
     signingConfigs {
         release {
-            storeFile file('release_keystore.jks')
+            storeFile file('keystores/opensqueeze_release.jks')
             keyAlias 'signing'
+        }
+        debug {
+            storeFile file('keystores/opensqueeze_debug.jks')
         }
     }
     lint {
@@ -86,17 +89,12 @@ android {
     }
 
     // enable release signing if we have password
-    if (project.hasProperty('releaseKeystorePassword')) {
-        signingConfigs.release.storePassword = releaseKeystorePassword
-        signingConfigs.release.keyPassword = releaseKeystorePassword
+    if (project.hasProperty('openSqueezeReleaseStorePassword')) {
+        signingConfigs.release.storePassword = openSqueezeReleaseStorePassword
+        signingConfigs.release.keyPassword = openSqueezeReleaseStorePassword
 
         // actually set the config here
         buildTypes.release.signingConfig = signingConfigs.release
-    }
-
-    // use debug keystore if it's supplied
-    if (project.hasProperty('debugKeystore')) {
-        signingConfigs.debug.storeFile = file(debugKeystore)
     }
 }
 
