@@ -1,3 +1,12 @@
+# [2.7.0-alpha.58](https://github.com/orangebikelabs/opensqueeze/compare/v2.7.0-alpha.57...v2.7.0-alpha.58) (2024-03-09)
+
+
+### Bug Fixes
+
+* remove unused strings and translations (resolve issue [#65](https://github.com/orangebikelabs/opensqueeze/issues/65)) ([a644e3e](https://github.com/orangebikelabs/opensqueeze/commit/a644e3e4a9a438d49530e13bd3b1d41c05a5ce9b))
+* update build to use more specific keystores (that aren't in git) ([3e15319](https://github.com/orangebikelabs/opensqueeze/commit/3e1531947f949144e3a0f6662d14f3c018317abc))
+* update default opensqueeze keystores ([d4addc0](https://github.com/orangebikelabs/opensqueeze/commit/d4addc06c76b2b6de5095d5318bad04c1234f2d2))
+
 # [2.7.0-alpha.57](https://github.com/orangebikelabs/opensqueeze/compare/v2.7.0-alpha.56...v2.7.0-alpha.57) (2024-03-05)
 
 
