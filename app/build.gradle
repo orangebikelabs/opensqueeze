@@ -43,6 +43,21 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    signingConfigs {
+        release {
+            storeFile file('keystores/opensqueeze_release.jks')
+            storePassword "opensqueeze"
+            keyAlias "android"
+            keyPassword "opensqueeze"
+        }
+        debug {
+            storeFile file('keystores/opensqueeze_debug.jks')
+            storePassword "opensqueeze"
+            keyAlias "android"
+            keyPassword "opensqueeze"
+        }
+    }
+
     buildTypes {
         release {
             minifyEnabled true
@@ -52,10 +67,14 @@ android {
             proguardFile 'proguard-guava.pro'
             proguardFile 'proguard-jackson.pro'
             proguardFile 'proguard-otto.pro'
+
+            signingConfig signingConfigs.release
         }
 
         debug {
             multiDexEnabled true
+
+            signingConfig signingConfigs.debug
         }
     }
 
@@ -75,26 +94,18 @@ android {
         jvmTarget = JavaVersion.VERSION_17
     }
 
-    signingConfigs {
-        release {
-            storeFile file('keystores/opensqueeze_release.jks')
-            keyAlias 'signing'
-        }
-        debug {
-            storeFile file('keystores/opensqueeze_debug.jks')
-        }
-    }
     lint {
         abortOnError true
     }
 
-    // enable release signing if we have password
-    if (project.hasProperty('openSqueezeReleaseStorePassword')) {
-        signingConfigs.release.storePassword = openSqueezeReleaseStorePassword
-        signingConfigs.release.keyPassword = openSqueezeReleaseStorePassword
-
-        // actually set the config here
-        buildTypes.release.signingConfig = signingConfigs.release
+    // override the password if we supply it
+    if (project.hasProperty('releaseKeystorePassword')) {
+        signingConfigs.release.storePassword = releaseKeystorePassword
+        signingConfigs.release.keyPassword = releaseKeystorePassword
+    }
+    if (project.hasProperty('debugKeystorePassword')) {
+        signingConfigs.debug.storePassword = debugKeystorePassword
+        signingConfigs.debug.keyPassword = debugKeystorePassword
     }
 }
 

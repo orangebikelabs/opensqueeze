@@ -1,0 +1,4 @@
+These keystores are for development purposes only and are not used for any official OpenSqueeze builds.
+They are here solely as a convenience to any develop trying to build OpenSqueeze.
+
+The passwords for these keystores and the contained aliases are all 'opensqueeze'.

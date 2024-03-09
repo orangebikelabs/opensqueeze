@@ -71,8 +71,8 @@ jobs:
 
       - name: Setting up keystores
         run: |
-          echo ${{ secrets.RELEASE_KEYSTORE_BASE64 }} | base64 --decode > app/release_keystore.jks
-          echo ${{ secrets.DEBUG_KEYSTORE_BASE64 }} | base64 --decode > app/debug_keystore.jks
+          echo ${{ secrets.RELEASE_KEYSTORE_BASE64 }} | base64 --decode > app/keystores/opensqueeze_release.jks
+          echo ${{ secrets.DEBUG_KEYSTORE_BASE64 }} | base64 --decode > app/keystores/opensqueeze_debug.jks
 
       - run: echo Building with version ${{ env.next_version_name }}, build number ${{ env.next_build_number }}
 
@@ -82,7 +82,7 @@ jobs:
           -PversionName=${{ env.next_version_name }}
           -PbuildNumber=${{ env.next_build_number }}
           -PreleaseKeystorePassword=${{ secrets.RELEASE_KEYSTORE_PASSWORD }}
-          -PdebugKeystore=debug_keystore.jks
+          -PdebugKeystorePassword=${{ secrets.RELEASE_KEYSTORE_PASSWORD }}
           build
 
       - name: Test Report
