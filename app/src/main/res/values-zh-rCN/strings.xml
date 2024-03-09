@@ -69,7 +69,6 @@
     <string name="nowplaying_activity_title_disconnected_html"><b>%1$s</b>•断开</string>
     <string name="nowplaying_activity_title_off_html"><b>%1$s</b>• 关闭</string>
     <string name="nowplaying_activity_title_noplayers_html">无播放器</string>
-    <string name="playlist_action_remove">从播放列表中删除</string>
     <string name="no">否</string>
     <string name="yes">是</string>
     <string name="empty_downloads_text">没有正在进行或已完成的下载</string>
@@ -91,7 +90,6 @@
     <string name="menu_nowplaying_hideplaylist">隐藏播放列表</string>
     <string name="cleared_playlist">已清除的播放列表</string>
     <string name="nowplaying_saveplaylist_title">保存播放列表</string>
-    <string name="nowplaying_saveplaylist_message">输入新的播放列表名称：</string>
     <string name="removefavorite_action_snackbar_html">从收藏夹中删除<b>%1$s</b></string>
     <string name="nowplaying_saveplaylist_hint">新播放列表名称</string>
     <string name="saved_playlist_html">保存的播放列表<b>%1$s</b></string>
@@ -125,8 +123,6 @@
     <string name="cachelocation_internal">内部存储</string>
     <string name="cachelocation_external">外部存储（SD卡等）</string>
     <string name="confirmation_title">是否确定？</string>
-    <string name="nextbutton_label">下一个</string>
-    <string name="neverbutton_label">不再显示</string>
     <string name="extras_node_text">额外</string>
     <string name="wakeonlan_prompt">局域网唤醒策略</string>
     <string name="wakeonlan_macaddress">MAC地址</string>
@@ -163,14 +159,12 @@
     <string name="navigation_nowplaying">正在播放</string>
     <string name="menu_startdownload">下载</string>
     <string name="download_activity_title">下载: %1$s</string>
-    <string name="customize_menu_title">自定义</string>
     <string name="notification_downloads_title">下载</string>
     <string name="notification_downloads_text">%1$d 的 %2$d</string>
     <string name="drawer_open">打开导航栏</string>
     <string name="drawer_close">关闭导航栏</string>
     <string name="left_drawer_title">浏览</string>
     <string name="wipingcache_notification_text">清除缓存的媒体服务器数据。</string>
-    <string name="feedback_collecting_logs">收集日志</string>
     <string name="previous_track_desc">上一曲目</string>
     <string name="pause_desc">暂停播放</string>
     <string name="volume_desc">音量</string>
@@ -202,9 +196,6 @@
 \n当前值：”%1$s\"</string>
     <string name="pref_silentaudiohack_summaryOn">该应用程序将在后台播放无声音频，以帮助管理较新的Android版本的音频焦点。</string>
     <string name="pref_use24hourtimeformat_title">时间格式</string>
-    <string name="pref_volumecontrol_notification">此应用程序可以使用您的设备音量控制来控制您的Squeezebox设备音量。是否要启用此行为？
-\n
-\n它可以随时在应用程序首选项中更改。</string>
     <string name="pref_browse_shownowplaying_summary">如果选中，在浏览期间，底部栏将显示正在播放的信息，并允许快速访问正在播放的屏幕。</string>
     <string name="pref_autolaunch_squeezeplayer_summary">与服务器建立连接后，自动启动Squeeze播放器并将其连接到服务器。</string>
     <string name="pref_autolaunch_squeezeplayer_message">很好，您已经安装了Squeeze播放器! 您想在这个应用程序连接到服务器时自动启动Squeeze播放器吗？</string>
@@ -219,7 +210,6 @@
     <string name="permission_read_phone_state_rationale_content">需要电话权限才能根据您的手机使用情况自动静音和取消静音。如果拒绝此权限，此功能将不起作用。</string>
     <string name="permission_read_phone_state_denied">电话权限被拒绝。此功能将不起作用。</string>
     <string name="permission_write_external_storage_rationale_title">存储权限</string>
-    <string name="cancel_notification_desc">取消通知，断开连接</string>
     <string name="reset">重置</string>
     <string name="ok">确定</string>
     <string name="cancel">取消</string>
@@ -233,8 +223,6 @@
     <string name="snap_to_current_item">对齐当前曲目</string>
     <string name="forgot_password">忘记密码？</string>
     <string name="pref_autoconnect_title">自动连接</string>
-    <string name="pref_autodiscovery_summary">定期发送发现广播请求以查找本地服务器</string>
-    <string name="pref_autodiscovery_title">自动发现</string>
     <string name="pref_advancedprefs_title">高级</string>
     <string name="pref_advancedprefs_summary">显示高级首选项</string>
     <string name="pref_downloadprefs_title">下载</string>
@@ -278,10 +266,6 @@
     <string name="pref_trackselect_playmode_summary">选择直接选择曲目时要使用的播放模式</string>
     <string name="pref_other_category">其他</string>
     <string name="pref_volume_category">音量</string>
-    <string name="pref_verboselogging_summary">暂时启用此功能，执行一个麻烦的操作。然后返回并使用 \"发送反馈 \"选项。</string>
-    <string name="pref_verboselogging_title">详细日志记录</string>
-    <string name="pref_showreleasenotes_title">显示版本说明</string>
-    <string name="pref_showreleasenotes_summary">如果您不想在升级应用程序时阅读版本说明，请禁用此功能。</string>
     <string name="pref_theme_title">主题</string>
     <string name="pref_theme_summary">为应用选择视觉样式。</string>
     <string name="pref_compactmode_title">紧凑模式</string>

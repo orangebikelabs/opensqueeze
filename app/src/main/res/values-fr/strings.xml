@@ -8,7 +8,6 @@
     <string name="action_moreplayermenu">Plus</string>
     <string name="action_removefavorite">Supprimer favori</string>
     <string name="cancel">Annuler</string>
-    <string name="cancel_notification_desc">Annuler la notification, déconnecter</string>
     <string name="confirmation_title">Êtes-vous sûr \?</string>
     <string name="connect_button">Connecter</string>
     <string name="connect_hostname">Nom d\'hôte ou adresse IP</string>
@@ -60,7 +59,6 @@
     <string name="playadd_desc">Ajouter à la playlist</string>
     <string name="download_desc">Télécharger sur l\'appareil</string>
     <string name="nowplaying_activity_title_noplayers_html">Aucun platine</string>
-    <string name="playlist_action_remove">Supprimer de la playlist</string>
     <string name="yes">OK</string>
     <string name="ok">OK</string>
     <string name="reset">Réinitialiser</string>
@@ -83,14 +81,12 @@
     <string name="menu_nowplaying_hideplaylist">Masquer la playlist</string>
     <string name="cleared_playlist">Liste de lecture effacée</string>
     <string name="nowplaying_saveplaylist_title">Sauvegarder la playlist</string>
-    <string name="nowplaying_saveplaylist_message">Entrez le nouveau nom de la playlist :</string>
     <string name="nowplaying_saveplaylist_hint">Nouveau nom de la playlist</string>
     <string name="playmode_stopped">Arrêté</string>
     <string name="save">Sauvegarder</string>
     <string name="players_none">Aucun</string>
     <string name="action_renameplayer">Renommer la platine</string>
     <string name="rename_player_title">Renommer la platine</string>
-    <string name="nextbutton_label">Suivant</string>
     <string name="extras_node_text">Extras</string>
     <string name="wakeonlan_hostname">Nom d\'hôte</string>
     <string name="wakeonlan_ports">Les ports</string>
@@ -103,11 +99,9 @@
     <string name="maintenance_server_rescan">Nouvelle analyse et modification</string>
     <string name="maintenance_server_rescan_playlists">Rescan Playlists</string>
     <string name="maintenance_server_rescan_clear">Effacer et Rescan</string>
-    <string name="feedback_collecting_logs">Collecte de journaux</string>
     <string name="drawer_open">Ouvrir le tiroir de navigation</string>
     <string name="drawer_close">Fermer le tiroir de navigation</string>
     <string name="notification_downloads_title">Téléchargements</string>
-    <string name="customize_menu_title">Personnaliser</string>
     <string name="pref_use24hourtimeformat_summaryOn">Utilisez le format horaire 24 heures.</string>
     <string name="change_player_snackbar"><![CDATA[<b>%1$s</b> est maintenant le lecteur actif]]></string>
     <string name="nowplaying_activity_title_off_html"><![CDATA[<b>%1$s</b> • Désactivé]]></string>
@@ -128,7 +122,6 @@
     <string name="randomplay_genreselect_loading">Genres actifs</string>
     <string name="cachelocation_internal">Stockage interne</string>
     <string name="cachelocation_external">Stockage externe (carte SD, etc.)</string>
-    <string name="neverbutton_label">Ne plus afficher</string>
     <string name="wakeonlan_prompt">Politique de réveil sur réseau local</string>
     <string name="wakeonlan_autodetect">Détection automatique de l\'adresse MAC</string>
     <string name="wakeonlan_macaddress">Adresse Mac</string>
@@ -280,10 +273,8 @@
     <string name="pref_wipeartwork_summary">Supprime toutes les données en cache du stockage</string>
     <string name="pref_systemvolumecontrol_title">Intégrer avec le contrôle du volume du système</string>
     <string name="pref_browse_shownowplaying_summary">Si cette option est sélectionnée, pendant la navigation, la barre inférieure affiche les informations en cours de lecture et permet un accès rapide à l\'écran en cours de lecture.</string>
-    <string name="pref_showreleasenotes_summary">Désactivez cette option si vous ne souhaitez pas lire les notes de publication chaque fois que l\'application est mise à niveau.</string>
     <string name="pref_autoconnect_summary">Se connecter automatiquement au dernier serveur connecté</string>
     <string name="pref_autoconnect_title">Connexion automatique</string>
-    <string name="pref_autodiscovery_title">Découverte automatique</string>
     <string name="pref_browse_category">Parcourir les préférences</string>
     <string name="pref_browse_albumsort_title">Méthode de tri des albums</string>
     <string name="pref_general_category_title">Général</string>
@@ -292,7 +283,6 @@
     <string name="pref_automaticmute_category_title">Comportement sur appel</string>
     <string name="pref_automaticmute_title">Sur appel reçu</string>
     <string name="pref_automaticunmute_title">Reprise du seuil</string>
-    <string name="pref_autodiscovery_summary">Envoyer périodiquement des demandes de diffusion de découverte pour trouver des serveurs locaux</string>
     <string name="pref_advancedprefs_title">Avancé</string>
     <string name="pref_downloadprefs_title">Télécharger</string>
     <string name="pref_cachelocation_title">Cache Location</string>
@@ -320,9 +310,6 @@
     <string name="pref_trackselect_playmode_summary">Choisissez le mode de lecture à utiliser lors de la sélection directe de pistes</string>
     <string name="pref_other_category">Autre</string>
     <string name="pref_volume_category">Volume</string>
-    <string name="pref_verboselogging_summary">Activez-le temporairement, puis effectuez une opération pénible. Puis revenez et utilisez l\'option «Envoyer un commentaire».</string>
-    <string name="pref_verboselogging_title">Enregistrement détaillé</string>
-    <string name="pref_showreleasenotes_title">Afficher les notes de publication</string>
     <string name="pref_theme_title">Thème</string>
     <string name="pref_autolaunch_squeezeplayer_message">Super, vous avez installé SqueezePlayer ! Voulez-vous démarrer automatiquement SqueezePlayer chaque fois que cette application se connecte à un serveur \?</string>
     <string name="pref_theme_summary">Choisissez un style visuel pour l\'application.</string>
@@ -341,9 +328,6 @@
     <string name="pref_shownowplayingnotification_summaryOff">Aucune notification ne sera affichée.</string>
     <string name="exception_connection_timeout">Délai d\'attente en attente de la connexion au serveur</string>
     <string name="exception_no_network_available">Pas de réseau disponible</string>
-    <string name="pref_volumecontrol_notification">Cette application peut utiliser les contrôles de volume de votre appareil pour contrôler le volume de votre appareil Squeezebox. Voulez-vous activer ce comportement \?
-\n
-\nIl peut être modifié à tout moment dans les préférences de l\'application.</string>
     <string name="pref_trackdownload_transcodeoptions_summary">Liste délimitée par des virgules d\'options de transcodage.
 \n
 \nValeur actuelle : %1$s</string>

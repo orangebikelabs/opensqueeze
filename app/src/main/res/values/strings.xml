@@ -77,18 +77,12 @@
     <string name="powermanager_service_label" translatable="false">Power Monitor Service</string>
     <string name="connection_service_label" translatable="false">Squeezebox Server Connection Service</string>
     <string name="content_provider_label" translatable="false">Open Squeeze Content Provider</string>
-    <string name="playlist_action_remove">Remove from Playlist</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string name="empty_downloads_text">No active or completed downloads</string>
     <string name="empty_text">No Items</string>
     <string name="select_player_prompt">Select player:</string>
     <string name="change_player_snackbar">&lt;b&gt;%1$s&lt;/b&gt; is now the active player</string>
-    <!-- 
-    <string name="compilation_options">Compilation Options</string>
-    <string name="shown">Shown</string>
-    <string name="hidden">Hidden</string>
-    -->
     <string name="serverdiscovery_label">Server Discovery</string>
     <string name="network_error">Network Error</string>
     <string name="addtoplaylist_action_snackbar_html">Added &lt;b&gt;%1$s&lt;/b&gt; to the current playlist
@@ -111,7 +105,6 @@
     <string name="menu_nowplaying_hideplaylist">Hide Playlist</string>
     <string name="cleared_playlist">Cleared Playlist</string>
     <string name="nowplaying_saveplaylist_title">Save Playlist</string>
-    <string name="nowplaying_saveplaylist_message">Enter the new playlist name:</string>
     <string name="nowplaying_saveplaylist_hint">New playlist name</string>
     <string name="saved_playlist_html">Saved Playlist &lt;b&gt;%1$s&lt;/b&gt;</string>
     <string name="playmode_stopped">Stopped</string>
@@ -148,8 +141,6 @@
     <string name="cachelocation_internal">Internal Storage</string>
     <string name="cachelocation_external">External Storage (SD Card, etc.)</string>
     <string name="confirmation_title">Are you sure?</string>
-    <string name="nextbutton_label">Next</string>
-    <string name="neverbutton_label">Never Show Again</string>
     <string name="contextmenu_item_title" translatable="false">%1$s: %2$s</string>
     <string name="extras_node_text">Extras</string>
     <string name="wakeonlan_prompt">Wake-On-LAN Policy</string>
@@ -206,14 +197,12 @@
     <string name="menu_startdownload">Download</string>
     <string name="download_activity_title">Download: %1$s</string>
     <string name="download_service_label" translatable="false">Track Download Service</string>
-    <string name="customize_menu_title">Customize</string>
     <string name="notification_downloads_title">Downloads</string>
     <string name="notification_downloads_text">%1$d of %2$d</string>
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
     <string name="left_drawer_title">Browse</string>
     <string name="wipingcache_notification_text">Wiping cached media server data.</string>
-    <string name="feedback_collecting_logs">Collecting Logs</string>
     <string name="previous_track_desc">Previous Track</string>
     <string name="pause_desc">Pause Playback</string>
     <string name="next_track_desc">Next Track</string>
@@ -249,7 +238,6 @@
     <string name="permission_write_external_storage_denied">The storage permission was denied.</string>
     <string name="permission_write_external_storage_neverask">The storage permission will never be requested again.</string>
     <string name="permission_write_external_storage_rationale_title">Storage Permission</string>
-    <string name="cancel_notification_desc">Cancel notification, disconnect</string>
     <string name="reset">Reset</string>
     <string name="ok">OK</string>
     <string name="cancel">Cancel</string>
@@ -263,9 +251,6 @@
     <string name="forgot_password">Forgot your password?</string>
     <string name="pref_autoconnect_summary">Automatically connect to the last connected server</string>
     <string name="pref_autoconnect_title">Automatic Connect</string>
-    <string name="pref_autodiscovery_summary">Periodically send discovery broadcast requests to
-		find local servers</string>
-    <string name="pref_autodiscovery_title">Automatic Discovery</string>
     <string name="pref_advancedprefs_title">Advanced</string>
     <string name="pref_advancedprefs_summary">Shows advanced preferences</string>
     <string name="pref_downloadprefs_title">Download</string>
@@ -329,10 +314,6 @@
     <string name="pref_use24hourtimeformat_title">Time Format</string>
     <string name="pref_use24hourtimeformat_summaryOn">Use 24 hour time format.</string>
     <string name="pref_use24hourtimeformat_summaryOff">Use 12 hour time format.</string>
-    <string name="pref_volumecontrol_notification">This app can use your device
-		volume controls to control your Squeezebox device volume. Would you like to
-		enable this behavior?\n\nIt can be changed at any time within
-		the app preferences.</string>
     <string name="pref_browse_category">Browse Preferences</string>
     <string name="pref_browse_albumsort_title">Album Sort</string>
     <string name="pref_browse_albumsort_summary">Choose the way that albums are sorted. Please note that this preference is stored on the server and can only be changed when connected.</string>
@@ -360,10 +341,6 @@
     </string-array>
     <string name="pref_other_category">Other</string>
     <string name="pref_volume_category">Volume</string>
-    <string name="pref_verboselogging_summary">Temporarily enable this, then perform a troublesome operation. Then return and use the “Send Feedback” option.</string>
-    <string name="pref_verboselogging_title">Verbose Logging</string>
-    <string name="pref_showreleasenotes_summary">Disable this if you don\'t want to read the release notes whenever the app is upgraded.</string>
-    <string name="pref_showreleasenotes_title">Show Release Notes</string>
     <string name="pref_theme_title">Theme</string>
     <string name="pref_theme_summary">Choose a visual style for the app.</string>
     <!-- make sure to change corresponding entry in prefs_nls.xml -->

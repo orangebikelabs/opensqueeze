@@ -62,7 +62,6 @@
     <string name="menu_nowplaying_clearplaylist">Töm spellista</string>
     <string name="cleared_playlist">Tömde spellista</string>
     <string name="nowplaying_saveplaylist_title">Spara spellista</string>
-    <string name="nowplaying_saveplaylist_message">Ange ett namn på den nya spellistan:</string>
     <string name="nowplaying_saveplaylist_hint">Ny spellistas namn</string>
     <string name="playmode_stopped">Stoppad</string>
     <string name="playmode_playing">Spelar</string>
@@ -93,7 +92,6 @@
     <string name="cachelocation_internal">Internt minne</string>
     <string name="cachelocation_external">Externt minne (SD-kort t.ex.)</string>
     <string name="confirmation_title">Är du säker\?</string>
-    <string name="nextbutton_label">Nästa</string>
     <string name="extras_node_text">Extra</string>
     <string name="wakeonlan_prompt">Policy för Wake-On-LAN</string>
     <string name="wakeonlan_autodetect">Välj MAC-adress automatiskt</string>
@@ -130,13 +128,11 @@
     <string name="menu_generic_slider_label">Svep för att välja ditt värde: %1$d</string>
     <string name="menu_startdownload">Hämta</string>
     <string name="download_activity_title">Hämta: %1$s</string>
-    <string name="customize_menu_title">Anpassa</string>
     <string name="notification_downloads_title">Hämtningar</string>
     <string name="notification_downloads_text">%1$d av %2$d</string>
     <string name="drawer_open">Öppna navigeringsvyn</string>
     <string name="drawer_close">Stäng navigeringsvyn</string>
     <string name="wipingcache_notification_text">Rensar cachad mediaserverdata.</string>
-    <string name="feedback_collecting_logs">Samlar ihop loggar</string>
     <string name="pause_desc">Pausa uppspelning</string>
     <string name="next_track_desc">Nästa spår</string>
     <string name="previous_track_desc">Förra spåret</string>
@@ -172,7 +168,6 @@
     <string name="pref_autoconnect_summary">Anslut automatiskt till den senast anslutna servern</string>
     <string name="pref_autoconnect_title">Automatisk anslutning</string>
     <string name="permission_write_external_storage_rationale_title">Lagringsbehörighet</string>
-    <string name="pref_autodiscovery_title">Automatisk sökning</string>
     <string name="pref_advancedprefs_title">Avancerat</string>
     <string name="pref_advancedprefs_summary">Visar avancerade inställningar</string>
     <string name="pref_downloadprefs_title">Hämta</string>
@@ -202,17 +197,14 @@
     <string name="actionmenu_title_html">På <b>%1$s</b>:</string>
     <string name="nowplaying_activity_title_paused_html"><b>%1$s</b> • Pausad</string>
     <string name="nowplaying_activity_title_noplayers_html">Inga spelare</string>
-    <string name="playlist_action_remove">Ta bort från spellista</string>
     <string name="serverdiscovery_label">Serversökning</string>
     <string name="menu_nowplaying_showplaylist">Visa spellista</string>
     <string name="menu_nowplaying_hideplaylist">Göm spellista</string>
     <string name="clearplaylist_action_confirmation">Är du säker på att du vill tömma den aktuella spellistan\?</string>
     <string name="saved_playlist_html">Sparade spellista <b>%1$s</b></string>
     <string name="action_synchronization">Synkronisering</string>
-    <string name="neverbutton_label">Visa aldrig igen</string>
     <string name="empty_downloads_text">Inga aktiva eller avslutade hämtningar</string>
     <string name="volume_slider_desc">Ändra volym</string>
-    <string name="pref_autodiscovery_summary">Sök periodiskt efter lokala servrar</string>
     <string name="pref_volume_category">Volym</string>
     <string name="pref_autolaunch_squeezeplayer_message">Toppen, du har SqueezePlayer installerad! Vill du starta SqueezePlayer automatiskt när den här appen ansluter till en server\?</string>
     <string name="permission_read_phone_state_rationale_content">Telefonbehörigheten krävs för att automatiskt slå på/av ljudet beroende på hur telefonen används. Om du nekar denna behörighet kommer funktionen inte fungera.</string>
@@ -227,7 +219,6 @@
     <string name="reset">Återställ</string>
     <string name="nowplaying_shortcut_long_label">Starta direkt i vyn \"Nu spelas\"</string>
     <string name="snap_to_current_item">Hoppa till aktuellt spår</string>
-    <string name="cancel_notification_desc">Avbryt avisering, koppla från</string>
     <string name="pref_cachelocation_title">Cachens lagringsplats</string>
     <string name="pref_cachelocation_summary">Posters-cachen kommer lagras i %1$s</string>
     <string name="pref_cache_storagesize_title">Cachens lagringsutrymme</string>
@@ -274,10 +265,6 @@
     <string name="pref_trackselect_playmode_title">Förvalt spelläge</string>
     <string name="pref_trackselect_playmode_summary">Välj hur spår ska spelas när de väljs</string>
     <string name="pref_other_category">Annat</string>
-    <string name="pref_verboselogging_summary">Slå på detta temporärt, utför något som inte fungerar korrekt och använd sedan \"Skicka återkoppling\".</string>
-    <string name="pref_verboselogging_title">Utförlig loggning</string>
-    <string name="pref_showreleasenotes_summary">Inaktivera detta om du inte vill läsa vad som är nytt när appen uppgraderas.</string>
-    <string name="pref_showreleasenotes_title">Visa appnyheter</string>
     <string name="pref_theme_summary">Välj ett visuellt tema för appen.</string>
     <string name="pref_compactmode_title">Kompakt läge</string>
     <string name="pref_compactmode_summaryOn">Använd kompakt utseende</string>
@@ -308,9 +295,6 @@
     <string name="exception_connection_timeout">Anslutningen till servern tog för lång tid att slutföras</string>
     <string name="exception_connection_error">Anslutningsfel</string>
     <string name="pref_pauseonheadphonedisconnect_summaryOn">Den aktuella spelaren pausar uppspelning när hörlurar (blåtand eller trådanslutna) kopplas ur (kräver att Spela tystnad är aktiverat).</string>
-    <string name="pref_volumecontrol_notification">Appen kan använda din enhets volymkontroller för att styra Squeezebox-enhetens volym. Vill du aktivera det här beteendet\?
-\n
-\nDet kan ändras när som helst i appens inställningar.</string>
     <string name="pref_browse_showactionbar_summary">Välj detta för att visa titelraden med navigeringsknappar medan du bläddrar innehåll.</string>
     <string name="pref_autolaunch_squeezeplayer_summary">Vid anslutning till en server, starta SqueezePlayer automatiskt och anslut den också till servern.</string>
     <string name="pref_theme_title">Tema</string>

@@ -77,7 +77,6 @@
     <string name="network_error">Netzwerkfehler</string>
     <string name="save">Sichern</string>
     <string name="players_none">Keiner</string>
-    <string name="nextbutton_label">Weiter</string>
     <string name="cancel">Abbrechen</string>
     <string name="ok">OK</string>
     <string name="dismiss_dialog">OK</string>
@@ -93,7 +92,6 @@
     <string name="widget_playername_text">Player: %1$s</string>
     <string name="widget_noplayers_text">Kein Player</string>
     <string name="maintenance_title">Instandhaltung</string>
-    <string name="neverbutton_label">Nie wieder zeigen</string>
     <string name="confirmation_title">Bist du sicher?</string>
     <string name="extras_node_text">Extras</string>
     <string name="wakeonlan_hostname">Hostname</string>
@@ -103,14 +101,12 @@
     <string name="globalsearch_moreitem">%1$d mehr Artikel</string>
     <string name="disconnected">Getrennt</string>
     <string name="navigation_nowplaying">Aktueller Titel</string>
-    <string name="customize_menu_title">Anpassen</string>
     <string name="wakeonlan_macaddress">MAC-Adresse</string>
     <string name="wakeonlan_prompt">Wake-On-LAN-Richtlinie</string>
     <string name="randomplay_genreselect_loading">Aktive Genres</string>
     <string name="cachelocation_internal">Interner Speicher</string>
     <string name="cachelocation_external">Externer Speicher (SD-Karte usw.)</string>
     <string name="action_unsync">Synchronisierung aufheben</string>
-    <string name="cancel_notification_desc">Benachrichtigung abbrechen, trennen</string>
     <string name="permission_read_phone_state_rationale_title">Berechtigung zum Zugriff auf das Telefon</string>
     <string name="permission_read_phone_state_neverask">Die Berechtigung zum Zugriff auf das Telefon wird nie mehr angefordert.</string>
     <string name="permission_read_phone_state_denied">Die Berechtigung für den Zugriff auf das Telefon wurde abgelehnt. Dieses Merkmal funktioniert nicht.</string>
@@ -133,7 +129,6 @@
 \n(kann andere haben)</string>
     <string name="drawer_open">Öffnen Sie die Navigationsleiste</string>
     <string name="drawer_close">Navigationsleiste schließen</string>
-    <string name="feedback_collecting_logs">Protokolle sammeln</string>
     <string name="previous_track_desc">Vorheriges Lied</string>
     <string name="pause_desc">Wiedergabe anhalten</string>
     <string name="next_track_desc">Nächster Titel</string>
@@ -165,13 +160,11 @@
     <string name="pref_systemvolumecontrol_title">Mit Systemlautstärkeregelung integrieren</string>
     <string name="pref_browse_shownowplaying_summary">Wenn diese Option aktiviert ist, werden in der unteren Leiste die Informationen angezeigt, die gerade wiedergegeben werden, und es wird ein schneller Zugriff auf den aktuellen Bildschirm ermöglicht.</string>
     <string name="pref_autolaunch_squeezeplayer_title">SqueezePlayer Start</string>
-    <string name="pref_showreleasenotes_summary">Deaktivieren Sie dies, wenn Sie die Versionshinweise nicht lesen möchten, wenn die App aktualisiert wird.</string>
     <string name="nowplaying_activity_title_playing_html">&lt;b&gt;%1$s&lt;/b&gt; • %2$d von %3$d</string>
     <string name="nowplaying_activity_title_paused_html">&lt;b&gt;%1$s&lt;/b&gt; • Angehalten</string>
     <string name="nowplaying_activity_title_stopped_html">&lt;b&gt;%1$s&lt;/b&gt; • Gestoppt</string>
     <string name="nowplaying_activity_title_disconnected_html">&lt;b&gt;%1$s&lt;/b&gt; • Getrennt</string>
     <string name="nowplaying_activity_title_off_html">&lt;b&gt;%1$s&lt;/b&gt; • Aus</string>
-    <string name="playlist_action_remove">Aus Playlist entfernen</string>
     <string name="select_player_prompt">Player auswählen:</string>
     <string name="change_player_snackbar"><![CDATA[<b>%1$s</b> ist jetzt der aktive Player]]></string>
     <string name="addtoplaylist_action_snackbar_html">&lt;b&gt;%1$s&lt;/b&gt; wurde der aktuellen Playlist hinzugefügt</string>
@@ -188,7 +181,6 @@
     <string name="rename_player_title">Player umbenennen</string>
     <string name="action_sleepplayer">Player schlafen</string>
     <string name="player_connect_server_confirmation_title">Bestätigen Sie die Serverauswahl</string>
-    <string name="nowplaying_saveplaylist_message">Geben Sie den neuen Namen der Playlist ein:</string>
     <string name="group_players_separator">Gruppenplayers</string>
     <string name="renameplayer_empty_message">Playername muss angegeben werden</string>
     <string name="renameplayer_empty_title">Leerer Playername</string>
@@ -278,8 +270,6 @@
     <string name="pref_artwork_category">Artwork</string>
     <string name="pref_autoconnect_summary">Verbinden Sie sich automatisch mit dem zuletzt verbundenen Server</string>
     <string name="pref_autoconnect_title">Automatisches Verbinden</string>
-    <string name="pref_autodiscovery_summary">Senden Sie regelmäßig Discovery-Broadcast-Anforderungen, um lokale Server zu finden</string>
-    <string name="pref_autodiscovery_title">Automatische Erkennung</string>
     <string name="pref_advancedprefs_title">Erweitert</string>
     <string name="pref_downloadprefs_title">Herunterladen</string>
     <string name="pref_downloadprefs_summary">Zeigt Download-Einstellungen an</string>
@@ -300,9 +290,6 @@
     <string name="pref_automaticunmute_summary">Automatische Fortsetzung der Wiedergabe, wenn diese automatisch stummgeschaltet oder pausiert worden ist und der Anruf innerhalb der angegebenen Zeit beendet wird.</string>
     <string name="pref_use24hourtimeformat_summaryOn">12-Stunden-Zeitformat verwenden.</string>
     <string name="pref_use24hourtimeformat_summaryOff">24-Stunden-Zeitformat verwenden.</string>
-    <string name="pref_volumecontrol_notification">Diese App kann die Lautstärkeregler Ihres Geräts verwenden, um die Lautstärke des Squeezebox-Geräts zu steuern. Möchten Sie dieses Verhalten aktivieren\?
-\n
-\nSie kann jederzeit in den App-Einstellungen geändert werden.</string>
     <string name="pref_browse_category">Durchsuchen Sie die Einstellungen</string>
     <string name="pref_browse_albumsort_title">Sortierverfahren für Alben</string>
     <string name="pref_browse_albumsort_summary">Wählen Sie die Art und Weise, wie Alben sortiert werden. Bitte beachten Sie, dass diese Einstellung auf dem Server gespeichert ist und nur bei Verbindung geändert werden kann.</string>
@@ -322,9 +309,6 @@
     <string name="pref_trackselect_playmode_summary">Wählen Sie den Wiedergabemodus für die direkte Auswahl der Titel</string>
     <string name="pref_other_category">Andere</string>
     <string name="pref_volume_category">Lautstärke</string>
-    <string name="pref_verboselogging_summary">Vorübergehend aktivieren, bevor Sie dann eine problematische Operation ausführen. Dann kehren Sie zurück und verwenden Sie die Option \"Feedback senden\".</string>
-    <string name="pref_verboselogging_title">Ausführliche Protokollierung</string>
-    <string name="pref_showreleasenotes_title">Versionshinweise anzeigen</string>
     <string name="pref_theme_title">Thema</string>
     <string name="pref_theme_summary">Visuellen Stil für die App wählen.</string>
     <string name="pref_language_title">Sprache</string>
