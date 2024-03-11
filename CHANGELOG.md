@@ -1,3 +1,10 @@
+# [2.7.0-alpha.59](https://github.com/orangebikelabs/opensqueeze/compare/v2.7.0-alpha.58...v2.7.0-alpha.59) (2024-03-11)
+
+
+### Bug Fixes
+
+* bump kotlin_version from 1.9.22 to 1.9.23 ([cb42e62](https://github.com/orangebikelabs/opensqueeze/commit/cb42e62819b4be0102b40a47d55ffcef847b0c44))
+
 # [2.7.0-alpha.58](https://github.com/orangebikelabs/opensqueeze/compare/v2.7.0-alpha.57...v2.7.0-alpha.58) (2024-03-09)
 
 
