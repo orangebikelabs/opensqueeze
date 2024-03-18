@@ -1,3 +1,11 @@
+# [2.7.0-alpha.60](https://github.com/orangebikelabs/opensqueeze/compare/v2.7.0-alpha.59...v2.7.0-alpha.60) (2024-03-18)
+
+
+### Bug Fixes
+
+* bump com.google.guava:guava from 33.0.0-android to 33.1.0-android ([f523e55](https://github.com/orangebikelabs/opensqueeze/commit/f523e5512382415363848061be03099054fb64e2))
+* bump com.squareup.okio:okio from 3.8.0 to 3.9.0 ([277a544](https://github.com/orangebikelabs/opensqueeze/commit/277a54454ab7e606acab4d505c06214fc753bfd9))
+
 # [2.7.0-alpha.59](https://github.com/orangebikelabs/opensqueeze/compare/v2.7.0-alpha.58...v2.7.0-alpha.59) (2024-03-11)
 
 
