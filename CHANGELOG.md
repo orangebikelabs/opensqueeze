@@ -1,3 +1,10 @@
+# [2.7.0-alpha.62](https://github.com/orangebikelabs/opensqueeze/compare/v2.7.0-alpha.61...v2.7.0-alpha.62) (2024-04-08)
+
+
+### Bug Fixes
+
+* bump sqldelight_version from 2.0.1 to 2.0.2 ([57a884c](https://github.com/orangebikelabs/opensqueeze/commit/57a884c180457cca4cf4f66c8f375977b4e8256b))
+
 # [2.7.0-alpha.61](https://github.com/orangebikelabs/opensqueeze/compare/v2.7.0-alpha.60...v2.7.0-alpha.61) (2024-03-25)
 
 
