@@ -1,3 +1,11 @@
+# [2.7.0-alpha.63](https://github.com/orangebikelabs/opensqueeze/compare/v2.7.0-alpha.62...v2.7.0-alpha.63) (2024-04-22)
+
+
+### Bug Fixes
+
+* bump androidx.core:core-ktx from 1.12.0 to 1.13.0 ([8151412](https://github.com/orangebikelabs/opensqueeze/commit/8151412af983d33330b7705baed7ce3293344358))
+* bump com.squareup.leakcanary:leakcanary-android from 2.13 to 2.14 ([bd8f573](https://github.com/orangebikelabs/opensqueeze/commit/bd8f573454357d67ba1f3899e779e7ccb09cd1d6))
+
 # [2.7.0-alpha.62](https://github.com/orangebikelabs/opensqueeze/compare/v2.7.0-alpha.61...v2.7.0-alpha.62) (2024-04-08)
 
 
