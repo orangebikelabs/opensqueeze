@@ -214,7 +214,7 @@ dependencies {
     implementation "app.cash.sqldelight:coroutines-extensions:${sqldelight_version}"
     implementation "app.cash.sqldelight:primitive-adapters:${sqldelight_version}"
 
-    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.13'
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.14'
 
     implementation 'androidx.multidex:multidex:2.0.1'
 
