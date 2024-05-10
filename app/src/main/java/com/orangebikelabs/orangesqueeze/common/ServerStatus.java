@@ -96,7 +96,7 @@ public class ServerStatus {
                 }
             } finally {
                 mTransactionLock.unlock();
-                sCurrentTransaction.set(null);
+                sCurrentTransaction.remove();
             }
         }
     }
