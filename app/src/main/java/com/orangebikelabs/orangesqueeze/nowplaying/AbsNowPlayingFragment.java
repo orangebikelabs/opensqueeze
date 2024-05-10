@@ -145,7 +145,6 @@ abstract public class AbsNowPlayingFragment extends AbsMenuFragment {
 
         mFullSizeArtworkWidth = Artwork.getFullSizeArtworkWidth(requireContext());
 
-        //noinspection resource
         TypedArray ta = requireContext().obtainStyledAttributes(new int[]{R.attr.tinyNowPlayingArtworkSize});
         mTinyArtworkWidth = ta.getDimensionPixelSize(0, -1);
         ta.recycle();

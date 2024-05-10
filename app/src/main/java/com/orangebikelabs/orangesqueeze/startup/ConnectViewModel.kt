@@ -168,7 +168,6 @@ class ConnectViewModel(application: Application, private val ioDispatcher: Corou
     }
 
     suspend fun validateHost(host: String): Boolean {
-        @Suppress("BlockingMethodInNonBlockingContext")
         return withContext(ioDispatcher) {
             try {
                 // check hostname

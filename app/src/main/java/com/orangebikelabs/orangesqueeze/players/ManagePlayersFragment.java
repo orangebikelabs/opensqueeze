@@ -39,7 +39,6 @@ import com.orangebikelabs.orangesqueeze.app.SimpleResult;
 import com.orangebikelabs.orangesqueeze.browse.AbsBrowseFragment;
 import com.orangebikelabs.orangesqueeze.browse.BrowseStyle;
 import com.orangebikelabs.orangesqueeze.browse.node.BrowseNodeFragment;
-import com.orangebikelabs.orangesqueeze.common.Constants;
 import com.orangebikelabs.orangesqueeze.common.DelayedFuture;
 import com.orangebikelabs.orangesqueeze.common.FutureResult;
 import com.orangebikelabs.orangesqueeze.common.MenuTools;

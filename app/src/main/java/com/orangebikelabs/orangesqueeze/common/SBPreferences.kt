@@ -40,10 +40,7 @@ import kotlin.math.min
 class SBPreferences private constructor(private val context: Context) {
 
     enum class ThemePreference(val nightMode: Int) {
-        @Suppress("unused")
         LIGHT(AppCompatDelegate.MODE_NIGHT_NO),
-
-        @Suppress("unused")
         DARK(AppCompatDelegate.MODE_NIGHT_YES),
         DEFAULT(if (Build.VERSION.SDK_INT < 29) AppCompatDelegate.MODE_NIGHT_AUTO_BATTERY else AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
 
