@@ -1,3 +1,10 @@
+# [2.7.0-alpha.64](https://github.com/orangebikelabs/opensqueeze/compare/v2.7.0-alpha.63...v2.7.0-alpha.64) (2024-05-10)
+
+
+### Bug Fixes
+
+* possible memory leak due to use of null in threadlocals ([edcac09](https://github.com/orangebikelabs/opensqueeze/commit/edcac091ae7b245aae4df36903ee272163c837a1))
+
 # [2.7.0-alpha.63](https://github.com/orangebikelabs/opensqueeze/compare/v2.7.0-alpha.62...v2.7.0-alpha.63) (2024-04-22)
 
 
