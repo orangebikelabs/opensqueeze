@@ -184,7 +184,7 @@ dependencies {
     //noinspection GradleDependency
     implementation "com.fasterxml.jackson.dataformat:jackson-dataformat-smile:${jacksonVersion}"
 
-    implementation "com.google.guava:guava:33.1.0-android"
+    implementation "com.google.guava:guava:33.2.0-android"
 
     // HTTP client
     //noinspection GradleDependency
