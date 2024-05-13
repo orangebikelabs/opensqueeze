@@ -1,3 +1,13 @@
+# [2.7.0-alpha.65](https://github.com/orangebikelabs/opensqueeze/compare/v2.7.0-alpha.64...v2.7.0-alpha.65) (2024-05-13)
+
+
+### Bug Fixes
+
+* bump com.android.tools.build:gradle from 8.3.2 to 8.4.0 ([e8d8b53](https://github.com/orangebikelabs/opensqueeze/commit/e8d8b530e30901f6793d5f6a40345cae7afc4936))
+* bump com.google.guava:guava from 33.1.0-android to 33.2.0-android ([115c084](https://github.com/orangebikelabs/opensqueeze/commit/115c084fa8e75a43fd5c4844fcec44eda436ee96))
+* bump kotlin_version from 1.9.23 to 1.9.24 ([631a6d6](https://github.com/orangebikelabs/opensqueeze/commit/631a6d68ca73a0ca28e0844b0e9c0d6ae06b80de))
+* bump org.jetbrains.kotlinx:kotlinx-coroutines-core ([4f88887](https://github.com/orangebikelabs/opensqueeze/commit/4f88887adc9cbebb983fd4f84b69e9079ae5fad7))
+
 # [2.7.0-alpha.64](https://github.com/orangebikelabs/opensqueeze/compare/v2.7.0-alpha.63...v2.7.0-alpha.64) (2024-05-10)
 
 
