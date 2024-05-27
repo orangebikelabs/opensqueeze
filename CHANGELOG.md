@@ -1,3 +1,12 @@
+# [2.7.0-alpha.66](https://github.com/orangebikelabs/opensqueeze/compare/v2.7.0-alpha.65...v2.7.0-alpha.66) (2024-05-27)
+
+
+### Bug Fixes
+
+* bump androidx.fragment:fragment-ktx from 1.7.0 to 1.7.1 ([83ac109](https://github.com/orangebikelabs/opensqueeze/commit/83ac1090438854501b7c9a3f4a7c0bc9af771472))
+* bump io.mockk:mockk-android from 1.13.10 to 1.13.11 ([a8c39d5](https://github.com/orangebikelabs/opensqueeze/commit/a8c39d58bfd1c939acf30cb048c6bc3bb4c6330b))
+* bump kotlin_version from 1.9.24 to 2.0.0 ([1131803](https://github.com/orangebikelabs/opensqueeze/commit/1131803715e0c00dca131c691fa633ff48ce4a71))
+
 # [2.7.0-alpha.65](https://github.com/orangebikelabs/opensqueeze/compare/v2.7.0-alpha.64...v2.7.0-alpha.65) (2024-05-13)
 
 
