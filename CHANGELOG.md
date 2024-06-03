@@ -1,3 +1,11 @@
+# [2.7.0-alpha.67](https://github.com/orangebikelabs/opensqueeze/compare/v2.7.0-alpha.66...v2.7.0-alpha.67) (2024-06-03)
+
+
+### Bug Fixes
+
+* bump com.android.tools.build:gradle from 8.4.0 to 8.4.1 ([69c3583](https://github.com/orangebikelabs/opensqueeze/commit/69c358333f4ddaf039976d4dfea9e5315734b86d))
+* bump com.google.guava:guava from 33.2.0-android to 33.2.1-android ([ce107ba](https://github.com/orangebikelabs/opensqueeze/commit/ce107baf965ba0a69aa5b322b29f15319ff77efa))
+
 # [2.7.0-alpha.66](https://github.com/orangebikelabs/opensqueeze/compare/v2.7.0-alpha.65...v2.7.0-alpha.66) (2024-05-27)
 
 
