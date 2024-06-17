@@ -1,3 +1,10 @@
+# [2.7.0-alpha.69](https://github.com/orangebikelabs/opensqueeze/compare/v2.7.0-alpha.68...v2.7.0-alpha.69) (2024-06-17)
+
+
+### Bug Fixes
+
+* bump androidx.fragment:fragment-ktx from 1.7.1 to 1.8.0 ([bd4cd59](https://github.com/orangebikelabs/opensqueeze/commit/bd4cd59ce6f685735e9f8c3874e37101dd117238))
+
 # [2.7.0-alpha.68](https://github.com/orangebikelabs/opensqueeze/compare/v2.7.0-alpha.67...v2.7.0-alpha.68) (2024-06-17)
 
 
