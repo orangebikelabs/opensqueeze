@@ -5,7 +5,6 @@
 
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-parcelize'
 apply plugin: 'app.cash.sqldelight'
 
@@ -167,8 +166,8 @@ dependencies {
     implementation 'com.nineoldandroids:library:2.4.0'
 
     implementation 'androidx.core:core-ktx:1.13.1'
-    implementation 'androidx.appcompat:appcompat:1.6.1'
-    implementation 'androidx.fragment:fragment-ktx:1.8.0'
+    implementation 'androidx.appcompat:appcompat:1.7.0'
+    implementation 'androidx.fragment:fragment-ktx:1.8.1'
     implementation 'androidx.preference:preference-ktx:1.2.1'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'androidx.media:media:1.7.0'
