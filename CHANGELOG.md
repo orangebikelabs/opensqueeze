@@ -1,3 +1,10 @@
+# [2.7.0-alpha.70](https://github.com/orangebikelabs/opensqueeze/compare/v2.7.0-alpha.69...v2.7.0-alpha.70) (2024-08-01)
+
+
+### Bug Fixes
+
+* bump com.google.truth:truth from 1.4.2 to 1.4.4 ([9fd913a](https://github.com/orangebikelabs/opensqueeze/commit/9fd913ad1744650ea28f62437a2dd563b125b7ca))
+
 # [2.7.0-alpha.69](https://github.com/orangebikelabs/opensqueeze/compare/v2.7.0-alpha.68...v2.7.0-alpha.69) (2024-06-17)
 
 
