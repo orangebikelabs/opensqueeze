@@ -1,3 +1,10 @@
+# [2.7.0-alpha.71](https://github.com/orangebikelabs/opensqueeze/compare/v2.7.0-alpha.70...v2.7.0-alpha.71) (2024-08-01)
+
+
+### Bug Fixes
+
+* bump io.mockk:mockk-android from 1.13.11 to 1.13.12 ([a9601b8](https://github.com/orangebikelabs/opensqueeze/commit/a9601b883fad0545e9337dcc458ffa89a4399807))
+
 # [2.7.0-alpha.70](https://github.com/orangebikelabs/opensqueeze/compare/v2.7.0-alpha.69...v2.7.0-alpha.70) (2024-08-01)
 
 
