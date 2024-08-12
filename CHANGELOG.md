@@ -1,3 +1,10 @@
+# [2.7.0-alpha.75](https://github.com/orangebikelabs/opensqueeze/compare/v2.7.0-alpha.74...v2.7.0-alpha.75) (2024-08-12)
+
+
+### Bug Fixes
+
+* bump com.android.tools.build:gradle from 8.5.1 to 8.5.2 ([fa60c9c](https://github.com/orangebikelabs/opensqueeze/commit/fa60c9c756c5394b4a6f6fce84ad2b649fdfc23b))
+
 # [2.7.0-alpha.74](https://github.com/orangebikelabs/opensqueeze/compare/v2.7.0-alpha.73...v2.7.0-alpha.74) (2024-08-12)
 
 
