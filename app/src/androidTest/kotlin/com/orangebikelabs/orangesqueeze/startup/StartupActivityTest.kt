@@ -30,9 +30,9 @@ class StartupActivityTest {
     }
 
     @Test
-    fun launchesIntoConnectingActivity() {
+    fun launchesIntoConnectActivity() {
         ActivityScenario.launch(StartupActivity::class.java).use {
-            intended(hasComponent(ConnectingActivity::class.java.name))
+            intended(hasComponent(ConnectActivity::class.java.name))
             onView(withId(R.id.discovery_toggle)).check(matches(isDisplayed()))
         }
     }
