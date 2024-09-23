@@ -1,3 +1,13 @@
+# [2.7.0-alpha.76](https://github.com/orangebikelabs/opensqueeze/compare/v2.7.0-alpha.75...v2.7.0-alpha.76) (2024-09-23)
+
+
+### Bug Fixes
+
+* bump androidx.lifecycle:lifecycle-livedata-ktx from 2.7.0 to 2.8.6 ([47ee504](https://github.com/orangebikelabs/opensqueeze/commit/47ee50403aaaea4ad9b4ffa2e0df762c27c0d436))
+* bump com.google.guava:guava from 33.2.1-android to 33.3.0-android ([ef20598](https://github.com/orangebikelabs/opensqueeze/commit/ef20598779117a5bc2d56b008b0b199a90ba78da))
+* bump io.reactivex.rxjava3:rxjava from 3.1.8 to 3.1.9 ([4a0f45c](https://github.com/orangebikelabs/opensqueeze/commit/4a0f45c638f85e9a02c9c2ed4f04f689dfb25958))
+* bump kotlin_version from 2.0.10 to 2.0.20 ([47bf106](https://github.com/orangebikelabs/opensqueeze/commit/47bf1065ee3b185ae89533467695f5a5fd1674c0))
+
 # [2.7.0-alpha.75](https://github.com/orangebikelabs/opensqueeze/compare/v2.7.0-alpha.74...v2.7.0-alpha.75) (2024-08-12)
 
 
