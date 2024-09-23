@@ -1,0 +1,14 @@
+/appInsightsSettings.xml
+/workspace.xml
+/tasks.xml
+/libraries/*
+/caches/**
+/assetWizardSettings.xml
+/deploymentTargetDropDown.xml
+/compiler.xml
+/gradle.xml
+/misc.xml
+/modules.xml
+/androidTestResultsUserPreferences.xml
+/deploymentTargetSelector.xml
+/other.xml
