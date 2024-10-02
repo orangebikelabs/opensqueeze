@@ -1,3 +1,13 @@
+# [2.7.0-alpha.77](https://github.com/orangebikelabs/opensqueeze/compare/v2.7.0-alpha.76...v2.7.0-alpha.77) (2024-10-02)
+
+
+### Bug Fixes
+
+* bump com.android.tools.build:gradle from 8.5.2 to 8.6.1 ([6c6381b](https://github.com/orangebikelabs/opensqueeze/commit/6c6381b25ff9e462e05b7fa867c32962a69dea49))
+* bump com.google.guava:guava from 33.3.0-android to 33.3.1-android ([24b8f53](https://github.com/orangebikelabs/opensqueeze/commit/24b8f53e622ea8f5e9db33d9fe3261dd8858305c))
+* bump com.squareup.okio:okio from 3.9.0 to 3.9.1 ([d987af9](https://github.com/orangebikelabs/opensqueeze/commit/d987af9a1a6d83e4bbe50ee095b1f4d53c4d1748))
+* bump org.jetbrains.kotlinx:kotlinx-coroutines-core ([1de4b20](https://github.com/orangebikelabs/opensqueeze/commit/1de4b204708a15f04bc07e7e99909676da3d9a82))
+
 # [2.7.0-alpha.76](https://github.com/orangebikelabs/opensqueeze/compare/v2.7.0-alpha.75...v2.7.0-alpha.76) (2024-09-23)
 
 
