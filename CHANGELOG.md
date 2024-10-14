@@ -1,3 +1,11 @@
+# [2.7.0-alpha.79](https://github.com/orangebikelabs/opensqueeze/compare/v2.7.0-alpha.78...v2.7.0-alpha.79) (2024-10-14)
+
+
+### Bug Fixes
+
+* bump io.mockk:mockk-android from 1.13.12 to 1.13.13 ([f808a6e](https://github.com/orangebikelabs/opensqueeze/commit/f808a6e9fdc2bb795d2ccb06585105e46dcb6745))
+* bump kotlin_version from 2.0.20 to 2.0.21 ([129b3e1](https://github.com/orangebikelabs/opensqueeze/commit/129b3e134b6569426b38660daf0022a936d7bbdb))
+
 # [2.7.0-alpha.78](https://github.com/orangebikelabs/opensqueeze/compare/v2.7.0-alpha.77...v2.7.0-alpha.78) (2024-10-10)
 
 
