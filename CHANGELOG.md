@@ -1,3 +1,12 @@
+# [2.7.0-alpha.80](https://github.com/orangebikelabs/opensqueeze/compare/v2.7.0-alpha.79...v2.7.0-alpha.80) (2024-10-14)
+
+
+### Bug Fixes
+
+* bump com.android.tools.build:gradle from 8.6.1 to 8.7.0 ([55d0100](https://github.com/orangebikelabs/opensqueeze/commit/55d0100b46a81fc3500bc46246b4efb1e3d2c6ca))
+* bump gradle versions for AGP compatibility ([06fc5eb](https://github.com/orangebikelabs/opensqueeze/commit/06fc5ebb1c0cf375118a782e232ec20cf7d24274))
+* update .idea files ([d707a01](https://github.com/orangebikelabs/opensqueeze/commit/d707a01e33a731ca344d8566dfd331b39150b33d))
+
 # [2.7.0-alpha.79](https://github.com/orangebikelabs/opensqueeze/compare/v2.7.0-alpha.78...v2.7.0-alpha.79) (2024-10-14)
 
 
