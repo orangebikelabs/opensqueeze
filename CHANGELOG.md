@@ -1,3 +1,10 @@
+# [2.7.0-alpha.82](https://github.com/orangebikelabs/opensqueeze/compare/v2.7.0-alpha.81...v2.7.0-alpha.82) (2024-10-15)
+
+
+### Bug Fixes
+
+* use safer scheduleWithFixedDelay ([ba09fa2](https://github.com/orangebikelabs/opensqueeze/commit/ba09fa26651b1519f273fbdc4936176cf6fe7783))
+
 # [2.7.0-alpha.81](https://github.com/orangebikelabs/opensqueeze/compare/v2.7.0-alpha.80...v2.7.0-alpha.81) (2024-10-15)
 
 
