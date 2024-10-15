@@ -110,7 +110,7 @@ final public class DiscoveryService extends AbstractExecutionThreadService {
         IntentFilter filter = new IntentFilter(ACTION_TRIGGER_DISCOVERY);
         ContextCompat.registerReceiver(mContext.getApplicationContext(), mTriggerDiscoveryReceiver, filter, ContextCompat.RECEIVER_NOT_EXPORTED);
 
-        mScheduledDiscoveryTask = OSExecutors.getSingleThreadScheduledExecutor().scheduleAtFixedRate(() -> triggerDiscovery(mContext), 5, Constants.DISCOVERY_PACKET_INTERVAL, Constants.TIME_UNITS);
+        mScheduledDiscoveryTask = OSExecutors.getSingleThreadScheduledExecutor().scheduleWithFixedDelay(() -> triggerDiscovery(mContext), 5, Constants.DISCOVERY_PACKET_INTERVAL, Constants.TIME_UNITS);
     }
 
     @Override
