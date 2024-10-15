@@ -1,3 +1,10 @@
+# [2.7.0-alpha.81](https://github.com/orangebikelabs/opensqueeze/compare/v2.7.0-alpha.80...v2.7.0-alpha.81) (2024-10-15)
+
+
+### Bug Fixes
+
+* use new agp 8.7.1 plugin ([73f61d1](https://github.com/orangebikelabs/opensqueeze/commit/73f61d1153c147ffe48a78448966d792c7199428))
+
 # [2.7.0-alpha.80](https://github.com/orangebikelabs/opensqueeze/compare/v2.7.0-alpha.79...v2.7.0-alpha.80) (2024-10-14)
 
 
