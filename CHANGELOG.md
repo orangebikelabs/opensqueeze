@@ -1,3 +1,10 @@
+# [2.7.0-alpha.83](https://github.com/orangebikelabs/opensqueeze/compare/v2.7.0-alpha.82...v2.7.0-alpha.83) (2024-10-16)
+
+
+### Bug Fixes
+
+* lint fixes ([b629844](https://github.com/orangebikelabs/opensqueeze/commit/b6298446bac366b5d82e85e43cd162ae0f4d8ad4))
+
 # [2.7.0-alpha.82](https://github.com/orangebikelabs/opensqueeze/compare/v2.7.0-alpha.81...v2.7.0-alpha.82) (2024-10-15)
 
 
