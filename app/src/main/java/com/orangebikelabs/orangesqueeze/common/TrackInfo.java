@@ -108,7 +108,13 @@ public class TrackInfo {
 
                 return newTrackInfo(result.get().getJsonResult());
             } catch (ExecutionException e) {
-                Throwables.propagateIfPossible(e.getCause(), InterruptedException.class, IOException.class);
+                Throwable cause = e.getCause();
+                if(cause == null) {
+                    throw SBCacheException.wrap(e);
+                }
+                Throwables.throwIfInstanceOf(cause, InterruptedException.class);
+                Throwables.throwIfInstanceOf(cause, IOException.class);
+                Throwables.throwIfUnchecked(cause);
 
                 throw SBCacheException.wrap(e);
             }
@@ -270,7 +276,7 @@ public class TrackInfo {
     public Optional<String> getYear() {
         Optional<String> retval = Optional.empty();
         String year = getString("year", "0");
-        if (!year.equals("0") && !year.equals("")) {
+        if (!year.equals("0") && !year.isEmpty()) {
             retval = Optional.of(year);
         }
         return retval;
@@ -280,7 +286,7 @@ public class TrackInfo {
     public Optional<String> getTrackNumber() {
         Optional<String> retval = Optional.empty();
         String tracknum = getString("tracknum", "0");
-        if (!tracknum.equals("0") && !tracknum.equals("")) {
+        if (!tracknum.equals("0") && !tracknum.isEmpty()) {
             retval = Optional.of(tracknum);
         }
         return retval;

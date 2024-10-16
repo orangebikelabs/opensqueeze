@@ -220,7 +220,7 @@ public class PlayerStatus {
     @Nonnull
     public String getDisplayArtist() {
         String retval = getTrackArtist();
-        if (retval.length() == 0) {
+        if (retval.isEmpty()) {
             retval = getArtist();
         }
         return retval;
@@ -583,7 +583,7 @@ public class PlayerStatus {
 
         boolean shouldResetButtonStatus = true;
         JsonNode playlistLoop = o.path("item_loop");
-        if (playlistLoop.isArray() && playlistLoop.size() > 0) {
+        if (playlistLoop.isArray() && !playlistLoop.isEmpty()) {
             JsonNode firstItem = playlistLoop.get(0);
 
             String artist = firstItem.path("artist").asText();
@@ -594,13 +594,13 @@ public class PlayerStatus {
             String[] text = firstItem.path("text").asText().split("\n");
 
             // but apply it selectively
-            if (track.length() == 0 && text.length >= 1) {
+            if (track.isEmpty() && text.length >= 1) {
                 track = text[0];
             }
-            if (album.length() == 0 && text.length >= 2) {
+            if (album.isEmpty() && text.length >= 2) {
                 album = text[1];
             }
-            if (artist.length() == 0 && text.length >= 3) {
+            if (artist.isEmpty() && text.length >= 3) {
                 artist = text[2];
             }
 

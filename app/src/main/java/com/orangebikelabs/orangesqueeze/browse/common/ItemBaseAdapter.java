@@ -747,7 +747,7 @@ abstract public class ItemBaseAdapter extends BaseAdapter implements SectionInde
          */
         protected int compare(String word, String letter) {
             final String firstLetter;
-            if (word.length() == 0) {
+            if (word.isEmpty()) {
                 firstLetter = " ";
             } else {
                 firstLetter = word.substring(0, 1);

@@ -26,7 +26,7 @@ public class SeparatorItem extends Item {
     @Override
     @Nonnull
     public ItemType getBaseType() {
-        if (mSectionName.length() == 0) {
+        if (mSectionName.isEmpty()) {
             return ItemType.IVT_SEPARATOR_EMPTY;
         } else {
             return ItemType.IVT_SEPARATOR_TEXT;

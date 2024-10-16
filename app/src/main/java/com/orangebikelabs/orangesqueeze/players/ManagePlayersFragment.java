@@ -308,7 +308,7 @@ public class ManagePlayersFragment extends SBFragment implements LoaderCallbacks
                 return;
             }
 
-            if (newName.length() == 0) {
+            if (newName.isEmpty()) {
                 // show error, no blanks
 
                 MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(requireContext());

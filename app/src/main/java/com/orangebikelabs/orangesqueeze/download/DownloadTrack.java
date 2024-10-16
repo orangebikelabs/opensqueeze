@@ -117,14 +117,14 @@ public class DownloadTrack implements Comparable<DownloadTrack> {
         buffer.append(getTrack());
 
         String artistName = getArtist();
-        if (artistName.length() != 0) {
+        if (!artistName.isEmpty()) {
             buffer.append(" (");
             buffer.append(artistName);
             buffer.append(")");
         }
 
         String albumName = mTrackInfo.getTrackAlbum();
-        if (albumName.length() != 0) {
+        if (!albumName.isEmpty()) {
             buffer.append(" - ");
             buffer.append(albumName);
         }
@@ -180,7 +180,7 @@ public class DownloadTrack implements Comparable<DownloadTrack> {
     @Nonnull
     synchronized public String getArtist() {
         String value = mTrackInfo.getAlbumArtist();
-        if (value.length() == 0) {
+        if (value.isEmpty()) {
             value = mTrackInfo.getTrackArtist();
         }
         return value;
@@ -250,10 +250,10 @@ public class DownloadTrack implements Comparable<DownloadTrack> {
         String artistName = getArtist();
         String albumName = mTrackInfo.getTrackAlbum();
 
-        if (artistName.length() == 0) {
+        if (artistName.isEmpty()) {
             artistName = "Unknown Artist";
         }
-        if (albumName.length() == 0) {
+        if (albumName.isEmpty()) {
             albumName = "Unknown Album";
         }
 

@@ -163,7 +163,7 @@ public class HeaderGridView extends GridView implements HeaderCapable {
      * view
      */
     public boolean removeHeaderView(View v) {
-        if (mHeaderViewInfos.size() > 0) {
+        if (!mHeaderViewInfos.isEmpty()) {
             boolean result = false;
             ListAdapter adapter = getAdapter();
             if (adapter != null && ((HeaderViewGridAdapter) adapter).removeHeader(v)) {
@@ -188,7 +188,7 @@ public class HeaderGridView extends GridView implements HeaderCapable {
 
     @Override
     public void setAdapter(ListAdapter adapter) {
-        if (mHeaderViewInfos.size() > 0) {
+        if (!mHeaderViewInfos.isEmpty()) {
             HeaderViewGridAdapter hadapter = new HeaderViewGridAdapter(mHeaderViewInfos, adapter);
             int numColumns = getNumColumns();
             if (numColumns > 1) {

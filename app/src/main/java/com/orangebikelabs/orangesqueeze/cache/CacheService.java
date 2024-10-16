@@ -309,7 +309,9 @@ public class CacheService {
             }
             return Optional.ofNullable(retval);
         } catch (Exception e) {
-            Throwables.propagateIfPossible(e, CachedItemInvalidException.class, CachedItemNotFoundException.class);
+            Throwables.throwIfInstanceOf(e, CachedItemInvalidException.class);
+            Throwables.throwIfInstanceOf(e, CachedItemNotFoundException.class);
+            Throwables.throwIfUnchecked(e);
 
             OSLog.w(Tag.CACHE, "CacheService.peek(): " + e.getMessage(), e);
             return Optional.empty();

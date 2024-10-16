@@ -105,21 +105,25 @@ public class JsonRpc {
             return limiter.callWithTimeout(callable, mTimeout, mTimeUnit);
         } catch (ExecutionException e) {
             Throwable cause = e.getCause();
-
-            Throwables.propagateIfPossible(cause, JsonRpcException.class);
-            Throwables.propagateIfPossible(cause, IOException.class);
-            Throwables.propagateIfPossible(cause, InterruptedException.class);
+            if(cause == null) {
+                throw new IllegalStateException("unexpected exception", e);
+            }
+            Throwables.throwIfInstanceOf(cause, JsonRpcException.class);
+            Throwables.throwIfInstanceOf(cause, IOException.class);
+            Throwables.throwIfInstanceOf(cause, InterruptedException.class);
             if (cause instanceof TimeoutException) {
                 throw new SocketTimeoutException();
             }
+            Throwables.throwIfUnchecked(cause);
 
             throw new IllegalStateException("unexpected exception", cause);
         } catch (TimeoutException | UncheckedTimeoutException e) {
             throw new SocketTimeoutException();
         } catch (Exception e) {
-            Throwables.propagateIfPossible(e, JsonRpcException.class);
-            Throwables.propagateIfPossible(e, IOException.class);
-            Throwables.propagateIfPossible(e, InterruptedException.class);
+            Throwables.throwIfInstanceOf(e, JsonRpcException.class);
+            Throwables.throwIfInstanceOf(e, IOException.class);
+            Throwables.throwIfInstanceOf(e, InterruptedException.class);
+            Throwables.throwIfUnchecked(e);
 
             throw new IllegalStateException("unexpected exception", e);
         }

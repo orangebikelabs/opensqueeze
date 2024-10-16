@@ -36,8 +36,12 @@ public class FutureResult extends ForwardingListenableFuture.SimpleForwardingLis
             throw new SBRequestException(e);
         } catch (ExecutionException e) {
             Throwable cause = e.getCause();
+            if(cause == null) {
+                throw SBRequestException.wrap(e);
+            }
 
-            Throwables.propagateIfPossible(cause, SBRequestException.class, InterruptedException.class);
+            Throwables.throwIfInstanceOf(cause, SBRequestException.class);
+            Throwables.throwIfInstanceOf(cause, InterruptedException.class);
             throw SBRequestException.wrap(cause);
         }
     }

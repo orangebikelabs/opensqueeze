@@ -87,7 +87,7 @@ public class MenuAction implements Serializable {
         mNextWindow = JsonHelper.getString(node, "nextWindow", null);
 
         JsonNode choicesNode = node.get("choices");
-        if (choicesNode != null && choicesNode.size() > 0) {
+        if (choicesNode != null && !choicesNode.isEmpty()) {
             ObjectReader reader = JsonHelper.getJsonObjectReader().forType(new TypeReference<List<MenuChoice>>() {
             });
             mChoices = reader.readValue(choicesNode);

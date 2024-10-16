@@ -327,7 +327,7 @@ public class LoopingRequest {
                         Reporting.report(null, "Unexpected non-object node", node);
                         continue;
                     }
-                    if (node.size() == 0) {
+                    if (node.isEmpty()) {
                         // skipping empty node (comment fields, for now)
                         continue;
                     }
@@ -361,7 +361,7 @@ public class LoopingRequest {
                             Reporting.report(null, "Unexpected non-object node", node);
                             continue;
                         }
-                        if (node.size() == 0) {
+                        if (node.isEmpty()) {
                             // skipping empty node (comment fields, for now)
                             continue;
                         }

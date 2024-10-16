@@ -597,7 +597,8 @@ public class PendingConnection {
         checkAborted();
         if (version == null) {
             if (lastException != null) {
-                Throwables.propagateIfPossible(lastException, SBException.class);
+                Throwables.throwIfInstanceOf(lastException, SBException.class);
+                Throwables.throwIfUnchecked(lastException);
             }
             if (lastException == null) {
                 throw new ConnectionException(mContext.getString(R.string.exception_connection_error));

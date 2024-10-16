@@ -283,7 +283,7 @@ public class StandardMenuItem extends Item {
      */
     @Nullable
     protected String getAlphabeticSection(String text) {
-        if (text.length() == 0) {
+        if (text.isEmpty()) {
             return null;
         }
 

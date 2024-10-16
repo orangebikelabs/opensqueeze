@@ -187,7 +187,7 @@ public class CacheDatabase {
     public int purgeEntries(String where, List<String> args) {
         // first, purge any entries stored completely in the cache
         String nonExternalWhere = where;
-        if (nonExternalWhere.length() != 0) {
+        if (!nonExternalWhere.isEmpty()) {
             nonExternalWhere += " AND ";
         }
         nonExternalWhere += COLUMN_CACHE_VALUE + " IS NOT NULL";
@@ -197,7 +197,7 @@ public class CacheDatabase {
         // now, purge any entries with values stored outside the cache
 
         String externalWhere = where;
-        if (externalWhere.length() != 0) {
+        if (!externalWhere.isEmpty()) {
             externalWhere += " AND ";
         }
         externalWhere += COLUMN_CACHE_VALUE + " IS NULL";

@@ -57,9 +57,12 @@ public class CacheFutureFactory {
                 OSLog.d(OSLog.Tag.CACHE, "Cache request failed with exception", e);
 
                 Throwable cause = e.getCause();
-                Throwables.propagateIfPossible(cause, InterruptedException.class);
-                Throwables.propagateIfPossible(cause, TimeoutException.class);
-                Throwables.propagateIfPossible(cause, SBCacheException.class);
+                if(cause == null) {
+                    throw SBCacheException.wrap(e);
+                }
+                Throwables.throwIfInstanceOf(cause, InterruptedException.class);
+                Throwables.throwIfInstanceOf(cause, TimeoutException.class);
+                Throwables.throwIfInstanceOf(cause, SBCacheException.class);
                 throw SBCacheException.wrap(cause);
             }
         }

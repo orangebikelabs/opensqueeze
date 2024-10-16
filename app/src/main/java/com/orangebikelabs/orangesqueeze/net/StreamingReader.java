@@ -365,7 +365,7 @@ public class StreamingReader extends AbsInterruptibleThreadService {
                 }
 
                 String chunkSize = buffer.substring(0, separator).trim();
-                if (chunkSize.length() == 0) {
+                if (chunkSize.isEmpty()) {
                     return 0;
                 }
                 try {
