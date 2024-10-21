@@ -1,3 +1,10 @@
+# [2.7.0-alpha.84](https://github.com/orangebikelabs/opensqueeze/compare/v2.7.0-alpha.83...v2.7.0-alpha.84) (2024-10-21)
+
+
+### Bug Fixes
+
+* bump androidx.test:orchestrator from 1.5.0 to 1.5.1 ([06f133c](https://github.com/orangebikelabs/opensqueeze/commit/06f133ceee28ae8674f9ae7013824c490dd0c51d))
+
 # [2.7.0-alpha.83](https://github.com/orangebikelabs/opensqueeze/compare/v2.7.0-alpha.82...v2.7.0-alpha.83) (2024-10-16)
 
 
