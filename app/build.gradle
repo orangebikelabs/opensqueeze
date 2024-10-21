@@ -236,7 +236,7 @@ dependencies {
     androidTestImplementation "androidx.test.ext:junit-ktx:1.2.1"
     androidTestImplementation "androidx.test.ext:truth:1.6.0"
     androidTestImplementation "io.mockk:mockk-android:1.13.13"
-    androidTestUtil "androidx.test:orchestrator:1.5.0"
+    androidTestUtil "androidx.test:orchestrator:1.5.1"
 
     // workaround for gradle bug https://github.com/gradle/gradle/issues/22326, keep until fixed
     modules {
