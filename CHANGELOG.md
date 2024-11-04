@@ -1,3 +1,13 @@
+# [2.7.0-alpha.85](https://github.com/orangebikelabs/opensqueeze/compare/v2.7.0-alpha.84...v2.7.0-alpha.85) (2024-11-04)
+
+
+### Bug Fixes
+
+* bump androidx.fragment:fragment-ktx from 1.8.4 to 1.8.5 ([51ecd44](https://github.com/orangebikelabs/opensqueeze/commit/51ecd449b9d560fff2d8daf6ffe77675370dc4cb))
+* bump androidx.lifecycle:lifecycle-livedata-ktx from 2.8.6 to 2.8.7 ([bd4131e](https://github.com/orangebikelabs/opensqueeze/commit/bd4131e5e1387691547ec386f949ab1467ae0f85))
+* bump androidx.lifecycle:lifecycle-viewmodel-ktx from 2.8.6 to 2.8.7 ([5bd5bb2](https://github.com/orangebikelabs/opensqueeze/commit/5bd5bb2a8ffb8a5a0f5fd96068f8c45ed93112f6))
+* bump com.android.tools.build:gradle from 8.7.1 to 8.7.2 ([fe90e54](https://github.com/orangebikelabs/opensqueeze/commit/fe90e542792dd6d984e3e0027a0de286984274da))
+
 # [2.7.0-alpha.84](https://github.com/orangebikelabs/opensqueeze/compare/v2.7.0-alpha.83...v2.7.0-alpha.84) (2024-10-21)
 
 
