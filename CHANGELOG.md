@@ -1,3 +1,11 @@
+# [2.7.0-alpha.86](https://github.com/orangebikelabs/opensqueeze/compare/v2.7.0-alpha.85...v2.7.0-alpha.86) (2024-11-11)
+
+
+### Bug Fixes
+
+* bump androidx.constraintlayout:constraintlayout from 2.1.4 to 2.2.0 ([56442e9](https://github.com/orangebikelabs/opensqueeze/commit/56442e9f95a38d2e8cd2f52a3c51204a95a0c4df))
+* bump com.android.tools:desugar_jdk_libs from 2.1.2 to 2.1.3 ([06ff4d8](https://github.com/orangebikelabs/opensqueeze/commit/06ff4d8854407b45785bf2521fd67135c6f423c7))
+
 # [2.7.0-alpha.85](https://github.com/orangebikelabs/opensqueeze/compare/v2.7.0-alpha.84...v2.7.0-alpha.85) (2024-11-04)
 
 
