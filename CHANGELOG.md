@@ -1,3 +1,11 @@
+# [2.7.0-alpha.87](https://github.com/orangebikelabs/opensqueeze/compare/v2.7.0-alpha.86...v2.7.0-alpha.87) (2024-12-02)
+
+
+### Bug Fixes
+
+* bump io.reactivex.rxjava3:rxjava from 3.1.9 to 3.1.10 ([ee114f0](https://github.com/orangebikelabs/opensqueeze/commit/ee114f04f211ea78dd43249fae67d1f5949f8c39))
+* bump kotlin_version from 2.0.21 to 2.1.0 ([44cc578](https://github.com/orangebikelabs/opensqueeze/commit/44cc5781810b422fd5818eefd9f8adc0d7b0ac68))
+
 # [2.7.0-alpha.86](https://github.com/orangebikelabs/opensqueeze/compare/v2.7.0-alpha.85...v2.7.0-alpha.86) (2024-11-11)
 
 
