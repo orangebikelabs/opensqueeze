@@ -1,3 +1,12 @@
+# [2.7.0-alpha.88](https://github.com/orangebikelabs/opensqueeze/compare/v2.7.0-alpha.87...v2.7.0-alpha.88) (2024-12-23)
+
+
+### Bug Fixes
+
+* bump com.google.guava:guava from 33.3.1-android to 33.4.0-android ([d385015](https://github.com/orangebikelabs/opensqueeze/commit/d38501523491f18e2c6303995d318e87c73b38b8))
+* bump io.mockk:mockk-android from 1.13.13 to 1.13.14 ([f35a0b4](https://github.com/orangebikelabs/opensqueeze/commit/f35a0b4bd964e4a39b05f8138ed7b99ddc76a6b9))
+* bump org.jetbrains.kotlinx:kotlinx-coroutines-core ([54f69e6](https://github.com/orangebikelabs/opensqueeze/commit/54f69e610ebf72a2b05697f87303e9d01052dc13))
+
 # [2.7.0-alpha.87](https://github.com/orangebikelabs/opensqueeze/compare/v2.7.0-alpha.86...v2.7.0-alpha.87) (2024-12-02)
 
 
