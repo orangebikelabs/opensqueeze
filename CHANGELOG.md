@@ -1,3 +1,10 @@
+# [2.7.0-alpha.89](https://github.com/orangebikelabs/opensqueeze/compare/v2.7.0-alpha.88...v2.7.0-alpha.89) (2024-12-30)
+
+
+### Bug Fixes
+
+* bump com.android.tools:desugar_jdk_libs from 2.1.3 to 2.1.4 ([17dc0e3](https://github.com/orangebikelabs/opensqueeze/commit/17dc0e319a5440dd37894ccf698c84e685ce1a51))
+
 # [2.7.0-alpha.88](https://github.com/orangebikelabs/opensqueeze/compare/v2.7.0-alpha.87...v2.7.0-alpha.88) (2024-12-23)
 
 
