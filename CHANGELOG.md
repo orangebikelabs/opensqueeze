@@ -1,3 +1,12 @@
+# [2.7.0-alpha.90](https://github.com/orangebikelabs/opensqueeze/compare/v2.7.0-alpha.89...v2.7.0-alpha.90) (2025-01-13)
+
+
+### Bug Fixes
+
+* bump com.android.tools.build:gradle from 8.7.2 to 8.8.0 ([cef3971](https://github.com/orangebikelabs/opensqueeze/commit/cef3971734225a994b5ad764d16913140c46aa5f))
+* bump com.squareup.okio:okio from 3.9.1 to 3.10.2 ([ae11d52](https://github.com/orangebikelabs/opensqueeze/commit/ae11d52cb0d5812f9aabd4db0cefb38babd45f76))
+* bump io.mockk:mockk-android from 1.13.14 to 1.13.16 ([75c0e48](https://github.com/orangebikelabs/opensqueeze/commit/75c0e482dadf57f2e262e1abac0f7f271b0122dd))
+
 # [2.7.0-alpha.89](https://github.com/orangebikelabs/opensqueeze/compare/v2.7.0-alpha.88...v2.7.0-alpha.89) (2024-12-30)
 
 
