@@ -10,7 +10,7 @@ jobs:
   unittest-report:
     runs-on: ubuntu-latest
     steps:
-      - uses: dorny/test-reporter@v1
+      - uses: dorny/test-reporter@v2
         with:
           artifact: unittest-results        # artifact name
           name: Unit Tests                  # Name of the check run which will be created
@@ -20,7 +20,7 @@ jobs:
   instrumentationtest-report:
     runs-on: ubuntu-latest
     steps:
-      - uses: dorny/test-reporter@v1
+      - uses: dorny/test-reporter@v2
         with:
           artifact: instrumentationtest-results            # artifact name
           name: Instrumentation Tests       # Name of the check run which will be created
