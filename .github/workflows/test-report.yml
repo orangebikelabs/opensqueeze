@@ -27,6 +27,7 @@ jobs:
           reporter: java-junit              # Format of test results
 
   instrumentationtest-report:
+    if: false # disable for now
     runs-on: ubuntu-latest
     steps:
       - name: Download test artifacts
