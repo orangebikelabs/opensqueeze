@@ -1,3 +1,11 @@
+# [2.7.0-alpha.92](https://github.com/orangebikelabs/opensqueeze/compare/v2.7.0-alpha.91...v2.7.0-alpha.92) (2025-03-17)
+
+
+### Bug Fixes
+
+* bump androidx.core:core-ktx from 1.13.1 to 1.15.0 ([68c58c4](https://github.com/orangebikelabs/opensqueeze/commit/68c58c4f0f6ec0919bd0ebd33a564b739291cb26))
+* requires compile sdk 35 ([ecc3a71](https://github.com/orangebikelabs/opensqueeze/commit/ecc3a713da2666efe3ef437304308ef0837da66c))
+
 # [2.7.0-alpha.91](https://github.com/orangebikelabs/opensqueeze/compare/v2.7.0-alpha.90...v2.7.0-alpha.91) (2025-01-27)
 
 
