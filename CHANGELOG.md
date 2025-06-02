@@ -1,3 +1,10 @@
+# [2.7.0-alpha.93](https://github.com/orangebikelabs/opensqueeze/compare/v2.7.0-alpha.92...v2.7.0-alpha.93) (2025-06-02)
+
+
+### Bug Fixes
+
+* compile error in connectviewmodel ([3259953](https://github.com/orangebikelabs/opensqueeze/commit/3259953ea8a51677a65519b03c63288c6cdbbdda))
+
 # [2.7.0-alpha.92](https://github.com/orangebikelabs/opensqueeze/compare/v2.7.0-alpha.91...v2.7.0-alpha.92) (2025-03-17)
 
 
