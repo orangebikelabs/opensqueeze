@@ -20,7 +20,7 @@ jobs:
         run: ls -R results
 
       - name: Report
-        uses: dorny/test-reporter@v1
+        uses: dorny/test-reporter@v2
         with:
           name: Unit Tests                  # Name of the check run which will be created
           path: 'results/**/*.xml'                  # Path to test results (inside artifact .zip)
@@ -40,7 +40,7 @@ jobs:
         run: ls -R results
 
       - name: Report
-        uses: dorny/test-reporter@v1
+        uses: dorny/test-reporter@v2
         with:
           name: Instrumentation Tests       # Name of the check run which will be created
           path: 'results/**/*.xml'                  # Path to test results (inside artifact .zip)
