@@ -122,7 +122,7 @@ class ConnectViewModel(application: Application, private val ioDispatcher: Corou
         val serverId = server._id
         viewModelScope.launch(context = Dispatchers.IO) {
             val sq = database.serverQueries
-            return@launch when (operation) {
+            when (operation) {
                 ServerOperation.REMOVE -> {
                     if (context.isConnected && serverId == context.serverId) {
                         context.disconnect()
@@ -139,7 +139,6 @@ class ConnectViewModel(application: Application, private val ioDispatcher: Corou
                     if (server.servertype == ServerType.PINNED) {
                         database.deleteServer(serverId)
                     }
-                    Unit
                 }
                 ServerOperation.WAKEONLANSETTINGS -> {
                     throw IllegalStateException("handled in view")
