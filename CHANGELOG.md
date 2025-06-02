@@ -1,3 +1,15 @@
+# [2.7.0-alpha.94](https://github.com/orangebikelabs/opensqueeze/compare/v2.7.0-alpha.93...v2.7.0-alpha.94) (2025-06-02)
+
+
+### Bug Fixes
+
+* bump androidx.fragment:fragment-ktx from 1.8.5 to 1.8.7 ([07021f3](https://github.com/orangebikelabs/opensqueeze/commit/07021f36f3d37836ce1df9bf33ad71a2a1ca83cd))
+* bump androidx.recyclerview:recyclerview from 1.3.2 to 1.4.0 ([8844cea](https://github.com/orangebikelabs/opensqueeze/commit/8844cea225c930fb9c2ec4ffae382e0fa7c1c0ba))
+* bump com.android.tools:desugar_jdk_libs from 2.1.4 to 2.1.5 ([81660b5](https://github.com/orangebikelabs/opensqueeze/commit/81660b5d879a152e784230ab3e49e69c8c652444))
+* bump com.android.tools.build:gradle from 8.8.0 to 8.10.1 ([847ba02](https://github.com/orangebikelabs/opensqueeze/commit/847ba02120ffbd347c734ae72d195156391882b5))
+* bump io.mockk:mockk-android from 1.13.16 to 1.14.2 ([542f879](https://github.com/orangebikelabs/opensqueeze/commit/542f879a7b218e8fcc4df52bcddb727206bbc438))
+* use gradle 8.14.1 ([19e28ef](https://github.com/orangebikelabs/opensqueeze/commit/19e28ef176b11e0141b62c7b8bec4c266d21697e))
+
 # [2.7.0-alpha.93](https://github.com/orangebikelabs/opensqueeze/compare/v2.7.0-alpha.92...v2.7.0-alpha.93) (2025-06-02)
 
 
