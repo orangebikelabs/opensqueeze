@@ -97,7 +97,7 @@ jobs:
           force-avd-creation: false
           emulator-options: -no-snapshot-save -no-metrics -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
           disable-animations: true
-          script: ./.github/scripts/e2e_tests.sh
+          script: sh ./.github/scripts/e2e_tests.sh
 
       - uses: actions/upload-artifact@v4  # upload test results
         if: success() || failure()        # run this step even if previous step failed
