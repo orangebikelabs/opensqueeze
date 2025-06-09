@@ -1,3 +1,14 @@
+# [2.7.0-alpha.95](https://github.com/orangebikelabs/opensqueeze/compare/v2.7.0-alpha.94...v2.7.0-alpha.95) (2025-06-09)
+
+
+### Bug Fixes
+
+* bump androidx.constraintlayout:constraintlayout from 2.2.0 to 2.2.1 ([8b2d318](https://github.com/orangebikelabs/opensqueeze/commit/8b2d318bc163d38ab284abdcf71d59c68dd50042))
+* bump androidx.fragment:fragment-ktx from 1.8.7 to 1.8.8 ([5944c4a](https://github.com/orangebikelabs/opensqueeze/commit/5944c4aff05f45df2e7b729a885f176fc21a7248))
+* bump androidx.lifecycle:lifecycle-viewmodel-ktx from 2.8.7 to 2.9.1 ([06af373](https://github.com/orangebikelabs/opensqueeze/commit/06af373cac029a9f3ae0f8ebc9bd6ea7440e529e))
+* bump kotlin_version from 2.1.10 to 2.1.21 ([6aa4aa0](https://github.com/orangebikelabs/opensqueeze/commit/6aa4aa08b6686e8cf22d02c8cad2e71e95045251))
+* bump org.jetbrains.kotlinx:kotlinx-coroutines-core ([c3910ae](https://github.com/orangebikelabs/opensqueeze/commit/c3910ae43bacaffd187d42766363e5612e40aa35))
+
 # [2.7.0-alpha.94](https://github.com/orangebikelabs/opensqueeze/compare/v2.7.0-alpha.93...v2.7.0-alpha.94) (2025-06-02)
 
 
