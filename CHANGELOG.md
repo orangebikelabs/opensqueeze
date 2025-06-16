@@ -1,3 +1,12 @@
+# [2.7.0-alpha.96](https://github.com/orangebikelabs/opensqueeze/compare/v2.7.0-alpha.95...v2.7.0-alpha.96) (2025-06-16)
+
+
+### Bug Fixes
+
+* bump androidx.core:core-ktx from 1.15.0 to 1.16.0 ([f927dfe](https://github.com/orangebikelabs/opensqueeze/commit/f927dfe6fc94a000a1783e882a0d3b35a6f0c7fd))
+* bump androidx.lifecycle:lifecycle-livedata-ktx from 2.8.7 to 2.9.1 ([cf79c60](https://github.com/orangebikelabs/opensqueeze/commit/cf79c60174a1e3c7046b661cbbc0488e15a72d60))
+* bump com.squareup.okio:okio from 3.10.2 to 3.13.0 ([4cde88e](https://github.com/orangebikelabs/opensqueeze/commit/4cde88e6482e6fd84351d09e39d7fd5debec1350))
+
 # [2.7.0-alpha.95](https://github.com/orangebikelabs/opensqueeze/compare/v2.7.0-alpha.94...v2.7.0-alpha.95) (2025-06-09)
 
 
