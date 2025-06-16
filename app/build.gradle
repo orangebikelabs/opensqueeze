@@ -192,7 +192,7 @@ dependencies {
     implementation "com.squareup.okhttp3:logging-interceptor:${okhttpVersion}"
     //noinspection GradleDependency
     implementation "com.squareup.okhttp3:okhttp-urlconnection:${okhttpVersion}"
-    implementation 'com.squareup.okio:okio:3.10.2'
+    implementation 'com.squareup.okio:okio:3.13.0'
 
     // permissions
     implementation 'com.github.fondesa:kpermissions:3.5.0'
