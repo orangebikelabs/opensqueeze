@@ -38,6 +38,7 @@ import com.orangebikelabs.orangesqueeze.ui.MainActivity
 import java.util.concurrent.ExecutionException
 import java.util.concurrent.TimeUnit
 import java.util.concurrent.TimeoutException
+import androidx.core.net.toUri
 
 /**
  * @author tsandee
@@ -222,12 +223,10 @@ object NotificationCommon {
             val future = artwork.getThumbnail(largeBitmapSize)
             if (!future.isDone) {
                 Futures.addCallback(future, object : FutureCallback<Bitmap> {
-                    override fun onSuccess(result: Bitmap?) {
-                        if (result != null) {
+                    override fun onSuccess(result: Bitmap) {
                             val applicationContext = context.applicationContext
                             val intent = ServerConnectionService.getBroadcastIntent(ServerConnectionService.BroadcastServiceActions.UPDATE_WIDGETS)
                             applicationContext.sendBroadcast(intent)
-                        }
                     }
 
                     override fun onFailure(t: Throwable) {
@@ -254,7 +253,7 @@ object NotificationCommon {
 
     private fun buildNowPlayingPendingIntent(context: Context): PendingIntent {
         val intent = Intent(context, StartupActivity::class.java)
-        intent.data = Uri.parse("https://app.orangebikelabs.com/orangesqueeze/nowplaying")
+        intent.data = "https://app.orangebikelabs.com/orangesqueeze/nowplaying".toUri()
 
         return PendingIntent.getActivity(context, 0, intent, Compat.getDefaultPendingIntentFlags() or PendingIntent.FLAG_UPDATE_CURRENT)
     }

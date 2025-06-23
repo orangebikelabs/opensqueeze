@@ -32,6 +32,7 @@ import java.util.concurrent.TimeUnit
 import java.util.concurrent.TimeoutException
 import kotlin.math.min
 import kotlin.math.roundToInt
+import androidx.core.graphics.createBitmap
 
 /**
  * Media control compat helper.
@@ -54,7 +55,7 @@ class MediaSessionHelper private constructor(private val context: Context) {
                 val scale = min(maxWidth.toFloat() / width, maxHeight.toFloat() / height)
                 val newWidth = (scale * width).roundToInt()
                 val newHeight = (scale * height).roundToInt()
-                val outBitmap = Bitmap.createBitmap(newWidth, newHeight, targetConfig)
+                val outBitmap = createBitmap(newWidth, newHeight, targetConfig)
                 val canvas = Canvas(outBitmap)
                 val paint = Paint()
                 paint.isAntiAlias = true
@@ -287,7 +288,7 @@ class MediaSessionHelper private constructor(private val context: Context) {
             val future = artwork.getThumbnail(largeBitmapSize)
             if (!future.isDone) {
                 Futures.addCallback(future, object : FutureCallback<Bitmap> {
-                    override fun onSuccess(result: Bitmap?) {
+                    override fun onSuccess(result: Bitmap) {
                         updatePlayerStatus(status, result)
                     }
 
