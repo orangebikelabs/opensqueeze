@@ -1,3 +1,11 @@
+# [2.7.0-alpha.99](https://github.com/orangebikelabs/opensqueeze/compare/v2.7.0-alpha.98...v2.7.0-alpha.99) (2025-06-23)
+
+
+### Bug Fixes
+
+* bump com.google.guava:guava from 33.4.0-android to 33.4.8-android ([74ddc7b](https://github.com/orangebikelabs/opensqueeze/commit/74ddc7b367f833653146b9b2b277ae3e4af61937))
+* guava 33.4.8 compatibility ([7971a94](https://github.com/orangebikelabs/opensqueeze/commit/7971a94c547e8936ff2ecf1d17a1939868a13b97))
+
 # [2.7.0-alpha.98](https://github.com/orangebikelabs/opensqueeze/compare/v2.7.0-alpha.97...v2.7.0-alpha.98) (2025-06-23)
 
 
