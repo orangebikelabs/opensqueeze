@@ -36,7 +36,7 @@ class PhoneStateReceiver : BroadcastReceiver() {
         if (intent.action != TelephonyManager.ACTION_PHONE_STATE_CHANGED) return
 
         // should we do this in a background thread? maybe
-        var work: Function<SBContext, List<FutureResult?>>? = null
+        var work: Function<SBContext, List<FutureResult>>? = null
         val state = intent.getStringExtra(TelephonyManager.EXTRA_STATE)
         if (state == TelephonyManager.EXTRA_STATE_IDLE) {
             // only trigger this if something will actually happen otherwise we spin up the server connection for nothing
@@ -139,7 +139,7 @@ class PhoneStateReceiver : BroadcastReceiver() {
             return results
         }
 
-        fun doUnmute(prefs: SBPreferences, context: SBContext, executor: ListeningExecutorService): List<FutureResult?> {
+        fun doUnmute(prefs: SBPreferences, context: SBContext, executor: ListeningExecutorService): List<FutureResult> {
             val unmutePref = prefs.getAutoUnmute(TimeUnit.MILLISECONDS) ?: return emptyList()
 
             // is there a valid mute event to process?

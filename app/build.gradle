@@ -9,9 +9,9 @@ apply plugin: 'kotlin-parcelize'
 apply plugin: 'app.cash.sqldelight'
 
 android {
-    namespace 'com.orangebikelabs.orangesqueeze'
+    namespace = 'com.orangebikelabs.orangesqueeze'
 
-    compileSdk 35
+    compileSdk = 35
 
     sourceSets {
         main {
@@ -67,26 +67,26 @@ android {
             proguardFile 'proguard-jackson.pro'
             proguardFile 'proguard-otto.pro'
 
-            signingConfig signingConfigs.release
+            signingConfig = signingConfigs.release
         }
 
         debug {
-            multiDexEnabled true
+            multiDexEnabled = true
 
-            signingConfig signingConfigs.debug
+            signingConfig = signingConfigs.debug
         }
     }
 
     buildFeatures {
-        viewBinding true
-        buildConfig true
+        viewBinding = true
+        buildConfig = true
     }
 
     compileOptions {
-        coreLibraryDesugaringEnabled true
+        coreLibraryDesugaringEnabled = true
 
-        sourceCompatibility JavaVersion.VERSION_17
-        targetCompatibility JavaVersion.VERSION_17
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
 
     kotlinOptions {
@@ -94,7 +94,7 @@ android {
     }
 
     lint {
-        abortOnError true
+        abortOnError = true
     }
 
     // override the password if we supply it
