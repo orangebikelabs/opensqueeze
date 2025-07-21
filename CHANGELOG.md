@@ -1,3 +1,12 @@
+# [2.7.0-alpha.103](https://github.com/orangebikelabs/opensqueeze/compare/v2.7.0-alpha.102...v2.7.0-alpha.103) (2025-07-21)
+
+
+### Bug Fixes
+
+* bump androidx.lifecycle:lifecycle-livedata-ktx from 2.9.1 to 2.9.2 ([650a76e](https://github.com/orangebikelabs/opensqueeze/commit/650a76e64bffaa2980f99c18ffa59f594caa06b1))
+* bump androidx.lifecycle:lifecycle-viewmodel-ktx from 2.9.1 to 2.9.2 ([3bbe7bc](https://github.com/orangebikelabs/opensqueeze/commit/3bbe7bc7ea6625288d483a2997cc48ca2d9f8052))
+* bump io.mockk:mockk-android from 1.14.4 to 1.14.5 ([48a140a](https://github.com/orangebikelabs/opensqueeze/commit/48a140a2789eacce45000aa475e9404883b1b7e9))
+
 # [2.7.0-alpha.102](https://github.com/orangebikelabs/opensqueeze/compare/v2.7.0-alpha.101...v2.7.0-alpha.102) (2025-07-14)
 
 
