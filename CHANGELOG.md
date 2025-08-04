@@ -1,3 +1,12 @@
+# [2.7.0-alpha.104](https://github.com/orangebikelabs/opensqueeze/compare/v2.7.0-alpha.103...v2.7.0-alpha.104) (2025-08-04)
+
+
+### Bug Fixes
+
+* bump androidx.test:orchestrator from 1.5.1 to 1.6.1 ([00baa69](https://github.com/orangebikelabs/opensqueeze/commit/00baa69e0c207090f7c43548fbacbb81ade5074d))
+* bump androidx.test:runner from 1.6.2 to 1.7.0 ([72ee945](https://github.com/orangebikelabs/opensqueeze/commit/72ee9453625f0eda914044702f830f65750416fb))
+* bump com.squareup.okio:okio from 3.15.0 to 3.16.0 ([6a50ac6](https://github.com/orangebikelabs/opensqueeze/commit/6a50ac644ec5aa4832ff3bc90bf8b142a290b685))
+
 # [2.7.0-alpha.103](https://github.com/orangebikelabs/opensqueeze/compare/v2.7.0-alpha.102...v2.7.0-alpha.103) (2025-07-21)
 
 
