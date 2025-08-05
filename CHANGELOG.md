@@ -1,3 +1,13 @@
+# [2.7.0-alpha.105](https://github.com/orangebikelabs/opensqueeze/compare/v2.7.0-alpha.104...v2.7.0-alpha.105) (2025-08-05)
+
+
+### Bug Fixes
+
+* bump androidx.test:core from 1.6.1 to 1.7.0 ([6118da2](https://github.com/orangebikelabs/opensqueeze/commit/6118da2919429446b7b03a53cb8b2138299b8e5d))
+* bump androidx.test:core-ktx from 1.6.1 to 1.7.0 ([1d27d42](https://github.com/orangebikelabs/opensqueeze/commit/1d27d42faee118eb26ea1e239e1aa28f57178fc6))
+* bump androidx.test.espresso:espresso-intents from 3.6.1 to 3.7.0 ([6afb33a](https://github.com/orangebikelabs/opensqueeze/commit/6afb33a53527329f6e7c53221978a357385f726f))
+* bump androidx.test.ext:junit from 1.2.1 to 1.3.0 ([87f90a7](https://github.com/orangebikelabs/opensqueeze/commit/87f90a792fbba0117e3b4b647a791eb0bd3d7d46))
+
 # [2.7.0-alpha.104](https://github.com/orangebikelabs/opensqueeze/compare/v2.7.0-alpha.103...v2.7.0-alpha.104) (2025-08-04)
 
 
