@@ -4,4 +4,4 @@
 
 # Translations
 * Swedish - [Robert Högberg](https://github.com/robho)
-* Simplified Chinese - [nemooon] (https://hosted.weblate.org/user/UsMusic/)
+* Simplified Chinese - [nemooon](https://hosted.weblate.org/user/UsMusic/)
