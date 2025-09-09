@@ -1,3 +1,10 @@
+# [2.7.0-alpha.108](https://github.com/orangebikelabs/opensqueeze/compare/v2.7.0-alpha.107...v2.7.0-alpha.108) (2025-09-09)
+
+
+### Bug Fixes
+
+* missing test orchestrator version, fix warning ([3d44ead](https://github.com/orangebikelabs/opensqueeze/commit/3d44eadd33f6e281ff77e89e80f1dee4e130d379))
+
 # [2.7.0-alpha.107](https://github.com/orangebikelabs/opensqueeze/compare/v2.7.0-alpha.106...v2.7.0-alpha.107) (2025-09-09)
 
 
