@@ -1,3 +1,10 @@
+# [2.7.0-alpha.107](https://github.com/orangebikelabs/opensqueeze/compare/v2.7.0-alpha.106...v2.7.0-alpha.107) (2025-09-09)
+
+
+### Bug Fixes
+
+* update to gradle 8.11.0 ([538ba8c](https://github.com/orangebikelabs/opensqueeze/commit/538ba8c5218cec9e45a95640736030d1eb07de19))
+
 # [2.7.0-alpha.106](https://github.com/orangebikelabs/opensqueeze/compare/v2.7.0-alpha.105...v2.7.0-alpha.106) (2025-09-08)
 
 
