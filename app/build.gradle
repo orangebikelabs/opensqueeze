@@ -227,7 +227,7 @@ dependencies {
 
     testImplementation 'junit:junit:4.13.2'
     testImplementation "io.mockk:mockk-android:1.14.5"
-    testImplementation "com.google.truth:truth:1.4.4"
+    testImplementation "com.google.truth:truth:1.4.5"
 
     androidTestImplementation "androidx.test:runner:1.7.0"
     androidTestImplementation "androidx.test:rules:1.7.0"
