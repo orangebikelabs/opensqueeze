@@ -12,7 +12,7 @@ apply plugin: 'app.cash.sqldelight'
 android {
     namespace = 'com.orangebikelabs.orangesqueeze'
 
-    compileSdk = 35
+    compileSdk = 36
 
     sourceSets {
         main {
@@ -168,7 +168,7 @@ dependencies {
     // NineOldAndroids for ListViewAnimations
     implementation 'com.nineoldandroids:library:2.4.0'
 
-    implementation 'androidx.core:core-ktx:1.16.0'
+    implementation 'androidx.core:core-ktx:1.17.0'
     implementation 'androidx.appcompat:appcompat:1.7.0'
     implementation 'androidx.fragment:fragment-ktx:1.8.9'
     implementation 'androidx.preference:preference-ktx:1.2.1'
