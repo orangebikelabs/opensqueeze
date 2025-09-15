@@ -12,7 +12,7 @@ apply plugin: 'app.cash.sqldelight'
 android {
     namespace = 'com.orangebikelabs.orangesqueeze'
 
-    compileSdk = 35
+    compileSdk = 36
 
     sourceSets {
         main {
