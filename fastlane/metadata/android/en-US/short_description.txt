@@ -1,0 +1,1 @@
+control Logitech Squeezebox devices on the Logitech Media Server platform
