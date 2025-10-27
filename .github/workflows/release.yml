@@ -92,7 +92,7 @@ jobs:
           path: "**/test-results/**/*.xml"    # Path to test results
           reporter: java-junit        # Format of test results
 
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v5
         with:
           retention-days: 1
           name: builds
